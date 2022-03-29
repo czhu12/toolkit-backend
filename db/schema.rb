@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_02_195137) do
-
+ActiveRecord::Schema[7.0].define(version: 2022_03_29_195242) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -22,8 +21,8 @@ ActiveRecord::Schema.define(version: 2021_10_02_195137) do
     t.string "name", null: false
     t.string "email", null: false
     t.jsonb "roles", default: {}, null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_account_invitations_on_account_id"
     t.index ["invited_by_id"], name: "index_account_invitations_on_invited_by_id"
     t.index ["token"], name: "index_account_invitations_on_token", unique: true
@@ -33,8 +32,8 @@ ActiveRecord::Schema.define(version: 2021_10_02_195137) do
     t.bigint "account_id"
     t.bigint "user_id"
     t.jsonb "roles", default: {}, null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_account_users_on_account_id"
     t.index ["user_id"], name: "index_account_users_on_user_id"
   end
@@ -43,19 +42,20 @@ ActiveRecord::Schema.define(version: 2021_10_02_195137) do
     t.string "name", null: false
     t.bigint "owner_id"
     t.boolean "personal", default: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.text "extra_billing_info"
     t.string "domain"
     t.string "subdomain"
+    t.integer "account_id"
     t.index ["owner_id"], name: "index_accounts_on_owner_id"
   end
 
   create_table "action_text_embeds", force: :cascade do |t|
     t.string "url"
     t.jsonb "fields"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "action_text_rich_texts", force: :cascade do |t|
@@ -63,8 +63,8 @@ ActiveRecord::Schema.define(version: 2021_10_02_195137) do
     t.text "body"
     t.string "record_type", null: false
     t.bigint "record_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["record_type", "record_id", "name"], name: "index_action_text_rich_texts_uniqueness", unique: true
   end
 
@@ -73,7 +73,7 @@ ActiveRecord::Schema.define(version: 2021_10_02_195137) do
     t.string "record_type", null: false
     t.bigint "record_id", null: false
     t.bigint "blob_id", null: false
-    t.datetime "created_at", null: false
+    t.datetime "created_at", precision: nil, null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
@@ -85,7 +85,7 @@ ActiveRecord::Schema.define(version: 2021_10_02_195137) do
     t.text "metadata"
     t.bigint "byte_size", null: false
     t.string "checksum", null: false
-    t.datetime "created_at", null: false
+    t.datetime "created_at", precision: nil, null: false
     t.string "service_name", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
@@ -99,9 +99,9 @@ ActiveRecord::Schema.define(version: 2021_10_02_195137) do
   create_table "announcements", force: :cascade do |t|
     t.string "kind"
     t.string "title"
-    t.datetime "published_at"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "published_at", precision: nil
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "api_tokens", force: :cascade do |t|
@@ -110,20 +110,35 @@ ActiveRecord::Schema.define(version: 2021_10_02_195137) do
     t.string "name"
     t.jsonb "metadata", default: {}
     t.boolean "transient", default: false
-    t.datetime "last_used_at"
-    t.datetime "expires_at"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "last_used_at", precision: nil
+    t.datetime "expires_at", precision: nil
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["token"], name: "index_api_tokens_on_token", unique: true
     t.index ["user_id"], name: "index_api_tokens_on_user_id"
+  end
+
+  create_table "delayed_jobs", force: :cascade do |t|
+    t.integer "priority", default: 0, null: false
+    t.integer "attempts", default: 0, null: false
+    t.text "handler", null: false
+    t.text "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string "locked_by"
+    t.string "queue"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["priority", "run_at"], name: "delayed_jobs_priority"
   end
 
   create_table "notification_tokens", force: :cascade do |t|
     t.bigint "user_id"
     t.string "token", null: false
     t.string "platform", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_notification_tokens_on_user_id"
   end
 
@@ -230,6 +245,7 @@ ActiveRecord::Schema.define(version: 2021_10_02_195137) do
     t.string "currency"
     t.integer "interval_count", default: 1
     t.string "description"
+    t.string "unit"
   end
 
   create_table "user_connected_accounts", force: :cascade do |t|

@@ -75,10 +75,15 @@ Rails.application.routes.draw do
 
   # Payments
   resources :payment_methods
+  namespace :payment_methods do
+    resource :stripe, controller: "subscriptions/stripe", only: [:show]
+  end
   resources :subscriptions do
     resource :cancel, module: :subscriptions
     resource :pause, module: :subscriptions
     resource :resume, module: :subscriptions
+    resource :upcoming, module: :subscriptions
+    resource :stripe, controller: "subscriptions/stripe", only: [:show]
     collection do
       patch :info
     end

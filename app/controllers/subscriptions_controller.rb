@@ -17,12 +17,21 @@ class SubscriptionsController < ApplicationController
     redirect_to edit_subscription_path(@subscription)
   end
 
+  # Stripe subscriptions are handled entirely client side
+  # We need to create a subscription to render the PaymentElement
   def new
-    if Jumpstart.config.stripe? && @plan.has_trial?
-      @setup_intent = current_account.payment_processor&.stripe? ? current_account.payment_processor.create_setup_intent : Stripe::SetupIntent.create
+    if Jumpstart.config.stripe?
+      payment_processor = current_account.add_payment_processor(:stripe)
+      @pay_subscription = payment_processor.subscribe(
+        plan: @plan.id_for_processor(:stripe),
+        trial_period_days: @plan.trial_period_days,
+        payment_behavior: :default_incomplete,
+      )
+      @client_secret = @pay_subscription.client_secret
     end
   end
 
+  # Only used by Braintree
   def create
     payment_processor = params[:processor] ? current_account.set_payment_processor(params[:processor]) : current_account.payment_processor
     payment_processor.payment_method_token = params[:payment_method_token]

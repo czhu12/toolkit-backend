@@ -95,7 +95,7 @@
       <% end %>
 
       <%= tag.div class: ("hidden" if default_payment_method), data: { toggle_target: "toggleable" } do %>
-        <%= render 'subscriptions/forms/stripe'    if show_payment_processor?(:stripe, plan: @plan) %>
+        <%= render 'subscriptions/forms/stripe', client_secret: @client_secret, pay_subscription: @pay_subscription, plan: @plan if show_payment_processor?(:stripe, plan: @plan) %>
         <%= render 'subscriptions/forms/braintree' if show_payment_processor?(:braintree, plan: @plan) %>
         <%= render 'subscriptions/forms/paypal'    if show_payment_processor?(:paypal, plan: @plan) %>
         <%= render 'subscriptions/forms/paddle'    if show_payment_processor?(:paddle, plan: @plan) %>

@@ -3,7 +3,10 @@
 
   <div class="mb-4">
     <span class="text-5xl font-bold"><%= plan.amount_with_currency(precision: 0) %></span>
-    <span class="text-lg text-gray-500 font-medium">/ <%= plan.interval %></span>
+    <span class="text-lg text-gray-500 font-medium">
+      <% if plan.unit? %>/ <%= plan.unit %><% end %>
+      / <%= plan.interval %>
+    </span>
   </div>
 
   <p class="mb-4 text-gray-500"><%= plan.description %></p>

@@ -1,35 +1,23 @@
 import { Controller } from "@hotwired/stimulus"
-import { Turbo } from "@hotwired/turbo-rails"
 
 export default class extends Controller {
-  static targets = [ "card", "name", "error", "form" ]
+  static targets = [ "paymentElement", "error", "form" ]
+  static values = {
+    clientSecret: String,
+    returnUrl: String
+  }
 
   connect() {
-    let stripeMeta = document.querySelector('meta[name="stripe-key"]')
-    if (stripeMeta === null) { return }
-
-    let stripeKey = stripeMeta.getAttribute("content")
-    this.stripe   = Stripe(stripeKey)
-    let elements  = this.stripe.elements()
-
-    // Setup Intents are used for adding new cards to be charged in the future
-    this.setup_intent = this.data.get("setup-intent")
-
-    // Payment intents are for processing payments that require action
-    this.payment_intent = this.data.get("payment-intent")
-
-    // Setup regular payments
-    this.card = elements.create("card", {
-      style: {
-        base: {
-          fontFamily: 'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif',
-          fontSize: '16px',
-          fontSmoothing: 'antialiased',
-        }
-      }
+    this.stripe = Stripe(this.stripeKey)
+    this.elements = this.stripe.elements({
+      appearance: {
+        theme: "stripe",
+      },
+      clientSecret: this.clientSecretValue
     })
-    this.card.mount(this.cardTarget)
-    this.card.addEventListener("change", this.changed.bind(this))
+
+    this.paymentElement = this.elements.create("payment")
+    this.paymentElement.mount(this.paymentElementTarget)
   }
 
   changed(event) {
@@ -40,84 +28,48 @@ export default class extends Controller {
     }
   }
 
-  submit(event) {
+  async submit(event) {
     event.preventDefault()
     Rails.disableElement(this.formTarget)
 
-    if (this.nameTarget.value == "") {
-      this.showError("Name on card is required.")
-      return
-    }
-
-    // One time payments
-    if (this.payment_intent) {
-      this.handleCardPayment()
-
-      // Updating card with setup intent
-    } else if (this.setup_intent) {
-      this.setupNewCard()
-
-    // Subscriptions simply tokenize the payment method and redirect to payment page if SCA required
-    } else {
-      this.stripe.createPaymentMethod({
-        type: 'card',
-        card: this.card,
-        billing_details: {
-          name: this.nameTarget.value
+    // Payment Intents
+    if (this.clientSecretValue.startsWith("pi_")) {
+      const { error } = await this.stripe.confirmPayment({
+        elements: this.elements,
+        confirmParams: {
+          return_url: this.returnUrlValue,
         },
-      }).then((result) => this.handlePaymentMethod(result.paymentMethod.id))
+      });
+      this.showError(error)
+
+    // Setup Intents
+    } else {
+      const { error } = await this.stripe.confirmSetup({
+        elements: this.elements,
+        confirmParams: {
+          return_url: this.returnUrlValue,
+        },
+      });
+      this.showError(error)
     }
   }
 
-  setupNewCard() {
-    let data = {
-      payment_method: {
-        card: this.card,
-        billing_details: {
-          name: this.nameTarget.value
-        }
-      }
+  showError(error) {
+    let message
+
+    if (error.type === "card_error" || error.type === "validation_error") {
+      message = error.message
+    } else {
+      message = "An unexpected error occured."
     }
 
-    this.stripe.confirmCardSetup(this.setup_intent, data).then((result) => {
-      if (result.error) {
-        this.showError(result.error.message)
-      } else {
-        this.handlePaymentMethod(result.setupIntent.payment_method)
-      }
-    })
-  }
-
-  handlePaymentMethod(payment_method_id) {
-    this.addHiddenField("processor", "stripe")
-    this.addHiddenField("payment_method_token", payment_method_id)
-    this.formTarget.submit()
-  }
-
-  addHiddenField(name, value) {
-    let hiddenInput = document.createElement("input")
-    hiddenInput.setAttribute("type", "hidden")
-    hiddenInput.setAttribute("name", name)
-    hiddenInput.setAttribute("value", value)
-    this.formTarget.appendChild(hiddenInput)
-  }
-
-  handleCardPayment() {
-    // Handle an existing payment that needs confirmation
-    this.stripe.confirmCardPayment(this.payment_intent).then((result) => {
-      if (result.error) {
-        this.showError(result.error.message)
-      } else if (result.paymentIntent && result.paymentIntent.status === 'succeeded') {
-        Turbo.clearCache()
-        Turbo.visit("/")
-      }
-    })
-  }
-
-  showError(message) {
     this.errorTarget.textContent = message
     setTimeout(() => {
       Rails.enableElement(this.formTarget)
     }, 100)
+  }
+
+  get stripeKey() {
+    return document.querySelector('meta[name="stripe-key"]').getAttribute("content")
   }
 }

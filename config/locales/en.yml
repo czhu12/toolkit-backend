@@ -363,6 +363,17 @@ en:
       destroy:
         resumed: "Your subscription has been canceled."
 
+    upcomings:
+      show:
+        title: "Upcoming Invoice"
+        description: "The current costs for your usage this billing period."
+        line_items:
+          description: "Description"
+          quantity: "Quantity"
+          unit_price: "Unit Price"
+          total: "Total"
+        back: "Back to Billing"
+
     forms:
       stripe:
         credit_or_debit_card: "Credit or debit card"
