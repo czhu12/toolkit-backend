@@ -1,10 +1,11 @@
-class Subscriptions::StripeController < ApplicationController
+class PaymentMethods::StripeController < ApplicationController
   before_action :authenticate_user!
   before_action :set_setup_intent
 
   def show
     if @setup_intent.status == "succeeded"
-      current_account.set_payment_processor :stripe
+      pay_payment_method = Pay::Stripe::PaymentMethods.sync(@setup_intent.payment_method)
+      pay_payment_method.make_default!
       redirect_to root_path, notice: t("payment_methods.create.updated")
     else
       redirect_to root_path, alert: t("something_went_wrong")
