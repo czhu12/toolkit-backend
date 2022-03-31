@@ -26,6 +26,9 @@ class SubscriptionsController < ApplicationController
         plan: @plan.id_for_processor(:stripe),
         trial_period_days: @plan.trial_period_days,
         payment_behavior: :default_incomplete,
+        automatic_tax: {
+          enabled: @plan.automatic_tax?
+        }
       )
       @client_secret = @pay_subscription.client_secret
     end

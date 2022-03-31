@@ -43,7 +43,7 @@ GIT
 
 GIT
   remote: https://github.com/pay-rails/pay.git
-  revision: 3c6ceedc02a84d11be6e8f51a7bfe05ad1c15479
+  revision: 99a6ad8aea7741f73fe839a3c74f651e4669b903
   specs:
     pay (3.0.24)
       rails (>= 6.0.0)
@@ -163,7 +163,7 @@ GEM
       railties (>= 6.0.0)
     datetime_picker_rails (0.0.7)
       momentjs-rails (>= 2.8.1)
-    debug (1.4.0)
+    debug (1.5.0)
       irb (>= 1.3.6)
       reline (>= 0.2.7)
     devise (4.8.1)
@@ -302,7 +302,7 @@ GEM
     parser (3.1.1.0)
       ast (~> 2.4.1)
     pdf-core (0.9.0)
-    pg (1.3.4)
+    pg (1.3.5)
     pg_search (2.3.6)
       activerecord (>= 5.2)
       activesupport (>= 5.2)
@@ -314,7 +314,7 @@ GEM
     pretender (0.4.0)
       actionpack (>= 5.2)
     public_suffix (4.0.6)
-    puma (5.6.2)
+    puma (5.6.4)
       nio4r (~> 2.0)
     pundit (2.2.0)
       activesupport (>= 3.0.0)
@@ -367,7 +367,7 @@ GEM
       chunky_png (~> 1.0)
       rqrcode_core (~> 1.0)
     rqrcode_core (1.2.0)
-    rubocop (1.26.0)
+    rubocop (1.26.1)
       parallel (~> 1.10)
       parser (>= 3.1.0.0)
       rainbow (>= 2.2.2, < 4.0)
@@ -406,8 +406,8 @@ GEM
       actionpack (>= 5.2)
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
-    standard (1.9.0)
-      rubocop (= 1.26.0)
+    standard (1.9.1)
+      rubocop (= 1.26.1)
       rubocop-performance (= 1.13.3)
     stimulus-rails (1.0.4)
       railties (>= 6.0.0)

@@ -300,6 +300,7 @@ en:
       ends_at: "Your plan will be canceled on %{date}."
       paused_at: "Your plan will be paused on %{date}."
       paused: "Your plan is paused."
+      view_usage: "View usage"
 
     payment_method:
       payment_method: "Payment Method"

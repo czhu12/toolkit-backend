@@ -24,6 +24,10 @@
         <div><%= t(".quantity", quantity: subscription.quantity, price: subscription.plan.amount_with_currency) %></div>
       <% end %>
 
+      <% if subscription.metered_items? %>
+        <div><%= link_to t(".view_usage"), subscription_upcoming_path(subscription), class: "text-sm font-medium" %></div>
+      <% end %>
+
       <% if subscription.on_trial? && subscription.canceled? %>
         <div><%= t(".canceled_on_trial", date: l(subscription.trial_ends_at.to_date, format: :long)) %></div>
       <% elsif subscription.on_trial? %>
