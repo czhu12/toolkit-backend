@@ -1,5 +1,10 @@
 # Install non-ruby dependencies required by Jumpstart Pro
-# https://jumpstartrails.com/docs/installation
+
+# Redis - For ActionCable support (and Sidekiq, caching, etc)
+brew "redis"
+
+# PostgreSQL - brew install postgresql
+brew "postgresql"
 
 # Overmind (requires tmux)
 brew "tmux"
