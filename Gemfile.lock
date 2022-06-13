@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/excid3/administrate.git
-  revision: 6c72c628afe17e5904d8e2591c62f3b4e394e18c
+  revision: 238d6d5d808a41e9a02439d482c44bd843dfb12c
   branch: jumpstart
   specs:
     administrate (0.17.0)
@@ -285,7 +285,7 @@ GEM
     noticed (1.5.9)
       http (>= 4.0.0)
       rails (>= 5.2.0)
-    oj (3.13.13)
+    oj (3.13.14)
     omniauth (2.1.0)
       hashie (>= 3.4.6)
       rack (>= 2.2.3)
@@ -345,7 +345,7 @@ GEM
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
       nokogiri (>= 1.6)
-    rails-html-sanitizer (1.4.2)
+    rails-html-sanitizer (1.4.3)
       loofah (~> 2.3)
     railties (7.0.3)
       actionpack (= 7.0.3)
@@ -519,4 +519,4 @@ RUBY VERSION
    ruby 3.1.0p0
 
 BUNDLED WITH
-   2.3.7
+   2.3.15
