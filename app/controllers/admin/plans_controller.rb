@@ -32,7 +32,7 @@ module Admin
     # for more information
 
     def resource_params
-      params.require(resource_name).permit(*dashboard.permitted_attributes, features: [])
+      params.require(resource_name).permit(*dashboard.permitted_attributes, features: []).with_defaults(features: [])
     end
   end
 end
