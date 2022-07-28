@@ -26,8 +26,10 @@ module ApplicationHelper
     inline_svg_tag(filename, options)
   end
 
+  # fa_icon "thumbs-up", weight: "fa-solid"
+  # <i class="fa-solid fa-thumbs-up"></i>
   def fa_icon(name, options = {})
-    weight = options.delete(:weight) || "far"
+    weight = options.delete(:weight) || "fa-regular"
     options[:class] = [weight, "fa-#{name}", options.delete(:class)]
     tag.i(nil, **options)
   end

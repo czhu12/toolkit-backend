@@ -74,9 +74,13 @@ Rails.application.routes.draw do
   resources :account_invitations
 
   # Payments
+  resource :billing_address
   resources :payment_methods
   namespace :payment_methods do
     resource :stripe, controller: "subscriptions/stripe", only: [:show]
+  end
+  namespace :subscriptions do
+    resource :billing_address
   end
   resources :subscriptions do
     resource :cancel, module: :subscriptions

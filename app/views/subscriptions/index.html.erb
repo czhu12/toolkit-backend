@@ -22,6 +22,8 @@
           <%= render "subscriptions/payment_method", payment_processor: @payment_processor %>
         <% end %>
 
+        <%= render "subscriptions/billing_address", billing_address: @billing_address %>
+
         <%# Paddle: Extra payment details live in Paddle, not our app %>
         <% unless @payment_processor&.paddle? %>
           <%= render partial: "subscriptions/billing_info" %>

@@ -3,10 +3,11 @@
 const colors = require('tailwindcss/colors')
 const defaultTheme = require('tailwindcss/defaultTheme')
 
+/** @type {import('tailwindcss').Config */
 module.exports = {
   plugins: [
     require('@tailwindcss/aspect-ratio'),
-    require('@tailwindcss/forms')({ strategy: 'class' }),
+    require('@tailwindcss/forms'),
     require('@tailwindcss/line-clamp'),
     require('@tailwindcss/typography'),
   ],

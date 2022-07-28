@@ -260,6 +260,8 @@ en:
 
     new:
       title: "Checkout"
+      account: "Account"
+      billing_address: "Billing Address"
       payment_method: "Payment Method"
       change: "Change"
       subscribe: "Subscribe"
@@ -306,6 +308,19 @@ en:
       payment_method: "Payment Method"
       no_payment_method: "You have no payment method on file."
       update_payment_method: "Update payment method"
+
+    billing_address:
+      billing_address: "Billing Address"
+      add_billing_address: "Add billing address"
+      created: "Your billing address was added successfully."
+      update_billing_address: "Update billing address"
+      updated: "Your billing address was updated successfully."
+      no_billing_address: "You have no billing address on file."
+      destroyed: "Your billing address has been removed successfully."
+
+    billing_addresses:
+      show:
+        tax_may_apply: "Tax may apply."
 
     billing_info:
       extra_billing_info: "Extra Billing Information"

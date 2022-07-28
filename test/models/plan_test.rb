@@ -12,6 +12,7 @@
 #  interval_count    :integer          default(1)
 #  name              :string           not null
 #  trial_period_days :integer          default(0)
+#  unit              :string
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #

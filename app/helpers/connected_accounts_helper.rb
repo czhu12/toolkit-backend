@@ -1,7 +1,7 @@
 module ConnectedAccountsHelper
   def social_icon(provider, options = {})
     icon = provider_config(provider)[:icon]
-    fa_icon icon, options.merge(weight: :fab) if icon
+    fa_icon icon, options.merge(weight: "fa-brands") if icon
   end
 
   def provider_config(provider)

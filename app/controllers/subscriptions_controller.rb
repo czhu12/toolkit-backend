@@ -3,12 +3,14 @@ class SubscriptionsController < ApplicationController
   before_action :authenticate_user_with_sign_up!
   before_action :require_account
   before_action :require_current_account_admin, except: [:show]
-  before_action :set_plan, only: [:new, :create, :update]
+  before_action :set_plan, only: [:new, :payment, :create, :update]
   before_action :set_subscription, only: [:show, :edit, :update, :destroy]
+  before_action :redirect_to_billing_address, only: [:new]
 
-  layout "checkout", only: [:new, :create]
+  layout "checkout", only: [:new, :payment, :create]
 
   def index
+    @billing_address = current_account.billing_address
     @payment_processor = current_account.payment_processor
     @subscriptions = current_account.subscriptions.active.order(created_at: :asc).includes([:customer])
   end
@@ -20,7 +22,7 @@ class SubscriptionsController < ApplicationController
   # Stripe subscriptions are handled entirely client side
   # We need to create a subscription to render the PaymentElement
   def new
-    if Jumpstart.config.stripe?
+    if Jumpstart.config.stripe? && (!Jumpstart.config.collect_billing_address? || params[:step] == "payment")
       payment_processor = current_account.add_payment_processor(:stripe)
       @pay_subscription = payment_processor.subscribe(
         plan: @plan.id_for_processor(:stripe),
@@ -28,10 +30,15 @@ class SubscriptionsController < ApplicationController
         payment_behavior: :default_incomplete,
         automatic_tax: {
           enabled: @plan.automatic_tax?
-        }
+        },
+        promotion_code: params[:promo_code]
       )
+      @stripe_invoice = @pay_subscription.subscription.latest_invoice
       @client_secret = @pay_subscription.client_secret
     end
+  rescue Pay::Stripe::Error => e
+    flash[:alert] = e.message
+    redirect_to pricing_path
   end
 
   # Only used by Braintree
@@ -107,10 +114,6 @@ class SubscriptionsController < ApplicationController
     params.require(:account).permit(:extra_billing_info)
   end
 
-  def require_account
-    redirect_to new_user_registration_path unless current_account
-  end
-
   def require_payments_enabled
     return if Jumpstart.config.payments_enabled?
     flash[:alert] = "Jumpstart must be configured for payments before you can manage subscriptions."
@@ -126,5 +129,11 @@ class SubscriptionsController < ApplicationController
   def set_subscription
     @subscription = current_account.subscriptions.find_by_prefix_id(params[:id])
     redirect_to subscriptions_path if @subscription.nil?
+  end
+
+  def redirect_to_billing_address
+    if Jumpstart.config.collect_billing_address? && params[:step] != "payment"
+      redirect_to subscriptions_billing_address_path(plan: params[:plan], promo_code: params[:promo_code])
+    end
   end
 end

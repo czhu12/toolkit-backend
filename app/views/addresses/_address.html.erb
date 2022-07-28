@@ -1,0 +1,4 @@
+<%= tag.div address.line1 if address.line1? %>
+<%= tag.div address.line2 if address.line2? %>
+<div><%= [address.city, address.state].compact.join(",") %> <%= address.postal_code %></div>
+<div><%= address.country %></div>

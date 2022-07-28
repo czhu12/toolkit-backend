@@ -25,7 +25,7 @@ module SubscriptionExtensions
   end
 
   def amount_with_currency(**options)
-    total = (quantity == 0) ? plan.amount : plan.amount * quantity
+    total = quantity == 0 ? plan.amount : plan.amount * quantity
     Pay::Currency.format(total, **{currency: plan.currency}.merge(options))
   end
 end

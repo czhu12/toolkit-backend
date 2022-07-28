@@ -12,6 +12,7 @@
 #  interval_count    :integer          default(1)
 #  name              :string           not null
 #  trial_period_days :integer          default(0)
+#  unit              :string
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #
@@ -21,7 +22,7 @@ class Plan < ApplicationRecord
   # https://github.com/excid3/prefixed_ids
   has_prefix_id :plan
 
-  store_accessor :details, :features, :stripe_id, :braintree_id, :paddle_id, :jumpstart_id, :fake_processor_id
+  store_accessor :details, :features, :stripe_id, :braintree_id, :paddle_id, :jumpstart_id, :fake_processor_id, :stripe_tax
   attribute :features, :string, array: true
 
   validates :name, :amount, :interval, presence: true
@@ -49,6 +50,10 @@ class Plan < ApplicationRecord
     plan
   end
 
+  def automatic_tax?
+    !!stripe_tax
+  end
+
   def features
     Array.wrap(super)
   end
@@ -73,6 +78,10 @@ class Plan < ApplicationRecord
     interval == "year"
   end
   alias_method :yearly?, :annual?
+
+  def taxed?
+    !!stripe_tax
+  end
 
   # Find a plan with the same name in the opposite interval
   # This is useful when letting users upgrade to the yearly plan

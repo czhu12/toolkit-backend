@@ -53,6 +53,7 @@ group :development, :test do
   gem "annotate", github: "excid3/annotate_models", branch: "rails7"
   gem "letter_opener_web", "~> 2.0"
   gem "standard", require: false
+  gem "erb_lint", require: false
 
   # Security tooling to
   # gem "brakeman"
@@ -85,8 +86,9 @@ gem "jumpstart", path: "lib/jumpstart", group: :omit
 
 gem "acts_as_tenant", "~> 0.5.1"
 gem "administrate", github: "excid3/administrate", branch: "jumpstart" # '~> 0.10.0'
-gem "administrate-field-active_storage", "~> 0.4.0"
+gem "administrate-field-active_storage", "~> 0.4.1"
 gem "cssbundling-rails", "~> 1.1.0"
+gem "country_select", "~> 8.0"
 gem "devise", "~> 4.8", ">= 4.8.1"
 gem "devise-i18n", "~> 1.10"
 gem "inline_svg", "~> 1.6"
@@ -99,7 +101,7 @@ gem "oj", "~> 3.8", ">= 3.8.1"
 gem "omniauth", "~> 2.0", ">= 2.0.4"
 gem "omniauth-rails_csrf_protection", "~> 1.0"
 gem "pagy", "~> 5.1"
-gem "pay", github: "pay-rails/pay" #"~> 4.0.0"
+gem "pay", "~> 4.0.0"
 gem "pg_search", "~> 2.3"
 gem "prawn", github: "prawnpdf/prawn"
 gem "prefixed_ids", "~> 1.2"
