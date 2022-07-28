@@ -40,6 +40,16 @@ GIT
       railties (>= 5.2)
 
 GIT
+  remote: https://github.com/hotwired/turbo-rails.git
+  revision: 2b02587c6f5feff7e968e721f24eeb24e1abc779
+  branch: turbo-7-2-0
+  specs:
+    turbo-rails (1.2.0.beta1)
+      actionpack (>= 6.0.0)
+      activejob (>= 6.0.0)
+      railties (>= 6.0.0)
+
+GIT
   remote: https://github.com/prawnpdf/prawn.git
   revision: 7d4f6b8998e0627259c1036a2cd6bca65cd53f45
   specs:
@@ -429,10 +439,6 @@ GEM
     tilt (2.0.11)
     timeout (0.3.0)
     ttfunk (1.7.0)
-    turbo-rails (1.1.1)
-      actionpack (>= 6.0.0)
-      activejob (>= 6.0.0)
-      railties (>= 6.0.0)
     tzinfo (2.0.5)
       concurrent-ruby (~> 1.0)
     tzinfo-data (1.2022.1)
@@ -517,7 +523,7 @@ DEPENDENCIES
   sprockets-rails (>= 3.4.1)
   standard
   stimulus-rails (~> 1.0, >= 1.0.2)
-  turbo-rails (~> 1.0, >= 1.0.1)
+  turbo-rails!
   tzinfo-data
   web-console (>= 4.1.0)
   webdrivers
