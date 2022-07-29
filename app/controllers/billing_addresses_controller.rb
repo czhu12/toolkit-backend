@@ -30,7 +30,7 @@ class BillingAddressesController < ApplicationController
 
   def destroy
     @billing_address.destroy
-    redirect_to subscriptions_path, alert: t("subscriptions.billing_address.destroyed")
+    redirect_to subscriptions_path, status: :see_other, notice: t("subscriptions.billing_address.destroyed")
   end
 
   private

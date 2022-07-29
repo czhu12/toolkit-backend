@@ -60,7 +60,7 @@ class AccountsController < Accounts::BaseController
   # DELETE /accounts/1
   def destroy
     @account.destroy
-    redirect_to accounts_url, notice: t(".destroyed")
+    redirect_to accounts_url, status: :see_other, notice: t(".destroyed")
   end
 
   # Current account will not change until the next request

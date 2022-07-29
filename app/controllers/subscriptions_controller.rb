@@ -75,34 +75,6 @@ class SubscriptionsController < ApplicationController
     render :edit, status: :unprocessable_entity
   end
 
-  def resume
-    current_account.payment_processor.subscription.resume
-    redirect_to subscriptions_path, notice: t(".resumed")
-  rescue Pay::Error => e
-    flash[:alert] = e.message
-    render :show, status: :unprocessable_entity
-  end
-
-  def pause
-    current_account.payment_processor.subscription.pause
-    redirect_to subscriptions_path
-  rescue Pay::Error => e
-    flash[:alert] = e.message
-    render :show
-  end
-
-  def destroy
-    @subscription.cancel
-
-    # Optionally, you can cancel immediately
-    # @subscription.cancel_now!
-
-    redirect_to subscriptions_path
-  rescue Pay::Error => e
-    flash[:alert] = e.message
-    render :show, status: :unprocessable_entity
-  end
-
   def info
     current_account.update(info_params)
     redirect_to subscriptions_path, notice: t(".info_updated")

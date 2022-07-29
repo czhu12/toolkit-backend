@@ -4,7 +4,6 @@ export default class extends Controller {
   static targets = [ "form" ]
 
   connect() {
-
     let params = {
       method: 'inline',
       allowQuantity: false,

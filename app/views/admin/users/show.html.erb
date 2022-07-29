@@ -36,8 +36,7 @@ as well as a link to its edit page.
       t("administrate.actions.destroy"),
       [namespace, page.resource],
       class: "button button--danger",
-      method: :delete,
-      data: { confirm: t("administrate.actions.confirm") }
+      data: { turbo_method: :delete, turbo_confirm: t("administrate.actions.confirm") }
     ) if valid_action?(:destroy) && show_action?(:destroy, page.resource) %>
   </div>
 </header>

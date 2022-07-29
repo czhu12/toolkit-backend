@@ -12,6 +12,9 @@ export default class extends Controller {
     this.elements = this.stripe.elements({
       appearance: {
         theme: "stripe",
+        variables: {
+          fontSizeBase: "14px"
+        }
       },
       clientSecret: this.clientSecretValue
     })

@@ -18,7 +18,7 @@ class AccountInvitationsController < ApplicationController
 
   def destroy
     @account_invitation.reject!
-    redirect_to root_path
+    redirect_to root_path, status: :see_other
   end
 
   private

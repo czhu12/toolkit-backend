@@ -11,7 +11,7 @@ class Subscriptions::CancelsController < ApplicationController
     # Optionally, you can cancel immediately
     # current_account.subscription.cancel_now!
 
-    redirect_to subscriptions_path
+    redirect_to subscriptions_path, status: :see_other
   rescue Pay::Error => e
     flash[:alert] = e.message
     render :show, status: :unprocessable_entity
