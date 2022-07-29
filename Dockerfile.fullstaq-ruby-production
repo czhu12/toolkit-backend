@@ -1,6 +1,7 @@
 # This Dockerfile uses Fullstaq Ruby with jemalloc and only supports amd64.
 FROM buildpack-deps:20.04
 
+ARG RUBY_VERSION=3.1-jemalloc
 ENV RAILS_ENV=production
 ENV GEM_HOME /usr/local/bundle
 ENV BUNDLE_PATH="$GEM_HOME"
@@ -13,7 +14,6 @@ RUN apt-get update -qq && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends imagemagick libvips libvips-dev libvips-tools libpq-dev && \
     rm -rf /var/lib/apt/lists/* /var/cache/apt
 
-ARG RUBY_VERSION=3.1-jemalloc
 RUN curl -SLf https://raw.githubusercontent.com/fullstaq-labs/fullstaq-ruby-server-edition/main/fullstaq-ruby.asc | apt-key add - && \
     echo "deb https://apt.fullstaqruby.org ubuntu-20.04 main" > /etc/apt/sources.list.d/fullstaq-ruby.list && \
     apt-get update -q && \
