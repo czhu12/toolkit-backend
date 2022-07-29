@@ -48,7 +48,7 @@ class Pay::SubscriptionDashboard < Administrate::BaseDashboard
     :processor_id,
     :processor_plan,
     :quantity,
-    :status
+    :status,
     :trial_ends_at,
     :ends_at,
     :created_at,
