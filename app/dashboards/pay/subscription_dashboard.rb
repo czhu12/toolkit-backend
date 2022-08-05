@@ -21,7 +21,7 @@ class Pay::SubscriptionDashboard < Administrate::BaseDashboard
     status: Field::String,
     prorate: Field::Boolean,
     active?: Field::Boolean,
-    cancelled?: Field::Boolean,
+    cancelled?: Field::Boolean
   }.freeze
 
   # COLLECTION_ATTRIBUTES

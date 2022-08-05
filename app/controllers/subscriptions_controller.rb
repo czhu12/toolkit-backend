@@ -27,7 +27,7 @@ class SubscriptionsController < ApplicationController
         payment_processor = current_account.add_payment_processor(:stripe)
         @client_secret = payment_processor.create_setup_intent.client_secret
 
-      elsif (!Jumpstart.config.collect_billing_address? || params[:step] == "payment")
+      elsif !Jumpstart.config.collect_billing_address? || params[:step] == "payment"
         payment_processor = current_account.add_payment_processor(:stripe)
         @pay_subscription = payment_processor.subscribe(
           plan: @plan.id_for_processor(:stripe),

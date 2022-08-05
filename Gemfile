@@ -19,7 +19,6 @@ gem "puma", "~> 5.0"
 # gem "turbo-rails", "~> 1.0", ">= 1.0.1"
 gem "turbo-rails", github: "hotwired/turbo-rails", branch: "turbo-7-2-0"
 
-
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
 gem "stimulus-rails", "~> 1.0", ">= 1.0.2"
 
