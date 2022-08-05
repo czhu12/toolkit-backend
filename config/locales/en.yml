@@ -95,6 +95,8 @@ en:
     users: "Users"
     roles: "Roles"
     account_invitations:
+      updated: "Invitation was successfully updated."
+      destroyed: "Invitation was successfully removed."
       new:
         title: "Invite User"
         description: "Invite a user to join your account."
