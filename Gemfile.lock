@@ -41,10 +41,10 @@ GIT
 
 GIT
   remote: https://github.com/hotwired/turbo-rails.git
-  revision: 2b02587c6f5feff7e968e721f24eeb24e1abc779
+  revision: 717978b7bcc33a9566fc71d136858204ef3a3aeb
   branch: turbo-7-2-0
   specs:
-    turbo-rails (1.2.0.beta1)
+    turbo-rails (1.2.0.beta2)
       actionpack (>= 6.0.0)
       activejob (>= 6.0.0)
       railties (>= 6.0.0)
@@ -151,7 +151,7 @@ GEM
       parser (>= 2.4)
       smart_properties
     bindex (0.8.1)
-    bootsnap (1.12.0)
+    bootsnap (1.13.0)
       msgpack (~> 1.2)
     builder (3.2.4)
     capybara (3.37.1)
@@ -197,10 +197,6 @@ GEM
       rubocop
       smart_properties
     erubi (1.11.0)
-    faraday (2.4.0)
-      faraday-net_http (~> 2.0)
-      ruby2_keywords (>= 0.0.4)
-    faraday-net_http (2.1.0)
     ffi (1.15.5)
     ffi-compiler (1.0.1)
       ffi (>= 1.0.0)
@@ -304,7 +300,7 @@ GEM
     noticed (1.5.9)
       http (>= 4.0.0)
       rails (>= 5.2.0)
-    oj (3.13.18)
+    oj (3.13.19)
     omniauth (2.1.0)
       hashie (>= 3.4.6)
       rack (>= 2.2.3)
@@ -317,8 +313,6 @@ GEM
       childprocess (>= 0.6.3, < 5)
       iniparse (~> 1.4)
       rexml (~> 3.2)
-    paddle_pay (0.2.0)
-      faraday (>= 1.10.0, < 3.0)
     pagy (5.10.1)
       activesupport
     parallel (1.22.1)
@@ -411,7 +405,6 @@ GEM
     ruby-progressbar (1.11.0)
     ruby-vips (2.1.4)
       ffi (~> 1.12)
-    ruby2_keywords (0.0.5)
     rubyzip (2.3.2)
     sassc (2.4.0)
       ffi (~> 1.9)
@@ -510,7 +503,6 @@ DEPENDENCIES
   omniauth (~> 2.0, >= 2.0.4)
   omniauth-rails_csrf_protection (~> 1.0)
   overcommit
-  paddle_pay
   pagy (~> 5.1)
   pay (~> 5.0.0)
   pg
