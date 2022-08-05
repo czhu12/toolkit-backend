@@ -22,19 +22,25 @@ class SubscriptionsController < ApplicationController
   # Stripe subscriptions are handled entirely client side
   # We need to create a subscription to render the PaymentElement
   def new
-    if Jumpstart.config.stripe? && (!Jumpstart.config.collect_billing_address? || params[:step] == "payment")
-      payment_processor = current_account.add_payment_processor(:stripe)
-      @pay_subscription = payment_processor.subscribe(
-        plan: @plan.id_for_processor(:stripe),
-        trial_period_days: @plan.trial_period_days,
-        payment_behavior: :default_incomplete,
-        automatic_tax: {
-          enabled: @plan.automatic_tax?
-        },
-        promotion_code: params[:promo_code]
-      )
-      @stripe_invoice = @pay_subscription.subscription.latest_invoice
-      @client_secret = @pay_subscription.client_secret
+    if Jumpstart.config.stripe?
+      if @plan.trial_period_days?
+        payment_processor = current_account.add_payment_processor(:stripe)
+        @client_secret = payment_processor.create_setup_intent.client_secret
+
+      elsif (!Jumpstart.config.collect_billing_address? || params[:step] == "payment")
+        payment_processor = current_account.add_payment_processor(:stripe)
+        @pay_subscription = payment_processor.subscribe(
+          plan: @plan.id_for_processor(:stripe),
+          trial_period_days: @plan.trial_period_days,
+          payment_behavior: :default_incomplete,
+          automatic_tax: {
+            enabled: @plan.automatic_tax?
+          },
+          promotion_code: params[:promo_code]
+        )
+        @stripe_invoice = @pay_subscription.subscription.latest_invoice
+        @client_secret = @pay_subscription.client_secret
+      end
     end
   rescue Pay::Stripe::Error => e
     flash[:alert] = e.message

@@ -44,7 +44,7 @@
 <p class="text-sm text-gray-700">Enable this to collect a billing address during checkout. You might need this for Stripe Tax or other features.</p>
 
 <label class="mt-2">
-  <%= f.check_box :collect_billing_address %>
+  <%= f.check_box :collect_billing_address, checked: @config.collect_billing_address? %>
   Collect billing address during checkout
 </label>
 

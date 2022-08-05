@@ -3,6 +3,14 @@ module SubscriptionsHelper
     Rails.env.production? ? "production" : "sandbox"
   end
 
+  def pricing_cta(plan)
+    if plan.trial_period_days?
+      t(".start_trial")
+    else
+      t(".get_started")
+    end
+  end
+
   def payment_method_details(object)
     case object.payment_method_type
     when "paypal"

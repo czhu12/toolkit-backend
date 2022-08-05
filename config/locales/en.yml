@@ -249,6 +249,7 @@ en:
       change_plan: "Change Plan"
       current_plan: "Current plan"
       get_started: "Get Started"
+      start_trial: "Start Trial"
       processing: "Processing..."
 
     index:
@@ -265,6 +266,7 @@ en:
       payment_method: "Payment Method"
       change: "Change"
       subscribe: "Subscribe"
+      start_trial: "Start trial"
       processing: "Processing..."
       help: "Need any help?"
       contact_html: "Don't hesitate to %{link}."
@@ -272,6 +274,9 @@ en:
       contact_support: "contact support"
       contact_subject: "I have a question about %{product}"
       testimonial: "%{product} has made my life so much easier. I can't recommend it enough."
+      subtotal: "Subtotal"
+      tax: "Tax"
+      total: "Total due today"
 
     edit:
       trial_ends: "Your trial ends in %{days}."
@@ -288,7 +293,7 @@ en:
     subscription:
       cancel_plan: "Cancel plan"
       canceled_on_trial: "After your trial ends on %{date}, this plan will be canceled automatically."
-      title: "Current Plan"
+      title: "Current Plans"
       free_trial: "Free Trial"
       free_trial_ends: "Your trial ends on %{date}."
       trial: "After your trial ends on %{date}, this plan will continue automatically."

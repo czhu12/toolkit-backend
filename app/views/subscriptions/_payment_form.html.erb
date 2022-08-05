@@ -1,7 +1,13 @@
 <% if Jumpstart.config.collect_billing_address? %>
   <h5 class="text-gray-700 font-semibold my-4 border-b border-gray-200 pb-2"><%= t("subscriptions.new.billing_address") %></h5>
-  <div class="flex justify-between">
-    <div><%= render current_account.billing_address %></div>
+  <div class="flex justify-between text-sm">
+    <div>
+    <% if current_account.billing_address %>
+      <%= render current_account.billing_address %>
+    <% else %>
+      <%= t(".no_billing_address") %>
+    <% end %>
+    </div>
     <%= link_to "Edit", new_subscription_path(plan: @plan.id) %>
   </div>
 <% end %>

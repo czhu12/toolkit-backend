@@ -5,14 +5,14 @@
   <% end %>
 </nav>
 
-<div class="p-4 max-w-6xl mx-auto grid lg:grid-cols-2 lg:gap-24 lg:p-16">
+<div class="p-4 max-w-6xl mx-auto grid lg:grid-cols-2 lg:gap-48 lg:py-24">
   <div>
     <div class="flex justify-center mb-4 lg:justify-start">
       <% if @plan.has_trial? %>
         <div>
           <h1 class="font-semibold text-lg text-gray-500">Try <%= @plan.name %></h1>
           <h3 class="my-1 font-bold text-3xl"><%= @plan.trial_period_days %> days free</h3>
-          <p class="font-medium text-gray-500">Then <%= @plan.amount_with_currency %> per <%= @plan.interval %></p>
+          <p class="font-medium text-gray-500">Then <span id="recurringTotal"><%= @plan.amount_with_currency %></span> per <%= @plan.interval %></p>
         </div>
 
       <% else %>
@@ -20,20 +20,48 @@
           <h1 class="font-semibold text-lg text-gray-500">Subscribe to <%= @plan.name %></h1>
 
           <div class="flex items-center">
-            <% if Jumpstart.config.paddle? && show_payment_processor?(:paddle, plan: @plan) %>
-              <h3 id="recurringTotal" class="my-1 font-bold text-4xl"><i class="fas fa-circle-notch fa-spin"></i></h3>
-            <% else %>
-              <h3 class="my-1 font-bold text-4xl"><%= @plan.amount_with_currency %></h3>
-            <% end %>
+            <h3 id="recurringTotal" class="my-1 font-bold text-4xl"><%= @plan.amount_with_currency %></h3>
 
             <div class="ml-2 font-medium text-sm text-gray-500 leading-none">
-              <div>per</div>
-              <div><%= @plan.interval %></div>
+              <% if @plan.unit? %>
+                <div>per <%= @plan.unit %></div>
+                <div>per <%= @plan.interval %></div>
+              <% else %>
+                <div>per</div>
+                <div><%= @plan.interval %></div>
+              <% end %>
             </div>
           </div>
         </div>
       <% end %>
     </div>
+
+    <% if @plan.taxed? && @stripe_invoice %>
+      <div class="flex justify-between mb-4 text-sm font-medium">
+        <div><%= t(".subtotal") %></div>
+        <div><%= Pay::Currency.format(@stripe_invoice.subtotal, currency: @stripe_invoice.currency) %></div>
+      </div>
+
+      <hr class="mb-4" />
+
+      <div class="flex justify-between mb-4 text-sm text-gray-700">
+        <% @stripe_invoice.total_tax_amounts.each do |tax| %>
+          <div>
+            <%= tax.tax_rate.jurisdiction %>
+            <%= tax.tax_rate.display_name %>
+            (<%= tax.tax_rate.percentage %>%)
+          </div>
+          <div><%= Pay::Currency.format(tax.amount, currency: @stripe_invoice.currency) %></div>
+        <% end %>
+      </div>
+
+      <hr class="mb-4" />
+
+      <div class="flex justify-between mb-4 text-sm font-medium">
+        <div><%= t(".total") %></div>
+        <div><%= Pay::Currency.format(@stripe_invoice.total, currency: @stripe_invoice.currency) %></div>
+      </div>
+    <% end %>
 
     <div class="hidden flex justify-center mb-4 lg:block">
       <div>

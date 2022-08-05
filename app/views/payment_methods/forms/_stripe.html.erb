@@ -16,7 +16,7 @@
     <div data-stripe-target="paymentElement"></div>
   </div>
 
-  <div data-stripe-target="error" role="alert" class="text-red-600 text-sm"></div>
+  <div data-stripe-target="error" role="alert" class="form-group text-red-600 text-sm"></div>
 
   <%= f.hidden_field :processor, value: :stripe %>
   <%= f.button t(".button"), id: 'submit-button', class: "btn btn-primary", data: { action: "click->stripe#submit", disable_with: disable_with(t("processing")) } %>

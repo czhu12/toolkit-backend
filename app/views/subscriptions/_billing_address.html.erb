@@ -4,12 +4,7 @@
   <div class="flex-1 my-4">
     <% if billing_address %>
       <div class="text-gray-700">
-        <%= tag.div billing_address.line1 %>
-        <%= tag.div billing_address.line2 if billing_address.line2? %>
-        <div>
-          <%= [billing_address.city, billing_address.state].compact.join(", ") %> <%= billing_address.postal_code %>
-        </div>
-        <div><%= ISO3166::Country[billing_address.country].common_name if billing_address.country? %></div>
+        <%= render billing_address %>
       </div>
     <% else %>
       <p class="text-gray-700">

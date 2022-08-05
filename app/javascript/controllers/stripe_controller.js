@@ -58,15 +58,7 @@ export default class extends Controller {
   }
 
   showError(error) {
-    let message
-
-    if (error.type === "card_error" || error.type === "validation_error") {
-      message = error.message
-    } else {
-      message = "An unexpected error occured."
-    }
-
-    this.errorTarget.textContent = message
+    this.errorTarget.textContent = error.message
     setTimeout(() => {
       Rails.enableElement(this.formTarget)
     }, 100)

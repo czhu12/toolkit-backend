@@ -1,6 +1,8 @@
 class Subscriptions::StripeController < ApplicationController
+  # Handles Stripe PaymentElement callback
+
   before_action :authenticate_user!
-  before_action :set_subscription
+  before_action :set_subscription, only: [:show]
 
   def show
     @pay_subscription = Pay::Stripe::Subscription.sync(@pay_subscription.processor_id)
