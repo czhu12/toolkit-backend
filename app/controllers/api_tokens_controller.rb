@@ -32,7 +32,7 @@ class ApiTokensController < ApplicationController
 
   def destroy
     @api_token.destroy
-    redirect_to api_tokens_path, notice: t(".destroyed")
+    redirect_to api_tokens_path, status: :see_other, notice: t(".destroyed")
   end
 
   private

@@ -33,7 +33,7 @@
   "buildpacks": [
     { "url": "https://github.com/heroku/heroku-buildpack-apt.git" },
     { "url": "https://github.com/brandoncc/heroku-buildpack-vips" },
-    {"url": "https://github.com/gaffneyc/heroku-buildpack-jemalloc.git"},
+    { "url": "https://github.com/gaffneyc/heroku-buildpack-jemalloc.git" },
     { "url": "heroku/nodejs" },
     { "url": "heroku/ruby" }
   ],
@@ -48,6 +48,6 @@
       }
     }
   },
-  "stack": "heroku-20"
+  "stack": "heroku-22"
 }
 

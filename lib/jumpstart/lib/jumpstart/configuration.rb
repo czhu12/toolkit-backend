@@ -121,6 +121,14 @@ module Jumpstart
       ActiveModel::Type::Boolean.new.cast(@fcm || false)
     end
 
+    def collect_billing_address=(value)
+      @collect_billing_address = ActiveModel::Type::Boolean.new.cast(value)
+    end
+
+    def collect_billing_address?
+      ActiveModel::Type::Boolean.new.cast(@collect_billing_address || false)
+    end
+
     def update_procfiles
       write_procfile Rails.root.join("Procfile"), procfile_content
       write_procfile Rails.root.join("Procfile.dev"), procfile_content(dev: true)

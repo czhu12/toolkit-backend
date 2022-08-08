@@ -24,7 +24,7 @@ class PaymentMethodsController < ApplicationController
     # User may not be using Stripe currently, so we have to check their payment processor
     return unless show_payment_processor?(:stripe)
 
-    payment_processor = current_account.pay_customers.stripe.first
-    @setup_intent = (!!payment_processor ? payment_processor.create_setup_intent : Stripe::SetupIntent.create)
+    payment_processor = current_account.add_payment_processor(:stripe)
+    @client_secret = payment_processor.create_setup_intent.client_secret
   end
 end

@@ -3,12 +3,14 @@ class SubscriptionsController < ApplicationController
   before_action :authenticate_user_with_sign_up!
   before_action :require_account
   before_action :require_current_account_admin, except: [:show]
-  before_action :set_plan, only: [:new, :create, :update]
+  before_action :set_plan, only: [:new, :payment, :create, :update]
   before_action :set_subscription, only: [:show, :edit, :update, :destroy]
+  before_action :redirect_to_billing_address, only: [:new]
 
-  layout "checkout", only: [:new, :create]
+  layout "checkout", only: [:new, :payment, :create]
 
   def index
+    @billing_address = current_account.billing_address
     @payment_processor = current_account.payment_processor
     @subscriptions = current_account.subscriptions.active.order(created_at: :asc).includes([:customer])
   end
@@ -17,12 +19,35 @@ class SubscriptionsController < ApplicationController
     redirect_to edit_subscription_path(@subscription)
   end
 
+  # Stripe subscriptions are handled entirely client side
+  # We need to create a subscription to render the PaymentElement
   def new
-    if Jumpstart.config.stripe? && @plan.has_trial?
-      @setup_intent = current_account.payment_processor&.stripe? ? current_account.payment_processor.create_setup_intent : Stripe::SetupIntent.create
+    if Jumpstart.config.stripe?
+      if @plan.trial_period_days?
+        payment_processor = current_account.add_payment_processor(:stripe)
+        @client_secret = payment_processor.create_setup_intent.client_secret
+
+      elsif !Jumpstart.config.collect_billing_address? || params[:step] == "payment"
+        payment_processor = current_account.add_payment_processor(:stripe)
+        @pay_subscription = payment_processor.subscribe(
+          plan: @plan.id_for_processor(:stripe),
+          trial_period_days: @plan.trial_period_days,
+          payment_behavior: :default_incomplete,
+          automatic_tax: {
+            enabled: @plan.automatic_tax?
+          },
+          promotion_code: params[:promo_code]
+        )
+        @stripe_invoice = @pay_subscription.subscription.latest_invoice
+        @client_secret = @pay_subscription.client_secret
+      end
     end
+  rescue Pay::Stripe::Error => e
+    flash[:alert] = e.message
+    redirect_to pricing_path
   end
 
+  # Only used by Braintree
   def create
     payment_processor = params[:processor] ? current_account.set_payment_processor(params[:processor]) : current_account.payment_processor
     payment_processor.payment_method_token = params[:payment_method_token]
@@ -56,34 +81,6 @@ class SubscriptionsController < ApplicationController
     render :edit, status: :unprocessable_entity
   end
 
-  def resume
-    current_account.payment_processor.subscription.resume
-    redirect_to subscriptions_path, notice: t(".resumed")
-  rescue Pay::Error => e
-    flash[:alert] = e.message
-    render :show, status: :unprocessable_entity
-  end
-
-  def pause
-    current_account.payment_processor.subscription.pause
-    redirect_to subscriptions_path
-  rescue Pay::Error => e
-    flash[:alert] = e.message
-    render :show
-  end
-
-  def destroy
-    @subscription.cancel
-
-    # Optionally, you can cancel immediately
-    # @subscription.cancel_now!
-
-    redirect_to subscriptions_path
-  rescue Pay::Error => e
-    flash[:alert] = e.message
-    render :show, status: :unprocessable_entity
-  end
-
   def info
     current_account.update(info_params)
     redirect_to subscriptions_path, notice: t(".info_updated")
@@ -93,10 +90,6 @@ class SubscriptionsController < ApplicationController
 
   def info_params
     params.require(:account).permit(:extra_billing_info)
-  end
-
-  def require_account
-    redirect_to new_user_registration_path unless current_account
   end
 
   def require_payments_enabled
@@ -114,5 +107,11 @@ class SubscriptionsController < ApplicationController
   def set_subscription
     @subscription = current_account.subscriptions.find_by_prefix_id(params[:id])
     redirect_to subscriptions_path if @subscription.nil?
+  end
+
+  def redirect_to_billing_address
+    if Jumpstart.config.collect_billing_address? && params[:step] != "payment"
+      redirect_to subscriptions_billing_address_path(plan: params[:plan], promo_code: params[:promo_code])
+    end
   end
 end

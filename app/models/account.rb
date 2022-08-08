@@ -10,7 +10,7 @@
 #  subdomain          :string
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
-#  owner_id           :bigint
+#  owner_id           :integer
 #
 # Indexes
 #
@@ -30,6 +30,9 @@ class Account < ApplicationRecord
   has_many :account_users, dependent: :destroy
   has_many :notifications, dependent: :destroy
   has_many :users, through: :account_users
+  has_many :addresses, as: :addressable, dependent: :destroy
+  has_one :billing_address, -> { where(address_type: :billing) }, class_name: "Address", as: :addressable
+  has_one :shipping_address, -> { where(address_type: :shipping) }, class_name: "Address", as: :addressable
 
   scope :personal, -> { where(personal: true) }
   scope :impersonal, -> { where(personal: false) }
@@ -37,12 +40,16 @@ class Account < ApplicationRecord
 
   has_noticed_notifications
   has_one_attached :avatar
-  pay_customer
+  pay_customer stripe_attributes: :stripe_attributes
 
   validates :name, presence: true
   validates :domain, exclusion: {in: RESERVED_DOMAINS, message: :reserved}
   validates :subdomain, exclusion: {in: RESERVED_SUBDOMAINS, message: :reserved}, format: {with: /\A[a-zA-Z0-9]+[a-zA-Z0-9\-_]*[a-zA-Z0-9]+\Z/, message: :format, allow_blank: true}
   validates :avatar, resizable_image: true
+
+  def find_or_build_billing_address
+    billing_address || build_billing_address
+  end
 
   def email
     account_users.includes(:user).order(created_at: :asc).first.user.email
@@ -104,4 +111,11 @@ class Account < ApplicationRecord
   #     association.create(name: "example")
   #   end
   # end
+
+  private
+
+  # Attributes to sync to the Stripe Customer
+  def stripe_attributes(*args)
+    {address: billing_address&.to_stripe}
+  end
 end

@@ -8,7 +8,7 @@ class Users::ConnectedAccountsController < ApplicationController
 
   def destroy
     @connected_account.destroy
-    redirect_to user_connected_accounts_path
+    redirect_to user_connected_accounts_path, status: :see_other
   end
 
   private

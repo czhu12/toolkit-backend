@@ -95,6 +95,8 @@ en:
     users: "Users"
     roles: "Roles"
     account_invitations:
+      updated: "Invitation was successfully updated."
+      destroyed: "Invitation was successfully removed."
       new:
         title: "Invite User"
         description: "Invite a user to join your account."
@@ -249,6 +251,7 @@ en:
       change_plan: "Change Plan"
       current_plan: "Current plan"
       get_started: "Get Started"
+      start_trial: "Start Trial"
       processing: "Processing..."
 
     index:
@@ -260,9 +263,12 @@ en:
 
     new:
       title: "Checkout"
+      account: "Account"
+      billing_address: "Billing Address"
       payment_method: "Payment Method"
       change: "Change"
       subscribe: "Subscribe"
+      start_trial: "Start trial"
       processing: "Processing..."
       help: "Need any help?"
       contact_html: "Don't hesitate to %{link}."
@@ -270,6 +276,9 @@ en:
       contact_support: "contact support"
       contact_subject: "I have a question about %{product}"
       testimonial: "%{product} has made my life so much easier. I can't recommend it enough."
+      subtotal: "Subtotal"
+      tax: "Tax"
+      total: "Total due today"
 
     edit:
       trial_ends: "Your trial ends in %{days}."
@@ -286,7 +295,7 @@ en:
     subscription:
       cancel_plan: "Cancel plan"
       canceled_on_trial: "After your trial ends on %{date}, this plan will be canceled automatically."
-      title: "Current Plan"
+      title: "Current Plans"
       free_trial: "Free Trial"
       free_trial_ends: "Your trial ends on %{date}."
       trial: "After your trial ends on %{date}, this plan will continue automatically."
@@ -300,11 +309,25 @@ en:
       ends_at: "Your plan will be canceled on %{date}."
       paused_at: "Your plan will be paused on %{date}."
       paused: "Your plan is paused."
+      view_usage: "View usage"
 
     payment_method:
       payment_method: "Payment Method"
       no_payment_method: "You have no payment method on file."
       update_payment_method: "Update payment method"
+
+    billing_address:
+      billing_address: "Billing Address"
+      add_billing_address: "Add billing address"
+      created: "Your billing address was added successfully."
+      update_billing_address: "Update billing address"
+      updated: "Your billing address was updated successfully."
+      no_billing_address: "You have no billing address on file."
+      destroyed: "Your billing address has been removed successfully."
+
+    billing_addresses:
+      show:
+        tax_may_apply: "Tax may apply."
 
     billing_info:
       extra_billing_info: "Extra Billing Information"
@@ -362,6 +385,17 @@ en:
 
       destroy:
         resumed: "Your subscription has been canceled."
+
+    upcomings:
+      show:
+        title: "Upcoming Invoice"
+        description: "The current costs for your usage this billing period."
+        line_items:
+          description: "Description"
+          quantity: "Quantity"
+          unit_price: "Unit Price"
+          total: "Total"
+        back: "Back to Billing"
 
     forms:
       stripe:

@@ -47,4 +47,10 @@ class ApplicationController < ActionController::Base
       redirect_to root_path, alert: t("must_be_an_admin")
     end
   end
+
+  private
+
+  def require_account
+    redirect_to new_user_registration_path unless current_account
+  end
 end
