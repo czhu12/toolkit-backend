@@ -40,11 +40,11 @@ GIT
       railties (>= 5.2)
 
 GIT
-  remote: https://github.com/hotwired/turbo-rails.git
-  revision: 717978b7bcc33a9566fc71d136858204ef3a3aeb
-  branch: turbo-7-2-0
+  remote: https://github.com/marcelolx/turbo-rails.git
+  revision: 61c406847882e0438a0192258c64ae930c1f19e1
+  branch: @hotwired/turbo/c4e0aba
   specs:
-    turbo-rails (1.2.0.beta2)
+    turbo-rails (1.2.0)
       actionpack (>= 6.0.0)
       activejob (>= 6.0.0)
       railties (>= 6.0.0)
