@@ -125,6 +125,11 @@ en:
       description: "New updates and improvements to %{name}"
       empty_placeholder: "Exciting stuff coming very soon!"
 
+    show:
+      title: "What's New"
+      description: "New updates and improvements to %{name}"
+      back: "Back"
+
   api_tokens:
     created: "Successfully created API token"
     updated: "Successfully updated API token"

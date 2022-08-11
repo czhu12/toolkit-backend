@@ -60,7 +60,7 @@ Rails.application.routes.draw do
     get "session/otp", to: "sessions#otp"
   end
 
-  resources :announcements, only: [:index]
+  resources :announcements, only: [:index, :show]
   resources :api_tokens
   resources :accounts do
     member do

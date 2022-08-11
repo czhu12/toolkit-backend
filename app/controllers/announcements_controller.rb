@@ -5,6 +5,10 @@ class AnnouncementsController < ApplicationController
     @pagy, @announcements = pagy(Announcement.order(published_at: :desc))
   end
 
+  def show
+    @announcement = Announcement.find(params[:id])
+  end
+
   private
 
   def mark_as_read
