@@ -116,6 +116,6 @@ class Account < ApplicationRecord
 
   # Attributes to sync to the Stripe Customer
   def stripe_attributes(*args)
-    {address: billing_address&.to_stripe}
+    {address: billing_address&.to_stripe}.compact
   end
 end
