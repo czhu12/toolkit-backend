@@ -47,7 +47,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_31_201915) do
     t.text "extra_billing_info"
     t.string "domain"
     t.string "subdomain"
-    t.integer "account_id"
     t.index ["owner_id"], name: "index_accounts_on_owner_id"
   end
 
@@ -294,12 +293,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_31_201915) do
     t.string "otp_secret"
     t.integer "last_otp_timestep"
     t.text "otp_backup_codes"
-    t.integer "account_id"
-    t.index ["email", "account_id"], name: "index_users_on_email_and_account_id", unique: true
+    t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
     t.index ["invitations_count"], name: "index_users_on_invitations_count"
     t.index ["invited_by_id"], name: "index_users_on_invited_by_id"
-    t.index ["invited_by_type", "invited_by_id"], name: "index_users_on_invited_by"
+    t.index ["invited_by_type", "invited_by_id"], name: "index_users_on_invited_by_type_and_invited_by_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
