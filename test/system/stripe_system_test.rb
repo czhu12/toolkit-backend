@@ -18,57 +18,51 @@ class StripeSystemTest < ApplicationSystemTestCase
     # Only test against Stripe even if others are enabled
     @original_payment_processors = Jumpstart.config.payment_processors
     Jumpstart.config.payment_processors = [:stripe]
+
+    @collect_billing_address = Jumpstart.config.collect_billing_address?
+    Jumpstart.config.collect_billing_address = false
   end
 
   teardown do
     Jumpstart.config.payment_processors = @original_payment_processors
+    Jumpstart.config.collect_billing_address = @collect_billing_address
   end
 
   test "can subscribe" do
     visit new_subscription_url(plan: plans(:personal))
-    fill_stripe_elements card: "4242 4242 4242 4242"
-    fill_in "Name on card", with: @user.name
+    fill_stripe_payment_element_card "4242 4242 4242 4242"
     click_on "Subscribe"
-    assert_selector "p", text: "Thanks for subscribing!"
+    assert_selector "p", text: I18n.t("subscriptions.created")
     assert @account.payment_processor.subscribed?
   end
 
   test "can subscribe with SCA" do
     visit new_subscription_url(plan: plans(:personal))
-    fill_stripe_elements(card: "4000 0027 6000 3184")
-    fill_in "Name on card", with: @user.name
+    fill_stripe_payment_element_card "4000 0027 6000 3184"
     click_on "Subscribe"
-    assert_selector "h1", text: "Confirm your $19.00 payment"
     complete_stripe_sca
-    assert_selector "p", text: "The payment was successful."
-    # Webhook will update the subscription to active, so we can't easily test that here
+    assert_selector "p", text: I18n.t("subscriptions.created")
   end
 
   test "handles SCA and insufficient funds" do
     visit new_subscription_url(plan: plans(:personal))
-    fill_stripe_elements(card: "4000 0082 6000 3178")
-    fill_in "Name on card", with: @user.name
+    fill_stripe_payment_element_card "4000 0082 6000 3178"
     click_on "Subscribe"
-    # assert_selector "h1", text: "Confirm your $19.00 payment"
     complete_stripe_sca
-    assert_selector "span", text: "Your card has insufficient funds."
-    # Webhook will update the subscription to active, so we can't easily test that here
+    assert_selector "div", text: "Your card has insufficient funds."
   end
 
   test "fail subscribe with SCA" do
     visit new_subscription_url(plan: plans(:personal))
-    fill_stripe_elements(card: "4000 0027 6000 3184")
-    fill_in "Name on card", with: @user.name
+    fill_stripe_payment_element_card "4000 0027 6000 3184"
     click_on "Subscribe"
-    assert_selector "h1", text: "Confirm your $19.00 payment"
     fail_stripe_sca
-    assert_selector "p", text: "We are unable to authenticate your payment method. Please choose a different payment method and try again."
+    assert_selector "div", text: "We are unable to authenticate your payment method. Please choose a different payment method and try again."
   end
 
   test "can update payment method" do
     visit new_payment_method_url
-    fill_stripe_elements(card: "4242 4242 4242 4242")
-    fill_in "Name on card", with: @user.name
+    fill_stripe_payment_element_card "4242 4242 4242 4242"
     click_on "Update Card"
     assert_selector "p", text: I18n.t("payment_methods.create.updated")
     assert_equal "Visa", @account.payment_processor.default_payment_method.brand
@@ -77,8 +71,7 @@ class StripeSystemTest < ApplicationSystemTestCase
 
   test "can update payment method with SCA" do
     visit new_payment_method_url
-    fill_stripe_elements(card: "4000 0027 6000 3184")
-    fill_in "Name on card", with: @user.name
+    fill_stripe_payment_element_card "4000 0027 6000 3184"
     click_on "Update Card"
     complete_stripe_sca
     assert_selector "p", text: I18n.t("payment_methods.create.updated")
@@ -88,8 +81,7 @@ class StripeSystemTest < ApplicationSystemTestCase
 
   test "can fail updating payment method with SCA" do
     visit new_payment_method_url
-    fill_stripe_elements(card: "4000 0027 6000 3184")
-    fill_in "Name on card", with: @user.name
+    fill_stripe_payment_element_card "4000 0027 6000 3184"
     click_on "Update Card"
     fail_stripe_sca
     assert_selector "div", text: "We are unable to authenticate your payment method. Please choose a different payment method and try again."
@@ -115,12 +107,10 @@ class StripeSystemTest < ApplicationSystemTestCase
   test "can swap plans with SCA" do
     # Subscribe to a new plan
     visit new_subscription_url(plan: plans(:personal))
-    fill_stripe_elements(card: "4000 0027 6000 3184")
-    fill_in "Name on card", with: @user.name
+    fill_stripe_payment_element_card "4000 0027 6000 3184"
     click_on "Subscribe"
-    assert_selector "h1", text: "Confirm your $19.00 payment"
     complete_stripe_sca
-    assert_selector "p", text: "The payment was successful."
+    assert_selector "div", text: I18n.t("subscriptions.created")
 
     # Fake webhook that sets subscription status to active
     subscription = @account.payment_processor.subscription

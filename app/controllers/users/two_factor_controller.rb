@@ -25,7 +25,7 @@ class Users::TwoFactorController < ApplicationController
 
   def destroy
     current_user.disable_two_factor!
-    redirect_to edit_account_password_path, notice: t(".disabled")
+    redirect_to edit_account_password_path, status: :see_other, notice: t(".disabled")
   end
 
   private

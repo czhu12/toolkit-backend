@@ -19,8 +19,10 @@ class Jumpstart::SubscriptionsTest < ActionDispatch::IntegrationTest
 
     test "can subscribe account" do
       Jumpstart.config.stub(:payments_enabled?, true) do
-        get new_subscription_path(plan: @plan)
-        assert_response :success
+        Jumpstart.config.stub(:collect_billing_address?, false) do
+          get new_subscription_path(plan: @plan)
+          assert_response :success
+        end
       end
     end
   end
@@ -50,8 +52,10 @@ class Jumpstart::SubscriptionsTest < ActionDispatch::IntegrationTest
     end
 
     test "cannot delete subscription" do
+      @account.set_payment_processor :fake_processor, allow_fake: true
+      subscription = @account.payment_processor.subscribe
       Jumpstart.config.stub(:payments_enabled?, true) do
-        delete subscription_path
+        delete subscription_cancel_path(subscription)
         assert_redirected_to root_path
         assert_equal I18n.t("must_be_an_admin"), flash[:alert]
       end

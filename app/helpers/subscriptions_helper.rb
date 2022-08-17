@@ -3,6 +3,14 @@ module SubscriptionsHelper
     Rails.env.production? ? "production" : "sandbox"
   end
 
+  def pricing_cta(plan)
+    if plan.trial_period_days?
+      t(".start_trial")
+    else
+      t(".get_started")
+    end
+  end
+
   def payment_method_details(object)
     case object.payment_method_type
     when "paypal"
@@ -20,7 +28,7 @@ module SubscriptionsHelper
 
     # If a user has active subscriptions, only let them use that payment processor for new payments
     # Also show if user is on the fake processor (for trial)
-    if current_account.subscriptions.active.any?
+    if current_account.subscriptions.active.any? && current_account.payment_processor
       ["fake_processor", processor_name.to_s].include?(current_account.payment_processor.processor)
 
     # Otherwise show all options

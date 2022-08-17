@@ -1,5 +1,3 @@
-<% default_payment_method = current_account.payment_processor&.default_payment_method %>
-
 <nav class="p-4 border-b border-gray-200">
   <%= link_to root_path do %>
     <%= render_svg "logo", styles: "inline-block fill-current text-gray-700 hover:text-gray-800" %>
@@ -7,14 +5,14 @@
   <% end %>
 </nav>
 
-<div class="p-4 max-w-6xl mx-auto grid lg:grid-cols-2 lg:gap-24 lg:p-16 lg:pt-32">
+<div class="p-4 max-w-6xl mx-auto grid lg:grid-cols-2 lg:gap-48 lg:py-24">
   <div>
     <div class="flex justify-center mb-4 lg:justify-start">
       <% if @plan.has_trial? %>
         <div>
           <h1 class="font-semibold text-lg text-gray-500">Try <%= @plan.name %></h1>
           <h3 class="my-1 font-bold text-3xl"><%= @plan.trial_period_days %> days free</h3>
-          <p class="font-medium text-gray-500">Then <%= @plan.amount_with_currency %> per <%= @plan.interval %></p>
+          <p class="font-medium text-gray-500">Then <span id="recurringTotal"><%= @plan.amount_with_currency %></span> per <%= @plan.interval %></p>
         </div>
 
       <% else %>
@@ -22,20 +20,48 @@
           <h1 class="font-semibold text-lg text-gray-500">Subscribe to <%= @plan.name %></h1>
 
           <div class="flex items-center">
-            <% if Jumpstart.config.paddle? && show_payment_processor?(:paddle, plan: @plan) %>
-              <h3 id="recurringTotal" class="my-1 font-bold text-4xl"><i class="fas fa-circle-notch fa-spin"></i></h3>
-            <% else %>
-              <h3 class="my-1 font-bold text-4xl"><%= @plan.amount_with_currency %></h3>
-            <% end %>
+            <h3 id="recurringTotal" class="my-1 font-bold text-4xl"><%= @plan.amount_with_currency %></h3>
 
             <div class="ml-2 font-medium text-sm text-gray-500 leading-none">
-              <div>per</div>
-              <div><%= @plan.interval %></div>
+              <% if @plan.unit? %>
+                <div>per <%= @plan.unit %></div>
+                <div>per <%= @plan.interval %></div>
+              <% else %>
+                <div>per</div>
+                <div><%= @plan.interval %></div>
+              <% end %>
             </div>
           </div>
         </div>
       <% end %>
     </div>
+
+    <% if @plan.taxed? && @stripe_invoice %>
+      <div class="flex justify-between mb-4 text-sm font-medium">
+        <div><%= t(".subtotal") %></div>
+        <div><%= Pay::Currency.format(@stripe_invoice.subtotal, currency: @stripe_invoice.currency) %></div>
+      </div>
+
+      <hr class="mb-4" />
+
+      <div class="flex justify-between mb-4 text-sm text-gray-700">
+        <% @stripe_invoice.total_tax_amounts.each do |tax| %>
+          <div>
+            <%= tax.tax_rate.jurisdiction %>
+            <%= tax.tax_rate.display_name %>
+            (<%= tax.tax_rate.percentage %>%)
+          </div>
+          <div><%= Pay::Currency.format(tax.amount, currency: @stripe_invoice.currency) %></div>
+        <% end %>
+      </div>
+
+      <hr class="mb-4" />
+
+      <div class="flex justify-between mb-4 text-sm font-medium">
+        <div><%= t(".total") %></div>
+        <div><%= Pay::Currency.format(@stripe_invoice.total, currency: @stripe_invoice.currency) %></div>
+      </div>
+    <% end %>
 
     <div class="hidden flex justify-center mb-4 lg:block">
       <div>
@@ -70,43 +96,13 @@
   <div>
     <h1 class="hidden h3 mb-4 lg:block"><%= t(".title") %></h1>
 
-    <label>Account</label>
+    <h5 id="billing-address" class="text-gray-700 font-semibold my-4 border-b border-gray-200 pb-2"><%= t(".account") %></h5>
     <div class="flex items-center mb-8">
       <%= account_avatar current_account, class: "h-10 w-10 rounded-full mr-4" %>
       <h4><%= current_account.name %></h4>
     </div>
 
-    <div data-controller="toggle">
-      <% if default_payment_method %>
-        <div data-toggle-target="toggleable">
-          <div class="flex items-center mb-8">
-            <div class="flex-1">
-              <label><%= t(".payment_method") %></label>
-              <i class="fab fa-cc-<%= default_payment_method.brand.downcase %> text-gray-700"></i> <%= payment_method_details(default_payment_method) %>
-            </div>
-            <%= link_to t(".change"), "#", class: "btn btn-light-gray", data: { action: "click->toggle#toggle" } %>
-          </div>
-
-          <%= form_with url: subscriptions_path, method: :post do |f| %>
-            <%= f.hidden_field :plan, value: @plan.id if @plan.present? %>
-            <%= f.button t(".subscribe"), id: 'submit-button', class: "btn btn-primary btn-large btn-block", data: { action: "click->stripe#submit", disable_with: disable_with(t(".processing")) } %>
-          <% end %>
-        </div>
-      <% end %>
-
-      <%= tag.div class: ("hidden" if default_payment_method), data: { toggle_target: "toggleable" } do %>
-        <%= render 'subscriptions/forms/stripe'    if show_payment_processor?(:stripe, plan: @plan) %>
-        <%= render 'subscriptions/forms/braintree' if show_payment_processor?(:braintree, plan: @plan) %>
-        <%= render 'subscriptions/forms/paypal'    if show_payment_processor?(:paypal, plan: @plan) %>
-        <%= render 'subscriptions/forms/paddle'    if show_payment_processor?(:paddle, plan: @plan) %>
-      <% end %>
-
-      <% if @plan.has_trial? %>
-        <p class="mt-4 text-center text-sm text-gray-500">After your trial ends, you will be charged <%= @plan.amount_with_currency %> per <%= @plan.interval %> starting <%= l @plan.trial_period_days.days.from_now.to_date, format: :long %>. You can always cancel before then.</p>
-      <% else %>
-        <p class="mt-4 text-center text-sm text-gray-500">By confirming your subscription, you allow <%= Jumpstart.config.application_name %> to charge your payment method for this payment and future payments in accorandce with our terms.</p>
-      <% end %>
-    </div>
+    <%= render partial: "subscriptions/payment_form" %>
 
     <div class="text-sm text-center mt-8">
       <%= render_svg "icons/question", styles: "fill-current text-gray-500 w-4 h-4 inline-block" %>

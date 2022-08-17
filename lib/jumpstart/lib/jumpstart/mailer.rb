@@ -35,7 +35,8 @@ module Jumpstart
       {
         port: 587,
         authentication: :plain,
-        enable_starttls_auto: true
+        enable_starttls_auto: true,
+        domain: Jumpstart.config.domain
       }
     end
 

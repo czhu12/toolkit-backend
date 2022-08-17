@@ -18,6 +18,7 @@ class Pay::SubscriptionDashboard < Administrate::BaseDashboard
     ends_at: Field::DateTime,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
+    status: Field::String,
     prorate: Field::Boolean,
     active?: Field::Boolean,
     cancelled?: Field::Boolean
@@ -32,6 +33,7 @@ class Pay::SubscriptionDashboard < Administrate::BaseDashboard
     :id,
     :customer,
     :name,
+    :status,
     :active?,
     :cancelled?
   ].freeze
@@ -46,6 +48,7 @@ class Pay::SubscriptionDashboard < Administrate::BaseDashboard
     :processor_id,
     :processor_plan,
     :quantity,
+    :status,
     :trial_ends_at,
     :ends_at,
     :created_at,

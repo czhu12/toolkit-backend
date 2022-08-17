@@ -1,23 +1,11 @@
 // Custom TailwindCSS modals for confirm dialogs
-
-const Rails = require("@rails/ujs")
-
-// Cache a copy of the old Rails.confirm since we'll override it when the modal opens
-const old_confirm = Rails.confirm;
-
-// Elements we want to listen to for data-confirm
-const elements = ['a[data-confirm]', 'button[data-confirm]', 'input[type=submit][data-confirm]']
-
-const createConfirmModal = (element) => {
-  var id = 'confirm-modal-' + String(Math.random()).slice(2, -1);
-  var confirm = element.dataset.confirm
-
-  var content = `
-    <div id="${id}" class="z-50 animated fadeIn fixed top-0 left-0 w-full h-full table" style="background-color: rgba(0, 0, 0, 0.8);">
+function insertConfirmModal(message, element) {
+  let content = `
+    <div id="confirm-modal" class="z-50 animated fadeIn fixed top-0 left-0 w-full h-full table" style="background-color: rgba(0, 0, 0, 0.8);">
       <div class="table-cell align-middle">
 
         <div class="bg-white mx-auto rounded shadow p-8 max-w-sm">
-          <h4>${confirm}</h4>
+          <h4>${message}</h4>
 
           <div class="flex justify-end items-center flex-wrap mt-6">
             <button data-behavior="cancel" class="btn btn-light-gray mr-2">Cancel</button>
@@ -29,8 +17,35 @@ const createConfirmModal = (element) => {
   `
 
   element.insertAdjacentHTML('afterend', content)
+  return element.nextElementSibling
+}
 
-  var modal = element.nextElementSibling
+Turbo.setConfirmMethod((message, element) => {
+  let dialog = insertConfirmModal(message, element)
+
+  return new Promise((resolve, reject) => {
+    dialog.querySelector("[data-behavior='cancel']").addEventListener("click", (event) => {
+      dialog.remove()
+      resolve(false)
+    }, { once: true })
+    dialog.querySelector("[data-behavior='commit']").addEventListener("click", (event) => {
+      dialog.remove()
+      resolve(true)
+    }, { once: true })
+  })
+})
+
+const Rails = require("@rails/ujs")
+
+// Cache a copy of the old Rails.confirm since we'll override it when the modal opens
+const old_confirm = Rails.confirm;
+
+// Elements we want to listen to for data-confirm
+const elements = ['a[data-confirm]', 'button[data-confirm]', 'input[type=submit][data-confirm]']
+
+const createConfirmModal = (element) => {
+  let modal = insertConfirmModal(element.dataset.confirm, element)
+
   element.dataset.confirmModal = `#${id}`
 
   modal.addEventListener("keyup", (event) => {
@@ -45,7 +60,7 @@ const createConfirmModal = (element) => {
     event.preventDefault()
     element.removeAttribute("data-confirm-modal")
     modal.remove()
-  })
+  }, { once: true })
   modal.querySelector("[data-behavior='commit']").addEventListener("click", (event) => {
     event.preventDefault()
 
@@ -60,7 +75,7 @@ const createConfirmModal = (element) => {
     Rails.confirm = old_confirm
 
     modal.remove()
-  })
+  }, { once: true })
 
   modal.querySelector("[data-behavior='commit']").focus()
   return modal

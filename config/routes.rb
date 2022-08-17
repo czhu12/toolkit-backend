@@ -60,7 +60,7 @@ Rails.application.routes.draw do
     get "session/otp", to: "sessions#otp"
   end
 
-  resources :announcements, only: [:index]
+  resources :announcements, only: [:index, :show]
   resources :api_tokens
   resources :accounts do
     member do
@@ -74,13 +74,29 @@ Rails.application.routes.draw do
   resources :account_invitations
 
   # Payments
+  resource :billing_address
+  namespace :payment_methods do
+    resource :stripe, controller: :stripe, only: [:show]
+  end
   resources :payment_methods
+  namespace :subscriptions do
+    resource :billing_address
+    namespace :stripe do
+      resource :trial, only: [:show]
+    end
+  end
   resources :subscriptions do
     resource :cancel, module: :subscriptions
     resource :pause, module: :subscriptions
     resource :resume, module: :subscriptions
+    resource :upcoming, module: :subscriptions
+
     collection do
       patch :info
+    end
+
+    scope module: :subscriptions do
+      resource :stripe, controller: :stripe, only: [:show]
     end
   end
   resources :charges do

@@ -40,7 +40,7 @@
             <%= link_to t(".back"), @account, class: "btn btn-link" %>
           </div>
           <div class="form-group">
-            <%= link_to t(".destroy"), account_account_invitation_path(@account, @account_invitation), method: :delete, data: { confirm: t("are_you_sure") }, class: "btn btn-link text-red-500" %>
+            <%= link_to t(".destroy"), account_account_invitation_path(@account, @account_invitation), data: { turbo_method: :delete, turbo_confirm: t("are_you_sure") }, class: "btn btn-link text-red-500" %>
           </div>
         </div>
       <% end %>

@@ -8,6 +8,6 @@
       <%= form.collection_select :user_id, account.users.where.not(users: { id: current_user.id }), :id, :name, { prompt: true }, { class: "form-control" } %>
     </div>
 
-    <%= form.button t(".transfer"), class: "btn btn-primary", data: { confirm: t(".are_you_sure") } %>
+    <%= form.button t(".transfer"), class: "btn btn-primary", data: { turbo_confirm: t(".are_you_sure") } %>
   <% end %>
 </div>

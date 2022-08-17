@@ -31,7 +31,7 @@ class AccountUsersController < Accounts::BaseController
   # DELETE /account_users/1
   def destroy
     @account_user.destroy
-    redirect_to @account, notice: t(".destroyed")
+    redirect_to @account, status: :see_other, notice: t(".destroyed")
   end
 
   private

@@ -32,6 +32,7 @@ module Jumpstart
           :register_with_account,
           :apns,
           :fcm,
+          :collect_billing_address,
           integrations: [],
           omniauth_providers: [],
           payment_processors: [],

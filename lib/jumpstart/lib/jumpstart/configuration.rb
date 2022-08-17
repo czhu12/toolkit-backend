@@ -28,7 +28,8 @@ module Jumpstart
 
     def self.load!
       if File.exist?(config_path)
-        config = Psych.safe_load_file(config_path, permitted_classes: [Hash, Jumpstart::Configuration])
+        config_yaml = ERB.new(File.read(config_path)).result
+        config = Psych.safe_load(config_yaml, permitted_classes: [Hash, Jumpstart::Configuration])
         return config if config.is_a?(Jumpstart::Configuration)
         new(config)
       else
@@ -119,6 +120,14 @@ module Jumpstart
 
     def fcm?
       ActiveModel::Type::Boolean.new.cast(@fcm || false)
+    end
+
+    def collect_billing_address=(value)
+      @collect_billing_address = ActiveModel::Type::Boolean.new.cast(value)
+    end
+
+    def collect_billing_address?
+      ActiveModel::Type::Boolean.new.cast(@collect_billing_address || false)
     end
 
     def update_procfiles
