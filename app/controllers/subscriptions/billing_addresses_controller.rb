@@ -11,7 +11,7 @@ class Subscriptions::BillingAddressesController < ApplicationController
   def update
     @billing_address = current_account.billing_address || current_account.build_billing_address
     if @billing_address.update(billing_address_params)
-      redirect_to new_subscription_path(plan: @plan.id, step: :payment, promo_code: params[:promo_code])
+      redirect_to new_subscription_path(plan: @plan.id, promo_code: params[:promo_code])
     else
       render :show, status: :unprocessable_entity
     end

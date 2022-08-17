@@ -119,3 +119,13 @@ twofactor:
     - "0000000003"
     - "0000000004"
     - "0000000005"
+
+user_without_billing_address:
+  email: noaddress@example.com
+  first_name: User
+  last_name: NoAddress
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+  accepted_terms_at: <%= Time.current %>
+  accepted_privacy_at: <%= Time.current %>
+  time_zone: "Central Time (US & Canada)"
+  confirmed_at: <%= Time.current %>

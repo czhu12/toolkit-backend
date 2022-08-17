@@ -22,25 +22,13 @@
 
 one:
   address_type: 0
-  line1: MyString
-  line2: MyString
-  city: MyString
-  state: MyString
-  country: MyString
-  postal_code: MyString
+  line1: 123 My Home Dr
+  line2: 
+  city: Small Town
+  state: LA
+  country: US
+  postal_code: 12345
   addressable: one (Account)
-  # addressable_type: Addressable
-
-two:
-  address_type: 1
-  line1: MyString
-  line2: MyString
-  city: MyString
-  state: MyString
-  country: MyString
-  postal_code: MyString
-  addressable: two
-  addressable_type: Addressable
 
 company_billing_address:
   address_type: 0

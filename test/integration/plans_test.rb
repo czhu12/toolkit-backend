@@ -30,6 +30,17 @@ class Jumpstart::PlansTest < ActionDispatch::IntegrationTest
   end
 
   if Jumpstart.config.payments_enabled?
+    test "redirects to billing address form when attempting checkout with no billing address set" do
+      Jumpstart.config.stub(:collect_billing_address?, true) do
+        sign_in users(:user_without_billing_address)
+        plan = plans(:personal)
+
+        get new_subscription_path(plan: plan.id)
+
+        assert_redirected_to subscriptions_billing_address_path(plan: plan.id)
+      end
+    end
+
     test "can view subscribe page for a plan" do
       sign_in users(:one)
       plan = plans(:personal)

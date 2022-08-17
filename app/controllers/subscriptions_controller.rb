@@ -23,12 +23,11 @@ class SubscriptionsController < ApplicationController
   # We need to create a subscription to render the PaymentElement
   def new
     if Jumpstart.config.stripe?
+      payment_processor = current_account.add_payment_processor(:stripe)
       if @plan.trial_period_days?
-        payment_processor = current_account.add_payment_processor(:stripe)
         @client_secret = payment_processor.create_setup_intent.client_secret
 
-      elsif !Jumpstart.config.collect_billing_address? || params[:step] == "payment"
-        payment_processor = current_account.add_payment_processor(:stripe)
+      else
         @pay_subscription = payment_processor.subscribe(
           plan: @plan.id_for_processor(:stripe),
           trial_period_days: @plan.trial_period_days,
@@ -110,7 +109,7 @@ class SubscriptionsController < ApplicationController
   end
 
   def redirect_to_billing_address
-    if Jumpstart.config.collect_billing_address? && params[:step] != "payment"
+    if Jumpstart.config.collect_billing_address? && current_account.billing_address.nil?
       redirect_to subscriptions_billing_address_path(plan: params[:plan], promo_code: params[:promo_code])
     end
   end
