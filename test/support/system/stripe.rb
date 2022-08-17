@@ -13,19 +13,7 @@ module StripeSystemTestHelper
 
       find_field("expiry").send_keys expiry
       find_field("cvc").send_keys cvc
-      find_field("postalCode").send_keys postal
-    end
-  end
-
-  def fill_stripe_elements(card:, expiry: "1234", cvc: "123", postal: "12345", selector: '[data-stripe-target="card"] > div > iframe')
-    find_frame(selector) do
-      card.to_s.chars.each do |piece|
-        find_field("cardnumber").send_keys(piece)
-      end
-
-      find_field("exp-date").send_keys expiry
-      find_field("cvc").send_keys cvc
-      find_field("postal").send_keys postal
+      find_field("postalCode").send_keys postal if has_field?("postalCode")
     end
   end
 
