@@ -158,14 +158,6 @@ module Jumpstart
           # Webhooks should be pointed to https://domain.com/webhooks/paddle
           public_key_base64: ''
 
-        # Paddle
-        # https://vendors.paddle.com/authentication
-        # https://vendors.paddle.com/public-key
-        paddle:
-          vendor_id: ''
-          vendor_auth_code: ''
-          public_key_base64: ''
-
         ###  Integrations
 
         airbrake:
