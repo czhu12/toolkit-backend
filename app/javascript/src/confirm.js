@@ -17,7 +17,7 @@ function insertConfirmModal(message, element) {
   `
 
   document.body.insertAdjacentHTML('beforeend', content)
-  return document.getElementByID("confirm-modal")
+  return document.getElementById("confirm-modal")
 }
 
 Turbo.setConfirmMethod((message, element) => {
