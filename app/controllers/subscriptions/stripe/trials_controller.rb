@@ -8,7 +8,7 @@ class Subscriptions::Stripe::TrialsController < ApplicationController
       plan: @plan.id_for_processor(:stripe),
       trial_period_days: @plan.trial_period_days,
       automatic_tax: {
-        enabled: @plan.automatic_tax?
+        enabled: @plan.taxed?
       },
       promotion_code: params[:promo_code]
     )

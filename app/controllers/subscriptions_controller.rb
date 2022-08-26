@@ -33,7 +33,7 @@ class SubscriptionsController < ApplicationController
           trial_period_days: @plan.trial_period_days,
           payment_behavior: :default_incomplete,
           automatic_tax: {
-            enabled: @plan.automatic_tax?
+            enabled: @plan.taxed?
           },
           promotion_code: params[:promo_code]
         )

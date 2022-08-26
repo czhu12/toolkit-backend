@@ -67,6 +67,15 @@ class PlanTest < ActiveSupport::TestCase
     assert_not_includes Plan.hidden, plans(:personal)
   end
 
+  test "plan converts stripe_tax to boolean" do
+    plan = Plan.first
+    plan.stripe_tax = "1"
+    assert plan.stripe_tax
+
+    plan.stripe_tax = "0"
+    refute plan.stripe_tax
+  end
+
   private
 
   def monthly

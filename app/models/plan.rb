@@ -50,10 +50,6 @@ class Plan < ApplicationRecord
     plan
   end
 
-  def automatic_tax?
-    !!stripe_tax
-  end
-
   def features
     Array.wrap(super)
   end
@@ -79,8 +75,12 @@ class Plan < ApplicationRecord
   end
   alias_method :yearly?, :annual?
 
+  def stripe_tax=(value)
+    super(ActiveModel::Type::Boolean.new.cast(value))
+  end
+
   def taxed?
-    !!stripe_tax
+    ActiveModel::Type::Boolean.new.cast(stripe_tax)
   end
 
   # Find a plan with the same name in the opposite interval
