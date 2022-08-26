@@ -33,10 +33,6 @@ class AccountUser < ApplicationRecord
   validates :user_id, uniqueness: {scope: :account_id}
   validate :owner_must_be_admin, on: :update, if: -> { admin_changed? && account_owner? }
 
-  def active_roles
-    ROLES.select { |role| send(:"#{role}?") }.compact
-  end
-
   def account_owner?
     account.owner_id == user_id
   end

@@ -1,4 +1,20 @@
 module Rolified
+  # Adds roles to a model along with helper methods and scopes
+  #
+  # To use, add a `roles:json` column to your model.
+  # Then include this module with a ROLES constant of available roles
+  #
+  #   ROLES = [:admin, :member]
+  #   include Rolified
+  #
+  # Then you can assign and check roles:
+  #
+  #   account_user.admin = true
+  #   account_user.admin? #=> true
+  #   account_user.active_roles #=> [:admin]
+  #
+  #   AccountUser.admin
+
   extend ActiveSupport::Concern
 
   included do
