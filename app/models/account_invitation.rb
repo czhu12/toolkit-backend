@@ -24,21 +24,16 @@
 #  fk_rails_...  (invited_by_id => users.id)
 #
 class AccountInvitation < ApplicationRecord
+  ROLES = AccountUser::ROLES
+
+  include Rolified
+
   belongs_to :account
   belongs_to :invited_by, class_name: "User", optional: true
   has_secure_token
 
   validates :name, :email, presence: true
   validates :email, uniqueness: {scope: :account_id, message: :invited}
-
-  # Store the roles in the roles json column and cast to booleans
-  store_accessor :roles, *AccountUser::ROLES
-
-  # Cast roles to/from booleans
-  AccountUser::ROLES.each do |role|
-    define_method(:"#{role}=") { |value| super ActiveRecord::Type::Boolean.new.cast(value) }
-    define_method(:"#{role}?") { send(role) }
-  end
 
   def save_and_send_invite
     if save
