@@ -24,7 +24,7 @@
 #  fk_rails_...  (invited_by_id => users.id)
 #
 class AccountInvitation < ApplicationRecord
-  ROLES = [:admin, :member]
+  ROLES = AccountUser::ROLES
 
   include Rolified
 
