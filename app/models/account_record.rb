@@ -1,4 +1,4 @@
-class AccountRecord < ActiveRecord::Base
+class AccountRecord < ApplicationRecord
   self.abstract_class = true
 
   default_scope -> {
