@@ -17,6 +17,7 @@ module.exports = {
     './app/javascript/**/*.js',
     './app/views/**/*.erb',
     './app/views/**/*.haml',
+    './app/views/**/*.slim',
     './lib/jumpstart/app/views/**/*.erb',
     './lib/jumpstart/app/helpers/**/*.rb',
   ],
