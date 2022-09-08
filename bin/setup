@@ -19,6 +19,11 @@ FileUtils.chdir APP_ROOT do
   # Install foreman system wide
   system! "gem install foreman"
 
+  # Install overmind if Homebrew is installed
+  if system("which brew")
+    system!("brew install tmux overmind")
+  end
+
   # Install JavaScript dependencies if using Yarn
   system("bin/yarn")
 
