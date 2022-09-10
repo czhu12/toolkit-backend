@@ -15,17 +15,3 @@ es-co:
       edit:
         header: "Acepta tu invitación"
         submit_button: "Aceptar invitación"
-    mailer:
-      invitation_instructions:
-        subject: "Instrucciones para aceptar tu invitación"
-        hello: "Hola %{email}"
-        someone_invited_you: "Alguien te ha invitado a %{url}. Puedes aceptar haciendo clic en el siguiente enlace."
-        accept: "Aceptar invitación"
-        accept_until: "Esta invitación expirará el %{due_date}."
-        ignore: "Si no deseas aceptar esta invitacón, puedes ignorar este correo. Tu cuenta no será creada hasta que uses el link de arriba y asignes una contraseña."
-  time:
-    formats:
-      devise:
-        mailer:
-          invitation_instructions:
-            accept_until_format: "%d de %B de %Y a las %I:%M %p"
