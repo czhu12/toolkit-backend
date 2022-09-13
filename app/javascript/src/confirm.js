@@ -17,6 +17,7 @@ function insertConfirmModal(message, element) {
   `
 
   document.body.insertAdjacentHTML('beforeend', content)
+  document.activeElement.blur()
   return document.getElementById("confirm-modal")
 }
 
