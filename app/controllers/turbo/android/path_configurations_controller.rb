@@ -12,17 +12,17 @@ class Turbo::Android::PathConfigurationsController < ApplicationController
           {
             title: "Home",
             path: root_path,
-            image_url: svg_icon_path("home")
+            icon: "home"
           },
           {
             title: "What's New",
             path: announcements_path,
-            image_url: svg_icon_path("announcement")
+            icon: "announcement"
           },
           {
             title: "Notifications",
             path: notifications_path,
-            image_url: svg_icon_path("notifications"),
+            icon: "notifications",
             show_notification_badge: true
           }
         ].to_json
