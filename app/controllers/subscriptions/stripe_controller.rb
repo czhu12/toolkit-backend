@@ -6,9 +6,9 @@ class Subscriptions::StripeController < ApplicationController
   before_action :set_subscription, only: [:show]
 
   def show
-    @pay_subscription = Pay::Stripe::Subscription.sync(@pay_subscription.processor_id)
+    @subscription = Pay::Stripe::Subscription.sync(@subscription.processor_id)
 
-    if @pay_subscription.active?
+    if @subscription.active?
       current_account.set_payment_processor :stripe
       redirect_to root_path, notice: t("subscriptions.created")
     else
@@ -19,7 +19,7 @@ class Subscriptions::StripeController < ApplicationController
   private
 
   def set_subscription
-    @pay_subscription = current_account.subscriptions.find_by_prefix_id(params[:subscription_id])
+    @subscription = current_account.subscriptions.find_by_prefix_id!(params[:subscription_id])
   rescue ActiveRecord::RecordNotFound
     redirect_to subscriptions_path
   end

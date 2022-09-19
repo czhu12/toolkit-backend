@@ -17,7 +17,7 @@ class Subscriptions::ResumesController < ApplicationController
   private
 
   def set_subscription
-    @subscription = current_account.subscriptions.find_by_prefix_id(params[:subscription_id])
+    @subscription = current_account.subscriptions.find_by_prefix_id!(params[:subscription_id])
   rescue ActiveRecord::RecordNotFound
     redirect_to subscriptions_path
   end
