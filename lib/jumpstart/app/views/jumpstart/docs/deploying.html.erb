@@ -18,7 +18,14 @@
     <p class="mb-4"><%= link_to "Hatchbox.io", "https://hatchbox.io", target: :blank %> is built by the makers of Jumpstart Pro and GoRails. It's a fantastically simple and cheap option for deploying apps to your own servers.</p>
 
     <h2 class="pb-3 mb-6 border-b border-gray-200">Deploy to Render.com</h2>
-    <p class="mb-4">Jumpstart Pro comes with a render.yaml file that helps Render pre-configure your application.</p>
+    <p class="mb-4">
+      Jumpstart Pro comes with a render.yaml file that helps Render pre-configure your application.
+      Be sure to update the <code>repo</code> value in the <code>services</code> section of this file to point to the github repository
+      for your Jumpstart Pro application as noted in the comments inside the file.
+    </p>
+    <% if @render_yaml_contents %>
+      <pre><code><%= @render_yaml_contents %></code></pre>
+    <% end %>
     <p class="mb-4">Simply copy this URL and paste it into your browser, then change the GitHub URL to point to your private repository.</p>
     <pre><code>https://render.com/deploy?repo=https://github.com/excid3/jumpstart-pro</code></pre>
 

@@ -1,13 +1,10 @@
-databases:
-  - name: postgres
-    ipAllowList: [] # only allow internal connections
-
+# Replace repo url with the repository url for your Jumpstart Pro application
 services:
   - type: web
+    repo: https://github.com/GITHUB_USERNAME/GITHUB_REPOSITORY # Replace this url
     name: rails
     env: ruby
-    repo: https://github.com/jumpstart-pro/jumpstart-pro
-    buildCommand: bundle install && bundle exec rails assets:precompile
+    buildCommand: "./bin/render-build.sh"
     startCommand: bundle exec rails s
     envVars:
       - key: RAILS_MASTER_KEY
@@ -27,4 +24,8 @@ services:
     ipAllowList: [] # only allow internal connections
     plan: free # optional (defaults to starter)
     maxmemoryPolicy: noeviction # optional (defaults to allkeys-lru)
+
+databases:
+  - name: postgres
+    ipAllowList: [] # only allow internal connections
 
