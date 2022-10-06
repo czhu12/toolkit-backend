@@ -73,7 +73,7 @@ module Jumpstart
       end
 
       def run_connected_callback(connected_account)
-        method = "#{auth.provider.underscore}_connected"
+        method = "#{auth.provider.to_s.underscore}_connected"
         send(method.to_sym, connected_account) if respond_to?(method)
       end
 
