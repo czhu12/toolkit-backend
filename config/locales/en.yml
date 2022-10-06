@@ -419,6 +419,15 @@ en:
           disable: "Disable two-factor authentication"
 
   users:
+    agreements:
+      show:
+        title: "%{agreement} Changed"
+        last_updated: "Last updated %{date}"
+        description: "Before you can proceed, you must read and accept the new %{agreement}."
+        accept: "I Accept"
+        decline: "I Decline"
+      destroy:
+        declined: "To continue using the service, please sign in and accept the %{agreement}."
     avatar:
       upload: "Upload Avatar"
     connected_accounts:

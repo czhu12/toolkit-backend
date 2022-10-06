@@ -105,6 +105,7 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :agreements, module: :users
   namespace :account do
     resource :password
   end
