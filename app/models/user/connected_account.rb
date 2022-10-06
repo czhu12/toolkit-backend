@@ -93,7 +93,7 @@ class User::ConnectedAccount < ApplicationRecord
     # Fallback to the Rails credentials
     provider_config ||= Rails.application.credentials.dig(:omniauth, provider.to_sym)
 
-    OmniAuth::Strategies.const_get(provider.classify).new(
+    OmniAuth::Strategies.const_get(OmniAuth::Utils.camelize(provider).to_s).new(
       nil,
       provider_config[:public_key], # client id
       provider_config[:private_key] # client secret
