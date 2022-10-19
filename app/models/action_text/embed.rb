@@ -11,6 +11,44 @@
 class ActionText::Embed < ApplicationRecord
   include ActionText::Attachable
 
+  # Allowed script src URLs for OEmbeds
+  ALLOWED_SCRIPTS = [
+    /^https:\/\/embedr.flickr.com/,
+    /^\/\/s.imgur.com/,
+    /^https:\/\/www.instagram.com/,
+    /^https:\/\/platform.twitter.com/
+  ]
+
+  # URL patterns for Trix to detect for embedding
+  PATTERNS = [
+    {source: "^http:\\/\\/([^\\.]+\\.)?flickr\\.com\\/(.*?)", options: ""},
+    {source: "^https:\\/\\/([^\\.]+\\.)?flickr\\.com\\/(.*?)", options: ""},
+    {source: "^http:\\/\\/flic\\.kr\\/(.*?)", options: ""},
+    {source: "^https:\\/\\/flic\\.kr\\/(.*?)", options: ""},
+    {source: "^https:\\/\\/([^\\.]+\\.)?imgur\\.com\\/gallery\\/(.*?)", options: ""},
+    {source: "^http:\\/\\/([^\\.]+\\.)?imgur\\.com\\/gallery\\/(.*?)", options: ""},
+    {source: "^http:\\/\\/instagr\\.am\\/p\\/(.*?)", options: ""},
+    {source: "^http:\\/\\/instagram\\.com\\/p\\/(.*?)", options: ""},
+    {source: "^http:\\/\\/www\\.instagram\\.com\\/p\\/(.*?)", options: ""},
+    {source: "^https:\\/\\/instagr\\.am\\/p\\/(.*?)", options: ""},
+    {source: "^https:\\/\\/instagram\\.com\\/p\\/(.*?)", options: ""},
+    {source: "^https:\\/\\/www\\.instagram\\.com\\/p\\/(.*?)", options: ""},
+    {source: "^http:\\/\\/([^\\.]+\\.)?soundcloud\\.com\\/(.*?)", options: ""},
+    {source: "^https:\\/\\/([^\\.]+\\.)?soundcloud\\.com\\/(.*?)", options: ""},
+    {source: "^http:\\/\\/open\\.spotify\\.com\\/(.*?)", options: ""},
+    {source: "^https:\\/\\/open\\.spotify\\.com\\/(.*?)", options: ""},
+    {source: "^http:\\/\\/play\\.spotify\\.com\\/(.*?)", options: ""},
+    {source: "^https:\\/\\/play\\.spotify\\.com\\/(.*?)", options: ""},
+    {source: "^spotify\\:(.*?)", options: ""},
+    {source: "^https:\\/\\/([^\\.]+\\.)?twitter\\.com\\/(.*?)\\/status\\/(.*?)", options: ""},
+    {source: "^http:\\/\\/([^\\.]+\\.)?vimeo\\.com\\/(.*?)", options: ""},
+    {source: "^https:\\/\\/([^\\.]+\\.)?vimeo\\.com\\/(.*?)", options: ""},
+    {source: "^http:\\/\\/([^\\.]+\\.)?youtube\\.com\\/(.*?)", options: ""},
+    {source: "^https:\\/\\/([^\\.]+\\.)?youtube\\.com\\/(.*?)", options: ""},
+    {source: "^http:\\/\\/([^\\.]+\\.)?youtu\\.be\\/(.*?)", options: ""},
+    {source: "^https:\\/\\/([^\\.]+\\.)?youtu\\.be\\/(.*?)", options: ""}
+  ]
+
   def self.from_url(url)
     find_by!(url: url)
   rescue ActiveRecord::RecordNotFound
@@ -24,6 +62,12 @@ class ActionText::Embed < ApplicationRecord
         fields[key.to_s]
       end
     end
+  end
+
+  def self.allowed_script?(node)
+    src = node.attr("src")
+    return false unless src
+    ALLOWED_SCRIPTS.any? { |pattern| pattern.match?(src) }
   end
 
   delegate_fields(
@@ -55,33 +99,4 @@ class ActionText::Embed < ApplicationRecord
   def attachable_plain_text_representation(caption = nil)
     "[#{caption || url}]"
   end
-
-  PATTERNS = [
-    {source: "^http:\\/\\/([^\\.]+\\.)?flickr\\.com\\/(.*?)", options: ""},
-    {source: "^https:\\/\\/([^\\.]+\\.)?flickr\\.com\\/(.*?)", options: ""},
-    {source: "^http:\\/\\/flic\\.kr\\/(.*?)", options: ""},
-    {source: "^https:\\/\\/flic\\.kr\\/(.*?)", options: ""},
-    {source: "^https:\\/\\/([^\\.]+\\.)?imgur\\.com\\/gallery\\/(.*?)", options: ""},
-    {source: "^http:\\/\\/([^\\.]+\\.)?imgur\\.com\\/gallery\\/(.*?)", options: ""},
-    {source: "^http:\\/\\/instagr\\.am\\/p\\/(.*?)", options: ""},
-    {source: "^http:\\/\\/instagram\\.com\\/p\\/(.*?)", options: ""},
-    {source: "^http:\\/\\/www\\.instagram\\.com\\/p\\/(.*?)", options: ""},
-    {source: "^https:\\/\\/instagr\\.am\\/p\\/(.*?)", options: ""},
-    {source: "^https:\\/\\/instagram\\.com\\/p\\/(.*?)", options: ""},
-    {source: "^https:\\/\\/www\\.instagram\\.com\\/p\\/(.*?)", options: ""},
-    {source: "^http:\\/\\/([^\\.]+\\.)?soundcloud\\.com\\/(.*?)", options: ""},
-    {source: "^https:\\/\\/([^\\.]+\\.)?soundcloud\\.com\\/(.*?)", options: ""},
-    {source: "^http:\\/\\/open\\.spotify\\.com\\/(.*?)", options: ""},
-    {source: "^https:\\/\\/open\\.spotify\\.com\\/(.*?)", options: ""},
-    {source: "^http:\\/\\/play\\.spotify\\.com\\/(.*?)", options: ""},
-    {source: "^https:\\/\\/play\\.spotify\\.com\\/(.*?)", options: ""},
-    {source: "^spotify\\:(.*?)", options: ""},
-    {source: "^https:\\/\\/([^\\.]+\\.)?twitter\\.com\\/(.*?)\\/status\\/(.*?)", options: ""},
-    {source: "^http:\\/\\/([^\\.]+\\.)?vimeo\\.com\\/(.*?)", options: ""},
-    {source: "^https:\\/\\/([^\\.]+\\.)?vimeo\\.com\\/(.*?)", options: ""},
-    {source: "^http:\\/\\/([^\\.]+\\.)?youtube\\.com\\/(.*?)", options: ""},
-    {source: "^https:\\/\\/([^\\.]+\\.)?youtube\\.com\\/(.*?)", options: ""},
-    {source: "^http:\\/\\/([^\\.]+\\.)?youtu\\.be\\/(.*?)", options: ""},
-    {source: "^https:\\/\\/([^\\.]+\\.)?youtu\\.be\\/(.*?)", options: ""}
-  ]
 end
