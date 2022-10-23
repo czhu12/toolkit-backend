@@ -10,7 +10,15 @@ OEmbed::Providers.register_fallback(
   OEmbed::Providers::Noembed
 )
 
+# Allow injecting OEmbed HTML into ActionText, but only allow script tags from trusted sources
+# Soundcloud, Spotify, Vimeo, and YouTube use iframe embeds instead of script tags
 Rails.application.config.to_prepare do
   ActionText::ContentHelper.allowed_tags += %w[iframe script blockquote time]
   ActionText::ContentHelper.allowed_attributes += ["data-id", "data-flickr-embed", "target"]
+  ActionText::ContentHelper.scrubber = Loofah::Scrubber.new do |node|
+    if node.name == "script" && !ActionText::Embed.allowed_script?(node)
+      node.remove
+      Loofah::Scrubber::STOP # don't bother with the rest of the subtree
+    end
+  end
 end
