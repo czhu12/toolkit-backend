@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/excid3/administrate.git
-  revision: f1c631bebb25d8ce5057d0a8f9250d2977bac840
+  revision: a638567f2565cbd79e69fe5afc603467013527ea
   branch: jumpstart
   specs:
     administrate (0.17.0)
@@ -378,7 +378,7 @@ GEM
       rubocop-ast (>= 1.20.1, < 2.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 1.4.0, < 3.0)
-    rubocop-ast (1.22.0)
+    rubocop-ast (1.23.0)
       parser (>= 3.1.1.0)
     rubocop-performance (1.14.3)
       rubocop (>= 1.7.0, < 2.0)
@@ -420,7 +420,7 @@ GEM
     tilt (2.0.11)
     timeout (0.3.0)
     ttfunk (1.7.0)
-    turbo-rails (1.3.1)
+    turbo-rails (1.3.2)
       actionpack (>= 6.0.0)
       activejob (>= 6.0.0)
       railties (>= 6.0.0)
