@@ -1,12 +1,3 @@
-<nav class="flex flex-wrap items-center justify-between px-4 py-2 bg-white border-b border-gray-200 text-sm font-medium">
-  <div class="flex items-center flex-shrink-0 mr-6">
-    <%= link_to root_path do %>
-      <%= render_svg "logo-black", styles: "h-8 my-1" %>
-      <span class="sr-only"><%= Jumpstart.config.application_name %></span>
-    <% end %>
-  </div>
-</nav>
-
 <div class="max-w-4xl mx-auto p-4 my-8 lg:my-24">
   <h1 class="mb-4"><%= t(".title", agreement: @agreement.title) %></h1>
   <%= tag.p t("users.agreements.show.last_updated", date: l(@agreement.updated.to_date, format: :long)), class: "mb-4 text-gray-700 leading-normal italic" %>
