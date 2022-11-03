@@ -1,7 +1,7 @@
 Agreement = Struct.new(:id, :title, :column, :updated, keyword_init: true) do
   def accepted_by?(user)
     accepted_at = user.public_send(column)
-    accepted_at.nil? || accepted_at >= updated
+    accepted_at.present? && accepted_at >= updated
   end
 
   def not_accepted_by?(user)
