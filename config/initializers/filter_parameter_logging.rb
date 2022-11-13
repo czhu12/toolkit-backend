@@ -9,5 +9,9 @@ Rails.application.config.filter_parameters += [
   :first_name,
   :last_name,
   :current_sign_in_ip,
-  :last_sign_in_ip
+  :last_sign_in_ip,
+  :token,
+  :access_token,
+  :access_token_secret,
+  :refresh_token
 ]
