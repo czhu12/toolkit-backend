@@ -1,10 +1,16 @@
 class Accounts::AccountInvitationsController < Accounts::BaseController
   before_action :set_account
   before_action :require_account_admin
-  before_action :set_account_invitation, only: [:edit, :update, :destroy]
+  before_action :set_account_invitation, only: [:edit, :update, :destroy, :resend]
 
   def new
     @account_invitation = AccountInvitation.new
+  end
+
+  def resend
+    @account_invitation.send_invite
+
+    redirect_to @account
   end
 
   def create
