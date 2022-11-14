@@ -27,7 +27,9 @@ class Users::AgreementsController < ApplicationController
   def set_agreement
     @agreement = Rails.application.config.agreements.find { _1.id.to_s == params[:id] }
 
-    if @agreement.accepted_by?(current_user)
+    if @agreement.nil?
+      redirect_to root_path
+    elsif @agreement.accepted_by?(current_user)
       redirect_to after_accepted_path
     end
   end
