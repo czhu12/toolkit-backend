@@ -5,6 +5,6 @@ class Api::V1::MeController < Api::BaseController
 
   def destroy
     current_user.destroy
-    head :ok
+    render json: {}
   end
 end
