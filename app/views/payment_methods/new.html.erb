@@ -13,14 +13,27 @@
         <%= t(".payment_details") %>
       </h1>
 
-      <%# Show form if current processor exists or show all if no processor set %>
-      <%= render 'payment_methods/forms/fake_processor' if @payment_processor&.fake_processor? %>
-      <%= render 'payment_methods/forms/stripe', client_secret: @client_secret if show_payment_processor?(:stripe) %>
-      <%= render 'payment_methods/forms/braintree' if show_payment_processor?(:braintree) %>
-      <%= render 'payment_methods/forms/paypal' if show_payment_processor?(:paypal) %>
+      <% if @payment_processor.subscriptions.past_due.any? %>
+        <p class="text-red-600"><%= t ".past_due" %></p>
 
-      <%# Paddle can only update card when on a subscription %>
-      <%= render 'payment_methods/forms/paddle', subscription: @payment_processor.subscription if show_paddle_payment_method_form?(@payment_processor) %>
+        <%= render 'payment_methods/forms/fake_processor' if @payment_processor.fake_processor? %>
+        <%= render 'payment_methods/forms/stripe', client_secret: @client_secret if @payment_processor.stripe? %>
+        <%= render 'payment_methods/forms/braintree' if Jumpstart.config.braintree? && @payment_processor.braintree? %>
+        <%= render 'payment_methods/forms/paypal' if Jumpstart.config.paypal? && @payment_processor.braintree? %>
+
+        <%# Paddle can only update card when on a subscription %>
+        <%= render 'payment_methods/forms/paddle', subscription: @subscription if @payment_processor.paddle? %>
+
+      <% else %>
+        <%# Show form if current processor exists or show all if no processor set %>
+        <%= render 'payment_methods/forms/fake_processor' if @payment_processor&.fake_processor? %>
+        <%= render 'payment_methods/forms/stripe', client_secret: @client_secret if show_payment_processor?(:stripe) %>
+        <%= render 'payment_methods/forms/braintree' if show_payment_processor?(:braintree) %>
+        <%= render 'payment_methods/forms/paypal' if show_payment_processor?(:paypal) %>
+
+        <%# Paddle can only update card when on a subscription %>
+        <%= render 'payment_methods/forms/paddle', subscription: @payment_processor.subscription if show_paddle_payment_method_form?(@payment_processor) %>
+      <% end %>
     </div>
   </div>
 </div>

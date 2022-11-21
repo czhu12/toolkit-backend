@@ -11,6 +11,8 @@
         <%= badge t(".canceled"), class: "mb-1" %>
       <% elsif subscription.incomplete? %>
         <%= badge t(".incomplete"), class: "mb-1" %>
+      <% elsif subscription.past_due? %>
+        <%= badge t(".past_due"), class: "mb-1", color: "bg-red-100 text-red-800" %>
       <% end %>
 
       <h4><%= subscription.plan.name %></h4>
@@ -62,7 +64,8 @@
       <% elsif subscription.incomplete? %>
         <%= link_to t(".confirm_payment"), pay.payment_path(subscription.latest_payment.id), class: "btn btn-primary" %>
       <% elsif subscription.past_due? %>
-        Past Due
+        <%= link_to t(".update_payment_method"), new_payment_method_path(subscription_id: subscription), class: "btn btn-primary" %>
+        <%= link_to t(".cancel_plan"), subscription_cancel_path(subscription), class: "btn btn-light-gray" %>
       <% end %>
     </div>
   <% end %>

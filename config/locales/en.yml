@@ -157,6 +157,7 @@ en:
     new:
       billing: "Billing"
       payment_details: "Payment Details"
+      past_due: "Your payment method was declined. Please add another payment method to continue."
 
     create:
       updated: "Your payment method was updated successfully."
@@ -315,6 +316,9 @@ en:
       paused_at: "Your plan will be paused on %{date}."
       paused: "Your plan is paused."
       view_usage: "View usage"
+      past_due: "Past due"
+      update_payment_method: "Update payment method"
+      failed_payment: "Your latest payment has failed. Update your payment method to continue this plan."
 
     payment_method:
       payment_method: "Payment Method"

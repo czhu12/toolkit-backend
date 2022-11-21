@@ -7,7 +7,7 @@
     controller: "stripe",
     action: "submit->stripe#submit",
     stripe_client_secret_value: client_secret,
-    stripe_return_url_value: payment_methods_stripe_url,
+    stripe_return_url_value: local_assigns.fetch(:return_url, payment_methods_stripe_url),
     stripe_target: "form",
     toggle_target: "toggleable",
   } do |f| %>
