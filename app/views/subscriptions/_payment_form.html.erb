@@ -5,7 +5,7 @@
     <% if current_account.billing_address %>
       <%= render current_account.billing_address %>
     <% else %>
-      <%= t(".no_billing_address") %>
+      <%= t("subscriptions.billing_address.no_billing_address") %>
     <% end %>
     </div>
     <%= link_to "Edit", new_subscription_path(plan: @plan.id) %>
@@ -19,15 +19,15 @@
     <div data-toggle-target="toggleable">
       <div class="flex items-center mb-8">
         <div class="flex-1">
-          <label><%= t(".payment_method") %></label>
+          <label><%= t("subscriptions.new.payment_method") %></label>
           <i class="fab fa-cc-<%= default_payment_method.brand.downcase %> text-gray-700"></i> <%= payment_method_details(default_payment_method) %>
         </div>
-        <%= link_to t(".change"), "#", class: "btn btn-light-gray", data: { action: "click->toggle#toggle" } %>
+        <%= link_to t("subscriptions.new.change"), "#", class: "btn btn-light-gray", data: { action: "click->toggle#toggle" } %>
       </div>
 
       <%= form_with url: subscriptions_path, method: :post do |f| %>
         <%= f.hidden_field :plan, value: @plan.id if @plan.present? %>
-        <%= f.button t(".subscribe"), id: 'submit-button', class: "btn btn-primary btn-large btn-block", data: { action: "click->stripe#submit", disable_with: disable_with(t(".processing")) } %>
+        <%= f.button t("subscriptions.new.subscribe"), id: 'submit-button', class: "btn btn-primary btn-large btn-block", data: { action: "click->stripe#submit", disable_with: disable_with(t("subscriptions.new.processing")) } %>
       <% end %>
     </div>
   <% end %>

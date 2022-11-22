@@ -64,7 +64,7 @@
       <% elsif subscription.incomplete? %>
         <%= link_to t(".confirm_payment"), pay.payment_path(subscription.latest_payment.id), class: "btn btn-primary" %>
       <% elsif subscription.past_due? %>
-        <%= link_to t(".update_payment_method"), new_payment_method_path(subscription_id: subscription), class: "btn btn-primary" %>
+        <%= link_to t(".update_payment_method"), new_payment_method_path, class: "btn btn-primary" %>
         <%= link_to t(".cancel_plan"), subscription_cancel_path(subscription), class: "btn btn-light-gray" %>
       <% end %>
     </div>

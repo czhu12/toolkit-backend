@@ -74,6 +74,8 @@ class SubscriptionsController < ApplicationController
   def update
     @subscription.swap @plan.id_for_processor(current_account.payment_processor.processor)
     redirect_to subscriptions_path, notice: t(".success")
+  rescue Pay::ActionRequired => e
+    redirect_to pay.payment_path(e.payment.id)
   rescue Pay::Error => e
     edit # Reload plans
     flash[:alert] = e.message

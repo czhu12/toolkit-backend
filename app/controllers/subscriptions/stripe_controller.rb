@@ -7,9 +7,13 @@ class Subscriptions::StripeController < ApplicationController
 
   def show
     @subscription = Pay::Stripe::Subscription.sync(@subscription.processor_id)
+    current_account.set_payment_processor :stripe
+
+    # Mark payment intent payment method as default
+    pay_payment_method = Pay::Stripe::PaymentMethod.sync_payment_intent(params[:payment_intent])
+    pay_payment_method.make_default!
 
     if @subscription.active?
-      current_account.set_payment_processor :stripe
       redirect_to root_path, notice: t("subscriptions.created")
     else
       redirect_to root_path, alert: t("something_went_wrong")

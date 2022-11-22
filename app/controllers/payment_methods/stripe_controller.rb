@@ -11,12 +11,14 @@ class PaymentMethods::StripeController < ApplicationController
       # if any past_due subscriptions exist, attempt to pay them
       payment_processor.retry_past_due_subscriptions!
 
-      redirect_to root_path, notice: t("payment_methods.create.updated")
+      redirect_to subscriptions_path, notice: t("payment_methods.create.updated")
     else
-      redirect_to root_path, alert: t("something_went_wrong")
+      redirect_to new_payment_method_path, alert: t("something_went_wrong")
     end
   rescue Pay::ActionRequired => e
     redirect_to pay.payment_path(e.payment.id)
+  rescue Pay::Error => e
+    redirect_to new_payment_method_path, alert: t("something_went_wrong")
   end
 
   private
