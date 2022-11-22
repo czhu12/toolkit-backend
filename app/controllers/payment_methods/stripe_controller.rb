@@ -18,7 +18,7 @@ class PaymentMethods::StripeController < ApplicationController
   rescue Pay::ActionRequired => e
     redirect_to pay.payment_path(e.payment.id)
   rescue Pay::Error => e
-    redirect_to new_payment_method_path, alert: t("something_went_wrong")
+    redirect_to new_payment_method_path, alert: e.message
   end
 
   private
