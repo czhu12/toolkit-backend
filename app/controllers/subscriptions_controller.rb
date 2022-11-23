@@ -12,7 +12,7 @@ class SubscriptionsController < ApplicationController
   def index
     @billing_address = current_account.billing_address
     @payment_processor = current_account.payment_processor
-    @subscriptions = current_account.subscriptions.active.or(Pay::Subscription.past_due).order(created_at: :asc).includes([:customer])
+    @subscriptions = current_account.subscriptions.active.or(current_account.subscriptions.past_due).order(created_at: :asc).includes([:customer])
   end
 
   def show
