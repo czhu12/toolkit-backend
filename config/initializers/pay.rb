@@ -43,4 +43,11 @@ end
 Rails.configuration.to_prepare do
   Pay::Subscription.include SubscriptionExtensions
   Pay::Charge.include ChargeExtensions
+
+  # Use Inter font for full UTF-8 support in PDFs
+  # https://github.com/rsms/inter
+  Receipts.default_font = {
+    bold: Rails.root.join("app/assets/fonts/Inter-Bold.otf"),
+    normal: Rails.root.join("app/assets/fonts/Inter-Regular.otf")
+  }
 end
