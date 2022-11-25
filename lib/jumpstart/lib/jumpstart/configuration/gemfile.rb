@@ -76,16 +76,16 @@ module Jumpstart
           name = details.delete(:name)
           version = details.delete(:version)
           require_gem = details.delete(:require)
-          options = details.map { |k, v| "#{k}: '#{v}'" }.join(", ")
-          line = spacing + "gem '#{name}'"
-          line += ", '#{version}'" if version.present?
+          options = details.map { |k, v| "#{k}: \"#{v}\"" }.join(", ")
+          line = spacing + "gem \"#{name}\""
+          line += ", \"#{version}\"" if version.present?
           line += ", #{options}" if options.present?
 
           case require_gem
           when true, false
             line += ", require: #{require_gem}"
           when String
-            line += ", require: '#{require_gem}'"
+            line += ", require: \"#{require_gem}\""
           end
 
           line
