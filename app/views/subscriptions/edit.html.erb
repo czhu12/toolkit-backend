@@ -28,7 +28,7 @@
             <% else %>
               <%= form_with url: subscription_url, method: :patch do |f| %>
                 <%= f.hidden_field :plan, value: plan.id %>
-                <%= f.button t(".change_plan"), class: "btn btn-tertiary btn-block", data: { disable_with: t(".processing") } %>
+                <%= f.button t(".change_plan"), class: "btn btn-tertiary btn-block", data: { disable_with: t(".processing"), turbo_confirm: "Are you sure?" } %>
               <% end %>
             <% end %>
           <% end %>
@@ -43,7 +43,7 @@
             <% else %>
               <%= form_with url: subscription_url, method: :patch do |f| %>
                 <%= f.hidden_field :plan, value: plan.id %>
-                <%= f.button t(".change_plan"), class: "btn btn-tertiary btn-block", data: { disable_with: t(".processing") } %>
+                <%= f.button t(".change_plan"), class: "btn btn-tertiary btn-block", data: { disable_with: t(".processing"), turbo_confirm: "Are you sure?" } %>
               <% end %>
             <% end %>
           <% end %>
