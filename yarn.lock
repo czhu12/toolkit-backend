@@ -881,9 +881,9 @@ select@^1.1.2:
   integrity sha512-OwpTSOfy6xSs1+pwcNrv0RBMOzI39Lp3qQKUTPVVPRjCdNa5JH/oPRiqsesIskK8TVgmRiHwO4KXlV2Li9dANA==
 
 slim-select@^2.0.0:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/slim-select/-/slim-select-2.0.1.tgz#969b5dea9ddf7b56760a1905699abde8ce4cbde3"
-  integrity sha512-r1lMpX8n1o2yrH7znEls2bU+HI1/QjoNlUv9j/Ts+mJabWIcCkG6Rzs3gfc0zCrpModqVRWlU5b+96dGzC4blQ==
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/slim-select/-/slim-select-2.2.1.tgz#51fdec752864ecaae6892ef21575059136675c49"
+  integrity sha512-HZuKJw9QDtpXHxxyu6DNDjNOj9/m0LHM8FMhsW7VzkpHrX6V6+NQ6vNGILXOdtnLsGmdE6lgNHiNcU9auljOMQ==
 
 source-map-js@^1.0.2:
   version "1.0.2"
@@ -968,9 +968,9 @@ tributejs@^5.1.3:
   integrity sha512-B5CXihaVzXw+1UHhNFyAwUTMDk1EfoLP5Tj1VhD9yybZ1I8DZJEv8tZ1l0RJo0t0tk9ZhR8eG5tEsaCvRigmdQ==
 
 trix@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/trix/-/trix-2.0.0.tgz#eaac6a8e3a3192f41675232c8dbf1ede2c8771cc"
-  integrity sha512-3ELqNcPi1bZDuyStX0c3PpxUgynL9Q4MJqywpGAl+EWqd0mbgdQprEJta/j4o21nUXekC2L+5XP7pISjLJEXcA==
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/trix/-/trix-2.0.1.tgz#d4ade25250ecf3437ea8a3d8b8873e6be028cb14"
+  integrity sha512-oK3vGoI7dIXXc8dGoLWvQDWP2ZmxjxHiyy+ZGTkRvYL91u6Tl6YPdRR7l0aunt9qAivn7NnTqmUf+eF0ZI8D+g==
 
 tslib@^2.0.1:
   version "2.4.1"
