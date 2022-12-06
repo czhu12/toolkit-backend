@@ -98,6 +98,7 @@ class StripeSystemTest < ApplicationSystemTestCase
     # Swap subscription
     visit edit_subscription_url(subscription)
     click_on "Change Plan", match: :first
+    click_on "Confirm"
 
     # Assert we were redirected to the correct page
     assert_selector "h1", text: I18n.t("subscriptions.index.title")
@@ -121,6 +122,7 @@ class StripeSystemTest < ApplicationSystemTestCase
     # Swap subscription
     visit edit_subscription_url(subscription)
     click_on "Change Plan", match: :first
+    click_on "Confirm"
 
     # Changes are prorated so we don't have to go through SCA again
 
