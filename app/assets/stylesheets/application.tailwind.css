@@ -28,5 +28,6 @@
 
 @import "tailwindcss/utilities";
 
-@import "tippy.js/dist/tippy.css";
 @import "flatpickr/dist/flatpickr.css";
+@import "tippy.js/dist/tippy.css";
+@import "tom-select/dist/css/tom-select.css";

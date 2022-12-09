@@ -1,9 +1,9 @@
 import { Controller } from "@hotwired/stimulus"
-import SlimSelect from 'slim-select'
+import TomSelect from "tom-select"
 
 export default class extends Controller {
   connect() {
-    this.select = new SlimSelect({select: this.element})
+    this.select = new TomSelect(this.element)
   }
 
   disconnect() {

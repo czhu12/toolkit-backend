@@ -26,6 +26,8 @@
 
 @import "utilities/text-color";
 
+@import "tom-select/dist/css/tom-select.css";
+
 // We need to override trix.css’s image gallery styles to accommodate the
 // <action-text-attachment> element we wrap around attachments. Otherwise,
 // images in galleries will be squished by the max-width: 33%; rule.
@@ -104,8 +106,6 @@
     }
   }
 }
-
-@import "library/slim-select";
 
 .flatpickr-current-month .flatpickr-monthDropdown-months {
   display: inline-block;
