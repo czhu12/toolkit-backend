@@ -87,10 +87,15 @@ class SubscriptionsController < ApplicationController
     redirect_to subscriptions_path, notice: t(".info_updated")
   end
 
+  def billing_email
+    current_account.update(info_params)
+    redirect_to subscriptions_path, notice: t(".email_updated")
+  end
+
   private
 
   def info_params
-    params.require(:account).permit(:extra_billing_info)
+    params.require(:account).permit(:extra_billing_info, :billing_email)
   end
 
   def require_payments_enabled

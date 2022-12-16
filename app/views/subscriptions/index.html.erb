@@ -29,6 +29,7 @@
         <%# Paddle: Extra payment details live in Paddle, not our app %>
         <% unless @payment_processor&.paddle? %>
           <%= render partial: "subscriptions/billing_info" %>
+          <%= render partial: "subscriptions/billing_email" %>
         <% end %>
 
         <%= render partial: "subscriptions/charges" %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_21_232410) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_16_130900) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -47,6 +47,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_21_232410) do
     t.text "extra_billing_info"
     t.string "domain"
     t.string "subdomain"
+    t.string "billing_email"
     t.index ["owner_id"], name: "index_accounts_on_owner_id"
   end
 

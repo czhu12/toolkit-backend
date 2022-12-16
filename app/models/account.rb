@@ -51,8 +51,10 @@ class Account < ApplicationRecord
     billing_address || build_billing_address
   end
 
+  # Email address used for Pay customers and receipts
+  # Defaults to billing_email if defined, otherwise uses the account owner's email
   def email
-    account_users.includes(:user).order(created_at: :asc).first.user.email
+    billing_email? ? billing_email : owner.email
   end
 
   def impersonal?

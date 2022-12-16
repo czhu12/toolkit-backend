@@ -1,0 +1,14 @@
+<h5 class="text-gray-700 font-semibold my-4 border-b border-gray-200 pb-2"><%= t(".billing_email") %></h5>
+
+<div class="mb-8 flex gap-8" data-controller="toggle">
+  <%= form_with model: current_account, url: billing_email_subscriptions_path do |f| %>
+    <div class="flex-1">
+      <div class="text-gray-700 mt-2"><%= t ".description" %></div>
+
+      <div class="form-group mt-4 flex items-center gap-2">
+        <%= f.email_field :billing_email, class: "form-control mt-0", placeholder: true %>
+        <%= f.button t(".save"), class: "btn btn-primary", data: { disable_with: disable_with(t(".saving"))} %>
+      </div>
+    </div>
+  <% end %>
+</div>
