@@ -93,7 +93,7 @@ Rails.application.routes.draw do
 
     collection do
       patch :info
-      patch :billing_email
+      patch :billing_settings
     end
 
     scope module: :subscriptions do

@@ -251,8 +251,7 @@ en:
   subscriptions:
     created: "Thanks for subscribing!"
     resumed: "Your subscription has been resumed."
-    info_updated: "Extra billing info saved sucessfully."
-    email_updated: "Billing email has been updated sucessfully."
+    billing_settings_updated: "Billing settings have been updated sucessfully."
 
     plan:
       change_plan: "Change Plan"

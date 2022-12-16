@@ -25,6 +25,32 @@ class Jumpstart::SubscriptionsTest < ActionDispatch::IntegrationTest
         end
       end
     end
+
+    test "can view subscriptions_path" do
+      Jumpstart.config.stub(:payments_enabled?, true) do
+        get subscriptions_path
+        assert_response :success
+      end
+    end
+
+    test "can successfully update a billing email" do
+      Jumpstart.config.stub(:payments_enabled?, true) do
+        @account.update!(billing_email: nil)
+        patch billing_settings_subscriptions_path, params: { account: { billing_email: "accounting@example.com" } }
+
+        assert_response :redirect
+        assert_not_nil @account.reload.billing_email
+      end
+    end
+
+    test "can successfully update a extra billing info" do
+      Jumpstart.config.stub(:payments_enabled?, true) do
+        patch billing_settings_subscriptions_path, params: { account: { extra_billing_info: "VAT_ID" } }
+
+        assert_response :redirect
+        assert_equal "VAT_ID", @account.reload.extra_billing_info
+      end
+    end
   end
 
   class RegularUsers < Jumpstart::SubscriptionsTest

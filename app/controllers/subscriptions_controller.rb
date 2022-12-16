@@ -82,19 +82,14 @@ class SubscriptionsController < ApplicationController
     render :edit, status: :unprocessable_entity
   end
 
-  def info
-    current_account.update(info_params)
-    redirect_to subscriptions_path, notice: t(".info_updated")
-  end
-
-  def billing_email
-    current_account.update(info_params)
-    redirect_to subscriptions_path, notice: t(".email_updated")
+  def billing_settings
+    current_account.update(billing_params)
+    redirect_to subscriptions_path, notice: t(".billing_settings_updated")
   end
 
   private
 
-  def info_params
+  def billing_params
     params.require(:account).permit(:extra_billing_info, :billing_email)
   end
 
