@@ -92,7 +92,6 @@ Rails.application.routes.draw do
     resource :upcoming, module: :subscriptions
 
     collection do
-      patch :info
       patch :billing_settings
     end
 
