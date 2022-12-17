@@ -122,7 +122,7 @@ GEM
       i18n (>= 1.6, < 2)
       minitest (>= 5.1)
       tzinfo (~> 2.0)
-    acts_as_tenant (0.5.3)
+    acts_as_tenant (0.6.0)
       rails (>= 5.2)
       request_store (>= 1.0.5)
     addressable (2.8.1)
@@ -163,7 +163,7 @@ GEM
     crass (1.0.6)
     cssbundling-rails (1.1.2)
       railties (>= 6.0.0)
-    date (3.3.1)
+    date (3.3.2)
     debug (1.7.0)
       irb (>= 1.5.0)
       reline (>= 0.3.1)
@@ -212,7 +212,7 @@ GEM
       nokogiri (>= 1.6)
     invisible_captcha (2.0.0)
       rails (>= 5.0)
-    io-console (0.5.11)
+    io-console (0.6.0)
     irb (1.6.1)
       reline (>= 0.3.0)
     jquery-rails (4.5.1)
@@ -327,7 +327,7 @@ GEM
       activesupport (>= 3.0.0)
     racc (1.6.1)
     rack (2.2.4)
-    rack-protection (3.0.4)
+    rack-protection (3.0.5)
       rack
     rack-test (2.0.2)
       rack (>= 1.3)
@@ -468,7 +468,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  acts_as_tenant (~> 0.5.1)
+  acts_as_tenant (~> 0.6)
   administrate!
   administrate-field-active_storage (~> 0.4.1)
   annotate!
