@@ -5,6 +5,15 @@ Pay.setup do |config|
   config.support_email = Jumpstart.config.support_email
 
   config.routes_path = "/"
+
+  config.mail_to = -> {
+    pay_customer = params[:pay_customer]
+    account = pay_customer.owner
+
+    recipients = [ActionMailer::Base.email_address_with_name(pay_customer.email, pay_customer.customer_name)]
+    recipients << ActionMailer::Base.email_address_with_name(account.email, account.name) if account.billing_email?
+    recipients
+  }
 end
 
 module SubscriptionExtensions

@@ -251,7 +251,7 @@ en:
   subscriptions:
     created: "Thanks for subscribing!"
     resumed: "Your subscription has been resumed."
-    info_updated: "Extra billing info saved sucessfully."
+    billing_settings_updated: "Billing settings have been updated sucessfully."
 
     plan:
       change_plan: "Change Plan"
@@ -344,6 +344,12 @@ en:
       save_info: "Save information"
       saving: "Saving..."
       add_info: "Add information"
+
+    billing_email:
+      billing_email: "Billing Email"
+      description: "Send receipts to a specific email address along with the account owner."
+      save: "Save"
+      saving: "Saving..."
 
     charges:
       title: "Billing History"
@@ -540,6 +546,7 @@ en:
         subdomain: "example"
         name_on_card: "Full Name"
         extra_billing_info: "VAT ID, Business name, address, etc..."
+        billing_email: "account@example.com"
       api_token:
         name: "Token Name"
       user:
