@@ -333,6 +333,7 @@ en:
       updated: "Your billing address was updated successfully."
       no_billing_address: "You have no billing address on file."
       destroyed: "Your billing address has been removed successfully."
+      edit: "Edit"
 
     billing_addresses:
       show:

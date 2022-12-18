@@ -8,7 +8,7 @@
       <%= t("subscriptions.billing_address.no_billing_address") %>
     <% end %>
     </div>
-    <%= link_to "Edit", new_subscription_path(plan: @plan.id) %>
+    <%= link_to t("subscriptions.billing_address.edit"), new_subscription_path(plan: @plan.id) %>
   </div>
 <% end %>
 
