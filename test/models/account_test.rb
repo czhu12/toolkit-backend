@@ -116,4 +116,24 @@ class AccountTest < ActiveSupport::TestCase
     refute account.transfer_ownership(users(:invited).id)
     assert_equal owner, account.reload.owner
   end
+
+  test "billing_email shouldn't be included in receipts if empty" do
+    account = accounts(:company)
+    account.update!(billing_email: nil)
+    pay_customer = account.set_payment_processor :fake_processor, allow_fake: true
+    pay_charge = pay_customer.charge(10_00)
+
+    mail = Pay::UserMailer.with(pay_customer: pay_customer, pay_charge: pay_charge).receipt
+    assert_equal [account.email], mail.to
+  end
+
+  test "billing_email should be included in receipts if present" do
+    account = accounts(:company)
+    account.update!(billing_email: "accounting@example.com")
+    pay_customer = account.set_payment_processor :fake_processor, allow_fake: true
+    pay_charge = pay_customer.charge(10_00)
+
+    mail = Pay::UserMailer.with(pay_customer: pay_customer, pay_charge: pay_charge).receipt
+    assert_equal [account.email, "accounting@example.com"], mail.to
+  end
 end
