@@ -3,7 +3,7 @@
 PORT="${PORT:-3000}"
 export PORT
 
-if command -v overmind &> /dev/null; then
+if command -v overmind > /dev/null 2>&1; then
   exec overmind start -f Procfile.dev "$@"
 else
   exec foreman start -f Procfile.dev "$@"
