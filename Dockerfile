@@ -68,7 +68,7 @@ RUN set -ex \
 # App dependencies
 
 RUN apt-get update -qq && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends imagemagick libvips libvips-dev libvips-tools libpq-dev && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends imagemagick libvips libvips-dev libvips-tools libpq-dev poppler-utils && \
     rm -rf /var/lib/apt/lists/* /var/cache/apt
 
 # App
