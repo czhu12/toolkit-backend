@@ -1,10 +1,11 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = [ "paymentElement", "error", "form" ]
+  static targets = ["addressElement", "paymentElement", "error", "form"]
   static values = {
     clientSecret: String,
-    returnUrl: String
+    returnUrl: String,
+    name: String
   }
 
   connect() {
@@ -21,6 +22,16 @@ export default class extends Controller {
 
     this.paymentElement = this.elements.create("payment")
     this.paymentElement.mount(this.paymentElementTarget)
+
+    if (this.hasAddressElementTarget) {
+      this.addressElement = this.elements.create('address', {
+        mode: 'billing',
+        defaultValues: {
+          name: this.nameValue
+        }
+      });
+      this.addressElement.mount(this.addressElementTarget)
+    }
   }
 
   changed(event) {

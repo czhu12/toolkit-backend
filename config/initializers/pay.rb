@@ -11,7 +11,7 @@ Pay.setup do |config|
     account = pay_customer.owner
 
     recipients = [ActionMailer::Base.email_address_with_name(pay_customer.email, pay_customer.customer_name)]
-    recipients << ActionMailer::Base.email_address_with_name(account.email, account.name) if account.billing_email?
+    recipients << account.billing_email if account.billing_email?
     recipients
   }
 end
