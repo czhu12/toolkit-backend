@@ -3,7 +3,7 @@
 
   <h4 class="uppercase text-gray-700 tracking-wide font-semibold text-sm pb-3 mb-6 border-b border-gray-300">Rails UJS Confirm Dialog</h4>
 <%= render "jumpstart/docs/snippet" do %>
-  <%= link_to "Confirm Modal", "#", class: "btn btn-tertiary", data: { turbo_confirm: "Are you sure?" } %>
+  <%= button_to "Confirm Modal", request.path, method: :get, class: "btn btn-tertiary", data: { turbo_confirm: "Are you sure?" } %>
 <% end %>
 
   <h4 class="uppercase text-gray-700 tracking-wide font-semibold text-sm pb-3 mb-6 border-b border-gray-300">Small</h4>
