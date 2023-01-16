@@ -20,7 +20,7 @@ function insertConfirmModal(message, element, button) {
 
           <div class="flex justify-end items-center flex-wrap mt-6">
             <button data-behavior="cancel" class="btn btn-light-gray mr-2">Cancel</button>
-            <button disabled data-behavior="commit" class="btn btn-danger focus:outline-none">Confirm</button>
+            <button data-behavior="commit" class="btn btn-danger focus:outline-none">Confirm</button>
           </div>
         </div>
       </div>
