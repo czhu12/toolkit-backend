@@ -6,6 +6,10 @@
   <%= button_to "Confirm Modal", request.path, method: :get, class: "btn btn-tertiary", data: { turbo_confirm: "Are you sure?" } %>
 <% end %>
 
+<%= render "jumpstart/docs/snippet" do %>
+  <%= button_to "Confirm Modal with Description", request.path, method: :get, class: "btn btn-tertiary", data: { turbo_confirm: "Are you sure?", turbo_confirm_description: "<p>This is a description for the confirmation modal.</p><p>It can contain any HTML you need.</p>" } %>
+<% end %>
+
   <h4 class="uppercase text-gray-700 tracking-wide font-semibold text-sm pb-3 mb-6 border-b border-gray-300">Small</h4>
 
   <%= render "jumpstart/docs/snippet" do %>
