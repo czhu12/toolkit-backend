@@ -17,10 +17,10 @@
     "autoprefixer": "^10.4.0",
     "chokidar": "^3.5.2",
     "clipboard": "^2.0.8",
-    "esbuild": "^0.16.0",
+    "esbuild": "^0.17.0",
     "esbuild-rails": "^1.0.3",
     "flatpickr": "^4.6.10",
-    "glob": "^8.0.1",
+    "glob": "^8.1.0",
     "js-cookie": "^3.0.1",
     "jstz": "^2.1.1",
     "local-time": "^2.1.0",
@@ -36,6 +36,6 @@
   },
   "scripts": {
     "build:css": "tailwindcss --postcss --minify -i ./app/assets/stylesheets/application.tailwind.css -o ./app/assets/builds/application.css",
-    "build": "node esbuild.config.js"
+    "build": "node esbuild.config.mjs"
   }
 }
