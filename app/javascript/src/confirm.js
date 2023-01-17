@@ -1,9 +1,10 @@
 // Custom TailwindCSS modals for confirm dialogs
 function insertConfirmModal(message, element, button) {
   let confirmInput = ""
-  let confirmText = button.dataset.turboConfirmText
-  let description = button.dataset.turboConfirmDescription || ""
 
+  // button is nil if using link_to with data-turbo-confirm
+  let confirmText = button?.dataset?.turboConfirmText
+  let description = button?.dataset?.turboConfirmDescription || ""
   if (confirmText) {
     confirmInput = `<input type="text" class="mt-4 form-control" data-behavior="confirm-text" />`
   }
@@ -29,7 +30,6 @@ function insertConfirmModal(message, element, button) {
 
   document.body.insertAdjacentHTML('beforeend', content)
   document.activeElement.blur()
-
   let modal = document.getElementById("confirm-modal")
 
   // Disable commit button until the value matches confirmText
