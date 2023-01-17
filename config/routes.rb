@@ -20,9 +20,7 @@ Rails.application.routes.draw do
       resources :users do
         resource :impersonate, module: :user
       end
-      namespace :user do
-        resources :connected_accounts
-      end
+      resources :connected_accounts
       resources :accounts
       resources :account_users
       resources :plans

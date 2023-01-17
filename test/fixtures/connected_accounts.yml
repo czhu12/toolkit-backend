@@ -1,32 +1,29 @@
 # == Schema Information
 #
-# Table name: user_connected_accounts
+# Table name: connected_accounts
 #
 #  id                  :bigint           not null, primary key
 #  access_token        :string
 #  access_token_secret :string
 #  auth                :text
 #  expires_at          :datetime
+#  owner_type          :string
 #  provider            :string
 #  refresh_token       :string
 #  uid                 :string
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
-#  user_id             :bigint
+#  owner_id            :bigint
 #
 # Indexes
 #
-#  index_user_connected_accounts_on_user_id  (user_id)
-#
-# Foreign Keys
-#
-#  fk_rails_...  (user_id => users.id)
+#  index_connected_accounts_on_owner_id_and_owner_type  (owner_id,owner_type)
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  user: one
+  owner: one (User)
   provider: test
   access_token: abcd1234
   refresh_token: ABCDEFG
@@ -34,7 +31,7 @@ one:
   uid: one
 
 two:
-  user: one
+  owner: one (User)
   provider: test
   access_token: abcd1234
   refresh_token: ABCDEFG

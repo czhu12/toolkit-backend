@@ -3,6 +3,7 @@
 # Table name: accounts
 #
 #  id                 :bigint           not null, primary key
+#  billing_email      :string
 #  domain             :string
 #  extra_billing_info :text
 #  name               :string           not null

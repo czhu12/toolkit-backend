@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_16_130900) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_14_132615) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -131,6 +131,21 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_16_130900) do
     t.datetime "updated_at", null: false
     t.index ["token"], name: "index_api_tokens_on_token", unique: true
     t.index ["user_id"], name: "index_api_tokens_on_user_id"
+  end
+
+  create_table "connected_accounts", force: :cascade do |t|
+    t.bigint "owner_id"
+    t.string "provider"
+    t.string "uid"
+    t.string "refresh_token"
+    t.datetime "expires_at", precision: nil
+    t.text "auth"
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
+    t.string "access_token"
+    t.string "access_token_secret"
+    t.string "owner_type"
+    t.index ["owner_id", "owner_type"], name: "index_connected_accounts_on_owner_id_and_owner_type"
   end
 
   create_table "notification_tokens", force: :cascade do |t|
@@ -256,20 +271,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_16_130900) do
     t.string "unit"
   end
 
-  create_table "user_connected_accounts", force: :cascade do |t|
-    t.bigint "user_id"
-    t.string "provider"
-    t.string "uid"
-    t.string "refresh_token"
-    t.datetime "expires_at", precision: nil
-    t.text "auth"
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
-    t.string "access_token"
-    t.string "access_token_secret"
-    t.index ["user_id"], name: "index_user_connected_accounts_on_user_id"
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -320,5 +321,4 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_16_130900) do
   add_foreign_key "pay_charges", "pay_customers", column: "customer_id"
   add_foreign_key "pay_payment_methods", "pay_customers", column: "customer_id"
   add_foreign_key "pay_subscriptions", "pay_customers", column: "customer_id"
-  add_foreign_key "user_connected_accounts", "users"
 end

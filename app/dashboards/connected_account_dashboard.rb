@@ -1,6 +1,6 @@
 require "administrate/base_dashboard"
 
-class User::ConnectedAccountDashboard < Administrate::BaseDashboard
+class ConnectedAccountDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
   # a hash that describes the type of each of the model's fields.
   #
@@ -9,7 +9,7 @@ class User::ConnectedAccountDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
-    user: Field::BelongsTo,
+    owner: Field::Polymorphic,
     provider: Field::String,
     uid: Field::String,
     expires_at: Field::DateTime,
@@ -24,7 +24,7 @@ class User::ConnectedAccountDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = [
     :id,
-    :user,
+    :owner,
     :provider,
     :uid
   ].freeze
@@ -33,7 +33,7 @@ class User::ConnectedAccountDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = [
     :id,
-    :user,
+    :owner,
     :provider,
     :uid,
     :expires_at,
@@ -45,7 +45,7 @@ class User::ConnectedAccountDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
-    :user,
+    :owner,
     :provider,
     :uid
   ].freeze
@@ -54,6 +54,6 @@ class User::ConnectedAccountDashboard < Administrate::BaseDashboard
   # across all pages of the admin dashboard.
   #
   # def display_resource(connected_account)
-  #   "User::ConnectedAccount ##{connected_account.id}"
+  #   "ConnectedAccount ##{connected_account.id}"
   # end
 end

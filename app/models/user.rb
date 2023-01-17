@@ -66,7 +66,7 @@ class User < ApplicationRecord
 
   # Associations
   has_many :api_tokens, dependent: :destroy
-  has_many :connected_accounts, dependent: :destroy
+  has_many :connected_accounts, as: :owner, dependent: :destroy
   has_many :notifications, as: :recipient, dependent: :destroy
   has_many :notification_tokens, dependent: :destroy
 

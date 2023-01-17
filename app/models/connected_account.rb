@@ -1,36 +1,33 @@
 # == Schema Information
 #
-# Table name: user_connected_accounts
+# Table name: connected_accounts
 #
 #  id                  :bigint           not null, primary key
 #  access_token        :string
 #  access_token_secret :string
 #  auth                :text
 #  expires_at          :datetime
+#  owner_type          :string
 #  provider            :string
 #  refresh_token       :string
 #  uid                 :string
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
-#  user_id             :bigint
+#  owner_id            :bigint
 #
 # Indexes
 #
-#  index_user_connected_accounts_on_user_id  (user_id)
-#
-# Foreign Keys
-#
-#  fk_rails_...  (user_id => users.id)
+#  index_connected_accounts_on_owner_id_and_owner_type  (owner_id,owner_type)
 #
 
-class User::ConnectedAccount < ApplicationRecord
+class ConnectedAccount < ApplicationRecord
   serialize :auth, JSON
 
   encrypts :access_token
   encrypts :access_token_secret
 
   # Associations
-  belongs_to :user
+  belongs_to :owner, polymorphic: true
 
   # Helper scopes for each provider
   Devise.omniauth_configs.each do |provider, _|

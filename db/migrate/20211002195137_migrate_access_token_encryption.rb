@@ -3,11 +3,10 @@ class MigrateAccessTokenEncryption < ActiveRecord::Migration[7.0]
     add_column :user_connected_accounts, :access_token, :string
     add_column :user_connected_accounts, :access_token_secret, :string
 
-    User::ConnectedAccount.reset_column_information
-
-    User::ConnectedAccount.find_each do |user|
-      migrate_access_token(user)
-    end
+    # ConnectedAccount.reset_column_information
+    # ConnectedAccount.find_each do |user|
+    #   migrate_access_token(user)
+    # end
 
     remove_column :user_connected_accounts, :encrypted_access_token
     remove_column :user_connected_accounts, :encrypted_access_token_iv
