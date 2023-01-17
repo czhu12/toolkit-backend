@@ -40,14 +40,16 @@ module Jumpstart
       def handle_previously_connected(connected_account)
         # Update connected account attributes
         connected_account.update(connected_account_params)
-        run_connected_callback(connected_account)
-        success_message!(kind: auth.provider)
 
-        if user_signed_in?
-          # Already connected account, we can just update the data
+        if user_signed_in? && connected_account.owner != current_user
+          redirect_to root_path, alert: t(".connected_to_another_account")
+        elsif user_signed_in?
+          run_connected_callback(connected_account)
+          success_message!(kind: auth.provider)
           redirect_to after_connect_redirect_path
         else
-          # Account was already connected, so we can sign in the user
+          run_connected_callback(connected_account)
+          success_message!(kind: auth.provider)
           sign_in_and_redirect connected_account.owner, event: :authentication
         end
       end

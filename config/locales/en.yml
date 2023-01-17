@@ -450,6 +450,7 @@ en:
         none: "You don't have any connected accounts."
     omniauth_callbacks:
       account_exists: "We already have an account with this email. Login with your previous account before connecting this one."
+      connected_to_another_account: "This account is already connected to another user."
     sessions:
       create:
         incorrect_verification_code: "Incorrect verification code"
