@@ -14,8 +14,8 @@ module Jumpstart
 
         content = ""
         content += format_dependencies(gems[:main]) if gems[:main].any?
-        content += "\n\ngroup :test do\n#{format_dependencies(gems[:test], spacing: "  ")}\nend" if gems[:test].any?
-        content += "\n\ngroup :development do\n#{format_dependencies(gems[:development], spacing: "  ")}\nend" if gems[:development].any?
+        content += "\ngroup :test do\n#{format_dependencies(gems[:test], spacing: "  ")}end\n" if gems[:test].any?
+        content += "\ngroup :development do\n#{format_dependencies(gems[:development], spacing: "  ")}end\n" if gems[:development].any?
 
         FileUtils.mkdir_p Rails.root.join("config/jumpstart")
         File.write(gemfile_path, content)
@@ -88,8 +88,10 @@ module Jumpstart
             line += ", require: \"#{require_gem}\""
           end
 
+          line += "\n"
+
           line
-        }.join("\n")
+        }.join
       end
 
       def verify_dependencies!
