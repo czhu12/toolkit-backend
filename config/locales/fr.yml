@@ -32,14 +32,17 @@
 # https://mikerogers.io/2016/01/10/i18n-rails-internationalisation-i18n-cheatsheet.html
 
 fr:
-  hello: "Hello world"
-
-  something_went_wrong: "Un incident est survenu"
-  create_an_account_first: "Merci de créer un compte d’abord."
-  must_be_an_admin: "Vous devez être administrateur pour faire ça."
-  are_you_sure: "Êtes vous sûr ?"
-  delete: "Supprimer"
+  are_you_sure: "Êtes vous certain ?"
   back: "Retour"
+  cancel: "Annuler"
+  create_an_account_first: "Merci de créer un compte d’abord."
+  delete: "Supprimer"
+  edit: "Éditer"
+  view: "Consulter"
+  must_be_an_admin: "Vous devez être administrateur pour faire ça."
+  processing: "Traitement..."
+  something_went_wrong: "Un incident est survenu"
+  unauthorized: "Vous n'êtes pas autorisé à faire cette action."
 
   account_invitations_mailer:
     invite:
@@ -75,73 +78,98 @@ fr:
       edit: "Modifier"
       edit_account: "Modifier le compte"
       copy_link: "Copier le lien"
-
+      switch: "Changer"
+      personal_team_description: "Votre compte personnel est privé. Créer un nouveau compte pour le partager avec votre équipe."
     new:
-      breadcrumb: "Nouveau compte"
       title: "Nouveau compte"
+      description: "Collaborer et partager avec d'autres utilisateurs en créant un compte."
     edit:
-      breadcrumb: "Modifier"
       title: "Modifier compte"
     created: "Le compte a été créé."
+    created_and_switch_html: "Le compte a bien été créé. <a class=\"underline\" href=\"%{link}\">Changer de compte</a>"
     updated: "Le compte a été modifié."
     destroyed: "Le compte a été supprimé."
     admin_required: "Seuls les administrateurs peuvent faire ça."
     personal:
       cannot_delete: "Vous ne pouvez pas supprimer votre compte personnel."
-    all: "Tous les comptes"
     users: "Utilisateurs"
     roles: "Rôles"
     account_invitations:
+      updated: "L'invitation a bien été mise à jour."
+      destroyed: "L'invitation a bien été supprimée."
       new:
+        title: "Inviter un utilisateur"
         description: "Inviter un utilisateur à rejoindre ce compte."
         send: "Envoyer l’invitation"
         cancel: "Annuler"
       edit:
+        title: "Modifier l'innvitation"
         description: "Modifier ou annuler l’invitation."
         back: "Retour"
         update: "Mettre à jour l’invitation"
         destroy: "Annuler l’invitation"
+    transfers:
+      form:
+        title: "Transférer la propriété"
+        description: "Transférer la propriété de ce compte à un autre utilisateur."
+        transfer: "Transférer"
+        are_you_sure: "Êtes-vous certain de vouloir transférer la propriété de ce compte?"
+      update:
+        not_allowed: "Vous ne pouvez pas faire cela."
+        invalid: "Svp sélectionner parmi les membres de ce compte pour en transférer la propriété."
+        success: "Le compte a bien été transféré."
 
   announcements:
     index:
       title: "Les nouveautés"
+      description: "Mises à jour et améliorations à %{name}"
       empty_placeholder: "Plein de trucs tops bientôt !"
+
+    show:
+      title: "Nouveautés"
+      description: "Mises à jour et améliorations à %{name}"
+      back: "Retour"
 
   api_tokens:
     created: "Jeton API créé."
     updated: "Jeton API mis à jour."
     destroyed: "Votre jeton API a été révoqué"
     all: "Tous les jetons API"
+    default: "Valeurs par défaut"
+    app: "App"
 
     index:
       title: "Jetons API"
       create: "Créer un jeton API"
-      revoke: "Révoquer"
+      view: "Consulter"
     new:
-      breadcrumb: "Nouveau"
       title: "Nouveau jeton API"
     edit:
-      breadcrumb: "Modifier"
       title: "Modifier le jeton API"
     show:
       edit: "Modifier le jeton"
+      click_to_copy: "Cliquer pour copier"
       revoke: "Révoquer le jeton"
       confirm: "Êtes vous sûr de vouloir révoquer ce jeton API ?"
       auth_header: "Authentifiez-vous à l’aide d'un en-tête HTTP"
 
-  cards:
-    updated: "Votre carte a été mise à jour."
-    edit:
+  payment_methods:
+    new:
       billing: "Facturation"
-      payment_details: "Détails du paiement"
+      payment_details: "Détails des paiements"
+      past_due: "Votre méthode de paiement a été refusée. Svp ajouter une autre méthode de paiement pour continuer."
+
+    create:
+      updated: "Votre méthode de paiement a bien été mise à jour."
+
     forms:
       braintree:
         button: "Mettre à jour la carte"
-        processing: "Traitement en cours…"
+      fake_processor:
+        message: "Vous bénéficiez d'un accès gratuit et n'avez pas à configurer une méthode de paiement."
       stripe:
         credit_or_debit_card: "Carte de crédit ou de débit"
-        button: "Mettre à jour la carte"
-        processing: "Traitement en cours…"
+        button: "Mettre la carte à jour"
 
   dashboard:
     show:
@@ -160,13 +188,12 @@ fr:
       confirm_button: "Confirmer le paiement"
 
   static:
-    no_plans: "Aucun plan de paiement n’est configuré."
+    no_plans: "Aucun forfait n’est configuré."
     pricing:
-      heading: "Paiement"
-      subhead: "Un prix simple pour lancer votre activité en ligne"
+      heading: "Abonnements"
+      subhead: "Une structure de prix simple pour vous lancer"
       monthly: "Mensuel"
       yearly: "Annuel"
-      get_started: "Démarrer"
 
     about:
       title: "À propos"
@@ -181,7 +208,7 @@ fr:
       privacy: "Vie privée"
       terms: "Conditions d’utilisation"
     account_navbar:
-      profile: "Profil"
+      profile: "Préférences"
       password: "Mot de passe"
       connected_accounts: "Comptes connectés"
       billing: "Facturation"
@@ -190,8 +217,7 @@ fr:
     flash:
       confirm_payment: "Confirmez votre dernier paiement"
     navbar:
-      signed_in_as_html: "Connecté en tant que <strong>%{user}</strong>"
-      profile: "Profil"
+      profile: "Préférences"
       password: "Mot de passe"
       connected_accounts: "Comptes associés"
       billing: "Facturation"
@@ -199,87 +225,193 @@ fr:
       accounts: "Comptes"
       admin: "Admin"
       dashboard: "Tableau de bord"
-      sign_out: "Déconnection"
-      log_in: "Connection"
+      sign_out: "Déconnexion"
+      log_in: "Connexion"
       sign_up: "Créer un compte"
+    oauth:
+      apple: "Apple"
+      developer: "Développeur"
+      facebook: "Facebook"
+      github: "GitHub"
+      gitlab: "GitLab"
+      google_oauth2: "Google"
+      stripe: "Stripe"
+      twitter: "Twitter"
     right_nav:
-      pricing: "Prix"
+      pricing: "Tarifs"
       announcements: "Nouveautés"
+    scaffold:
+      edit:
+        title: "Éditer %{model}"
+      new:
+        title: "Nouveau %{model}"
+      actions: "Actions"
+      view: "Consulter"
 
   subscriptions:
-    created: "Merci d’avoir souscrit !"
-    resumed: "Votre souscription a repris."
+    created: "Merci de vous être abonné !"
+    resumed: "Votre abonnement a repris."
     info_updated: "Les informations de facturation ont été sauvegardées."
 
+    plan:
+      change_plan: "Changer de forfait"
+      current_plan: "Forfait actuel"
+      get_started: "Débuter"
+      start_trial: "Débuter l'essai"
+      processing: "Traitement..."
+
+    index:
+      title: "Facturation"
+      contact_admin: "Contacter un administrateur du compte %{account} pour modifier le forfait d'abonnement."
+      subscriptions: "Forfait actuel"
+      not_subscribed: "Vous n'avez pas de forfait actuellement."
+      choose_plan: "Sélectionnez un forfait"
+
     new:
-      title: "Checkout"
+      title: "Passer la commande"
+      account: "Compte"
+      billing_address: "Adresse de facturation"
       payment_method: "Méthode de paiement"
       change: "Changer"
-      subscribe: "Souscrire"
+      subscribe: "S'abonner"
+      start_trial: "Débuter l'évaluation"
       processing: "Traitement…"
       help: "Besoin d’aide ?"
       contact_html: "N’hésitez pas à %{link}."
       renews_html: "Renouvellement automatique<br/>après 1 %{interval}"
       contact_support: "contacter le support"
       contact_subject: "J’ai des questions à propos de %{product}"
-      testimonial: "Je n’ai rien trouvé de plus simple à utiliser que %{product} !"
+      testimonial: "Il n'y a rien de plus simple à utiliser que %{product} !"
+      subtotal: "Sous-total"
+      tax: "Taxes"
+      total: "Total à payer aujourd'hui"
 
     edit:
       trial_ends: "Votre période d’essai se termine dans %{days} jours."
-      title: "Changer de plan"
-      description: "Un prix simple pour démarrer votre activité en ligne"
+      title: "Changer de forfait"
+      description: "Des tarifs simples pour démarrer votre activité en ligne"
       monthly: "Mensuel"
       yearly: "Annuel"
-      current_plan: "Plan actuel"
-      change_plan: "Changer de plan"
+      current_plan: "Forfait actuel"
       processing: "Traitement…"
 
-    show:
-      title: "Facturation"
-      contact_admin: "Contacter un administrateur pour changer la souscription sur %{account}."
+    update:
+      success: "Votre forfait a bien été mis à jour."
 
-    current_plan:
-      title: "Plan actuel"
-      trial_ends: "Votre période d’essai se termine dans %{days} jours."
-      subscription_ends_html: "Votre souscription se termine le <strong>%{date}</strong>"
-      subscription_pauses_html: "Your subscription pauses <strong>%{date}</strong>"
-      subscription_paused_html: "Your subscription is <strong>paused</strong>"
-      resume: "Reprendre la souscription"
-      resuming: "Reprise…"
-      resubscribe_html: "Votre souscription s'est terminée. Voulez-vous %{link}?"
-      resubscribe: "resouscrire"
-      current_plan_html: "Vous avez souscrit au plan <strong>%{plan}</strong>."
-      change_plan: "Changer mon plan"
-      not_subscribed: "Vous n’avez pas souscrit."
-      choose_plan: "Choisir un plan"
-      payment_method: "Méthode de paiement"
-      no_card: "Vous n’avez pas de carte enregistrée."
+    subscription:
+      cancel_plan: "Annuler votre forfait"
+      canceled_on_trial: "Lorsque votre période d'évaluation se terminera la %{date}, cet abonnement se terminera automatiquement."
+      title: "Forfait actuels"
+      free_trial: "Évaluation gratuite"
+      free_trial_ends: "Votre période d'évaluation se terminera le %{date}."
+      trial: "Lorsque votre période d'évaluation se terminera le %{date}, cet abonnement se terminera automatiquement."
+      quantity: "Quantité: %{quantity} à %{price} chacun"
+      resume: "Reprendre le forfait"
+      change_plan: "Changer de forfait"
+      pause: "Mettre le forfait en pause"
+      canceled: "Annuler"
+      incomplete: "Incomplet"
+      confirm_payment: "Confirmer le paiement"
+      ends_at: "Votre forfait sera annulé le %{date}."
+      paused_at: "Votre forfait sera mis en pause %{date}."
+      paused: "Votre forfait est mis en pause."
+      view_usage: "Consulter l'utilisation"
+      past_due: "En souffrance"
       update_payment_method: "Mettre à jour la méthode de paiement"
-      extra_billing_info: "Informations supplémentaires de facturation"
-      additional_information: "Ajouter toute information supplémentaire à vos reçus, tels qu'un numéro de TVA, un nom d’entreprise et une adresse."
-      save_info: "Sauvegarde de l’information"
-      saving: "Sauvegarde…"
-      add_info: "Ajouter une information"
-      invoices: "Factures"
-      invoices_description: "Votre historique des transactions et paiements."
+      failed_payment: "Votre dernier paiement a échoué. Mettre à jour votre méthode de paiement pour continuer avec ce forfait."
+
+    payment_method:
+      payment_method: "Méthode de paiement"
+      no_payment_method: "Vous n'avez pas de méthode de paiement configurée."
+      update_payment_method: "Mettre à jour la méthode de paiement"
+
+    billing_address:
+      billing_address: "Adresse de facturation"
+      add_billing_address: "Ajouter une adresse de facturation"
+      created: "Votre adresse de facturation a bien été ajoutée."
+      update_billing_address: "Mettre à jour l'adresse de facturation"
+      updated: "Votre adresse de facturation a bien été ajoutée."
+      no_billing_address: "Vous n'avez pas de méthode de paiement configurée."
+      destroyed: "Votre adresse de facturation a bien été retirée."
+      edit: "Modifier"
+
+    billing_addresses:
+      show:
+        tax_may_apply: "Des taxes peuvent s'appliquer."
+
+    billing_info:
+      extra_billing_info: "Informations de facturation additionnelles"
+      additional_information: "Ajouter des informations à chacunes de vos factures comme vos numéros d'entreprise, nom de l'entreprise ou adresse."
+      save_info: "Sauvegarder l'information"
+      saving: "Sauvegarde..."
+      add_info: "Ajouter l'information"
+
+    billing_email:
+      billing_email: "Adresse de courriel de facturation"
+      description: "Expédier les reçus à une adresse de courriel particulière en plus d'au propriétaire du compte."
+      save: "Sauvegarder"
+      saving: "Sauvegarde..."
+
+    charges:
+      title: "Historique de facturation"
       date: "Date"
       amount: "Montant"
+      payment_method: "Méthode de paiement"
       receipt: "Reçu"
-      view: "Voir"
-      pause:
-        title: "Pause Your Subscription"
-        description: "You can pause your subscription and resume at a later time."
-        note: "The pause takes effect on the first day of your next billing cycle. You will not be charged while your account is paused."
-        button: "Pause Subscription"
-        pausing: "Pausing..."
-    cancel:
-      title: "Annuler votre souscription"
-      description: "Vous pouvez annuler à tout moment, mais vous perdrez l’accès à %{product}."
-      help_html: "Besoin de parler à quelqu’un ? %{link} − on peut vous aider."
-      contact_us: "Contactez-nous"
-      subject: "Questions à propos de %{product}"
-      button: "Annuler la souscription"
-      cancelling: "Annulation…"
+      view: "Consulter"
+      empty: "Pas d'historique de facturation."
+
+    pauses:
+      show:
+        title: "Mettre en pause votre forfait"
+        description: "Vous pouvez mettre en pause votre forfait et le reprendre à une date ultérieure lorsque vous le déciderez."
+        note: "La pause prend effet au premier jour de votre prochaine période de facturation. Vous ne serez pas facturé pendant que votre forfait est mis en pause."
+        back: "Retourner à la facturation"
+        button: "Mettre en pause le forfait"
+        processing: "Mise en pause..."
+
+      update:
+        resumed: "Votre forfait a bien été mis en pause."
+
+    resumes:
+      show:
+        title: "Réactiver votre forfait"
+        resume: "Ce forfait ne sera désormais plus annulé et sera automatiquement reconduit, périodiquement."
+        quantity: "Quantité: %{quantity} à %{price} each"
+        back: "Retourner à la facturation"
+        button: "Réactiver le forfait"
+        processing: "Réactivation..."
+
+      update:
+        resumed: "Votre forfait est de nouveau en fonction."
+
+    cancels:
+      show:
+        title: "Annuler votre forfait"
+        description: "Vous pouvez annuller n'importe quand, mais vous perdrez l'accès à %{product}."
+        help_html: "Souhaitez-vous parler à quelqu'un? %{link} -- nous serions ravis de vous aider."
+        contact_us: "Contactez-nous"
+        subject: "Des questions à propos de %{product}"
+        quantity: "Quantité: %{quantity} à %{price} chacun"
+        active_until: "Votre forfait sera annullé, mais sera encore accessible jusqu'à la fin de votre période de facturation."
+        resume: "Si vous changez d'avis, vous pourrez réactiver le forfait."
+        button: "Annuler le forfait"
+        back: "Retour vers la facturation"
+        processing: "Annulation..."
+
+      destroy:
+        resumed: "Votre forfait a bien été annulé."
+
+    upcomings:
+      show:
+        title: "Factures à venir"
+        description: "Vos coûts d'utilisation pour cette période."
+        line_items:
+          description: "Description"
+          quantity: "Quantité"
+          unit_price: "Prix unitaire"
+          total: "Total"
+        back: "Retour vers la facturation"
 
     forms:
       stripe:
@@ -291,22 +423,63 @@ fr:
       edit:
         update_password: "Modifier le mot de passe"
         update: "Mettre à jour"
-    companies:
-      updated: "Votre entreprise a été mise à jour."
-      edit:
-        update_company: "Mettre à jour l’entreprise"
-        update: "Mettre à jour"
+        two_factor:
+          header: "Authentification à deux facteurs"
+          description: "Lorsque vous vous connecterez, vous devrez consigner un code à utilisation unique qui proviendra de l'un de vos autres appareils, tel qu'un téléphone."
+          enable: "Activer l'authentification à deux facteurs"
+          disable: "Désactiver l'authentification à deux facteurs"
 
   users:
+    agreements:
+      show:
+        title: "%{agreement} modifiée"
+        last_updated: "Miss à jour le %{date}"
+        description: "Avant de commencer, vous devez lire et accepter la nouvelle %{agreement}."
+        accept: "J'accepte"
+        decline: "Je refuse"
+      destroy:
+        declined: "Pour continuer à utiliser le service, svp signer et accepter %{agreement}."
     avatar:
-      upload: "Uploader un avatar"
+      upload: "Téléverser un avatar"
     connected_accounts:
       index:
         title: "Comptes connectés"
-        description: "Connecter votre compte sur les réseaux sociaux facilite la connection."
+        description: "Connecter votre compte sur les réseaux sociaux facilite la connexion."
         remove: "Enlever"
         redirecting: "Redirection…"
         none: "Vous n’avez pas de compte connecté."
+    omniauth_callbacks:
+      account_exists: "Un compte associé à cette adresse courriel existe déjà. Connectez-vous avec vos identifiants précédants avant de vous connecter à celui-ci."
+    sessions:
+      create:
+        incorrect_verification_code: "Le code de vérification est incorrect"
+    sudo:
+      header: "Confirmer votre mot de passe pour continuer"
+      submit: "Confirmer votre mot de passe"
+      forgot_password: "Oublié votre mot de passe?"
+      invalid_password: "Mot de passe incorrect"
+    two_factor:
+      disabled: "L'authentification à deux facteurs est désormais désactivée"
+      enabled: "L'authentification à deux facteurs est désormais en fonction"
+      header: "L'authentification à deux facteurs"
+      submit: "Continuer"
+      backup_codes:
+        header: "Codes de récupération"
+        description: "Les codes de récupération permettent de recouvrer l'accès à votre compte si vous ne pouvez pas recevoir de code d'authentification à deux facteurs."
+        warning: "Télécharger, imprimer ou copier en lieu sûr vos codes de récupération avant de poursuivre."
+        save_codes: "Traitez vos codes de récupération avec autant de soin que votre mot de passe !"
+        cancel: "Annuler"
+        next: "Suivant"
+      verify:
+        header: "Scannez ce code-barres avec votre application."
+        subheader: "Scannez l'image ici-haut avec votre application d'identification à deux facteurs sur votre téléphone."
+        instructions_1_html: "Installer Authy: %{ios} ou %{android}"
+        instructions_2: "Dans l'appli, choisir \"Ajouter un compte\""
+        instructions_3: "Choisir \"Scanner un code QR\""
+        verify_header: "Entrer le code à six chiffres affiché par l'application"
+        verify_description: "Après avoir scanné l'image du code QC, l'application affichera un code numérique à consigner dans la boîte ici-bas."
+        cancel: "Annuler"
+        verify: "Vérifier"
 
   layouts:
     mailer:
@@ -314,11 +487,15 @@ fr:
       mailing_address: "Notre adresse est :"
       view_in_browser: "Voir dans un navigateur"
       unsubscribe: "Se désinscrire de cette liste"
-      preferences: "Mettre à jour les préférences de souscription"
+      preferences: "Mettre à jour les préférences d'abonnement"
 
   notifications:
+    index:
+      title: "Notifications"
+      empty_placeholder: "Rien à consulter ici pour le moment."
     invite_accepted: "%{user} a accepté votre invitation."
-    empty: "Rien à voir ici − pour le moment."
+    account_transferred: "%{previous_owner} vous a désigné comme propriétaire du compte %{account}."
+    empty: "Rien à consulter ici pour le moment."
     empty_description: "On vous informera lorsque vous aurez de nouvelles notifications."
 
   activerecord:
@@ -337,7 +514,7 @@ fr:
               reserved: "%{value} est réservé."
             subdomain:
               reserved: "%{value} est réservé."
-              format: "doit faire au moins 2 lettres ou nombres"
+              format: "doit faire au moins 2 lettres ou chiffres"
         account_invitation:
           attributes:
             email:
@@ -347,20 +524,33 @@ fr:
             admin:
               cannot_be_removed: "ce rôle ne peut être enlevé du propriétaire du compte"
 
+  errors:
+    messages:
+      image_format_not_supported: "ce format d'image n'est pas pris en charge"
+
   helpers:
+    label:
+      country: "Pays ou région"
+      account:
+        name: "Nom du compte ou société"
+      user:
+        name: "Nom complet"
+
     placeholder:
+      name_on_card: "Nom complet"
       account_invitation:
         name: "Nom complet"
-        email: "exemple@domain.com"
+        email: "exemple@domaine.com"
       account:
         name: "Nom du compte"
         domain: "exemple.com"
         subdomain: "exemple"
         name_on_card: "Nom complet"
         extra_billing_info: "Numéro de TVA, nom d’entreprise, adresse, etc."
+        billing_email: "untel@exemple.com"
       api_token:
         name: "Nom du jeton"
       user:
-        name: "Steve Jobs"
-        email: "you@example.com"
-        password: "password"
+        name: "Prénom Untel"
+        email: "vous@exemple.com"
+        password: "motdepasse"
