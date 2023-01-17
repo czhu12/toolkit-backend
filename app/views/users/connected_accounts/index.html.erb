@@ -27,7 +27,7 @@
                       </div>
                     </div>
                   </div>
-                  <%= button_to connected_account, method: :delete, class: "btn btn-link text-gray-700" do %>
+                  <%= button_to user_connected_account_path(connected_account), method: :delete, class: "btn btn-link text-gray-700" do %>
                     <%= render_svg "icons/close", styles: "fill-current h-3 w-3 mr-1" %>
                     <%= t(".remove") %>
                   <% end %>
