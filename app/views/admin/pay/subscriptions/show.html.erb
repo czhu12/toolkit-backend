@@ -24,13 +24,13 @@ as well as a link to its edit page.
   </h1>
 
   <div>
-    <%= link_to("View On #{page.resource.customer.processor.titleize}", subscription_processor_url(page.resource), class: "button", target: :_blank) if show_action?(:edit, page.resource) %>
+    <%= link_to("View On #{page.resource.customer.processor.titleize}", subscription_processor_url(page.resource), class: "button", target: :_blank) %>
 
     <%= link_to(
       t("administrate.actions.edit_resource", name: page.page_title),
       [:edit, namespace, page.resource],
       class: "button",
-    ) if valid_action?(:edit) && show_action?(:edit, page.resource) %>
+    ) if accessible_action?(page.resource, :edit) %>
   </div>
 </header>
 
