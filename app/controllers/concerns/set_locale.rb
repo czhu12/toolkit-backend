@@ -21,7 +21,7 @@ module SetLocale
   private
 
   def find_locale
-    locale_from_params || locale_from_header || locale_from_user || I18n.default_locale
+    locale_from_params || locale_from_user || locale_from_header || I18n.default_locale
   end
 
   def locale_from_params
