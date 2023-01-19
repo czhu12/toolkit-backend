@@ -22,26 +22,26 @@ module SetCurrentRequestDetails
 
   def account_from_domain
     return unless Jumpstart::Multitenancy.domain?
-    Account.find_by(domain: request.domain)
+    Account.includes(:payment_processor, :users).find_by(domain: request.domain)
   end
 
   def account_from_subdomain
     return unless Jumpstart::Multitenancy.subdomain? && request.subdomains.size > 0
-    Account.find_by(subdomain: request.subdomains.first)
+    Account.includes(:payment_processor, :users).find_by(subdomain: request.subdomains.first)
   end
 
   def account_from_session
     return unless Jumpstart::Multitenancy.session? && user_signed_in? && (account_id = session[:account_id])
-    current_user.accounts.find_by(id: account_id)
+    current_user.accounts.includes(:payment_processor, :users).find_by(id: account_id)
   end
 
   def account_from_param
     return unless (account_id = params[:account_id].presence)
-    current_user.accounts.find_by(id: account_id)
+    current_user.accounts.includes(:payment_processor, :users).find_by(id: account_id)
   end
 
   def fallback_account
     return unless user_signed_in?
-    current_user.accounts.order(created_at: :asc).first || current_user.create_default_account
+    current_user.accounts.includes(:payment_processor, :users).order(created_at: :asc).first || current_user.create_default_account
   end
 end

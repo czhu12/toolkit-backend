@@ -34,8 +34,10 @@ class Jumpstart::OmniauthCallbacksTest < ActionDispatch::IntegrationTest
     assert_equal "12345", user.connected_accounts.developer.last.uid
   end
 
-  test "Cannot login with social if email is taken but not connected yet" do
+  test "cannot login with social if email is taken but not connected yet" do
     user = users(:one)
+    user.connected_accounts.delete_all
+
     OmniAuth.config.add_mock(:developer, uid: "12345", info: {email: user.email}, credentials: {token: 1})
 
     get "/users/auth/developer/callback"
@@ -56,5 +58,20 @@ class Jumpstart::OmniauthCallbacksTest < ActionDispatch::IntegrationTest
     end
 
     assert_equal account, ConnectedAccount.last.owner
+  end
+
+  test "cannot connect with account if connected to another user" do
+    connected_account = connected_accounts(:one)
+    user = users(:invited)
+
+    # Ensure these are separate users
+    refute_equal connected_account.owner, user
+
+    sign_in user
+    OmniAuth.config.add_mock(:developer, uid: connected_account.uid, info: {email: connected_account.owner.email}, credentials: {token: 1})
+    get "/users/auth/developer/callback"
+
+    assert user.connected_accounts.developer.none?
+    assert_equal I18n.t("users.omniauth_callbacks.connected_to_another_account"), flash[:alert]
   end
 end

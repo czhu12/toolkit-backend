@@ -24,7 +24,7 @@
 
 one:
   owner: one (User)
-  provider: test
+  provider: developer
   access_token: abcd1234
   refresh_token: ABCDEFG
   expires_at: <%= 1.year.from_now.to_formatted_s(:db) %>
@@ -32,7 +32,7 @@ one:
 
 two:
   owner: one (User)
-  provider: test
+  provider: developer
   access_token: abcd1234
   refresh_token: ABCDEFG
   expires_at: <%= 1.year.from_now.to_formatted_s(:db) %>
