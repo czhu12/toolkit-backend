@@ -24,6 +24,9 @@ FileUtils.chdir APP_ROOT do
   # Install foreman system wide
   system! "gem install foreman"
 
+  # Install yarn system wide
+  system! "npm install -g yarn"
+
   # Install JavaScript dependencies if using Yarn
   system("bin/yarn")
 
