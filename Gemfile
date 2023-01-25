@@ -43,10 +43,7 @@ gem "image_processing", "~> 1.12"
 gem "nokogiri", ">= 1.12.5"
 
 group :development, :test do
-  # Start debugger with binding.b [https://github.com/ruby/debug]
-  gem "debug", ">= 1.0.0", platforms: %i[mri mingw x64_mingw]
-
-  # Optional other debugging tools
+  # Optional debugging tools
   # gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
   # gem "pry-rails"
 
