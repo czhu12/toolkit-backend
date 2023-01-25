@@ -7,10 +7,18 @@ class Subscriptions::CancelsController < ApplicationController
   end
 
   def destroy
-    @subscription.cancel
+    # Metered subscriptions should end immediately so they don't rack up more charges
+    if @subscription.metered?
+      subscription.cancel_now!(invoice_now: true)
 
-    # Optionally, you can cancel immediately
-    # current_account.subscription.cancel_now!
+    # Unpaid subscriptions are treated as canceled, so end them immediately
+    elsif @subscription.unpaid?
+      @subscription.cancel_now!
+
+    else
+      # Cancel at period end
+      @subscription.cancel
+    end
 
     redirect_to subscriptions_path, status: :see_other
   rescue Pay::Error => e

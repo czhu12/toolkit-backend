@@ -13,7 +13,7 @@
         <%= t(".payment_details") %>
       </h1>
 
-      <% if @payment_processor&.subscriptions&.past_due&.any? %>
+      <% if @payment_processor&.subscriptions&.past_due&.any? || @payment_processor&.subscriptions&.unpaid&.any? %>
         <p class="text-red-600"><%= t ".past_due" %></p>
 
         <%= render 'payment_methods/forms/fake_processor' if @payment_processor.fake_processor? %>

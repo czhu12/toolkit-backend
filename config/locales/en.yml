@@ -317,6 +317,7 @@ en:
       paused: "Your plan is paused."
       view_usage: "View usage"
       past_due: "Past due"
+      unpaid: "Unpaid"
       update_payment_method: "Update payment method"
       failed_payment: "Your latest payment has failed. Update your payment method to continue this plan."
 

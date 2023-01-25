@@ -6,13 +6,14 @@ class SubscriptionsController < ApplicationController
   before_action :set_plan, only: [:new, :payment, :create, :update]
   before_action :set_subscription, only: [:show, :edit, :update, :destroy]
   before_action :redirect_to_billing_address, only: [:new]
+  before_action :handle_past_due_or_unpaid, only: [:new]
 
   layout "checkout", only: [:new, :payment, :create]
 
   def index
     @billing_address = current_account.billing_address
     @payment_processor = current_account.payment_processor
-    @subscriptions = current_account.subscriptions.active.or(current_account.subscriptions.past_due).order(created_at: :asc).includes([:customer])
+    @subscriptions = current_account.subscriptions.active.or(current_account.subscriptions.past_due).or(current_account.subscriptions.unpaid).order(created_at: :asc).includes([:customer])
   end
 
   def show
@@ -113,6 +114,12 @@ class SubscriptionsController < ApplicationController
   def redirect_to_billing_address
     if Jumpstart.config.collect_billing_address? && current_account.billing_address.nil?
       redirect_to subscriptions_billing_address_path(plan: params[:plan], promo_code: params[:promo_code])
+    end
+  end
+
+  def handle_past_due_or_unpaid
+    if (subscription = current_account.payment_processor&.subscription) && (subscriptoin.past_due? || subscription.unpaid?)
+      redirect_to new_payment_method_path
     end
   end
 end

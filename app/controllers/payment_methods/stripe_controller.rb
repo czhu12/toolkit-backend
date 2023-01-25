@@ -8,8 +8,13 @@ class PaymentMethods::StripeController < ApplicationController
       pay_payment_method = Pay::Stripe::PaymentMethod.sync(@setup_intent.payment_method)
       pay_payment_method.make_default!
 
-      # if any past_due subscriptions exist, attempt to pay them
-      payment_processor.retry_past_due_subscriptions!
+      # If any past_due subscriptions exist, attempt to pay them before they are marked unpaid or canceled
+      payment_processor.subscriptions.past_due.each(&:retry_failed_payment)
+
+      # If unpaid subscriptions exist, attempt to pay the open invoices to put the subscription in good standing again
+      payment_processor.subscriptions.metered.unpaid.each(&:pay_open_invoices)
+
+      # If the latst invoice for an unpaid subscription is more than $0, you will want to finalize and pay it to make the subscription active again
 
       redirect_to subscriptions_path, notice: t("payment_methods.create.updated")
     else
