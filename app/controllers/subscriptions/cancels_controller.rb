@@ -9,7 +9,7 @@ class Subscriptions::CancelsController < ApplicationController
   def destroy
     # Metered subscriptions should end immediately so they don't rack up more charges
     if @subscription.metered?
-      subscription.cancel_now!(invoice_now: true)
+      @subscription.cancel_now!(invoice_now: true)
 
     # Unpaid subscriptions are treated as canceled, so end them immediately
     elsif @subscription.unpaid?

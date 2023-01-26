@@ -14,7 +14,7 @@ class PaymentMethods::StripeController < ApplicationController
       # If unpaid subscriptions exist, attempt to pay the open invoices to put the subscription in good standing again
       payment_processor.subscriptions.metered.unpaid.each(&:pay_open_invoices)
 
-      # If the latst invoice for an unpaid subscription is more than $0, you will want to finalize and pay it to make the subscription active again
+      # If the latest invoice for an unpaid subscription is more than $0, you will want to finalize and pay it to make the subscription active again
 
       redirect_to subscriptions_path, notice: t("payment_methods.create.updated")
     else
