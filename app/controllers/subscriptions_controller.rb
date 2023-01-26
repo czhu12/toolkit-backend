@@ -118,7 +118,7 @@ class SubscriptionsController < ApplicationController
   end
 
   def handle_past_due_or_unpaid
-    if (subscription = current_account.payment_processor&.subscription) && (subscriptoin.past_due? || subscription.unpaid?)
+    if (subscription = current_account.payment_processor&.subscription) && (subscription.past_due? || subscription.unpaid?)
       redirect_to new_payment_method_path
     end
   end
