@@ -4,11 +4,12 @@ module CurrentHelper
   end
 
   def current_account_user
+    return unless current_account
     @account_user ||= current_account.account_users.includes(:user).find_by(user: current_user)
   end
 
   def current_roles
-    current_account_user.active_roles
+    current_account_user&.active_roles || []
   end
 
   def current_account_admin?
