@@ -1,0 +1,13 @@
+class <%= class_name %>Client < ApplicationClient
+  # An API client for <%= class_name %>
+  #
+  # Usage:
+  #     client = <%= class_name %>Client.new(token: "token")
+  #     client.me
+
+  BASE_URI = "https://example.org"
+
+  def me
+    get("/me")
+  end
+end

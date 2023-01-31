@@ -2,6 +2,7 @@ ENV["RAILS_ENV"] ||= "test"
 require_relative "../config/environment"
 require "rails/test_help"
 require "minitest/mock"
+require "webmock/minitest"
 
 # Uncomment to view full stack trace in tests
 # Rails.backtrace_cleaner.remove_silencers!
@@ -28,3 +29,11 @@ end
 class ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
 end
+
+WebMock.disable_net_connect!({
+  allow_localhost: true,
+  allow: [
+    "chromedriver.storage.googleapis.com",
+    "api.stripe.com"
+  ]
+})
