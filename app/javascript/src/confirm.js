@@ -1,10 +1,21 @@
 // Custom TailwindCSS modals for confirm dialogs
+//
+// Example usage:
+//
+//   <%= button_to "Delete", my_path, method: :delete, form: {
+//     data: {
+//       turbo_confirm: "Are you sure?",
+//       turbo_confirm_description: "This will delete your record. Enter the record name to confirm.",
+//       turbo_confirm_text: "record name"
+//     }
+//   } %>
+
 function insertConfirmModal(message, element, button) {
   let confirmInput = ""
 
   // button is nil if using link_to with data-turbo-confirm
-  let confirmText = button?.dataset?.turboConfirmText
-  let description = button?.dataset?.turboConfirmDescription || ""
+  let confirmText = button?.dataset?.turboConfirmText || element.dataset.turboConfirmText
+  let description = button?.dataset?.turboConfirmDescription || element.dataset.turboConfirmDescription || ""
   if (confirmText) {
     confirmInput = `<input type="text" class="mt-4 form-control" data-behavior="confirm-text" />`
   }
