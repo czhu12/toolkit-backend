@@ -17,6 +17,7 @@ Jumpstart::Engine.routes.draw do
     get :admin
     get :announcements
     get :api
+    get :api_clients
     get :authentication
     get :background_workers
     get :billing

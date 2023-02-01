@@ -1,54 +1,57 @@
 <% content_for :section_title, "Authentication" %>
 
-<div class="mb-20">
-  <div class="mb-10">
-    <p class="mb-4 text-xl text-gray-700 leading-normal">User registration, authentication, forgotten passwords, social logins with OAuth, and more.</p>
+<p class="text-xl">User registration, authentication, forgotten passwords, social logins with OAuth, and more.</p>
 
-    <h2 class="pb-3 mb-6 border-b border-gray-400">Authentication with Devise</h2>
-    <p class="mb-4">Jumpstart Pro uses Devise for user registration and authentication. This library is well tested and receives regular security updates allowing you to focus on your business.</p>
-    <p class="mb-4">If you would like to collect other information on registration, you can add the fields to the devise views in <code>app/views/devise</code> and permit the additional params in <code>application_controller.rb</code>.</p>
+<h2>Authentication with Devise</h2>
+<p>Jumpstart Pro uses Devise for user registration and authentication. This library is well tested and receives regular security updates allowing you to focus on your business.</p>
+<p>If you would like to collect other information on registration, you can add the fields to the devise views in <code>app/views/devise</code> and permit the additional params in <code>application_controller.rb</code>.</p>
 
-    <h2 class="pb-3 mb-6 border-b border-gray-400">Social Login / OAuth with Omniauth Providers</h2>
-    <p class="mb-4">Devise is preconfigured to connect with Omniauth providers so users can register or sign in with their social accounts.</p>
-    <p class="mb-4">We automatically handle the various situations that can arise with social auth:</p>
+<h2>Social Login / OAuth with Omniauth Providers</h2>
+<p>Devise is preconfigured to connect with Omniauth providers so users can register or sign in with their social accounts.</p>
+<p>We automatically handle the various situations that can arise with social auth:</p>
 
-    <ul class="mb-4 list-disc list-inside">
-      <li>Registering a new user with an OAuth account</li>
-      <li>Connecting an OAuth account to an existing user who is logged in</li>
-      <li>Signing into an existing user via their previously connected social account</li>
-      <li>Rejecting login to an existing user who hasn't connected the social account before</li>
-    </ul>
+<ul>
+  <li>Registering a new user with an OAuth account</li>
+  <li>Connecting an OAuth account to an existing user who is logged in</li>
+  <li>Signing into an existing user via their previously connected social account</li>
+  <li>Rejecting login to an existing user who hasn't connected the social account before</li>
+</ul>
 
-    <p class="mb-4">You're free to override any of this functionality by adding your own methods to the OmniauthCallbacksController like you normally would.</p>
+<p>You're free to override any of this functionality by adding your own methods to the OmniauthCallbacksController like you normally would.</p>
 
-    <p class="mb-4">To create a button for OAuth, you will use the following:</p>
-    <pre><code>&lt;%= button_to omniauth_authorize_path(:user, :twitter), class: "btn btn-twitter m-1", data: { turbo: false, disable_with: t(".redirecting") } do %&gt;
+<p>To create a button for OAuth, you will use the following:</p>
+<div class="not-prose">
+  <pre><code>&lt;%= button_to omniauth_authorize_path(:user, :twitter), class: "btn btn-twitter m-1", data: { turbo: false, disable_with: t(".redirecting") } do %&gt;
   &lt;%= social_icon :twitter, class: "mr-2" &gt;
   &lt;%= t("shared.oauth.twitter") %&gt;
 &lt;% end %&gt;</code></pre>
+</div>
 
-    <p class="mb-4">This makes a POST request to our Rails app. OmniAuth handles the request and redirects to the OAuth provider for login. This POST request is required for security.</p>
-    <p class="mb-4"><code>data-turbo="false"</code> is important because we are redirecting to an external site after making a POST request to Rails. Disabling Turbo on the request tells it to allow the external redirect.</p>
+<p>This makes a POST request to our Rails app. OmniAuth handles the request and redirects to the OAuth provider for login. This POST request is required for security.</p>
+<p><code>data-turbo="false"</code> is important because we are redirecting to an external site after making a POST request to Rails. Disabling Turbo on the request tells it to allow the external redirect.</p>
 
-    <p class="mb-4">By default, OmniAuth callbacks controller will create a <code>ConnectedAccount</code> record and associate it with <code>current_user</code>.
+<p>By default, OmniAuth callbacks controller will create a <code>ConnectedAccount</code> record and associate it with <code>current_user</code>.
 
-    <h4 class="pb-3 mb-6 border-b border-gray-400">Associate ConnectedAccount with other models</h4>
-    <p class="mb-4">If you would like to associate the <code>ConnectedAccount</code> with a different model, you can pass in the <code>record</code> param set to a Signed GlobalID. The callback controller will detect this and use this as the owner of the ConnectedAccount record.</p>
-    <p class="mb-4">Here we will associate the Twitter <code>ConnectedAccount</code> with the <code>current_account</code>. Optionally, you can set the <code>redirect_to</code> to send the user to a different location afterwards.</p>
-    <pre><code>&lt;%= button_to omniauth_authorize_path(:user, :twitter, record: current_account.to_sgid, redirect_to: account_path(current_account)), class: "btn btn-twitter m-1", data: { turbo: false, disable_with: t(".redirecting") } do %&gt;
+<h4>Associate ConnectedAccount with other models</h4>
+<p>If you would like to associate the <code>ConnectedAccount</code> with a different model, you can pass in the <code>record</code> param set to a Signed GlobalID. The callback controller will detect this and use this as the owner of the ConnectedAccount record.</p>
+<p>Here we will associate the Twitter <code>ConnectedAccount</code> with the <code>current_account</code>. Optionally, you can set the <code>redirect_to</code> to send the user to a different location afterwards.</p>
+<div class="not-prose">
+  <pre><code>&lt;%= button_to omniauth_authorize_path(:user, :twitter, record: current_account.to_sgid, redirect_to: account_path(current_account)), class: "btn btn-twitter m-1", data: { turbo: false, disable_with: t(".redirecting") } do %&gt;
   &lt;%= social_icon :twitter, class: "mr-2" &gt;
   &lt;%= t("shared.oauth.twitter") %&gt;
 &lt;% end %&gt;</code></pre>
+</div>
 
-    <h2 class="pb-3 mb-6 border-b border-gray-400">Working with Connected Account OAuth Data And Tokens</h2>
-    <p class="mb-4">The User model <code>has_many :connected_accounts</code> which you can use to access the data collected from the accounts such as credentials and user information.</p>
-    <p class="mb-4">We automatically generate a scope for each provider, so you can filter out connected accounts easily: <code>@user.connected_accounts.twitter.first</code></p>
-    <p class="mb-4">If you would like to do something after connecting an OAuth account, you can add a method to the OmniauthCallbacksController for the provider and it will be called after the account is connected.</p>
-    <p class="mb-4">ConnectedAccount has a method named <code>token</code> that will always return an active API token. It will seamlessly renew expired tokens for you so your code never has to deal with services who provide you expiring tokens.</p>
-    <p class="mb-4">ConnectedAccount records also store the entire auth hash from Omniauth so you can easily debug integrations and access any of that data later on as necessary.</p>
+<h2>Working with Connected Account OAuth Data And Tokens</h2>
+<p>The User model <code>has_many :connected_accounts</code> which you can use to access the data collected from the accounts such as credentials and user information.</p>
+<p>We automatically generate a scope for each provider, so you can filter out connected accounts easily: <code>@user.connected_accounts.twitter.first</code></p>
+<p>If you would like to do something after connecting an OAuth account, you can add a method to the OmniauthCallbacksController for the provider and it will be called after the account is connected.</p>
+<p>ConnectedAccount has a method named <code>token</code> that will always return an active API token. It will seamlessly renew expired tokens for you so your code never has to deal with services who provide you expiring tokens.</p>
+<p>ConnectedAccount records also store the entire auth hash from Omniauth so you can easily debug integrations and access any of that data later on as necessary.</p>
 
-    <p class="mb-1">For example, to use the Twitter gem, you would initialize with the <code>token</code> and <code>access_token_secret</code>:</p>
-    <pre><code>connected_account = current_user.connected_accounts.twitter.first
+<p>For example, to use the Twitter gem, you would initialize with the <code>token</code> and <code>access_token_secret</code>:</p>
+<div class="not-prose">
+  <pre><code>connected_account = current_user.connected_accounts.twitter.first
 
 client = Twitter::REST::Client.new do |config|
   config.consumer_key        = Rails.application.credentials.dig(:omniauth, :twitter, :public_key)
@@ -56,6 +59,4 @@ client = Twitter::REST::Client.new do |config|
   config.access_token        = connected_account.token
   config.access_token_secret = connected_account.access_token_secret
 end</code></pre>
-
-  </div>
 </div>

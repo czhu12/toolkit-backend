@@ -1,21 +1,28 @@
 <!DOCTYPE html>
-<html class="h-full antialiased">
+<html lang="en" class="h-full antialiased">
   <head>
     <title>Jumpstart Docs | <%= yield :section_title %></title>
+
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <%= viewport_meta_tag %>
 
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbo-track': 'reload' %>
 
-    <%# Replace this with your FontAwesome Pro Kit code %>
-    <script src="https://kit.fontawesome.com/0e5ab6a736.js"></script>
-
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/monokai.min.css">
-    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
-
     <%# Be sure to add your own custom favicons %>
+    <%= render "shared/favicons" %>
+    <%= render "shared/payments_dependencies" %>
+
+    <%# Replace this with your FontAwesome Pro Kit code %>
+    <script defer src="https://kit.fontawesome.com/0e5ab6a736.js" crossorigin="anonymous"></script>
+
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+
+    <%= yield :head %>
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github-dark.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
     <script>
       document.addEventListener("turbo:load", function() {
         var snippets = document.querySelectorAll('pre code')
@@ -24,30 +31,24 @@
         })
       });
     </script>
-    <%= render "shared/favicons" %>
-    <%= render "shared/payments_dependencies" %>
-
-    <%= yield :head %>
   </head>
 
   <body class="h-full overflow-x-hidden font-sans font-normal leading-normal bg-offwhite">
     <%= render partial: "shared/flash" %>
 
-    <div class="flex flex-wrap items-start justify-between main">
-
-      <div class="flex w-full px-4 py-4 md:w-1/5 lg:p-8">
+    <div class="flex flex-wrap items-start main">
+      <div class="flex w-full px-4 py-4 md:w-1/5 md:max-w-[300px] lg:p-8">
         <%= render partial: "jumpstart/docs/nav" %>
       </div>
 
-      <div class="flex flex-col w-full h-full bg-white border-l border-gray-200 md:w-4/5 docs-main">
-
+      <div class="flex-grow flex flex-col w-full h-full bg-white border-l border-gray-200 md:w-4/5 docs-main">
         <% if content_for :section_title %>
-          <div class="px-4 py-10 mb-6 text-white bg-primary-500 md:px-20 lg:px-40 xl:px-56">
-            <h1><%= yield :section_title %></h1>
+          <div class="px-4 py-10 mb-6 text-white bg-primary-500 md:px-20 lg:px-40">
+            <h1 class="font-black"><%= yield :section_title %></h1>
           </div>
         <% end %>
 
-        <div class="px-4 pt-4 md:px-20 lg:px-40 xl:px-56">
+        <div class="prose max-w-7xl py-20 px-4 pt-4 md:px-20 lg:px-40">
           <%= yield %>
         </div>
       </div>

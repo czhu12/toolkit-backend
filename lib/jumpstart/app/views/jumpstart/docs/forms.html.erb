@@ -1,14 +1,10 @@
 <% content_for :section_title, "Forms" %>
 
-<div class="mb-20">
-  <p class="mb-4 text-xl leading-normal text-gray-700">TailwindCSS styled forms.</p>
+<h2>Forms</h2>
+<p>We've included the <%= link_to "TailwindCSS Forms", "https://github.com/tailwindlabs/tailwindcss-forms", target: :_blank %> plugin to provide default styling for form fields.</p>
 
-  <h2 class="pb-3 mb-6 border-b border-gray-300">TailwindCSS Forms</h2>
-  <p class="mb-4 text-gray-500">We've included the <%= link_to "TailwindCSS Forms", "https://github.com/tailwindlabs/tailwindcss-forms", target: :_blank %> plugin to provide default styling for form fields.</p>
-
-  <h2 class="pb-3 mb-6 border-b border-gray-300">Block</h2>
-
-    <%= render "jumpstart/docs/snippet" do %>
+<h4>Block Layout</h4>
+<%= render "jumpstart/docs/snippet" do %>
 <form action="#">
 
   <div class="form-group">
@@ -76,13 +72,10 @@
     <label for="disabled-checkbox" class="inline-block">Disabled checkbox</label>
   </div>
 </form>
-    <% end %>
-</div>
+<% end %>
 
-<div class="mb-20">
-  <h2 class="pb-3 mb-6 border-b border-gray-300">Inline</h2>
-
-    <%= render "jumpstart/docs/snippet" do %>
+<h3>Inline Layout</h3>
+<%= render "jumpstart/docs/snippet" do %>
 <form action="#">
   <div class="flex flex-wrap items-center justify-start form-group">
     <label for="name" class="lg:w-1/6 lg:text-right lg:pr-4 lg:mt-2">Name</label>
@@ -136,21 +129,17 @@
     <label for="admin2" class="inline-block mb-0">Member</label>
   </div>
 </form>
-    <% end %>
+<% end %>
 
+<h2>Date & Time Fields with Flatpickr</h2>
+<p class="mb-3">We're using <%= link_to "stimulus-flatpickr", "https://github.com/adrienpoly/stimulus-flatpickr", target: :_blank %> to enable this functionality. You can customize this to whatever you need as it supports everything Flatpickr does.</p>
+
+<div class="form-group">
+  <label for="name">Date</label>
+  <input type="text" name="date" class="form-control" data-controller="flatpickr">
 </div>
 
-<div class="mb-20">
-  <h2 class="pb-3 mb-6 border-b border-gray-300">Flatpickr</h2>
-  <p class="mb-3">We're using <%= link_to "stimulus-flatpickr", "https://github.com/adrienpoly/stimulus-flatpickr", target: :_blank %> to enable this functionality. You can customize this to whatever you need as it supports everything Flatpickr does.</p>
-
-  <div class="form-group">
-    <label for="name">Date</label>
-    <input type="text" name="date" class="form-control" data-controller="flatpickr">
-  </div>
-
-  <div class="form-group">
-    <label for="name">Date &amp; Time</label>
-    <input type="text" name="datetime" class="form-control" data-controller="flatpickr" data-flatpickr-enable-time="true">
-  </div>
+<div class="form-group">
+  <label for="name">Date &amp; Time</label>
+  <input type="text" name="datetime" class="form-control" data-controller="flatpickr" data-flatpickr-enable-time="true">
 </div>

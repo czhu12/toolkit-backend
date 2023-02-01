@@ -1,8 +1,7 @@
-<div class="mb-10 pb-10 border-b border-gray-300">
+<h2>Tabs</h2>
+<p>Tabs are implemented with the Stimulus.js <code>tabs_controller</code>. It works by having an list of tabs and panel targets that are hidden and shown based upon the active tab.</p>
 
-  <h2 class="mb-2 pb-2">Tabs</h2>
-
-  <%= render "jumpstart/docs/snippet" do %>
+<%= render "jumpstart/docs/snippet" do %>
 <div data-controller="tabs" data-tabs-active-tab="-mb-px tab-active transition">
   <ul class="list-none list-reset flex border-b">
     <li class="mr-1" data-tabs-target="tab" data-action="click->tabs#change">
@@ -28,8 +27,7 @@
   </div>
 
   <div class="hidden py-4 px-4" data-tabs-target="panel">
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/y3niFzo5VLI" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/GFhoSMD6idk" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
   </div>
 </div>
-  <% end %>
-</div>
+<% end %>
