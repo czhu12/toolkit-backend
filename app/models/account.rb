@@ -43,10 +43,12 @@ class Account < ApplicationRecord
   has_one_attached :avatar
   pay_customer stripe_attributes: :stripe_attributes
 
-  validates :name, presence: true
-  validates :domain, exclusion: {in: RESERVED_DOMAINS, message: :reserved}
-  validates :subdomain, exclusion: {in: RESERVED_SUBDOMAINS, message: :reserved}, format: {with: /\A[a-zA-Z0-9]+[a-zA-Z0-9\-_]*[a-zA-Z0-9]+\Z/, message: :format, allow_blank: true}, uniqueness: true
   validates :avatar, resizable_image: true
+  validates :name, presence: true
+
+  # To require a domain or subdomain, add the presence validation
+  validates :domain, exclusion: {in: RESERVED_DOMAINS, message: :reserved}, uniqueness: { allow_blank: true }
+  validates :subdomain, exclusion: {in: RESERVED_SUBDOMAINS, message: :reserved}, format: {with: /\A[a-zA-Z0-9]+[a-zA-Z0-9\-_]*[a-zA-Z0-9]+\Z/, message: :format, allow_blank: true}, uniqueness: { allow_blank: true }
 
   def find_or_build_billing_address
     billing_address || build_billing_address

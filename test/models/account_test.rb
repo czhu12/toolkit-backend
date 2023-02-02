@@ -24,6 +24,31 @@
 require "test_helper"
 
 class AccountTest < ActiveSupport::TestCase
+  test "validates uniqueness of domain" do
+    account = accounts(:company).dup
+    assert_not account.valid?
+    assert_not_empty account.errors[:domain]
+  end
+
+  test "can have multiple accounts with nil domain" do
+    user = users(:one)
+    Account.create!(owner: user, name: "test")
+    Account.create!(owner: user, name: "test2")
+  end
+
+  test "validates uniqueness of subdomain" do
+    account = accounts(:company).dup
+    assert_not account.valid?
+    assert_not_empty account.errors[:subdomain]
+  end
+
+  test "can have multiple accounts with nil subdomain" do
+    user = users(:one)
+
+    Account.create!(owner: user, name: "test")
+    Account.create!(owner: user, name: "test2")
+  end
+
   test "validates against reserved domains" do
     account = Account.new(domain: Jumpstart.config.domain)
     assert_not account.valid?
