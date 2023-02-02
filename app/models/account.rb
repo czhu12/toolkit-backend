@@ -45,7 +45,7 @@ class Account < ApplicationRecord
 
   validates :name, presence: true
   validates :domain, exclusion: {in: RESERVED_DOMAINS, message: :reserved}
-  validates :subdomain, exclusion: {in: RESERVED_SUBDOMAINS, message: :reserved}, format: {with: /\A[a-zA-Z0-9]+[a-zA-Z0-9\-_]*[a-zA-Z0-9]+\Z/, message: :format, allow_blank: true}
+  validates :subdomain, exclusion: {in: RESERVED_SUBDOMAINS, message: :reserved}, format: {with: /\A[a-zA-Z0-9]+[a-zA-Z0-9\-_]*[a-zA-Z0-9]+\Z/, message: :format, allow_blank: true}, uniqueness: true
   validates :avatar, resizable_image: true
 
   def find_or_build_billing_address
