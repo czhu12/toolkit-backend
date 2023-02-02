@@ -1,3 +1,8 @@
+### February 1, 2023 - Administrate updates
+
+We've updated Administrate to the latest version. GitHub accidentally blew away a few commits we added, so you'll want to bundle update administrate so you're on the latest sha.
+Administrate has changed views to use new helper methods, so you'll also want to check out the recent commits to adjust the views we have overridden.
+
 ### September 14, 2021 - CSS & JS Bundling
 
 Rails 7 introduces `cssbundling-rails` and `jsbundling-rails` packages. We now use the Tailwind CLI and esbuild for Javascript. It's much, much faster and configurable.
