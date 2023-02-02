@@ -62,6 +62,7 @@ class Pay::SubscriptionDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = [
     :customer,
     :name,
+    :status,
     :processor_id,
     :processor_plan,
     :quantity,
