@@ -50,7 +50,7 @@ class SendfoxClient < ApplicationClient
     delete("/lists/#{list_id}/contacts/#{contact_id}")
   end
 end
-```ruby
+```
 
 ### ApplicationClient
 
