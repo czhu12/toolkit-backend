@@ -21,22 +21,33 @@ class ApplicationClientTest < ActiveSupport::TestCase
 
   test "get with query params" do
     stub_request(:get, "https://example.org/test").with(query: {"foo" => "bar"})
-    @client.get("/test", foo: "bar")
+    @client.get("/test", query: {foo: "bar"})
   end
 
   test "post" do
-    stub_request(:post, "https://example.org/test").with(body: {"foo" => "bar"}.to_json)
-    @client.post("/test", foo: "bar")
+    stub_request(:post, "https://example.org/test").with(body: {"foo" => {"bar" => "baz"}}.to_json)
+    @client.post("/test", body: {foo: {bar: "baz"}})
+  end
+
+  test "post with string body" do
+    stub_request(:post, "https://example.org/test").with(body: "foo")
+    @client.post("/test", body: "foo")
+  end
+
+  test "post with custom content-type" do
+    headers = {"Content-Type" => "application/x-www-form-urlencoded"}
+    stub_request(:post, "https://example.org/test").with(body: {"foo" => "bar"}.to_json, headers: headers)
+    @client.post("/test", body: {foo: "bar"}, headers: headers)
   end
 
   test "patch" do
     stub_request(:patch, "https://example.org/test").with(body: {"foo" => "bar"}.to_json)
-    @client.patch("/test", foo: "bar")
+    @client.patch("/test", body: {foo: "bar"})
   end
 
   test "put" do
     stub_request(:put, "https://example.org/test").with(body: {"foo" => "bar"}.to_json)
-    @client.put("/test", foo: "bar")
+    @client.put("/test", body: {foo: "bar"})
   end
 
   test "delete" do

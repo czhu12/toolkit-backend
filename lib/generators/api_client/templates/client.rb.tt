@@ -4,10 +4,20 @@ class <%= class_name %>Client < ApplicationClient
   # Usage:
   #     client = <%= class_name %>Client.new(token: "token")
   #     client.me
+  #
+  # See app/clients/application_client.rb for more details
 
   BASE_URI = "https://example.org"
 
   def me
     get("/me")
+  end
+
+  def create_post(title:, body:)
+    post("/posts", body: { title: title, body: body })
+  end
+
+  def delete_post(id)
+    delete("/posts/#{id}")
   end
 end
