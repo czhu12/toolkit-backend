@@ -29,7 +29,7 @@
   end
 
   def create_list(name:)
-    post("/lists", name: name)
+    post("/lists", body: {name: name})
   end
 
   def remove_contact(list_id:, contact_id:)
@@ -49,11 +49,11 @@
   end
 
   def create_contact(**params)
-    post("/contacts", **params)
+    post("/contacts", body: params)
   end
 
   def unsubscribe(email:)
-    patch("/unsubscribe", email: email)
+    patch("/unsubscribe", body: {email: email})
   end
 
   def campaigns
