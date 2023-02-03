@@ -44,15 +44,25 @@ class ApplicationClient
   # Returns a Hash
   def default_headers
     {
-      "Authorization" => "Bearer #{token}",
       "Content-Type" => content_type
-    }
+    }.merge(authorization_header)
   end
 
   # Override to customize the content type
   # Returns a String
   def content_type
     "application/json"
+  end
+
+  # Override to customize the authorization header
+  # Returns a Hash
+  #
+  # Examples:
+  #
+  #   { "X-API-Key" => token }
+  #   { "AccessKey" => token }
+  def authorization_header
+    {"Authorization" => "Bearer #{token}"}
   end
 
   # Override to customize default query params
