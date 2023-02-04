@@ -17,51 +17,51 @@
   BASE_URI = "https://api.sendfox.com/"
 
   def me
-    get("/me")
+    get "/me"
   end
 
   def lists
-    get("/lists")
+    get "/lists"
   end
 
   def list(id)
-    get("/lists/#{id}")
+    get "/lists/#{id}"
   end
 
   def create_list(name:)
-    post("/lists", body: {name: name})
+    post "/lists", body: {name: name}
   end
 
   def remove_contact(list_id:, contact_id:)
-    delete("/lists/#{list_id}/contacts/#{contact_id}")
+    delete "/lists/#{list_id}/contacts/#{contact_id}"
   end
 
   def contacts(email: nil)
     if email
-      get("/contacts?email=#{CGI.escape(email)}")
+      get "/contacts?email=#{CGI.escape(email)}"
     else
-      get("/contacts")
+      get "/contacts"
     end
   end
 
   def contact(id)
-    get("/contacts/#{id}")
+    get "/contacts/#{id}"
   end
 
   def create_contact(**params)
-    post("/contacts", body: params)
+    post "/contacts", body: params
   end
 
   def unsubscribe(email:)
-    patch("/unsubscribe", body: {email: email})
+    patch "/unsubscribe", body: {email: email}
   end
 
   def campaigns
-    get("/campaigns")
+    get "/campaigns"
   end
 
   def campaign(id)
-    get("/#{id}")
+    get "/#{id}"
   end
 end</code></pre>
 </div>
