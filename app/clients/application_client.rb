@@ -163,7 +163,8 @@ class ApplicationClient
 
     # Merge query params with any currently in `path`
     existing_params = Rack::Utils.parse_query(uri.query).with_defaults(default_query_params)
-    uri.query = Rack::Utils.build_query(existing_params.merge(query || {}))
+    query_params = existing_params.merge(query || {})
+    uri.query = Rack::Utils.build_query(query_params) if query_params.present?
 
     Rails.logger.debug("#{klass.name.split("::").last.upcase}: #{uri}")
 
