@@ -44,6 +44,7 @@ class ApplicationClient
   # Returns a Hash
   def default_headers
     {
+      "Accept" => content_type,
       "Content-Type" => content_type
     }.merge(authorization_header)
   end
