@@ -6,7 +6,7 @@ RUN gem install "bundler:~>2" --no-document && \
 
 # NodeJS (https://github.com/nodejs/docker-node/blob/main/14/bullseye/Dockerfile)
 
-ARG NODE_VERSION=18.13.0
+ARG NODE_VERSION=18.14.0
 RUN ARCH= && dpkgArch="$(dpkg --print-architecture)" \
   && case "${dpkgArch##*-}" in \
     amd64) ARCH='x64';; \

@@ -1,7 +1,7 @@
 FROM ruby:3.2
 
 ENV RAILS_ENV=production
-ARG NODE_VERSION=18.13.0
+ARG NODE_VERSION=18.14.0
 ARG YARN_VERSION=1.22.19
 
 RUN gem install "bundler:~>2" --no-document && \

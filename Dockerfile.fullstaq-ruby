@@ -24,7 +24,7 @@ RUN gem install "bundler:~>2" --no-document && \
     gem update --system && \
     gem cleanup
 
-ARG NODE_VERSION=18.13.0
+ARG NODE_VERSION=18.14.0
 RUN curl -fsSLO --compressed "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-x64.tar.xz" \
   && tar -xJf "node-v$NODE_VERSION-linux-x64.tar.xz" -C /usr/local --strip-components=1 --no-same-owner \
   && rm "node-v$NODE_VERSION-linux-x64.tar.xz" \
