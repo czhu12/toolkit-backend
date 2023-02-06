@@ -41,9 +41,11 @@ class ApplicationClient
   end
 
   # Override to customize default headers
+  # Content-Type will be removed on GET requests
   # Returns a Hash
   def default_headers
     {
+      "Accept" => content_type,
       "Content-Type" => content_type
     }.merge(authorization_header)
   end
@@ -161,14 +163,20 @@ class ApplicationClient
 
     # Merge query params with any currently in `path`
     existing_params = Rack::Utils.parse_query(uri.query).with_defaults(default_query_params)
-    uri.query = Rack::Utils.build_query(existing_params.merge(query || {}))
+    query_params = existing_params.merge(query || {})
+    uri.query = Rack::Utils.build_query(query_params) if query_params.present?
 
     Rails.logger.debug("#{klass.name.split("::").last.upcase}: #{uri}")
 
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true if uri.instance_of? URI::HTTPS
 
-    request = klass.new(uri.request_uri, default_headers.merge(headers))
+    all_headers = default_headers.merge(headers)
+
+    # Remove Content-Type if there is no body
+    all_headers.delete("Content-Type") if klass == Net::HTTP::Get
+
+    request = klass.new(uri.request_uri, all_headers)
     request.body = build_body(body) if body.present?
 
     handle_response http.request(request)
