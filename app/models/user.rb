@@ -74,6 +74,9 @@ class User < ApplicationRecord
   # just when they change it
   before_create :skip_confirmation!
 
+  # Protect admin flag from editing
+  attr_readonly :admin
+
   # Validations
   validates :name, presence: true
   validates :avatar, resizable_image: true

@@ -54,4 +54,14 @@ module Jumpstart
       run_command("rails db:migrate")
     end
   end
+
+  def self.grant_system_admin!(user)
+    User.connection.execute("UPDATE users SET admin=true WHERE users.id='#{user.id}'")
+    user.reload
+  end
+
+  def self.revoke_system_admin!(user)
+    User.connection.execute("UPDATE users SET admin=false WHERE users.id='#{user.id}'")
+    user.reload
+  end
 end

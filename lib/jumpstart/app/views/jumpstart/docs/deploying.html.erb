@@ -72,5 +72,6 @@ heroku run rails db:migrate</code></pre>
 <h2>Creating An Admin User</h2>
 <p>To create an admin user in production, you can either generate one using <code>db/seeds.rb</code> or run the following code in the rails console in production.</p>
 <div class="not-prose">
-  <pre class="lang-ruby"><code>User.create name: "Steve Jobs", email: "steve@apple.com", password: "password", password_confirmation: "password", admin: true, terms_of_service: true</code></pre>
+  <pre class="lang-ruby"><code>user = User.create! name: "Steve Jobs", email: "steve@apple.com", password: "password", password_confirmation: "password", terms_of_service: true
+Jumpstart.grant_system_admin! user</code></pre>
 </div>

@@ -1,3 +1,18 @@
+### February 6, 2023 - System admins
+
+For additional security, we've made the `admin` attribute on the User model readonly.
+The `admin` attribute denotes a user as a system-wide admin. The system admins have access to `/admin` and can view the entire database. This is helpful for customer support and other things.
+
+To add or remove a system admin, you can now run the following commands:
+
+```ruby
+# Add system admin
+Jumpstart.grant_system_admin! User.find_by_email("admin@example.org")
+
+# Remove system admin
+Jumpstart.revoke_system_admin! User.find_by_email("admin@example.org")
+```
+
 ### February 1, 2023 - Administrate updates
 
 We've updated Administrate to the latest version. GitHub accidentally blew away a few commits we added, so you'll want to bundle update administrate so you're on the latest sha.

@@ -6,6 +6,8 @@ module Jumpstart
       @user = User.new(user_params)
 
       if @user.save
+        Jumpstart.grant_system_admin!(@user)
+
         # Create a fake subscription for the admin user so they have access to everything by default
         account = @user.accounts.first
         account.set_payment_processor :fake_processor, allow_fake: true
@@ -25,7 +27,7 @@ module Jumpstart
     private
 
     def user_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation, :time_zone).merge(admin: true, terms_of_service: true)
+      params.require(:user).permit(:name, :email, :password, :password_confirmation, :time_zone).merge(terms_of_service: true)
     end
   end
 end
