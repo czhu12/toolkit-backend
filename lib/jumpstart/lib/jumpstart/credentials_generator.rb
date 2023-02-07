@@ -65,6 +65,11 @@ module Jumpstart
             private_key: ''
             # scope: 'user:email'
 
+          microsoft_graph:
+            # https://portal.azure.com/#view/Microsoft_AAD_RegisteredApps
+            public_key: ''
+            private_key: ''
+
           twitter:
             # https://apps.twitter.com
             public_key: ''

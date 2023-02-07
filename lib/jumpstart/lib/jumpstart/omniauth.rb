@@ -23,6 +23,11 @@ module Jumpstart
         provider: :google_oauth2,
         icon: :google
       },
+      "microsoft_graph" => {
+        name: "Microsoft",
+        provider: :microsoft_graph,
+        icon: :microsoft
+      },
       "twitter" => {
         name: "Twitter",
         provider: :twitter,

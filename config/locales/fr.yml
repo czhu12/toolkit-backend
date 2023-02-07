@@ -235,6 +235,7 @@ fr:
       github: "GitHub"
       gitlab: "GitLab"
       google_oauth2: "Google"
+      microsoft_graph: "Microsoft"
       stripe: "Stripe"
       twitter: "Twitter"
     right_nav:

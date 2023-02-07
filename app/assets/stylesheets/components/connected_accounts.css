@@ -23,3 +23,7 @@
 .btn-google_oauth2 {
   @apply bg-google_oauth2 text-white;
 }
+
+.btn-microsoft_graph {
+  @apply bg-white text-slate-900 border border-slate-900;
+}
