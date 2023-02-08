@@ -206,7 +206,8 @@ class ApplicationClient
     end
   end
 
-  # Converts a body to JSON
+  # Converts a body to the matching ContentType
+  # Override this to convert request bodies to other content types
   def build_body(body)
     case body
     when String
