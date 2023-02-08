@@ -10,14 +10,26 @@ class <%= class_name %>Client < ApplicationClient
   BASE_URI = "https://example.org"
 
   def me
-    get("/me")
+    get "/me"
+  end
+
+  def posts(**kwargs)
+    get "/posts", query: kwargs
+  end
+
+  def find_post(id)
+    get "/posts/#{id}"
   end
 
   def create_post(title:, body:)
-    post("/posts", body: { title: title, body: body })
+    post "/posts", body: { title: title, body: body }
+  end
+
+  def update_post(id, title:, body:)
+    patch "/posts/#{id}", body: { title: title, body: body }
   end
 
   def delete_post(id)
-    delete("/posts/#{id}")
+    delete "/posts/#{id}"
   end
 end

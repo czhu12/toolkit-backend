@@ -6,89 +6,85 @@ class <%= class_name %>ClientTest < ActiveSupport::TestCase
   end
 
   test "authorization header" do
-    stub_request(:get, "https://example.org/").with(
-      headers: {
-        "Authorization" => "Bearer test"
-      }
-    )
-    @client.get("/")
+    stub_request(:get, "https://example.org/me").with(headers: {"Authorization" => "Bearer test"})
+    @client.me
   end
 
-  test "get" do
-    stub_request(:get, "https://example.org/test")
-    @client.get("/test")
+  test "me" do
+    stub_request(:get, "https://example.org/me")
+    @client.me
   end
 
-  test "get with query params" do
-    stub_request(:get, "https://example.org/test").with(query: {"foo" => "bar"})
-    @client.get("/test", query: {foo: "bar"})
+  test "posts with query params" do
+    stub_request(:get, "https://example.org/posts").with(query: {"foo" => "bar"})
+    @client.posts(foo: "bar")
   end
 
-  test "post" do
-    stub_request(:post, "https://example.org/test").with(body: {"foo" => "bar"}.to_json)
-    @client.post("/test", body: {foo: "bar"})
+  test "find a post" do
+    stub_request(:get, "https://example.org/posts/1")
+    @client.find_post(1)
   end
 
-  test "patch" do
-    stub_request(:patch, "https://example.org/test").with(body: {"foo" => "bar"}.to_json)
-    @client.patch("/test", body: {foo: "bar"})
+  test "create post" do
+    stub_request(:post, "https://example.org/posts").with(body: {"title" => "title", "body" => "body"}.to_json)
+    @client.create_post(title: "title", body: "body")
   end
 
-  test "put" do
-    stub_request(:put, "https://example.org/test").with(body: {"foo" => "bar"}.to_json)
-    @client.put("/test", body: {foo: "bar"})
+  test "update post" do
+    stub_request(:patch, "https://example.org/posts/1").with(body: {"title" => "title", "body" => "body"}.to_json)
+    @client.update_post(1, title: "title", body: "body")
   end
 
-  test "delete" do
-    stub_request(:delete, "https://example.org/test")
-    @client.delete("/test")
+  test "delete post" do
+    stub_request(:delete, "https://example.org/posts/1")
+    @client.delete_post(1)
   end
 
   test "parse body" do
-    stub_request(:get, "https://example.org/test").to_return(body: {"foo" => "bar"}.to_json)
-    result = @client.get("/test")
+    stub_request(:get, "https://example.org/posts/1").to_return(body: {"foo" => "bar"}.to_json)
+    result = @client.find_post(1)
     assert_equal "bar", result.foo
   end
 
   test "unauthorized" do
-    stub_request(:get, "https://example.org/test").to_return(status: 401)
+    stub_request(:get, "https://example.org/posts").to_return(status: 401)
     assert_raises <%= class_name %>Client::Unauthorized do
-      @client.get("/test")
+      @client.posts
     end
   end
 
   test "forbidden" do
-    stub_request(:get, "https://example.org/test").to_return(status: 403)
+    stub_request(:get, "https://example.org/posts").to_return(status: 403)
     assert_raises <%= class_name %>Client::Forbidden do
-      @client.get("/test")
+      @client.posts
     end
   end
 
   test "not found" do
-    stub_request(:get, "https://example.org/test").to_return(status: 404)
+    stub_request(:get, "https://example.org/posts").to_return(status: 404)
     assert_raises <%= class_name %>Client::NotFound do
-      @client.get("/test")
+      @client.posts
     end
   end
 
   test "rate limit" do
-    stub_request(:get, "https://example.org/test").to_return(status: 429)
+    stub_request(:get, "https://example.org/posts").to_return(status: 429)
     assert_raises <%= class_name %>Client::RateLimit do
-      @client.get("/test")
+      @client.posts
     end
   end
 
   test "internal error" do
-    stub_request(:get, "https://example.org/test").to_return(status: 500)
+    stub_request(:get, "https://example.org/posts").to_return(status: 500)
     assert_raises <%= class_name %>Client::InternalError do
-      @client.get("/test")
+      @client.posts
     end
   end
 
   test "other error" do
-    stub_request(:get, "https://example.org/test").to_return(status: 418)
+    stub_request(:get, "https://example.org/posts").to_return(status: 418)
     assert_raises <%= class_name %>Client::Error do
-      @client.get("/test")
+      @client.posts
     end
   end
 end
