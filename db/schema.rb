@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_14_132615) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_04_162609) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -48,6 +48,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_14_132615) do
     t.string "domain"
     t.string "subdomain"
     t.string "billing_email"
+    t.integer "account_users_count", default: 0
     t.index ["owner_id"], name: "index_accounts_on_owner_id"
   end
 
@@ -268,7 +269,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_14_132615) do
     t.string "currency"
     t.integer "interval_count", default: 1
     t.string "description"
-    t.string "unit"
+    t.string "unit_label"
+    t.boolean "charge_per_unit"
   end
 
   create_table "users", force: :cascade do |t|

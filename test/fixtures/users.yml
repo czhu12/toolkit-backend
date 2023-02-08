@@ -129,3 +129,13 @@ user_without_billing_address:
   accepted_privacy_at: <%= Time.current %>
   time_zone: "Central Time (US & Canada)"
   confirmed_at: <%= Time.current %>
+
+fake_processor:
+  email: fake@example.com
+  first_name: Fake
+  last_name: Processor
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+  accepted_terms_at: <%= Time.current %>
+  accepted_privacy_at: <%= Time.current %>
+  time_zone: "Central Time (US & Canada)"
+  confirmed_at: <%= Time.current %>

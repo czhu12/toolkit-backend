@@ -4,6 +4,7 @@
 #
 #  id                :bigint           not null, primary key
 #  amount            :integer          default(0), not null
+#  charge_per_unit   :boolean
 #  currency          :string
 #  description       :string
 #  details           :jsonb            not null
@@ -12,7 +13,7 @@
 #  interval_count    :integer          default(1)
 #  name              :string           not null
 #  trial_period_days :integer          default(0)
-#  unit              :string
+#  unit_label        :string
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #

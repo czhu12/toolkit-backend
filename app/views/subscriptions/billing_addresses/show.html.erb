@@ -23,8 +23,8 @@
             <h3 id="recurringTotal" class="my-1 font-bold text-4xl"><%= @plan.amount_with_currency %></h3>
 
             <div class="ml-2 font-medium text-sm text-gray-500 leading-none">
-              <% if @plan.unit? %>
-                <div>per <%= @plan.unit %></div>
+              <% if @plan.unit_label? %>
+                <div>per <%= @plan.unit_label %></div>
                 <div>per <%= @plan.interval %></div>
               <% else %>
                 <div>per</div>

@@ -2,16 +2,17 @@
 #
 # Table name: accounts
 #
-#  id                 :bigint           not null, primary key
-#  billing_email      :string
-#  domain             :string
-#  extra_billing_info :text
-#  name               :string           not null
-#  personal           :boolean          default(FALSE)
-#  subdomain          :string
-#  created_at         :datetime         not null
-#  updated_at         :datetime         not null
-#  owner_id           :bigint
+#  id                  :bigint           not null, primary key
+#  account_users_count :integer          default(0)
+#  billing_email       :string
+#  domain              :string
+#  extra_billing_info  :text
+#  name                :string           not null
+#  personal            :boolean          default(FALSE)
+#  subdomain           :string
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#  owner_id            :bigint
 #
 # Indexes
 #
@@ -49,3 +50,9 @@ invited:
   owner: invited
   name: "Invited User"
   personal: true
+
+fake_processor:
+  owner: fake_processor
+  name: "Per Seat Account"
+  personal: false
+  account_users_count: 1

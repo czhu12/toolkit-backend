@@ -2,16 +2,17 @@
 #
 # Table name: accounts
 #
-#  id                 :bigint           not null, primary key
-#  billing_email      :string
-#  domain             :string
-#  extra_billing_info :text
-#  name               :string           not null
-#  personal           :boolean          default(FALSE)
-#  subdomain          :string
-#  created_at         :datetime         not null
-#  updated_at         :datetime         not null
-#  owner_id           :bigint
+#  id                  :bigint           not null, primary key
+#  account_users_count :integer          default(0)
+#  billing_email       :string
+#  domain              :string
+#  extra_billing_info  :text
+#  name                :string           not null
+#  personal            :boolean          default(FALSE)
+#  subdomain           :string
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#  owner_id            :bigint
 #
 # Indexes
 #
@@ -99,25 +100,6 @@ class Account < ApplicationRecord
   rescue
     false
   end
-
-  # Uncomment this to add generic trials (without a card or plan)
-  #
-  # after_create :start_trial
-  #
-  # def start_trial(length: 14.days)
-  #   trial_ends_at = length.from_now
-  #   set_payment_processor :fake_processor, allow_fake: true
-  #   payment_processor.subscribe(plan: Plan.free.fake_processor_id, trial_ends_at: trial_ends_at, ends_at: trial_ends_at)
-  # end
-
-  # If you need to create some associated records when an Account is created,
-  # use a `with_tenant` block to change the current tenant temporarily
-  #
-  # after_create do
-  #   ActsAsTenant.with_tenant(self) do
-  #     association.create(name: "example")
-  #   end
-  # end
 
   private
 

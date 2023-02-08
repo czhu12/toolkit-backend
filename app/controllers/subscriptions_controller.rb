@@ -29,7 +29,7 @@ class SubscriptionsController < ApplicationController
         @client_secret = payment_processor.create_setup_intent.client_secret
 
       else
-        @pay_subscription = payment_processor.subscribe(
+        args = {
           plan: @plan.id_for_processor(:stripe),
           trial_period_days: @plan.trial_period_days,
           payment_behavior: :default_incomplete,
@@ -37,7 +37,9 @@ class SubscriptionsController < ApplicationController
             enabled: @plan.taxed?
           },
           promotion_code: params[:promo_code]
-        )
+        }
+        args[:quantity] = account.calculate_subscription_quantity if @plan.charge_per_unit?
+        @pay_subscription = payment_processor.subscribe(**args)
         @stripe_invoice = @pay_subscription.subscription.latest_invoice
         @client_secret = @pay_subscription.client_secret
       end
@@ -51,10 +53,12 @@ class SubscriptionsController < ApplicationController
   def create
     payment_processor = params[:processor] ? current_account.set_payment_processor(params[:processor]) : current_account.payment_processor
     payment_processor.payment_method_token = params[:payment_method_token]
-    payment_processor.subscribe(
+    args = {
       plan: @plan.id_for_processor(payment_processor.processor),
       trial_period_days: @plan.trial_period_days
-    )
+    }
+    args[:quantity] = account.calculate_subscription_quantity if @plan.charge_per_unit?
+    payment_processor.subscribe(**args)
     redirect_to root_path, notice: t(".created")
   rescue Pay::ActionRequired => e
     redirect_to pay.payment_path(e.payment.id)

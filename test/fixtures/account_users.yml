@@ -45,3 +45,7 @@ company_regular_user:
 invited_user:
   account: invited
   user: invited
+
+fake_processor:
+  account: fake_processor
+  user: fake_processor

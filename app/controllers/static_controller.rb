@@ -6,7 +6,7 @@ class StaticController < ApplicationController
   end
 
   def pricing
-    redirect_to root_path, alert: t(".no_plans") unless Plan.without_free.exists?
+    redirect_to root_path, alert: t(".no_plans_html", link: helpers.link_to_if(current_user&.admin?, "Add a plan in the admin", admin_plans_path)) unless Plan.without_free.exists?
 
     plans = Plan.visible.sorted
     @monthly_plans = plans.select(&:monthly?)

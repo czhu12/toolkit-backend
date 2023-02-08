@@ -1,5 +1,6 @@
 class ApplicationRecord < ActiveRecord::Base
   include ActionView::RecordIdentifier
+  include UpdatesSubscriptionQuantity
 
   primary_abstract_class
 

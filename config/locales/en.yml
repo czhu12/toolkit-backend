@@ -188,7 +188,7 @@ en:
       confirm_button: "Confirm Payment"
 
   static:
-    no_plans: "There are no pricing plans configured."
+    no_plans_html: "There are no pricing plans configured. %{link}."
     pricing:
       heading: "Pricing Plans"
       subhead: "Simple, straightforward pricing to get your online business up and running"
@@ -306,7 +306,6 @@ en:
       free_trial: "Free Trial"
       free_trial_ends: "Your trial ends on %{date}."
       trial: "After your trial ends on %{date}, this plan will continue automatically."
-      quantity: "Quantity: %{quantity} at %{price} each"
       resume: "Resume plan"
       change_plan: "Change plan"
       pause: "Pause plan"
@@ -317,6 +316,7 @@ en:
       paused_at: "Your plan will be paused on %{date}."
       paused: "Your plan is paused."
       view_usage: "View usage"
+      view_upcoming_invoice: "View upcoming invoice"
       past_due: "Past due"
       unpaid: "Unpaid"
       update_payment_method: "Update payment method"
@@ -379,13 +379,17 @@ en:
       show:
         title: "Resume your plan"
         resume: "This plan will no longer be canceled and will automatically renew."
-        quantity: "Quantity: %{quantity} at %{price} each"
         back: "Back to Billing"
         button: "Resume plan"
         processing: "Resuming..."
 
       update:
         resumed: "Your subscription has been resumed."
+
+    summary:
+      quantity: "Quantity: %{quantity} at %{price} %{unit}"
+      per_unit: "per %{unit}"
+      each: "each"
 
     cancels:
       show:
@@ -394,7 +398,6 @@ en:
         help_html: "Need to talk to someone? %{link} -- we'd love to help."
         contact_us: "Contact us"
         subject: "Question about %{product}"
-        quantity: "Quantity: %{quantity} at %{price} each"
         active_until: "Your plan will be canceled, but is still available until the end of your billing period."
         resume: "If you change your mind, you can resume your subscription."
         button: "Cancel plan"
@@ -413,6 +416,7 @@ en:
           quantity: "Quantity"
           unit_price: "Unit Price"
           total: "Total"
+        quantity: "Quantity"
         back: "Back to Billing"
 
     forms:
