@@ -25,9 +25,9 @@ div.form-control {
 
 @layer components {
   .form-control {
-    @apply form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50;
+    @apply form-input block w-full rounded-md border-gray-300 shadow-sm sm:text-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50;
 
-    &[disabled] {
+    &[disabled], &[readonly] {
       @apply bg-gray-200;
     }
 

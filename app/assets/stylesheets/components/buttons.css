@@ -6,7 +6,7 @@ button[disabled]        .when-enabled { display: none; }
 
 @layer components {
   .btn {
-    @apply inline-flex text-sm font-semibold text-center px-4 py-0 rounded no-underline items-center justify-between shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2;
+    @apply inline-flex text-sm font-semibold text-center px-4 py-0 rounded-md no-underline items-center justify-between shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2;
 
     height: 40px;
     line-height: 40px;
