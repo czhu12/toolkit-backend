@@ -30,6 +30,7 @@ class Plan < ApplicationRecord
   validates :currency, presence: true, format: {with: /\A[a-zA-Z]{3}\z/, message: "must be a 3-letter ISO currency code"}
   validates :interval, inclusion: %w[month year]
   validates :trial_period_days, numericality: {only_integer: true}
+  validates :unit_label, presence: { if: :charge_per_unit? }
 
   scope :hidden, -> { unscope(where: :hidden).where(hidden: true) }
   scope :monthly, -> { without_free.where(interval: :month) }

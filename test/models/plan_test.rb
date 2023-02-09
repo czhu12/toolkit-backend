@@ -77,6 +77,12 @@ class PlanTest < ActiveSupport::TestCase
     refute plan.stripe_tax
   end
 
+  test "unit label required if charge_by_unit enabled" do
+    plan = Plan.new(charge_per_unit: true, unit_label: "")
+    refute plan.valid?
+    assert plan.errors[:unit_label].any?
+  end
+
   private
 
   def monthly
