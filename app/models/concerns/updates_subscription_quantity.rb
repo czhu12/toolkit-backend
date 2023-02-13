@@ -8,7 +8,7 @@ module UpdatesSubscriptionQuantity
   # Another example if an Account has_many :sites, you would include this module on the Site model.
   # When a site is created or destroyed, the account's subscription quantity would be updated to match.
   #
-  # You'll need to implement the `per_unit_quantity` to return the quantity to be set on the subscription.
+  # You'll also need to implement the `per_unit_quantity` on Account to return the quantity to be set on new subscriptions.
   #
   # Usage:
   #
@@ -17,11 +17,12 @@ module UpdatesSubscriptionQuantity
   #
   #      updates_subscription_quantity :per_unit_quantity
   #      # or with a block/callable object
-  #      # updates_subscription_quantity ->{ account.sites_count }
+  #      # updates_subscription_quantity ->{ account.per_unit_quantity }
+  #    end
   #
+  #    class Account
   #      def per_unit_quantity
-  #        # Use the counter cache for performance
-  #        account.sites_count
+  #        account.sites_count # Use counter cache for performance
   #      end
   #    end
 

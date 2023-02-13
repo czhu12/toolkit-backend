@@ -38,7 +38,7 @@ class SubscriptionsController < ApplicationController
           },
           promotion_code: params[:promo_code]
         }
-        args[:quantity] = account.calculate_subscription_quantity if @plan.charge_per_unit?
+        args[:quantity] = account.per_unit_quantity if @plan.charge_per_unit?
         @pay_subscription = payment_processor.subscribe(**args)
         @stripe_invoice = @pay_subscription.subscription.latest_invoice
         @client_secret = @pay_subscription.client_secret
@@ -57,7 +57,7 @@ class SubscriptionsController < ApplicationController
       plan: @plan.id_for_processor(payment_processor.processor),
       trial_period_days: @plan.trial_period_days
     }
-    args[:quantity] = account.calculate_subscription_quantity if @plan.charge_per_unit?
+    args[:quantity] = account.per_unit_quantity if @plan.charge_per_unit?
     payment_processor.subscribe(**args)
     redirect_to root_path, notice: t(".created")
   rescue Pay::ActionRequired => e

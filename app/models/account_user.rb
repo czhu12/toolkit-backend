@@ -33,7 +33,8 @@ class AccountUser < ApplicationRecord
   validates :user_id, uniqueness: {scope: :account_id}
   validate :owner_must_be_admin, on: :update, if: -> { admin_changed? && account_owner? }
 
-  updates_subscription_quantity -> { account.account_users_count }
+  # Updates the subscription quantity automatically when charge_per_unit is enabled
+  updates_subscription_quantity -> { account.per_unit_quantity }
 
   def account_owner?
     account.owner_id == user_id
