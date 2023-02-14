@@ -95,7 +95,7 @@ class ApplicationClient
   # Pass `query: {}` to add query parameters
   # Pass `body: {}` to add a body to the request
   def post(path, headers: {}, query: nil, body: nil)
-    make_request(klass: Net::HTTP::Post, path: path, headers: headers, body: body)
+    make_request(klass: Net::HTTP::Post, path: path, headers: headers, query: query, body: body)
   end
 
   # Make a PATCH request
@@ -103,7 +103,7 @@ class ApplicationClient
   # Pass `query: {}` to add query parameters
   # Pass `body: {}` to add a body to the request
   def patch(path, headers: {}, query: nil, body: nil)
-    make_request(klass: Net::HTTP::Patch, path: path, headers: headers, body: body)
+    make_request(klass: Net::HTTP::Patch, path: path, headers: headers, query: query, body: body)
   end
 
   # Make a PUT request
@@ -111,7 +111,7 @@ class ApplicationClient
   # Pass `query: {}` to add query parameters
   # Pass `body: {}` to add a body to the request
   def put(path, headers: {}, query: nil, body: nil)
-    make_request(klass: Net::HTTP::Put, path: path, headers: headers, body: body)
+    make_request(klass: Net::HTTP::Put, path: path, headers: headers, query: query, body: body)
   end
 
   # Make a DELETE request
@@ -119,7 +119,7 @@ class ApplicationClient
   # Pass `query: {}` to add query parameters
   # Pass `body: {}` to add a body to the request
   def delete(path, headers: {}, query: nil, body: nil)
-    make_request(klass: Net::HTTP::Delete, path: path, headers: headers, body: body)
+    make_request(klass: Net::HTTP::Delete, path: path, headers: headers, query: query, body: body)
   end
 
   # Returns the BASE_URI from the current class
