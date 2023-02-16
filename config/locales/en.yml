@@ -75,6 +75,7 @@ en:
       current: "Current Account"
     show:
       invite: "Invite A User"
+      resend_invite: "Resend Invite"
       edit: "Edit"
       edit_account: "Edit Account"
       copy_link: "Copy link"
