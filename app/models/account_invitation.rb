@@ -36,9 +36,11 @@ class AccountInvitation < ApplicationRecord
   validates :email, uniqueness: {scope: :account_id, message: :invited}
 
   def save_and_send_invite
-    if save
-      AccountInvitationsMailer.with(account_invitation: self).invite.deliver_later
-    end
+    save && send_invite
+  end
+
+  def send_invite
+    AccountInvitationsMailer.with(account_invitation: self).invite.deliver_later
   end
 
   def accept!(user)

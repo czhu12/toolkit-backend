@@ -9,7 +9,6 @@ button[disabled]        .when-enabled { display: none; }
     @apply inline-flex text-sm font-semibold text-center px-4 py-0 rounded-md no-underline items-center justify-between shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2;
 
     height: 40px;
-    line-height: 40px;
     transition: ease 0.3s background, ease 0.3s transform, ease 0.2s color;
 
     &:hover,

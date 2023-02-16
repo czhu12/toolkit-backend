@@ -75,6 +75,7 @@ en:
       current: "Current Account"
     show:
       invite: "Invite A User"
+      resend_invite: "Resend Invite"
       edit: "Edit"
       edit_account: "Edit Account"
       copy_link: "Copy link"
@@ -95,6 +96,7 @@ en:
     users: "Users"
     roles: "Roles"
     account_invitations:
+      sent: "Invitation was sent to %{email}."
       updated: "Invitation was successfully updated."
       destroyed: "Invitation was successfully removed."
       new:
