@@ -69,7 +69,7 @@ Rails.application.routes.draw do
     resources :account_users, path: :members
     resources :account_invitations, path: :invitations, module: :accounts do
       member do
-        get "resend"
+        post :resend
       end
     end
   end

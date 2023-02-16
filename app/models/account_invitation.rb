@@ -36,7 +36,7 @@ class AccountInvitation < ApplicationRecord
   validates :email, uniqueness: {scope: :account_id, message: :invited}
 
   def save_and_send_invite
-    send_invite if save
+    save && send_invite
   end
 
   def send_invite

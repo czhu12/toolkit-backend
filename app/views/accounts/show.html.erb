@@ -55,11 +55,11 @@
                   <%= image_tag avatar_url_for(account_invitation), class: "hidden lg:inline-block h-6 rounded-full mr-2" %>
                   <%= account_invitation.name %>
                   <%= badge "Awaiting response" %>
-                  <%= tag.button t(".copy_link"), class: "btn btn-link", data: { controller: "clipboard", clipboard_text: account_invitation_url(account_invitation) } if account_admin?(@account, current_user) %>
                 </td>
                 <td class="p-3 text-sm font-medium text-gray-700"><%= account_user_roles(@account, account_invitation).join(", ") %></td>
-                <td class="p-3 text-right">
-                  <%= link_to t(".resend_invite"), resend_account_account_invitation_path(@account, account_invitation), class: "btn btn-link" if account_admin?(@account, current_user) %>
+                <td class="p-3 text-right flex gap-2 justify-end">
+                  <%= button_to t(".resend_invite"), resend_account_account_invitation_path(@account, account_invitation), class: "btn btn-link" if account_admin?(@account, current_user) %>
+                  <%= tag.button t(".copy_link"), class: "btn btn-link", data: { controller: "clipboard", clipboard_text: account_invitation_url(account_invitation) } if account_admin?(@account, current_user) %>
                   <%= link_to t(".edit"), edit_account_account_invitation_path(@account, account_invitation), class: "btn btn-link" if account_admin?(@account, current_user) %>
                 </td>
               </tr>

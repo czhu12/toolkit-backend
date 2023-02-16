@@ -96,6 +96,7 @@ en:
     users: "Users"
     roles: "Roles"
     account_invitations:
+      sent: "Invitation was sent to %{email}."
       updated: "Invitation was successfully updated."
       destroyed: "Invitation was successfully removed."
       new:
