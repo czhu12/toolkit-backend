@@ -101,6 +101,12 @@ class Account < ApplicationRecord
     false
   end
 
+  # Used for per-unit subscriptions on create and update
+  # Returns the quantity that should be on the subscription
+  def per_unit_quantity
+    account_users_count
+  end
+
   private
 
   # Attributes to sync to the Stripe Customer
