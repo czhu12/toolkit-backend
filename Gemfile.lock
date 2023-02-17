@@ -31,15 +31,6 @@ GIT
       activesupport (>= 5.0.0)
 
 GIT
-  remote: https://github.com/excid3/responders.git
-  revision: 1288c5391e474cad507d473b1050d0f3573e8aa6
-  branch: fix-redirect-status-config
-  specs:
-    responders (3.0.1)
-      actionpack (>= 5.2)
-      railties (>= 5.2)
-
-GIT
   remote: https://github.com/prawnpdf/prawn.git
   revision: 7d4f6b8998e0627259c1036a2cd6bca65cd53f45
   specs:
@@ -166,7 +157,7 @@ GEM
     cssbundling-rails (1.1.2)
       railties (>= 6.0.0)
     date (3.3.3)
-    devise (4.8.1)
+    devise (4.9.0)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 4.1.0)
@@ -362,6 +353,9 @@ GEM
     regexp_parser (2.7.0)
     request_store (1.5.1)
       rack (>= 1.4)
+    responders (3.1.0)
+      actionpack (>= 5.2)
+      railties (>= 5.2)
     rexml (3.2.5)
     rotp (6.2.2)
     rqrcode (2.1.2)
@@ -417,7 +411,7 @@ GEM
       railties (>= 6.0.0)
     thor (1.2.1)
     tilt (2.0.11)
-    timeout (0.3.1)
+    timeout (0.3.2)
     ttfunk (1.7.0)
     turbo-rails (1.3.3)
       actionpack (>= 6.0.0)
@@ -463,6 +457,7 @@ PLATFORMS
   x86_64-darwin-19
   x86_64-darwin-20
   x86_64-darwin-21
+  x86_64-darwin-22
   x86_64-linux
 
 DEPENDENCIES
@@ -474,7 +469,7 @@ DEPENDENCIES
   capybara (>= 3.26)
   country_select (~> 8.0)
   cssbundling-rails (~> 1.1.0)
-  devise (~> 4.8, >= 4.8.1)
+  devise (~> 4.9.0)
   devise-i18n (~> 1.10)
   erb_lint
   image_processing (~> 1.12)
@@ -504,7 +499,6 @@ DEPENDENCIES
   rails (~> 7.0.0)
   receipts (~> 2.1)
   redis (~> 4.8)
-  responders!
   rotp (~> 6.2)
   rqrcode (~> 2.1)
   ruby-oembed (~> 0.16.0)
