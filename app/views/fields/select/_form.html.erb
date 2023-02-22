@@ -24,7 +24,7 @@ to be displayed on a resource's edit form page.
         :first,
         field.data,
       ),
-      {},
+      { include_blank: field.include_blank_option },
       { data: { controller: "select" } }
     ) %>
   <% else %>
@@ -36,7 +36,7 @@ to be displayed on a resource's edit form page.
         :to_s,
         field.data,
       ),
-      {},
+      { include_blank: field.include_blank_option },
       { data: { controller: "select" } }
     ) %>
   <% end %>
