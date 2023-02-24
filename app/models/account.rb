@@ -96,7 +96,7 @@ class Account < ApplicationRecord
     end
 
     # Notify the new owner of the change
-    Account::OwnershipNotification.with(account: self, previous_owner: previous_owner.name).deliver_later(user)
+    Account::OwnershipNotification.with(account: self, previous_owner: previous_owner).deliver_later(user)
   rescue
     false
   end
