@@ -8,19 +8,19 @@
 <p>You may also use the payments functionality in Jumpstart Pro to process one-time payments instead. In fact, that's what we're using on our website to sell Jumpstart Pro!</p>
 
 <div class="not-prose alert mb-6" role="alert">
-<div class="flex items-start justify-start">
-  <svg class="fill-current icon mr-4 flex-no-shrink" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <g id="Page-1" stroke="none" stroke-width="1" fill="currentColor" fill-rule="evenodd">
-      <g id="icon-shape">
-        <path d="M2.92893219,17.0710678 C6.83417511,20.9763107 13.1658249,20.9763107 17.0710678,17.0710678 C20.9763107,13.1658249 20.9763107,6.83417511 17.0710678,2.92893219 C13.1658249,-0.976310729 6.83417511,-0.976310729 2.92893219,2.92893219 C-0.976310729,6.83417511 -0.976310729,13.1658249 2.92893219,17.0710678 Z M15.6568542,15.6568542 C18.7810486,12.5326599 18.7810486,7.46734008 15.6568542,4.34314575 C12.5326599,1.21895142 7.46734008,1.21895142 4.34314575,4.34314575 C1.21895142,7.46734008 1.21895142,12.5326599 4.34314575,15.6568542 C7.46734008,18.7810486 12.5326599,18.7810486 15.6568542,15.6568542 Z M9,5 L11,5 L11,11 L9,11 L9,5 Z M9,13 L11,13 L11,15 L9,15 L9,13 Z" id="Combined-Shape"></path>
+  <div class="flex items-start justify-start">
+    <svg class="fill-current icon mr-4 flex-no-shrink" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+      <g id="Page-1" stroke="none" stroke-width="1" fill="currentColor" fill-rule="evenodd">
+        <g id="icon-shape">
+          <path d="M2.92893219,17.0710678 C6.83417511,20.9763107 13.1658249,20.9763107 17.0710678,17.0710678 C20.9763107,13.1658249 20.9763107,6.83417511 17.0710678,2.92893219 C13.1658249,-0.976310729 6.83417511,-0.976310729 2.92893219,2.92893219 C-0.976310729,6.83417511 -0.976310729,13.1658249 2.92893219,17.0710678 Z M15.6568542,15.6568542 C18.7810486,12.5326599 18.7810486,7.46734008 15.6568542,4.34314575 C12.5326599,1.21895142 7.46734008,1.21895142 4.34314575,4.34314575 C1.21895142,7.46734008 1.21895142,12.5326599 4.34314575,15.6568542 C7.46734008,18.7810486 12.5326599,18.7810486 15.6568542,15.6568542 Z M9,5 L11,5 L11,11 L9,11 L9,5 Z M9,13 L11,13 L11,15 L9,15 L9,13 Z" id="Combined-Shape"></path>
+        </g>
       </g>
-    </g>
-  </svg>
+    </svg>
 
-  <div>
-    <p class="leading-normal">If you remove all payment providers, the Pricing and Billing pages will be disabled for users.</p>
+    <div>
+      <p class="leading-normal">If you remove all payment providers, the Pricing and Billing pages will be disabled for users.</p>
+    </div>
   </div>
-</div>
 </div>
 
 <h2>Strong Customer Authentication (SCA)</h2>
@@ -59,10 +59,48 @@
   account.payment_processor.subscribe</code></pre>
 </div>
 
-<h3>Trials</h3>
+<h4>Trials</h4>
 <p>Generic trials are trials without a card or subscription plan. These can be configured in <code>app/models/account.rb</code> by uncommenting the <code>before_create</code> block. You can check if an account is on generic trial with <code>account.on_generic_trial?</code>.</p>
 <p>Subscription trials are trials that require both a card upfront and a subscription plan selected. You can simply add <code>trial_period_days</code> when creating a Plan in the admin. When the subscription is created, the <code>trial_period_days</code> will be passed along to Stripe and Braintree for adding a trial to the subscription.</p>
 
+<h4>Require a subscription</h4>
+<p><code>require_subscription!</code> is a method defined within the <code>SubscriptionStatus</code> module under the <code>Accounts</code> module. This method is intended to be used as a <code>before_action</code> filter in Rails controllers to ensure that only subscribed users can access certain actions.</p>
+<p>When <code>require_subscription!</code> is called, it checks whether the current user is signed in and whether they are subscribed. If the user is not subscribed, they will be redirected to the pricing page.</p>
+<div class="not-prose alert mb-6" role="alert">
+  <div class="flex items-start justify-start">
+    <svg class="fill-current icon mr-4 flex-no-shrink" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+      <g id="Page-1" stroke="none" stroke-width="1" fill="currentColor" fill-rule="evenodd">
+        <g id="icon-shape">
+          <path d="M2.92893219,17.0710678 C6.83417511,20.9763107 13.1658249,20.9763107 17.0710678,17.0710678 C20.9763107,13.1658249 20.9763107,6.83417511 17.0710678,2.92893219 C13.1658249,-0.976310729 6.83417511,-0.976310729 2.92893219,2.92893219 C-0.976310729,6.83417511 -0.976310729,13.1658249 2.92893219,17.0710678 Z M15.6568542,15.6568542 C18.7810486,12.5326599 18.7810486,7.46734008 15.6568542,4.34314575 C12.5326599,1.21895142 7.46734008,1.21895142 4.34314575,4.34314575 C1.21895142,7.46734008 1.21895142,12.5326599 4.34314575,15.6568542 C7.46734008,18.7810486 12.5326599,18.7810486 15.6568542,15.6568542 Z M9,5 L11,5 L11,11 L9,11 L9,5 Z M9,13 L11,13 L11,15 L9,15 L9,13 Z" id="Combined-Shape"></path>
+        </g>
+      </g>
+    </svg>
+
+    <div>
+      <p class="leading-normal"><code>require_subscription!</code> uses <code>Pay.default_product_name</code>. If you would like to check for a specific product you can create your own method in <code>SubscriptionStatus</code>.
+    </div>
+  </div>
+</div>
+<p>In this example, the <code>premium_features</code> action can only be accessed by users who are subscribed. If a user who is not subscribed tries to access this action, they will be redirected to the pricing page.</p>
+<div class="not-prose">
+  <pre class="language-ruby">
+    <code>
+      class ProductsController &lt; ApplicationController
+        before_action :require_subscription!, only: [:premium_features]
+
+        def index
+          # ...
+        end
+
+        def premium_features
+          # Only accessible by subscribed users
+        end
+
+        # ...
+      end
+    </code>
+  </pre>
+</div>
 <h3>Stripe</h3>
 <p>Processing payments with Stripe is as simple as adding your Stripe credentials, enabling the Stripe configuration, and adding plans with Stripe IDs on them.</p>
 
