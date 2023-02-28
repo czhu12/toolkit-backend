@@ -14,5 +14,9 @@ module Accounts
     def not_subscribed?(name: Pay.default_product_name)
       !subscribed?(name: name)
     end
+
+    def require_subscription!
+      redirect_to pricing_path unless subscribed?
+    end
   end
 end
