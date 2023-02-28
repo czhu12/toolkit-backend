@@ -12,11 +12,12 @@ module Jumpstart
     end
 
     # http://example.com/12345/projects
+    # http://example.com/12345-account/projects
     def call(env)
       request = ActionDispatch::Request.new env
       _, account_id, request_path = request.path.split("/", 3)
 
-      if /\d+/.match?(account_id)
+      if /^\d+/.match?(account_id)
         if (account = Account.find_by(id: account_id))
           Current.account = account
         else
