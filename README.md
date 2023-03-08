@@ -18,8 +18,7 @@ You'll need the following installed to run the template successfully:
 * PostgreSQL - `brew install postgresql`
 * Libvips or Imagemagick - `brew install vips imagemagick`
 * Yarn - `brew install yarn` or [Install Yarn](https://yarnpkg.com/en/docs/install)
-* Foreman (optional) - `gem install foreman` - helps run all your
-  processes in development
+* Foreman (optional) - `gem install foreman` - helps run all your processes in development
 * If you install [Overmind](https://github.com/DarthSim/overmind) (optional), it will be used in place of Foreman - `brew install tmux overmind`
 * [Stripe CLI](https://stripe.com/docs/stripe-cli) for Stripe webhooks in development - `brew install stripe/stripe-cli/stripe`
 
