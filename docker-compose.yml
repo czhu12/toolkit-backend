@@ -1,8 +1,9 @@
 version: '3.2'
 services:
-  db:
-    image: postgres:latest
+  postgres:
+    image: postgres:15
     environment:
+      - POSTGRES_DB=jumpstart
       - POSTGRES_PASSWORD=password
     ports:
       - "5432:5432"
@@ -16,17 +17,20 @@ services:
 
   web:
     build: .
+    stdin_open: true
+    tty: true
     ports:
       - "3000:3000"
     depends_on:
-      - db
+      - postgres
       - redis
     environment:
-      - DATABASE_URL=postgres://postgres:password@db:5432/postgres
+      - DATABASE_URL=postgres://postgres:password@postgres:5432/jumpstart
       - REDIS_URL=redis://redis:6379
       - PORT=3000
     volumes:
       - .:/app
+      - /app/node_modules
 
 volumes:
   dbdata:

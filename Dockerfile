@@ -1,12 +1,12 @@
 FROM ruby:3.2
 
-RUN gem install "bundler:~>2" --no-document && \
-    gem update --system && \
-    gem cleanup
+ARG NODE_VERSION=18.15.0
+ARG YARN_VERSION=1.22.19
+ENV BINDING="0.0.0.0"
+
+RUN gem update --system && gem cleanup
 
 # NodeJS (https://github.com/nodejs/docker-node/blob/main/14/bullseye/Dockerfile)
-
-ARG NODE_VERSION=18.14.0
 RUN ARCH= && dpkgArch="$(dpkg --print-architecture)" \
   && case "${dpkgArch##*-}" in \
     amd64) ARCH='x64';; \
@@ -46,7 +46,6 @@ RUN ARCH= && dpkgArch="$(dpkg --print-architecture)" \
   && node --version \
   && npm --version
 
-ARG YARN_VERSION=1.22.19
 RUN set -ex \
   && for key in \
     6A010C5166006599AA17F08146C2130DFD2497F5 \
@@ -66,13 +65,11 @@ RUN set -ex \
   && yarn --version
 
 # App dependencies
-
 RUN apt-get update -qq && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends imagemagick libvips libvips-dev libvips-tools libpq-dev poppler-utils && \
     rm -rf /var/lib/apt/lists/* /var/cache/apt
 
 # App
-
 WORKDIR /app
 COPY ./Gemfile* /app/
 COPY ./config/jumpstart/Gemfile /app/config/jumpstart/
@@ -82,6 +79,6 @@ COPY package.json yarn.lock /app/
 RUN yarn install
 COPY . /app
 
-CMD ["bin/rails", "s", "-b", "0.0.0.0"]
+RUN gem install foreman
 
-EXPOSE 3000
+CMD ["bin/dev"]
