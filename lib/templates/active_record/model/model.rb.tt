@@ -20,8 +20,8 @@ class <%= class_name %> < <%= parent_class_name.classify %>
 <% end -%>
 
   # Broadcast changes in realtime with Hotwire
-  after_create_commit  -> { broadcast_prepend_later_to :<%= plural_table_name %>, partial: "<%= (class_path + [plural_name]).join("/") %>/index", locals: { <%= singular_name %>: self } }
-  after_update_commit  -> { broadcast_replace_later_to self }
+  after_create_commit -> { broadcast_prepend_later_to :<%= plural_table_name %>, partial: "<%= (class_path + [plural_name]).join("/") %>/index", locals: { <%= singular_name %>: self } }
+  after_update_commit -> { broadcast_replace_later_to self }
   after_destroy_commit -> { broadcast_remove_to :<%= plural_table_name %>, target: dom_id(self, :index) }
 end
 <% end -%>

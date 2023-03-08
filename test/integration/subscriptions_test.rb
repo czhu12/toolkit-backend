@@ -43,6 +43,16 @@ class Jumpstart::SubscriptionsTest < ActionDispatch::IntegrationTest
       end
     end
 
+    test "Account can not be subscribed twice" do
+      Jumpstart.config.stub(:payments_enabled?, true) do
+        @account.set_payment_processor :fake_processor, allow_fake: true
+        @account.payment_processor.subscribe
+        get new_subscription_path(plan: @plan)
+        assert_redirected_to subscriptions_path
+        assert_equal I18n.t("subscriptions.already_subscribed"), flash[:alert]
+      end
+    end
+
     test "can successfully update a extra billing info" do
       Jumpstart.config.stub(:payments_enabled?, true) do
         patch billing_settings_subscriptions_path, params: {account: {extra_billing_info: "VAT_ID"}}
