@@ -1,0 +1,16 @@
+<div class="flex border-top align-middle py-4">
+  <div class="flex-1">
+    <%= image_tag connected_account.image_url, class: "inline-block h-10 w-10 rounded shadow mr-2" %>
+    <div class="inline-block align-middle">
+      <div><%= connected_account.name %></div>
+      <div class="font-semibold text-sm text-gray-700">
+        <%= social_icon connected_account.provider %>
+        <%= provider_config(connected_account.provider)[:name] %>
+      </div>
+    </div>
+  </div>
+  <%= button_to user_connected_account_path(connected_account), method: :delete, class: "btn btn-link text-gray-700" do %>
+    <%= render_svg "icons/close", styles: "fill-current h-3 w-3 mr-1" %>
+    <%= t(".remove") %>
+  <% end %>
+</div>
