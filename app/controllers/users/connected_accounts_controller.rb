@@ -3,7 +3,7 @@ class Users::ConnectedAccountsController < ApplicationController
   before_action :set_connected_account, only: [:destroy]
 
   def index
-    @connected_accounts = current_user.connected_accounts
+    @connected_accounts = current_user.connected_accounts.order(provider: :asc, created_at: :desc)
   end
 
   def destroy
