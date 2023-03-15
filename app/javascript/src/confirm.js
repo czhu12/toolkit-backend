@@ -43,6 +43,9 @@ function insertConfirmModal(message, element, button) {
   document.activeElement.blur()
   let modal = document.getElementById("confirm-modal")
 
+  // Focus on the first button in the modal after rendering
+  modal.querySelector("button").focus()
+
   // Disable commit button until the value matches confirmText
   if (confirmText) {
     let commitButton = modal.querySelector("[data-behavior='commit']")
