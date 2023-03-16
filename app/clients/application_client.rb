@@ -14,6 +14,8 @@ class ApplicationClient
   #
   #     def account
   #       get("/account").account
+  #     rescue *NET_HTTP_ERRORS
+  #       raise Error, "Unable to load your account"
   #     end
   #   end
 
@@ -32,6 +34,7 @@ class ApplicationClient
   class InternalError < Error; end
 
   BASE_URI = "https://example.org"
+  NET_HTTP_ERRORS = [Timeout::Error, Errno::EINVAL, Errno::ECONNRESET, EOFError, Net::HTTPBadResponse, Net::HTTPHeaderSyntaxError, Net::ProtocolError]
 
   attr_reader :token
 
