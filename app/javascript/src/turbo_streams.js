@@ -20,3 +20,15 @@ StreamActions.remove_later = function() {
     this.targetElements.forEach((element) => element.remove())
   }, this.getAttribute("after"))
 }
+
+// Resets a form
+// <%= turbo_stream.reset_form "new_post"
+StreamActions.reset_form = function() {
+  this.targetElements.forEach((element) => element.reset())
+}
+
+// Scrolls an element into view
+// <%= turbo_stream.scroll_to "comment_1"
+StreamActions.scroll_to = function() {
+  this.targetElements.forEach((element) => element.scrollIntoView({behavior: 'smooth'}))
+}

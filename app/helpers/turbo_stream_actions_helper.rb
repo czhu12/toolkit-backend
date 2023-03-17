@@ -8,6 +8,14 @@ module TurboStreamActionsHelper
     def remove_later(target, after: "2000")
       turbo_stream_action_tag :remove_later, target: target, after: after
     end
+
+    def reset_form(target)
+      turbo_stream_action_tag :reset_form, target: target
+    end
+
+    def scroll_to(target)
+      turbo_stream_action_tag :scroll_to, target: target
+    end
   end
 
   Turbo::Streams::TagBuilder.prepend(CustomTurboStreamActions)
