@@ -13,13 +13,13 @@ remote to merge in updates.
 You'll need the following installed to run the template successfully:
 
 * Ruby 3.0 or higher
+* Node.js v18
 * bundler - `gem install bundler`
 * Redis - For ActionCable support (and Sidekiq, caching, etc)
 * PostgreSQL - `brew install postgresql`
 * Libvips or Imagemagick - `brew install vips imagemagick`
-* Yarn - `brew install yarn` or [Install Yarn](https://yarnpkg.com/en/docs/install)
-* Foreman (optional) - `gem install foreman` - helps run all your processes in development
-* If you install [Overmind](https://github.com/DarthSim/overmind) (optional), it will be used in place of Foreman - `brew install tmux overmind`
+* Yarn - `npm install --global yarn` [Install Yarn](https://yarnpkg.com/en/docs/install)
+* [Overmind](https://github.com/DarthSim/overmind) or Foreman - `brew install tmux overmind` or `gem install foreman` - helps run all your processes in development
 * [Stripe CLI](https://stripe.com/docs/stripe-cli) for Stripe webhooks in development - `brew install stripe/stripe-cli/stripe`
 
 All Homebrew dependencies are listed in `Brewfile`, so you can install them all at once like this:
