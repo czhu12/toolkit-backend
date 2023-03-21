@@ -35,9 +35,8 @@ class Jumpstart::PlansTest < ActionDispatch::IntegrationTest
         sign_in users(:user_without_billing_address)
         plan = plans(:personal)
 
-        get new_subscription_path(plan: plan.id)
-
-        assert_redirected_to subscriptions_billing_address_path(plan: plan.id)
+        get new_subscription_path(plan: plan)
+        assert_redirected_to subscriptions_billing_address_path(plan: plan)
       end
     end
 
@@ -45,8 +44,7 @@ class Jumpstart::PlansTest < ActionDispatch::IntegrationTest
       sign_in users(:one)
       plan = plans(:personal)
 
-      get new_subscription_path(plan: plan.id)
-
+      get new_subscription_path(plan: plan)
       assert response.body.include?(plan.name)
       plan.features.each do |feature|
         assert response.body.include?(feature)
@@ -55,12 +53,11 @@ class Jumpstart::PlansTest < ActionDispatch::IntegrationTest
 
     test "can view subscribe page for a account plan" do
       account = accounts(:company)
-      user = account.owner
       plan = plans(:personal)
 
-      sign_in user
+      sign_in account.owner
       switch_account(account)
-      get new_subscription_path(plan: plan.id)
+      get new_subscription_path(plan: plan)
 
       assert response.body.include?(account.name)
       assert response.body.include?(plan.name)
