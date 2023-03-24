@@ -145,7 +145,7 @@
 <p>An example from the Jumpstart Pro website when purchasing a license: We check if the current account has a card on file, if so we let you purchase a license. If not, we display the card form.</p>
 
 <div class="not-prose">
-  <pre><code>&lt;% if !current_account.card_type? %&gt;
+  <pre><code>&lt;% if !current_account.payment_processor&.default_payment_method %&gt;
   &lt;p&gt;First, add a payment method to your account:</p>
 
   &lt;%= render 'cards/forms/stripe'    if Jumpstart.config.stripe? %&gt;
