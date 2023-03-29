@@ -43,8 +43,8 @@ button[disabled]        .when-enabled { display: none; }
       @apply bg-blue-500 text-white;
     }
 
-    &.outline {
-      @apply bg-transparent outline-1 text-blue-500 shadow-none;
+    &.btn-outline {
+      @apply bg-transparent border border-blue-500 text-blue-500 shadow-none;
 
       &:hover,
       &:focus {
@@ -61,8 +61,8 @@ button[disabled]        .when-enabled { display: none; }
       @apply bg-green-500 text-white;
     }
 
-    &.outline {
-      @apply bg-transparent outline-1 text-green-600 shadow-none;
+    &.btn-outline {
+      @apply bg-transparent border border-green-500 text-green-600 shadow-none;
 
       &:hover,
       &:focus {
@@ -79,8 +79,8 @@ button[disabled]        .when-enabled { display: none; }
       @apply bg-gray-600 text-white;
     }
 
-    &.outline {
-      @apply bg-transparent outline-1 text-gray-700 shadow-none;
+    &.btn-outline {
+      @apply bg-transparent border  border-gray-500 text-gray-700 shadow-none;
 
       &:hover,
       &:focus {
@@ -97,8 +97,8 @@ button[disabled]        .when-enabled { display: none; }
       @apply bg-red-500 text-white;
     }
 
-    &.outline {
-      @apply bg-transparent outline-1 text-red-500 shadow-none;
+    &.btn-outline {
+      @apply bg-transparent border border-red-500 text-red-500 shadow-none;
 
       &:hover,
       &:focus {
@@ -159,6 +159,6 @@ button[disabled]        .when-enabled { display: none; }
   }
 
   .btn-expanded, .btn-block {
-    @apply block w-full;
+    @apply flex justify-center w-full;
   }
 }

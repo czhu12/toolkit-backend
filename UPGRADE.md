@@ -1,3 +1,7 @@
+### March 29, 2023
+
+We renamed the `outline` CSS class to `btn-outline` to prevent conflicts with TailwindCSS's `outline` class. You will need to update any references of `outline` to `btn-outline` in your views.
+
 ### February 6, 2023 - System admins
 
 For additional security, we've made the `admin` attribute on the User model readonly.
