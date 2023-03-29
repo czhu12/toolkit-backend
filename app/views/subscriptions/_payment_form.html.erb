@@ -8,7 +8,7 @@
       <%= t("subscriptions.billing_address.no_billing_address") %>
     <% end %>
     </div>
-    <%= link_to t("subscriptions.billing_address.edit"), subscriptions_billing_address_path(plan: @plan.id) %>
+    <%= link_to t("subscriptions.billing_address.edit"), subscriptions_billing_address_path(plan: @plan) %>
   </div>
 <% end %>
 
@@ -26,7 +26,7 @@
       </div>
 
       <%= form_with url: subscriptions_path, method: :post do |f| %>
-        <%= f.hidden_field :plan, value: @plan.id if @plan.present? %>
+        <%= f.hidden_field :plan, value: @plan.to_param if @plan.present? %>
         <%= f.button t("subscriptions.new.subscribe"), id: 'submit-button', class: "btn btn-primary btn-large btn-block", data: { action: "click->stripe#submit", disable_with: disable_with(t("subscriptions.new.processing")) } %>
       <% end %>
     </div>

@@ -8,7 +8,7 @@
     stripe_target: "form",
     action: "submit->stripe#submit",
     stripe_client_secret_value: client_secret,
-    stripe_return_url_value: plan&.trial_period_days? ? subscriptions_stripe_trial_url(plan: plan.id) : subscription_stripe_url(pay_subscription)
+    stripe_return_url_value: plan&.trial_period_days? ? subscriptions_stripe_trial_url(plan: plan) : subscription_stripe_url(pay_subscription)
   } do |f| %>
 
   <div class="form-group">

@@ -23,7 +23,7 @@ class Subscriptions::Stripe::TrialsController < ApplicationController
   private
 
   def set_plan
-    @plan = Plan.without_free.find(params[:plan])
+    @plan = Plan.without_free.find_by_prefix_id!(params[:plan])
   rescue ActiveRecord::RecordNotFound
     redirect_to subscriptions_path
   end

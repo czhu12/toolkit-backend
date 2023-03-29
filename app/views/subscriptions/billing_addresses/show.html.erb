@@ -114,7 +114,7 @@
             <%= form.country_select :country, include_blank: true %>
           </div>
 
-          <%= hidden_field_tag :plan, @plan.id %>
+          <%= hidden_field_tag :plan, @plan.to_param %>
 
           <div class="mt-8">
             <%= form.button "Continue", class: "btn btn-primary btn-block btn-large" %>

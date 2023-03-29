@@ -88,7 +88,7 @@
           </div>
 
           <%= form_with url: subscriptions_path, method: :post do |f| %>
-            <%= f.hidden_field :plan, value: @plan.id if @plan.present? %>
+            <%= f.hidden_field :plan, value: @plan.to_param if @plan.present? %>
             <%= f.button t(".subscribe"), id: 'submit-button', class: "btn btn-primary btn-large btn-block", data: { action: "click->stripe#submit", disable_with: disable_with(t(".processing")) } %>
           <% end %>
         </div>
