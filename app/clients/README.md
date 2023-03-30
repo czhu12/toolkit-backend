@@ -70,7 +70,7 @@ There are helper methods for the standard HTTP request types for APIs:
 
 You can override the methods to match the APIs you're integrating with.
 
-For example, you can override the default headers, query params, and how responses are parsed. This example could be used to connect to an XML API that uses a query parameter to authenticate.
+For example, you can override the default headers and query params. This example could be used to connect to an XML API that uses a query parameter to authenticate.
 
 ```ruby
 class XmlExampleClient < ApplicationClient
@@ -84,10 +84,6 @@ class XmlExampleClient < ApplicationClient
     {
       token: token
     }
-  end
-
-  def parse_response(response)
-    Nokogiri::XML(response.body)
   end
 end
 ```

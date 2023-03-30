@@ -9,7 +9,7 @@ class ApplicationClient
   #
   # An example API client:
   #
-  #   class DigitalOceanClient < ApiClient
+  #   class DigitalOceanClient < ApplicationClient
   #     BASE_URI = "https://api.digitalocean.com/v2"
   #
   #     def account
