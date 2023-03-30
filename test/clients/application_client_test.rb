@@ -51,9 +51,11 @@ class ApplicationClientTest < ActiveSupport::TestCase
     @client.send(:delete, "/test")
   end
 
-  test "parse body" do
-    stub_request(:get, "https://example.org/test").to_return(body: {"foo" => "bar"}.to_json)
+  test "response object" do
+    stub_request(:get, "https://example.org/test").to_return(body: {"foo" => "bar"}.to_json, headers: {content_type: "application/json"})
     result = @client.send(:get, "/test")
+    assert_equal "200", result.code
+    assert_equal [:content_type], result.headers.keys
     assert_equal "bar", result.foo
   end
 

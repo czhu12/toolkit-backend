@@ -168,7 +168,8 @@ class ApplicationClient
   def handle_response(response)
     case response.code
     when "200", "201", "202", "203", "204"
-      parse_response(response) if response.body.present?
+      parsed_body = response.body.present? ? parse_response(response) : nil
+      Response.new(response, parsed_body)
     when "401"
       raise Unauthorized, response.body
     when "403"
@@ -198,5 +199,24 @@ class ApplicationClient
   # Override to customize response body parsing
   def parse_response(response)
     JSON.parse(response.body, object_class: OpenStruct)
+  end
+
+  class Response
+    # Provides easy access to the parsed response body as well as the response object headers and status code
+
+    attr_reader :parsed_body, :original_response
+
+    delegate :code, to: :original_response
+    delegate_missing_to :parsed_body
+
+    def initialize(original_response, parsed_body)
+      @original_response = original_response
+      @parsed_body = parsed_body
+    end
+
+    # Returns a hash of headers with underscored names as symbols
+    def headers
+      @headers ||= original_response.each_header.to_h.transform_keys { |k| k.underscore.to_sym }
+    end
   end
 end

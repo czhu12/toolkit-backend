@@ -1,6 +1,7 @@
 ### March 29, 2023
 
 We renamed the `outline` CSS class to `btn-outline` to prevent conflicts with TailwindCSS's `outline` class. You will need to update any references of `outline` to `btn-outline` in your views.
+We've also added a `Response` class that wraps API client responses to provide access to the original response object for status code and headers. This comes in handy when APIs use headers for pagination, rate limiting, etc.
 
 ### February 6, 2023 - System admins
 
