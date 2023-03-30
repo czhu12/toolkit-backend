@@ -51,12 +51,20 @@ class ApplicationClientTest < ActiveSupport::TestCase
     @client.send(:delete, "/test")
   end
 
-  test "response object" do
+  test "response object parses json" do
     stub_request(:get, "https://example.org/test").to_return(body: {"foo" => "bar"}.to_json, headers: {content_type: "application/json"})
     result = @client.send(:get, "/test")
     assert_equal "200", result.code
-    assert_equal [:content_type], result.headers.keys
+    assert_equal "application/json", result.content_type
     assert_equal "bar", result.foo
+  end
+
+  test "response object parses xml" do
+    stub_request(:get, "https://example.org/test").to_return(body: {"foo" => "bar"}.to_xml, headers: {content_type: "application/xml"})
+    result = @client.send(:get, "/test")
+    assert_equal "200", result.code
+    assert_equal "application/xml", result.content_type
+    assert_equal "bar", result.xpath("//foo").children.first.to_s
   end
 
   test "unauthorized" do

@@ -157,7 +157,7 @@ class ApplicationClient
     request = klass.new(uri.request_uri, all_headers)
     request.body = build_body(body) if body.present?
 
-    handle_response http.request(request)
+    handle_response Response.new(http.request(request))
   end
 
   # Handles an HTTP response
@@ -168,8 +168,7 @@ class ApplicationClient
   def handle_response(response)
     case response.code
     when "200", "201", "202", "203", "204"
-      parsed_body = response.body.present? ? parse_response(response) : nil
-      Response.new(response, parsed_body)
+      response
     when "401"
       raise Unauthorized, response.body
     when "403"
@@ -196,27 +195,42 @@ class ApplicationClient
     end
   end
 
-  # Override to customize response body parsing
-  def parse_response(response)
-    JSON.parse(response.body, object_class: OpenStruct)
-  end
-
   class Response
     # Provides easy access to the parsed response body as well as the response object headers and status code
+    #
+    # To add customer content type parser, register it in the PARSER hash
+    # ApplicationClient::Response::PARSER["text/html"] = ->(response) { Nokogiri::HTML(response.body) }
+    #
+    # To parse JSON as a Hash instead of OpenStruct
+    # ApplicationClient::Response::JSON_OBJECT_CLASS = nil
 
-    attr_reader :parsed_body, :original_response
+    JSON_OBJECT_CLASS = OpenStruct
+    PARSER = {
+      "application/json" => ->(response) { JSON.parse(response.body, object_class: JSON_OBJECT_CLASS) },
+      "application/xml" => ->(response) { Nokogiri::XML(response.body) }
+    }
+    FALLBACK_PARSER = ->(response) { response.body }
 
-    delegate :code, to: :original_response
+    attr_reader :original_response
+
+    delegate :code, :body, to: :original_response
     delegate_missing_to :parsed_body
 
-    def initialize(original_response, parsed_body)
+    def initialize(original_response)
       @original_response = original_response
-      @parsed_body = parsed_body
     end
 
     # Returns a hash of headers with underscored names as symbols
     def headers
       @headers ||= original_response.each_header.to_h.transform_keys { |k| k.underscore.to_sym }
+    end
+
+    def content_type
+      headers[:content_type]
+    end
+
+    def parsed_body
+      @parsed_body ||= PARSER.fetch(content_type, FALLBACK_PARSER).call(self)
     end
   end
 end
