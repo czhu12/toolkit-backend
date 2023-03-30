@@ -49,7 +49,7 @@ module Jumpstart
   def self.post_install
     run_command("solargraph bundle") if config.solargraph?
 
-    if JobProcessor.delayed_job? && !ActiveRecord::Base.connection.table_exists?('delayed_jobs')
+    if JobProcessor.delayed_job? && !ActiveRecord::Base.connection.table_exists?("delayed_jobs")
       run_command("rails generate delayed:migration")
       run_command("rails db:migrate")
     end
