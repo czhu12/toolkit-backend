@@ -2,6 +2,7 @@
 
 We renamed the `outline` CSS class to `btn-outline` to prevent conflicts with TailwindCSS's `outline` class. You will need to update any references of `outline` to `btn-outline` in your views.
 We've also added a `Response` class that wraps API client responses to provide access to the original response object for status code and headers. This comes in handy when APIs use headers for pagination, rate limiting, etc.
+The original [DelayedJob](https://github.com/collectiveidea/delayed_job) gem is not compatible with Rails 7. We now use the [Delayed](https://github.com/betterment/delayed) fork by Betterment when DelayedJob is chosen as the background job processor.
 
 ### February 6, 2023 - System admins
 

@@ -57,7 +57,7 @@ module Jumpstart
         when "async"
           # Skip
         when "delayed_job"
-          gems[:main] += [{name: "delayed_job_active_record"}]
+          gems[:main] += [{name: "delayed"}]
         else
           gems[:main] += [{name: job_processor.to_s}]
         end

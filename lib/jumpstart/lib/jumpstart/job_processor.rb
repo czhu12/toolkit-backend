@@ -21,7 +21,7 @@ module Jumpstart
       when "sidekiq"
         "bundle exec sidekiq"
       when "delayed_job"
-        "bin/delayed_job --queues=default,mailers,action_mailbox_incineration,action_mailbox_routing,active_storage_analysis,active_storage_purge start"
+        "QUEUES=default,mailers,action_mailbox_incineration,action_mailbox_routing,active_storage_analysis,active_storage_purge bundle exec rake delayed:work"
       when "sneakers"
         "rake sneakers:run"
       when "que"
@@ -31,8 +31,8 @@ module Jumpstart
 
     def self.queue_adapter(processor)
       case processor.to_s
-      when "delayed_job_active_record"
-        "delayed_job"
+      when "delayed_job"
+        "delayed"
       else
         processor.to_s
       end
