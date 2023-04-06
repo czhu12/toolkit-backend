@@ -225,8 +225,15 @@ class ApplicationClient
       @headers ||= original_response.each_header.to_h.transform_keys { |k| k.underscore.to_sym }
     end
 
+    # Removes charset and boundary and returns the mime type
+    #
+    # Given:
+    #   Content-Type: application/json; charset=utf-8
+    #
+    # Returns:
+    #   "application/json"
     def content_type
-      headers[:content_type]
+      headers[:content_type].split(";").first
     end
 
     def parsed_body
