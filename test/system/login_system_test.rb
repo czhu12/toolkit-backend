@@ -1,101 +1,64 @@
 require "application_system_test_case"
 
 class LoginSystemTest < ApplicationSystemTestCase
-  test "can login" do
+  setup do
     Capybara.app_host = "http://lvh.me"
     Capybara.always_include_port = true
+  end
 
-    visit new_user_session_path
-
-    fill_in "user[email]", with: users(:one).email
-    fill_in "user[password]", with: "password"
-
-    find('input[name="commit"]').click
-
+  test "can login" do
+    login_with_email_and_password users(:one).email, "password"
     assert_selector "p", text: I18n.t("devise.sessions.signed_in")
   end
 
   test "two factor required" do
-    Capybara.app_host = "http://lvh.me"
-    Capybara.always_include_port = true
-
-    visit new_user_session_path
-
-    fill_in "user[email]", with: users(:twofactor).email
-    fill_in "user[password]", with: "password"
-
-    find('input[name="commit"]').click
-
+    login_with_email_and_password users(:twofactor).email, "password"
     assert_selector "h1", text: I18n.t("users.two_factor.header")
   end
 
   test "two factor success with otp password" do
-    Capybara.app_host = "http://lvh.me"
-    Capybara.always_include_port = true
-
-    visit new_user_session_path
-
-    fill_in "user[email]", with: users(:twofactor).email
-    fill_in "user[password]", with: "password"
-
-    find('input[name="commit"]').click
-
-    fill_in "otp_attempt", with: users(:twofactor).current_otp
-
-    find('input[name="commit"]').click
-
+    login_with_email_and_password users(:twofactor).email, "password"
+    submit_otp users(:twofactor).current_otp
     assert_selector "p", text: I18n.t("devise.sessions.signed_in")
   end
 
   test "two factor success with otp backup code" do
-    Capybara.app_host = "http://lvh.me"
-    Capybara.always_include_port = true
-
-    visit new_user_session_path
-
-    fill_in "user[email]", with: users(:twofactor).email
-    fill_in "user[password]", with: "password"
-
-    find('input[name="commit"]').click
-
-    fill_in "otp_attempt", with: users(:twofactor).otp_backup_codes[0]
-
-    find('input[name="commit"]').click
-
+    user = users(:twofactor)
+    login_with_email_and_password user.email, "password"
+    submit_otp user.otp_backup_codes[0]
     assert_selector "p", text: I18n.t("devise.sessions.signed_in")
   end
 
-  test "two factor fails with no input" do
-    Capybara.app_host = "http://lvh.me"
-    Capybara.always_include_port = true
-
-    visit new_user_session_path
-
-    fill_in "user[email]", with: users(:twofactor).email
-    fill_in "user[password]", with: "password"
-
-    find('input[name="commit"]').click
-
-    fill_in "otp_attempt", with: ""
-    find('input[name="commit"]').click
-
+  test "two factor fails with bad input" do
+    login_with_email_and_password users(:twofactor).email, "password"
+    submit_otp "invalid"
     assert_selector "p", text: I18n.t("users.sessions.create.incorrect_verification_code")
   end
 
-  test "two factor fails with bad input" do
-    Capybara.app_host = "http://lvh.me"
-    Capybara.always_include_port = true
+  test "two factor always enforced for separate user logins" do
+    login_with_email_and_password users(:twofactor).email, "password"
+    submit_otp "invalid"
+    assert_selector "p", text: I18n.t("users.sessions.create.incorrect_verification_code")
 
+    second_user = users(:twofactor).dup
+    second_user.update!(email: "twofactor2@example.org", password: "abcd1234", password_confirmation: "abcd1234", terms_of_service: true)
+    login_with_email_and_password second_user.email, "abcd1234"
+    submit_otp "invalid"
+    assert_selector "p", text: I18n.t("users.sessions.create.incorrect_verification_code")
+  end
+
+  private
+
+  def login_with_email_and_password(email, password)
     visit new_user_session_path
 
-    fill_in "user[email]", with: users(:twofactor).email
-    fill_in "user[password]", with: "password"
-
+    fill_in "user[email]", with: email
+    fill_in "user[password]", with: password
     find('input[name="commit"]').click
+  end
 
-    fill_in "otp_attempt", with: "abcdefghij"
+  def submit_otp(otp)
+    fill_in "otp_attempt", with: otp
     find('input[name="commit"]').click
-
-    assert_selector "p", text: I18n.t("users.sessions.create.incorrect_verification_code")
   end
 end

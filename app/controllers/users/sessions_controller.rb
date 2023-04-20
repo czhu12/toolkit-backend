@@ -9,37 +9,38 @@ class Users::SessionsController < Devise::SessionsController
   # a before_action instead
 
   def authenticate_with_two_factor
-    self.resource = find_user
-    return unless resource
-    return unless resource.otp_required_for_login?
-
-    # Submitted email and password, save user ID and send along to OTP
-    if sign_in_params[:password] && resource.valid_password?(sign_in_params[:password])
-      session[:remember_me] = Devise::TRUE_VALUES.include?(sign_in_params[:remember_me])
-      session[:otp_user_id] = resource.id
-      render :otp, status: :unprocessable_entity
-
-    # Submitted OTP, so verify and login
-    elsif session[:otp_user_id] && params[:otp_attempt]
-      if resource.verify_and_consume_otp!(params[:otp_attempt])
-        session.delete(:otp_user_id)
-        remember_me(resource) if session.delete(:remember_me)
-        set_flash_message!(:notice, :signed_in)
-        sign_in(resource, event: :authentication)
-        respond_with resource, location: after_sign_in_path_for(resource)
-      else
-        flash.now[:alert] = t(".incorrect_verification_code")
-        render :otp, status: :unprocessable_entity
-      end
+    if sign_in_params[:email]
+      authenticate_and_start_two_factor
+    elsif session[:otp_user_id]
+      authenticate_otp_attempt
     end
   end
 
-  def find_user
-    if session[:otp_user_id]
-      resource_class.find(session[:otp_user_id])
+  def authenticate_and_start_two_factor
+    self.resource = resource_class.find_by(email: sign_in_params[:email])
+    return unless resource.otp_required_for_login?
 
-    elsif sign_in_params[:email]
-      resource_class.find_by(email: sign_in_params[:email])
+    if resource.valid_password?(sign_in_params[:password])
+      session[:remember_me] = Devise::TRUE_VALUES.include?(sign_in_params[:remember_me])
+      session[:otp_user_id] = resource.id
+      render :otp, status: :unprocessable_entity
+    else
+      # let Devise handle invalid passwords
+    end
+  end
+
+  def authenticate_otp_attempt
+    self.resource = resource_class.find(session[:otp_user_id])
+
+    if resource.verify_and_consume_otp!(params[:otp_attempt])
+      session.delete(:otp_user_id)
+      remember_me(resource) if session.delete(:remember_me)
+      set_flash_message!(:notice, :signed_in)
+      sign_in(resource, event: :authentication)
+      respond_with resource, location: after_sign_in_path_for(resource)
+    else
+      flash.now[:alert] = t(".incorrect_verification_code")
+      render :otp, status: :unprocessable_entity
     end
   end
 end
