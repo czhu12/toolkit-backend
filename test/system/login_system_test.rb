@@ -11,6 +11,11 @@ class LoginSystemTest < ApplicationSystemTestCase
     assert_selector "p", text: I18n.t("devise.sessions.signed_in")
   end
 
+  test "handles invalid email" do
+    login_with_email_and_password "missing@example.org", "password"
+    assert_selector "p", text: I18n.t("devise.failure.invalid", authentication_keys: "Email")
+  end
+
   test "two factor required" do
     login_with_email_and_password users(:twofactor).email, "password"
     assert_selector "h1", text: I18n.t("users.two_factor.header")

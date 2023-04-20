@@ -12,7 +12,7 @@ class Users::SessionsController < Devise::SessionsController
       clear_otp_user_from_session
 
       # Intercept Devise if 2FA required. Otherwise let Devise handle non-2FA auth
-      authenticate_and_start_two_factor if resource.otp_required_for_login?
+      authenticate_and_start_two_factor if resource&.otp_required_for_login?
     elsif session[:otp_user_id]
       authenticate_otp_attempt
     end
