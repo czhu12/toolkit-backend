@@ -1,0 +1,7 @@
+require "test_helper"
+
+class InboundWebhooks::<%= class_name %>JobTest < ActiveJob::TestCase
+  # test "inbound webhook has processed status on success" do
+  #   assert true
+  # end
+end
