@@ -87,3 +87,40 @@ class XmlExampleClient < ApplicationClient
   end
 end
 ```
+
+### Multipart Form Data
+
+When working with APIs that require file uploads or multipart form data, the `ApplicationClient` can also handle these types of requests. You can use the `Net::HTTPHeader#set_form` method to set form data, including file uploads.
+
+#### Usage
+
+To send a multipart form data request, you need to pass the `form_data` parameter when calling the `post`, `patch`, or `put` methods in your custom API client. The `form_data` parameter should be an Enumerable containing field names and their values. You can use a hash or an array for `form_data`.
+
+For example, to upload a file:
+
+```ruby
+class MyApiClient < ApplicationClient
+  BASE_URI = "https://api.example.com"
+
+  def upload_file(file)
+    form_data = {
+      "field1" => "value1",
+      "file" => file
+    }
+
+    post("/upload", form_data: form_data)
+  end
+end
+```
+
+In this example, file should be a File or IO-like object.
+
+If you need to set additional options for the file upload, such as the filename or content type, you can include them in the form data like this:
+
+
+```rb
+form_data = {
+  "field1" => "value1",
+  "file" => [file, { filename: "custom_filename.txt", content_type: "text/plain" }]
+}
+```

@@ -36,14 +36,53 @@ class ApplicationClientTest < ActiveSupport::TestCase
     @client.send(:post, "/test", body: {foo: "bar"}, headers: headers)
   end
 
+  test "multipart form data with file_fixture" do
+    file = file_fixture("avatar.jpg")
+
+    form_data = {
+      "field1" => "value1",
+      "file" => File.open(file)
+    }
+
+    stub_request(:post, "https://example.org/upload").to_return(status: 200)
+
+    @client.send(:post, "/upload", form_data: form_data)
+  end
+
   test "patch" do
     stub_request(:patch, "https://example.org/test").with(body: {"foo" => "bar"}.to_json)
     @client.send(:patch, "/test", body: {foo: "bar"})
   end
 
+  test "multipart form data with file_fixture and patch" do
+    file = file_fixture("avatar.jpg")
+
+    form_data = {
+      "field1" => "value1",
+      "file" => File.open(file)
+    }
+
+    stub_request(:patch, "https://example.org/update").to_return(status: 200)
+
+    @client.send(:patch, "/update", form_data: form_data)
+  end
+
   test "put" do
     stub_request(:put, "https://example.org/test").with(body: {"foo" => "bar"}.to_json)
     @client.send(:put, "/test", body: {foo: "bar"})
+  end
+
+  test "multipart form data with file_fixture and put" do
+    file = file_fixture("avatar.jpg")
+
+    form_data = {
+      "field1" => "value1",
+      "file" => File.open(file)
+    }
+
+    stub_request(:put, "https://example.org/update").to_return(status: 200)
+
+    @client.send(:put, "/update", form_data: form_data)
   end
 
   test "delete" do

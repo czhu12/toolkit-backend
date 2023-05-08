@@ -96,25 +96,49 @@ class ApplicationClient
   # Make a POST request
   # Pass `headers: {}` to add or override default headers
   # Pass `query: {}` to add query parameters
-  # Pass `body: {}` to add a body to the request
-  def post(path, headers: {}, query: nil, body: nil)
-    make_request(klass: Net::HTTP::Post, path: path, headers: headers, query: query, body: body)
+  # Pass `body: {}` to add a JSON body to the request
+  # Pass `form_data: {}` to add form data to the request (multipart/form-data)
+  def post(path, headers: {}, query: nil, body: nil, form_data: nil)
+    make_request(
+      klass: Net::HTTP::Post,
+      path: path,
+      headers: headers,
+      query: query,
+      body: body,
+      form_data: form_data
+    )
   end
 
   # Make a PATCH request
   # Pass `headers: {}` to add or override default headers
   # Pass `query: {}` to add query parameters
   # Pass `body: {}` to add a body to the request
-  def patch(path, headers: {}, query: nil, body: nil)
-    make_request(klass: Net::HTTP::Patch, path: path, headers: headers, query: query, body: body)
+  # Pass `form_data: {}` to add form data to the request (multipart/form-data)
+  def patch(path, headers: {}, query: nil, body: nil, form_data: nil)
+    make_request(
+      klass: Net::HTTP::Patch,
+      path: path,
+      headers: headers,
+      query: query,
+      body: body,
+      form_data: form_data
+    )
   end
 
   # Make a PUT request
   # Pass `headers: {}` to add or override default headers
   # Pass `query: {}` to add query parameters
   # Pass `body: {}` to add a body to the request
-  def put(path, headers: {}, query: nil, body: nil)
-    make_request(klass: Net::HTTP::Put, path: path, headers: headers, query: query, body: body)
+  # Pass `form_data: {}` to add form data to the request (multipart/form-data)
+  def put(path, headers: {}, query: nil, body: nil, form_data: nil)
+    make_request(
+      klass: Net::HTTP::Put,
+      path: path,
+      headers: headers,
+      query: query,
+      body: body,
+      form_data: form_data
+    )
   end
 
   # Make a DELETE request
@@ -136,7 +160,9 @@ class ApplicationClient
   #   `headers:` is a Hash of HTTP headers
   #   `body:` can be a string, Hash, or any other object that can be serialized to a string
   #   `query:` is hash of query parameters to append to the path. For example: {foo: :bar} will add "?foo=bar" to the URL path
-  def make_request(klass:, path:, headers: {}, body: nil, query: nil)
+  def make_request(klass:, path:, headers: {}, body: nil, query: nil, form_data: nil)
+    raise ArgumentError, "Cannot pass both body and form_data" if body.present? && form_data.present?
+
     uri = URI("#{base_uri}#{path}")
 
     # Merge query params with any currently in `path`
@@ -155,7 +181,12 @@ class ApplicationClient
     all_headers.delete("Content-Type") if klass == Net::HTTP::Get
 
     request = klass.new(uri.request_uri, all_headers)
-    request.body = build_body(body) if body.present?
+
+    if body.present?
+      request.body = build_body(body)
+    elsif form_data.present?
+      request.set_form(form_data, "multipart/form-data")
+    end
 
     handle_response Response.new(http.request(request))
   end
