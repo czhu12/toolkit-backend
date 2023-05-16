@@ -29,12 +29,14 @@
 
   <body class="h-full font-sans antialiased font-normal leading-normal bg-gray-50">
     <div class="main flex flex-col">
-      <%= render partial: "shared/flash" %>
-      <%= render partial: "shared/navbar" %>
+      <header>
+        <%= render partial: "shared/flash" %>
+        <%= render partial: "shared/navbar" %>
+      </header>
 
-      <div class="px-3 lg:px-0 h-full">
+      <main class="px-3 lg:px-0 h-full">
         <%= yield %>
-      </div>
+      </main>
     </div>
 
     <%= render partial: "shared/footer" unless turbo_native_app? %>
