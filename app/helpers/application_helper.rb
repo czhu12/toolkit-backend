@@ -34,11 +34,17 @@ module ApplicationHelper
     tag.i(nil, **options)
   end
 
-  def badge(text, options = {})
+  # <%= badge "Active", color: "bg-green-100 text-green-800" %>
+  # <%= badge color: "bg-green-100 text-green-800", data: {controller: "tooltip", tooltip_controller_value: "Hello"} do
+  #   <svg>...</svg>
+  #   Active
+  # <% end %>
+  def badge(text=nil, options = {}, &block)
+    text, options = nil, text if block_given?
     base = options.delete(:base) || "rounded py-0.5 px-2 text-xs inline-block font-semibold leading-normal mr-2"
     color = options.delete(:color) || "bg-gray-100 text-gray-800"
     options[:class] = Array.wrap(options[:class]) + [base, color]
-    tag.div(text, **options)
+    tag.div(text, **options, &block)
   end
 
   def title(page_title)
