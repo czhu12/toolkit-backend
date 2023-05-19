@@ -18,8 +18,9 @@ namespace :jumpstart do
   end
 end
 
-if which("erd") && Rake::Task.task_defined?("db:migrate")
-  Rake::Task["db:migrate"].enhance do
-    Rake::Task["jumpstart:erd"].invoke
-  end
-end
+# Uncomment if you'd like to update the erd diagram anytime migrations are run
+# if which("erd") && Rake::Task.task_defined?("db:migrate")
+#   Rake::Task["db:migrate"].enhance do
+#     Rake::Task["jumpstart:erd"].invoke
+#   end
+# end
