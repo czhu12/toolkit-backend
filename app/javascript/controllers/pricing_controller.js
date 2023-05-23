@@ -6,6 +6,7 @@ import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
   static targets = [ "toggle", "frequency", "plans" ]
+  static values = { frequency: String }
 
   connect() {
     // Classes toggle on the plan switcher items
@@ -15,6 +16,10 @@ export default class extends Controller {
     // Classes toggle on the plans
     this.activePlansClass   = (this.data.get("activePlansClass") || "flex").split(" ")
     this.inactivePlansClass = (this.data.get("inactivePlansClass") || "hidden").split(" ")
+
+    if (!this.hasFrequencyValue) {
+      this.frequencyValue = this.frequencyTargets[0].dataset.frequency
+    }
 
     // Remove any targets without plans in them
     this.frequencyTargets.forEach(target => {
@@ -26,8 +31,7 @@ export default class extends Controller {
     // Hide frequency toggle if we have less than 2 frequencies with plans
     if (this.frequencyTargets.length < 2) this._hideFrequencyToggle()
 
-    let frequency = this.data.get("active") || this.frequencyTargets[0].dataset.frequency
-    this._toggle(frequency)
+    this._toggle(this.frequencyValue)
   }
 
   // Switches visible plans
@@ -45,7 +49,7 @@ export default class extends Controller {
   // Expects: "monthly", "yearly", etc
   _toggle(frequency) {
     // Keep track of active frequency on a data attribute
-    this.data.set("active", frequency)
+    this.frequencyValue = frequency
 
     this.frequencyTargets.forEach(target => {
       if (target.dataset.frequency == frequency) {
