@@ -79,42 +79,8 @@ group :test do
   gem "webmock"
 end
 
-# Jumpstart dependencies
-gem "jumpstart", path: "lib/jumpstart", group: :omit
-
-gem "acts_as_tenant", "~> 0.6"
-gem "administrate", github: "excid3/administrate", branch: "jumpstart" # '~> 0.10.0'
-gem "administrate-field-active_storage", "~> 0.4.1"
-gem "cssbundling-rails", "~> 1.1.0"
-gem "country_select", "~> 8.0"
-gem "devise", "~> 4.9.0"
-gem "devise-i18n", "~> 1.10"
-gem "inline_svg", "~> 1.6"
-gem "invisible_captcha", "~> 2.0"
-gem "jsbundling-rails", "~> 1.1.0"
-gem "local_time", "~> 2.1"
-gem "name_of_person", "~> 1.0"
-gem "noticed", "~> 1.5"
-gem "oj", "~> 3.8", ">= 3.8.1"
-gem "omniauth", "~> 2.0", ">= 2.0.4"
-gem "omniauth-rails_csrf_protection", "~> 1.0"
-gem "pagy", "~> 6.0"
-gem "pay", "~> 6.2"
-gem "pg_search", "~> 2.3"
-gem "prawn", github: "prawnpdf/prawn"
-gem "prefixed_ids", "~> 1.2"
-gem "pretender", "~> 0.4.0"
-gem "pundit", "~> 2.1"
-gem "receipts", "~> 2.1"
-gem "rotp", "~> 6.2"
-gem "rqrcode", "~> 2.1"
-gem "ruby-oembed", "~> 0.16.0", require: "oembed"
-gem "whenever", "~> 1.0", require: false
-
-# Jumpstart manages a few gems for us, so install them from the extra Gemfile
-if File.exist?("config/jumpstart/Gemfile")
-  eval_gemfile "config/jumpstart/Gemfile"
-end
+# Jumpstart Pro dependencies
+eval_gemfile "Gemfile.jumpstart"
 
 # We recommend using strong migrations when your app is in production
 # gem "strong_migrations", "~> 0.7.6"
