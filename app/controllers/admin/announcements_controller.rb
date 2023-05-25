@@ -28,7 +28,7 @@ module Admin
     #  end
     # end
 
-    # See https://administrate-prototype.herokuapp.com/customizing_controller_actions
+    # See https://administrate-demo.herokuapp.com/customizing_controller_actions
     # for more information
   end
 end

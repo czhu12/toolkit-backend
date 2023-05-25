@@ -1,6 +1,6 @@
 module Admin
   class DashboardController < Admin::ApplicationController
-    # See https://administrate-prototype.herokuapp.com/customizing_controller_actions
+    # See https://administrate-demo.herokuapp.com/customizing_controller_actions
     # for more information
     def show
       @total_revenue = total_revenue
