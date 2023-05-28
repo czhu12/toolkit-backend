@@ -12,7 +12,7 @@ class Subscriptions::CancelsController < ApplicationController
       @subscription.cancel_now!(invoice_now: true)
 
     # Unpaid subscriptions are treated as canceled, so end them immediately
-    elsif @subscription.unpaid?
+    elsif @subscription.unpaid? || @subscription.past_due?
       @subscription.cancel_now!
 
     else
