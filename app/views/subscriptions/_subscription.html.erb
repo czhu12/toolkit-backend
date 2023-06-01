@@ -36,8 +36,8 @@
           </svg>
           <% if subscription.ends_at? %>
             <%= t(".ends_at", date: l(subscription.ends_at.to_date, format: :long)) %>
-          <% elsif subscription.paddle_paused_from %>
-            <%= t(".paused_at", date: l(subscription.paddle_paused_from.to_date, format: :long)) %>
+          <% elsif subscription.pause_starts_at %>
+            <%= t(".paused_at", date: l(subscription.pause_starts_at.to_date, format: :long)) %>
           <% end %>
         </div>
       <% elsif subscription.paused? %>
