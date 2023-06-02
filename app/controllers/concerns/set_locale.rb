@@ -5,11 +5,11 @@ module SetLocale
   extend ActiveSupport::Concern
 
   included do
-    before_action :set_locale
+    around_action :set_locale
   end
 
-  def set_locale
-    I18n.locale = find_locale
+  def set_locale(&action)
+    I18n.with_locale(find_locale, &action)
     @pagy_locale = I18n.locale.to_s
   end
 
