@@ -9,8 +9,8 @@ module SetLocale
   end
 
   def set_locale(&action)
-    I18n.with_locale(find_locale, &action)
     @pagy_locale = I18n.locale.to_s
+    I18n.with_locale(find_locale, &action)
   end
 
   # Uncomment this if you'd like the locale included in URLs by default
