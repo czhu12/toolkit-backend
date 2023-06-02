@@ -67,6 +67,8 @@ en:
       edit:
         are_you_sure: Are you sure?
         cancel_my_account: Delete my account
+        cancel_my_account_description: This will permanently erase all data associated with your account. This action cannot be undone.
+        cancel_my_account_confirm_description_html: This will permanently erase all data associated with your account. This action cannot be undone.<br/><br/>To verify, type your email address to confirm and delete your account.
         currently_waiting_confirmation_for_email: 'Currently waiting confirmation for: %{email}'
         leave_blank_if_you_don_t_want_to_change_it: leave blank if you don't want to change it
         title: Edit Profile
