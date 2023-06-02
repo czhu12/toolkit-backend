@@ -1,3 +1,13 @@
+# == Schema Information
+#
+# Table name: inbound_webhooks
+#
+#  id         :bigint           not null, primary key
+#  body       :text
+#  status     :integer          default("pending"), not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
 require "test_helper"
 
 class InboundWebhookTest < ActiveSupport::TestCase
