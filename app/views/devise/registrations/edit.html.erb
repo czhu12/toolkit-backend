@@ -54,7 +54,20 @@
 
       <div class="flex flex-wrap flex-end">
         <div class="flex-1">
-          <%= button_to t('.cancel_my_account'), registration_path(resource_name), data: { turbo_confirm: t("are_you_sure"), controller: "turbo-native--sign-out", action: "turbo-native--sign-out#deleteAccount" }, method: :delete, class: "btn btn-white primary" %>
+          <h3 class="mb-4"><%= t('.cancel_my_account') %></h3>
+          <p class="text-sm"><%= t(".cancel_my_account_description") %></p>
+          <div class="mt-2">
+            <%= button_to t('.cancel_my_account'), registration_path(resource_name),
+              method: :delete,
+              class: "btn btn-danger btn-outline primary",
+              data: {
+                controller: "turbo-native--sign-out",
+                action: "turbo-native--sign-out#deleteAccount",
+                turbo_confirm: t("are_you_sure"),
+                turbo_confirm_text: current_user.email,
+                turbo_confirm_description: t(".cancel_my_account_confirm_description_html")
+              } %>
+          </div>
         </div>
       </div>
 
