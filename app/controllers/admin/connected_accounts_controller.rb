@@ -15,7 +15,7 @@ module Admin
     #   ConnectedAccount.find_by!(slug: param)
     # end
 
-    # See https://administrate-prototype.herokuapp.com/customizing_controller_actions
+    # See https://administrate-demo.herokuapp.com/customizing_controller_actions
     # for more information
   end
 end
