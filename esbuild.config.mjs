@@ -25,6 +25,7 @@ const watchDirectories = [
   "./app/javascript/**/*.js",
   "./app/views/**/*.html.erb",
   "./app/assets/builds/**/*.css", // Wait for cssbundling changes
+  "./config/locales/*.yml",
 ]
 const config = {
   absWorkingDir: path.join(process.cwd(), "app/javascript"),
