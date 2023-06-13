@@ -47,7 +47,7 @@ group :development, :test do
   # gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
   # gem "pry-rails"
 
-  gem "annotate", github: "excid3/annotate_models", branch: "rails7"
+  gem "annotate", ">= 3.2.0"
   gem "letter_opener_web", "~> 2.0"
   gem "standard", require: false
   gem "erb_lint", require: false
