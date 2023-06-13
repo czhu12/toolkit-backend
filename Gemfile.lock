@@ -13,15 +13,6 @@ GIT
       selectize-rails (~> 0.6)
 
 GIT
-  remote: https://github.com/excid3/annotate_models.git
-  revision: 34ab955c72c414b83e0b4aacae419003a52a151d
-  branch: rails7
-  specs:
-    annotate (3.1.1)
-      activerecord (>= 3.2, < 7.1)
-      rake (>= 10.4, < 14.0)
-
-GIT
   remote: https://github.com/excid3/jbuilder.git
   revision: 394014adca00e39e5c773a694b4b3d5d224f7e71
   branch: partial-paths
@@ -121,6 +112,9 @@ GEM
     administrate-field-active_storage (0.4.2)
       administrate (>= 0.2.2)
       rails (>= 7.0)
+    annotate (3.2.0)
+      activerecord (>= 3.2, < 8.0)
+      rake (>= 10.4, < 14.0)
     ast (2.4.2)
     bcrypt (3.1.18)
     better_html (2.0.1)
@@ -468,7 +462,7 @@ DEPENDENCIES
   acts_as_tenant (~> 0.6)
   administrate!
   administrate-field-active_storage (~> 0.4.1)
-  annotate!
+  annotate (>= 3.2.0)
   bootsnap (>= 1.4.2)
   capybara (>= 3.26)
   country_select (~> 8.0)
