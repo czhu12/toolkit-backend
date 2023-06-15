@@ -20,6 +20,16 @@ class ApplicationClientTest < ActiveSupport::TestCase
     @client.send(:get, "/test", query: {foo: "bar"})
   end
 
+  test "get with query params as a string" do
+    stub_request(:get, "https://example.org/test").with(query: {"foo" => "bar"})
+    @client.send(:get, "/test", query: "foo=bar")
+  end
+
+  test "override BASE_URI by passing in full url" do
+    stub_request(:get, "https://other.org/test")
+    @client.send(:get, "https://other.org/test")
+  end
+
   test "post" do
     stub_request(:post, "https://example.org/test").with(body: {"foo" => {"bar" => "baz"}}.to_json)
     @client.send(:post, "/test", body: {foo: {bar: "baz"}})
@@ -148,6 +158,19 @@ class ApplicationClientTest < ActiveSupport::TestCase
     end
   end
 
+  test "parses link header" do
+    stub_request(:get, "https://example.org/pages").to_return(headers: {"Link" => "<https://example.org/pages?page=2>; rel=\"next\", <https://example.org/pages?page=1>; rel=\"prev\""})
+    response = @client.send(:get, "/pages")
+    assert_equal "https://example.org/pages?page=2", response.link_header[:next]
+    assert_equal "https://example.org/pages?page=1", response.link_header[:prev]
+  end
+
+  test "handles missing link header" do
+    stub_request(:get, "https://example.org/pages")
+    response = @client.send(:get, "/pages")
+    assert_equal({}, response.link_header)
+  end
+
   class CustomClientTest < ActiveSupport::TestCase
     class TestApiClient < ApplicationClient
       BASE_URI = "https://test.example.org"
@@ -159,6 +182,31 @@ class ApplicationClientTest < ActiveSupport::TestCase
       def content_type
         "application/xml"
       end
+
+      def all_pages
+        with_pagination("/pages", query: {per_page: 100}) do |response|
+          response.link_header[:next]
+        end
+      end
+
+      def all_projects
+        with_pagination("/projects", query: {per_page: 100}) do |response|
+          next_page = response.parsed_body.pagination.next_page
+          {page: next_page} if next_page
+        end
+      end
+    end
+
+    test "with_pagination and url" do
+      stub_request(:get, "https://test.example.org/pages?per_page=100").to_return(headers: {"Link" => "<https://test.example.org/pages?page=2>; rel=\"next\""})
+      stub_request(:get, "https://test.example.org/pages?per_page=100&page=2")
+      TestApiClient.new(token: "test").all_pages
+    end
+
+    test "with_pagination with query hash" do
+      stub_request(:get, "https://test.example.org/projects?per_page=100").to_return(body: {pagination: {next_page: 2}}.to_json, headers: {content_type: "application/json"})
+      stub_request(:get, "https://test.example.org/projects?per_page=100&page=2").to_return(body: {pagination: {prev_page: 1}}.to_json, headers: {content_type: "application/json"})
+      TestApiClient.new(token: "test").all_projects
     end
 
     test "get" do

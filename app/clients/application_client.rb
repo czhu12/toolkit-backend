@@ -76,6 +76,28 @@ class ApplicationClient
     {}
   end
 
+  # Loops through a URL with pagination
+  # Each request yields the response to the provide block
+  #
+  # The block should return a string URL or a hash of query parameters for the next page
+  # Return nil to stop paginating
+  def with_pagination(path, headers: {}, query: nil)
+    page_query = query.dup
+
+    loop do
+      next_page = yield get(path, headers: headers, query: page_query)
+
+      case next_page
+      when String
+        path = next_page
+      when Hash
+        page_query.merge!(next_page)
+      else
+        break
+      end
+    end
+  end
+
   # Make a GET request
   # Pass `headers: {}` to add or override default headers
   # Pass `query: {}` to add query parameters
@@ -163,11 +185,20 @@ class ApplicationClient
   def make_request(klass:, path:, headers: {}, body: nil, query: nil, form_data: nil)
     raise ArgumentError, "Cannot pass both body and form_data" if body.present? && form_data.present?
 
-    uri = URI("#{base_uri}#{path}")
+    # If a full URL is passed in, use that, otherwise append to the base URI
+    uri = path.start_with?("http") ? URI(path) : URI("#{base_uri}#{path}")
 
     # Merge query params with any currently in `path`
-    existing_params = Rack::Utils.parse_query(uri.query).with_defaults(default_query_params)
-    query_params = existing_params.merge(query || {})
+    query_params = Rack::Utils.parse_query(uri.query).with_defaults(default_query_params)
+
+    # Merge query params for this request
+    case query
+    when String
+      query_params.merge! Rack::Utils.parse_query(query)
+    when Hash
+      query_params.merge! query
+    end
+
     uri.query = Rack::Utils.build_query(query_params) if query_params.present?
 
     Rails.logger.debug("#{klass.name.split("::").last.upcase}: #{uri}")
@@ -254,6 +285,26 @@ class ApplicationClient
     # Returns a hash of headers with underscored names as symbols
     def headers
       @headers ||= original_response.each_header.to_h.transform_keys { |k| k.underscore.to_sym }
+    end
+
+    # Returns a hash of the Link header
+    # If there is no Link header, returns an empty hash
+    #
+    # For example:
+    #   <https://api.github.com/repositories/1300192/issues?page=2>; rel="prev", <https://api.github.com/repositories/1300192/issues?page=4>; rel="next", <https://api.github.com/repositories/1300192/issues?page=515>; rel="last", <https://api.github.com/repositories/1300192/issues?page=1>; rel="first"
+    #
+    #   {
+    #     next: "https://...",
+    #     prev: "https://...",
+    #     first: "https://...",
+    #     last: "https://...",
+    #   }
+    def link_header
+      @link_header ||= headers[:link]&.split(", ")&.map do |link|
+        rel = link[/rel="(.+)"/, 1].to_sym
+        url = link[/<(.+)>/, 1]
+        [rel, url]
+      end.to_h
     end
 
     # Removes charset and boundary and returns the mime type
