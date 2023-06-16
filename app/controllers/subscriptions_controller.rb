@@ -4,7 +4,7 @@ class SubscriptionsController < ApplicationController
   before_action :require_account
   before_action :require_current_account_admin, except: [:show]
   before_action :set_plan, only: [:new, :payment, :create, :update]
-  before_action :set_subscription, only: [:show, :edit, :update, :destroy]
+  before_action :set_subscription, only: [:show, :edit, :update]
   before_action :redirect_if_already_subscribed, only: [:new]
   before_action :redirect_to_billing_address, only: [:new]
   before_action :handle_past_due_or_unpaid, only: [:new]
