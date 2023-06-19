@@ -22,7 +22,7 @@
 <p>To create a button for OAuth, you will use the following:</p>
 <div class="not-prose">
   <pre><code>&lt;%= button_to omniauth_authorize_path(:user, :twitter), class: "btn btn-twitter m-1", data: { turbo: false, disable_with: t(".redirecting") } do %&gt;
-  &lt;%= social_icon :twitter, class: "mr-2" &gt;
+  &lt;%= social_icon :twitter, class: "mr-2" %&gt;
   &lt;%= t("shared.oauth.twitter") %&gt;
 &lt;% end %&gt;</code></pre>
 </div>
