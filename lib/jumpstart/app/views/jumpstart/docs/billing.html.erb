@@ -148,9 +148,9 @@
   <pre><code>&lt;% if !current_account.payment_processor&.default_payment_method %&gt;
   &lt;p&gt;First, add a payment method to your account:</p>
 
-  &lt;%= render 'cards/forms/stripe'    if Jumpstart.config.stripe? %&gt;
-  &lt;%= render 'cards/forms/braintree' if Jumpstart.config.braintree? %&gt;
-  &lt;%= render 'cards/forms/paypal'    if Jumpstart.config.paypal? %&gt;
+  &lt;%= render 'payment_methods/forms/stripe'    if Jumpstart.config.stripe? %&gt;
+  &lt;%= render 'payment_methods/forms/braintree' if Jumpstart.config.braintree? %&gt;
+  &lt;%= render 'payment_methods/forms/paypal'    if Jumpstart.config.paypal? %&gt;
 &lt;% else %&gt;
   &lt;%= render 'form', license: @license %&gt;
 &lt;% end %&gt;</code></pre>
