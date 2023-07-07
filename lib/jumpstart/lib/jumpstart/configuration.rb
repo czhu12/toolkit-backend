@@ -1,18 +1,20 @@
-require "jumpstart/configuration/gemfile"
-require "jumpstart/configuration/mailable"
-require "jumpstart/configuration/integratable"
-require "jumpstart/configuration/payable"
+require_relative "configuration/mailable"
+require_relative "configuration/integratable"
+require_relative "configuration/payable"
+require "erb"
 require "open-uri"
+require "psych"
 require "thor"
 
 module Jumpstart
+  def self.config
+    @config ||= Configuration.load!
+  end
+
   class Configuration
-    include ActiveModel::Model
-    include Thor::Actions
     include Mailable
     include Integratable
     include Payable
-    include Gemfile
 
     # Attributes
     attr_accessor :application_name
@@ -24,6 +26,8 @@ module Jumpstart
     attr_accessor :default_from_email
     attr_accessor :support_email
     attr_accessor :multitenancy
+    attr_accessor :apns
+    attr_accessor :fcm
     attr_writer :omniauth_providers
 
     def self.load!
@@ -38,7 +42,7 @@ module Jumpstart
     end
 
     def self.config_path
-      Rails.root.join("config", "jumpstart.yml")
+      File.join("config", "jumpstart.yml")
     end
 
     def self.create_default_config
@@ -46,27 +50,34 @@ module Jumpstart
     end
 
     def initialize(options = {})
-      assign_attributes(options)
-      self.application_name ||= "Jumpstart"
-      self.business_name ||= "Jumpstart Company, LLC"
-      self.domain ||= "example.com"
-      self.support_email ||= "support@example.com"
-      self.default_from_email ||= "Jumpstart <support@example.com>"
-      self.job_processor ||= "async"
+      @application_name = options["application_name"] || "Jumpstart"
+      @business_name = options["business_name"] || "Jumpstart Company, LLC"
+      @domain = options["domain"] || "example.com"
+      @support_email = options["support_email"] || "support@example.com"
+      @default_from_email = options["default_from_email"] || "Jumpstart <support@example.com>"
+      @background_job_processor = options["background_job_processor"] || "async"
+      @email_provider = options["email_provider"]
 
-      self.personal_accounts = true if personal_accounts.nil?
+      @personal_accounts = cast_to_boolean(options["personal_accounts"])
+      @personal_accounts = true if @personal_accounts.nil?
+
+      @register_with_account = cast_to_boolean(options["register_with_account"]) || false
+      @collect_billing_address = cast_to_boolean(options["collect_billing_address"])
+
+      @apns = cast_to_boolean(options["apns"])
+      @fcm = cast_to_boolean(options["fcm"])
+      @integrations = options["integrations"]
+      @omniauth_providers = options["omniauth_providers"]
+      @payment_processors = options["payment_processors"]
+      @multitenancy = options["multitenancy"]
     end
 
     def save
       # Creates config/jumpstart.yml
       File.write(self.class.config_path, to_yaml)
 
-      # Updates config/jumpstart/Gemfile
-      save_gemfile
-
       update_procfiles
       copy_configs
-
       generate_credentials
 
       # Change the Jumpstart config to the latest version
@@ -78,56 +89,48 @@ module Jumpstart
     end
 
     def omniauth_providers
-      Array.wrap(@omniauth_providers)
+      Array(@omniauth_providers)
     end
 
     def register_with_account=(value)
-      @register_with_account = ActiveModel::Type::Boolean.new.cast(value)
+      @register_with_account = cast_to_boolean(value)
     end
 
     def register_with_account?
-      @register_with_account.nil? ? false : ActiveModel::Type::Boolean.new.cast(@register_with_account)
+      @register_with_account.nil? ? false : cast_to_boolean(@register_with_account)
     end
 
     def solargraph=(value)
-      @solargraph = ActiveModel::Type::Boolean.new.cast(value)
+      @solargraph = cast_to_boolean(value)
     end
 
     def solargraph?
-      @solargraph.nil? ? false : ActiveModel::Type::Boolean.new.cast(@solargraph)
+      @solargraph.nil? ? false : cast_to_boolean(@solargraph)
     end
 
     def personal_accounts=(value)
-      @personal_accounts = ActiveModel::Type::Boolean.new.cast(value)
+      @personal_accounts = cast_to_boolean(value)
     end
 
     def personal_accounts
       # Enabled by default
-      @personal_accounts.nil? ? true : ActiveModel::Type::Boolean.new.cast(@personal_accounts)
-    end
-
-    def apns=(value)
-      @apns = ActiveModel::Type::Boolean.new.cast(value)
+      @personal_accounts.nil? ? true : cast_to_boolean(@personal_accounts)
     end
 
     def apns?
-      ActiveModel::Type::Boolean.new.cast(@apns || false)
-    end
-
-    def fcm=(value)
-      @fcm = ActiveModel::Type::Boolean.new.cast(value)
+      cast_to_boolean(@apns || false)
     end
 
     def fcm?
-      ActiveModel::Type::Boolean.new.cast(@fcm || false)
+      cast_to_boolean(@fcm || false)
     end
 
     def collect_billing_address=(value)
-      @collect_billing_address = ActiveModel::Type::Boolean.new.cast(value)
+      @collect_billing_address = cast_to_boolean(value)
     end
 
     def collect_billing_address?
-      ActiveModel::Type::Boolean.new.cast(@collect_billing_address || false)
+      cast_to_boolean(@collect_billing_address || false)
     end
 
     def update_procfiles
@@ -214,6 +217,14 @@ module Jumpstart
       end
     end
 
+    def model_name
+      ActiveModel::Name.new(self, nil, "Configuration")
+    end
+
+    def persisted?
+      false
+    end
+
     private
 
     def procfile_content(dev: false)
@@ -254,6 +265,25 @@ module Jumpstart
 
     def template_path(filename)
       Rails.root.join("lib/templates", filename)
+    end
+
+    FALSE_VALUES = [
+      false, 0,
+      "0", :"0",
+      "f", :f,
+      "F", :F,
+      "false", # :false,
+      "FALSE", :FALSE,
+      "off", :off,
+      "OFF", :OFF
+    ].to_set.freeze
+
+    def cast_to_boolean(value)
+      if value.nil? || value == ""
+        nil
+      else
+        !FALSE_VALUES.include?(value)
+      end
     end
   end
 end

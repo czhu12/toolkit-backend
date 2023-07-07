@@ -27,7 +27,7 @@ module Jumpstart
       end
 
       def payment_processors
-        Array.wrap(@payment_processors).map(&:to_sym)
+        Array(@payment_processors).map(&:to_sym)
       end
 
       def plans

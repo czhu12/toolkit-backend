@@ -295,7 +295,7 @@ Devise.setup do |config|
     end
   end
 
-  config.omniauth :developer if Rails.env.test?
+  config.omniauth :developer if Rails.env.test? && defined?(OmniAuth)
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

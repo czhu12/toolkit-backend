@@ -1,8 +1,6 @@
 module Jumpstart
   class Configuration
     module Integratable
-      extend ActiveSupport::Concern
-
       AVAILABLE_PROVIDERS = {
         "AirBrake" => "airbrake",
         "AppSignal" => "appsignal",

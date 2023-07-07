@@ -9,13 +9,8 @@
       <div class="font-weight-semibold"><%= integration_name %></div>
 
       <div class="custom-control custom-checkbox">
-        <% if Jumpstart::Configuration::Integratable.has_credentials?(name) %>
-          <%= check_box_tag "configuration[integrations][]", name, Jumpstart.config.integrations.include?(name), disabled: false, id: name, class: "form-checkbox" %>
+        <%= check_box_tag "configuration[integrations][]", name, Jumpstart.config.integrations.include?(name), disabled: false, id: name, class: "form-checkbox" %>
           <%= label_tag name, "Enable", class: "inline-block" %>
-        <% else %>
-          <%= check_box_tag "configuration[integrations][]", name, false, disabled: true, id: name, class: "form-checkbox" %>
-          <%= label_tag name, "Add credentials to enable", class: "inline-block" %>
-        <% end %>
       </div>
     </div>
   <% end %>

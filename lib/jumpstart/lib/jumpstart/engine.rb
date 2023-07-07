@@ -13,7 +13,6 @@ module Jumpstart
 
     config.before_initialize do
       Jumpstart.config = Jumpstart::Configuration.load!
-      Jumpstart.config.verify_dependencies!
     end
 
     config.to_prepare do

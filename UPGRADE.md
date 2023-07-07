@@ -1,3 +1,13 @@
+# Jumpstart Pro Upgrade Guide
+
+This file includes notes on major changes that might affect your application and require changes from you to update.
+
+### July 6, 2023
+
+`Gemfile.jumpstart` now replaces `config/jumpstart/Gemfile`. We no longer rewrite `config/jumpstart/Gemfile` each time the Jumpstart Pro configuration changes to keep things simpler and easier to work with.
+To upgrade, you will remove `config/jumpstart/Gemfile`. Gems will be automatically installed in `Gemfile.jumpstart` instead. You may need to modify this to specify versions if you had previously in the old file.
+Afterwards, you can run `bundle` to confirm all the same gems and versions are installed.
+
 ### April 20, 2023
 
 We've fixed a security issue that allows users to bypass 2FA. See [PR #656](https://github.com/jumpstart-pro/jumpstart-pro-rails/pull/656) for details.
