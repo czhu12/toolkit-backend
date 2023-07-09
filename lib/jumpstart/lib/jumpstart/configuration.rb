@@ -4,7 +4,6 @@ require_relative "configuration/payable"
 require "erb"
 require "open-uri"
 require "psych"
-require "thor"
 
 module Jumpstart
   def self.config
