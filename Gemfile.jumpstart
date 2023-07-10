@@ -37,6 +37,9 @@ gem "omniauth" if omniauth_providers.any?
 gem "omniauth-rails_csrf_protection", "~> 1.0" if omniauth_providers.any?
 gem "omniauth-twitter", github: "excid3/omniauth-twitter" if omniauth_providers.include?("twitter")
 gem "omniauth-facebook", github: "excid3/omniauth-facebook" if omniauth_providers.include?("facebook")
+gem "omniauth-github" if omniauth_providers.include?("github")
+gem "omniauth-google_oauth2" if omniauth_providers.include?("google_oauth2")
+gem "omniauth-microsoft_graph" if omniauth_providers.include?("microsoft_graph")
 
 # Integrations
 gem "airbrake" if Jumpstart.config.airbrake?
