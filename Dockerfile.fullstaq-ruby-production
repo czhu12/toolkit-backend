@@ -40,7 +40,6 @@ RUN curl -fsSLO --compressed "https://yarnpkg.com/downloads/$YARN_VERSION/yarn-v
 
 WORKDIR /app
 COPY ./Gemfile* /app/
-COPY ./config/jumpstart/Gemfile /app/config/jumpstart/
 COPY ./lib/jumpstart/ /app/lib/jumpstart/
 RUN bundle config --local without "development test omit" && bundle install --jobs $(nproc) --retry 5
 COPY package.json yarn.lock /app/
