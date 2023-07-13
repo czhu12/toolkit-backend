@@ -51,6 +51,7 @@ module Jumpstart
     def initialize(options = {})
       @application_name = options["application_name"] || "Jumpstart"
       @business_name = options["business_name"] || "Jumpstart Company, LLC"
+      @business_address = options["business_address"] || ""
       @domain = options["domain"] || "example.com"
       @support_email = options["support_email"] || "support@example.com"
       @default_from_email = options["default_from_email"] || "Jumpstart <support@example.com>"
