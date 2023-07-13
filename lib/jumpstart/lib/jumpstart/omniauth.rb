@@ -43,7 +43,7 @@ module Jumpstart
       enabled = {}
 
       AVAILABLE_PROVIDERS.each do |gem_name, details|
-        next unless has_credentials?(gem_name)
+        next unless enabled?(gem_name)
 
         provider = details[:provider]
         default_options = {}
