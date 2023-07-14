@@ -9,7 +9,7 @@ class Pay::CustomerDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
-    owner: Field::BelongsTo.with_options(class_name: "Account"),
+    owner: Field::Polymorphic.with_options(classes: [Account]),
     processor: Field::String,
     processor_id: Field::String,
     default: Field::Boolean,
