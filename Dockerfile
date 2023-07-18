@@ -73,7 +73,7 @@ RUN apt-get update -qq && \
 WORKDIR /app
 COPY ./Gemfile* /app/
 COPY ./lib/jumpstart/ /app/lib/jumpstart/
-COPY ./config/jumpstart.yml /app/config/jumpstart.yml
+COPY ./config/jumpstart.yml* /app/config/jumpstart.yml
 RUN bundle config --local without "staging production omit" && bundle install --jobs $(nproc) --retry 5
 COPY package.json yarn.lock /app/
 RUN yarn install
