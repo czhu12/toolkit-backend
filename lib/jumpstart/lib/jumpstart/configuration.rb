@@ -4,6 +4,7 @@ require_relative "configuration/payable"
 require "erb"
 require "open-uri"
 require "psych"
+require "set" # standard:disable Lint/RedundantRequireStatement
 
 module Jumpstart
   def self.config
