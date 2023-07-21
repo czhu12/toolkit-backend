@@ -4,5 +4,5 @@ class AccountRecord < ApplicationRecord
 
   self.abstract_class = true
 
-  acts_as_tenant :account
+  acts_as_tenant :account if defined? ActsAsTenant
 end

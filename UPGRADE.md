@@ -2,6 +2,16 @@
 
 This file includes notes on major changes that might affect your application and require changes from you to update.
 
+### July 21, 2023
+
+We've made a few gems optional, but still integrated in Jumpstart Pro:
+
+* ActsAsTenant
+* Oj
+* Whenever
+
+If you wish to continue using the gems, enable them in the Jumpstart Pro config at `http://localhost:3000/jumpstart#dependencies`
+
 ### July 6, 2023
 
 `Gemfile.jumpstart` now replaces `config/jumpstart/Gemfile`. We no longer rewrite `config/jumpstart/Gemfile` each time the Jumpstart Pro configuration changes to keep things simpler and easier to work with.

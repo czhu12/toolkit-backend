@@ -3,7 +3,7 @@ module SetCurrentRequestDetails
 
   included do |base|
     if base < ActionController::Base
-      set_current_tenant_through_filter
+      set_current_tenant_through_filter if defined? ActsAsTenant
       before_action :set_request_details
     end
   end
@@ -17,7 +17,7 @@ module SetCurrentRequestDetails
     # Account may already be set by the AccountMiddleware
     Current.account ||= account_from_domain || account_from_subdomain || account_from_param || account_from_session || fallback_account
 
-    set_current_tenant(Current.account)
+    set_current_tenant(Current.account) if defined? ActsAsTenant
   end
 
   def account_from_domain

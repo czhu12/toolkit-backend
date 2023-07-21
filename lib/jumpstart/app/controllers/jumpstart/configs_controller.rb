@@ -28,7 +28,6 @@ module Jumpstart
           :cancel_immediately,
           :email_provider,
           :personal_accounts,
-          :solargraph,
           :register_with_account,
           :apns,
           :fcm,
@@ -36,7 +35,8 @@ module Jumpstart
           integrations: [],
           omniauth_providers: [],
           payment_processors: [],
-          multitenancy: []
+          multitenancy: [],
+          gems: []
         )
     end
   end

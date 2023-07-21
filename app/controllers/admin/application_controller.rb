@@ -7,7 +7,7 @@
 module Admin
   class ApplicationController < Administrate::ApplicationController
     before_action :authenticate_admin
-    around_action :without_tenant
+    around_action :without_tenant if defined? ActsAsTenant
 
     helper all_helpers_from_path "app/helpers"
 

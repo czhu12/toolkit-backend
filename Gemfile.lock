@@ -104,9 +104,6 @@ GEM
       i18n (>= 1.6, < 2)
       minitest (>= 5.1)
       tzinfo (~> 2.0)
-    acts_as_tenant (0.6.1)
-      rails (>= 5.2)
-      request_store (>= 1.0.5)
     addressable (2.8.4)
       public_suffix (>= 2.0.2, < 6.0)
     administrate-field-active_storage (0.4.2)
@@ -138,7 +135,6 @@ GEM
       regexp_parser (>= 1.5, < 3.0)
       xpath (~> 3.2)
     childprocess (4.1.0)
-    chronic (0.10.2)
     chunky_png (1.4.0)
     concurrent-ruby (1.2.2)
     countries (5.5.0)
@@ -266,7 +262,6 @@ GEM
     noticed (1.6.3)
       http (>= 4.0.0)
       rails (>= 5.2.0)
-    oj (3.15.0)
     orm_adapter (0.5.0)
     overcommit (0.60.0)
       childprocess (>= 0.6.3, < 5)
@@ -332,8 +327,6 @@ GEM
       prawn-table (~> 0.2.1)
     redis (4.8.1)
     regexp_parser (2.8.1)
-    request_store (1.5.1)
-      rack (>= 1.4)
     responders (3.1.0)
       actionpack (>= 5.2)
       railties (>= 5.2)
@@ -433,8 +426,6 @@ GEM
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
-    whenever (1.0.0)
-      chronic (>= 0.6.3)
     xpath (3.2.0)
       nokogiri (~> 1.8)
     zeitwerk (2.6.8)
@@ -448,7 +439,6 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  acts_as_tenant (~> 0.6)
   administrate!
   administrate-field-active_storage (~> 0.4.1)
   annotate (>= 3.2.0)
@@ -470,7 +460,6 @@ DEPENDENCIES
   name_of_person (~> 1.0)
   nokogiri (>= 1.12.5)
   noticed (~> 1.5)
-  oj (~> 3.8, >= 3.8.1)
   overcommit
   pagy (~> 6.0)
   pay (~> 6.2)
@@ -495,7 +484,6 @@ DEPENDENCIES
   web-console (>= 4.1.0)
   webdrivers
   webmock
-  whenever (~> 1.0)
 
 RUBY VERSION
    ruby 3.2.0p0

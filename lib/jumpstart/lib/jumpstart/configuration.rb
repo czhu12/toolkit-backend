@@ -11,6 +11,10 @@ module Jumpstart
     @config ||= Configuration.load!
   end
 
+  def self.config=(value)
+    @config = value
+  end
+
   class Configuration
     include Mailable
     include Integratable
@@ -28,6 +32,7 @@ module Jumpstart
     attr_accessor :multitenancy
     attr_accessor :apns
     attr_accessor :fcm
+    attr_writer :gems
     attr_writer :omniauth_providers
 
     def self.load!
@@ -71,6 +76,7 @@ module Jumpstart
       @omniauth_providers = options["omniauth_providers"]
       @payment_processors = options["payment_processors"]
       @multitenancy = options["multitenancy"]
+      @gems = options["gems"]
     end
 
     def save
@@ -89,6 +95,10 @@ module Jumpstart
       (background_job_processor || "async").to_sym
     end
 
+    def gems
+      Array(@gems)
+    end
+
     def omniauth_providers
       Array(@omniauth_providers)
     end
@@ -99,14 +109,6 @@ module Jumpstart
 
     def register_with_account?
       @register_with_account.nil? ? false : cast_to_boolean(@register_with_account)
-    end
-
-    def solargraph=(value)
-      @solargraph = cast_to_boolean(value)
-    end
-
-    def solargraph?
-      @solargraph.nil? ? false : cast_to_boolean(@solargraph)
     end
 
     def personal_accounts=(value)
@@ -190,12 +192,6 @@ module Jumpstart
 
       if skylight?
         copy_template("config/skylight.yml")
-      end
-
-      if solargraph?
-        URI.open "https://gist.githubusercontent.com/castwide/28b349566a223dfb439a337aea29713e/raw/715473535f11cf3eeb9216d64d01feac2ea37ac0/rails.rb" do |gist|
-          File.write(Rails.root.join("config/definitions.rb"), gist.read)
-        end
       end
     end
 

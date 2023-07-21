@@ -10,7 +10,7 @@
 
       <div class="custom-control custom-checkbox">
         <%= check_box_tag "configuration[integrations][]", name, Jumpstart.config.integrations.include?(name), disabled: false, id: name, class: "form-checkbox" %>
-          <%= label_tag name, "Enable", class: "inline-block" %>
+        <%= label_tag name, "Enable", class: "inline-block" %>
       </div>
     </div>
   <% end %>

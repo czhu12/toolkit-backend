@@ -11,10 +11,6 @@ module Jumpstart
       g.scaffold_stylesheet false
     end
 
-    config.before_initialize do
-      Jumpstart.config = Jumpstart::Configuration.load!
-    end
-
     config.to_prepare do
       Administrate::ApplicationController.helper Jumpstart::AdministrateHelpers
     end

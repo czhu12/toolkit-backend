@@ -10,8 +10,8 @@
 
       <h4 class="mt-4 font-semibold mb-1 text-gray-800 dark:text-gray-100">Configuration</h4>
       <div>
-        <a class="block py-1 text-gray-700 dark:text-gray-200 no-underline hover:text-primary focus:outline-none" data-tabs-target="tab" data-action="click->tabs#change" href="#" id="application">Application</a>
-        <a class="block py-1 text-gray-700 dark:text-gray-200 no-underline hover:text-primary" data-tabs-target="tab" data-action="click->tabs#change" href="#" id="development">Development</a>
+        <a class="block py-1 text-gray-700 dark:text-gray-200 no-underline hover:text-primary" data-tabs-target="tab" data-action="click->tabs#change" href="#" id="application">Application</a>
+        <a class="block py-1 text-gray-700 dark:text-gray-200 no-underline hover:text-primary" data-tabs-target="tab" data-action="click->tabs#change" href="#" id="dependencies">Dependencies</a>
         <a class="block py-1 text-gray-700 dark:text-gray-200 no-underline hover:text-primary" data-tabs-target="tab" data-action="click->tabs#change" href="#" id="accounts">Accounts</a>
         <a class="block py-1 text-gray-700 dark:text-gray-200 no-underline hover:text-primary" data-tabs-target="tab" data-action="click->tabs#change" href="#" id="workers">Background Workers</a>
         <a class="block py-1 text-gray-700 dark:text-gray-200 no-underline hover:text-primary" data-tabs-target="tab" data-action="click->tabs#change" href="#" id="integrations">Integrations</a>
@@ -41,7 +41,7 @@
           <%= render "shared/flash" %>
         </div>
 
-        <% %w{ application development multitenancy workers integrations oauth payments email turbo_native users }.each do |name| %>
+        <% %w{ application dependencies multitenancy workers integrations oauth payments email turbo_native users }.each do |name| %>
           <div data-tabs-target="panel" class="hidden">
             <%= render name, f: f %>
           </div>

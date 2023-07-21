@@ -1,4 +1,5 @@
 # Use this file to easily define all of your cron jobs.
+# https://github.com/javan/whenever
 #
 # It's helpful, but not entirely necessary to understand cron before proceeding.
 # http://en.wikipedia.org/wiki/Cron
@@ -16,5 +17,3 @@
 # every 4.days do
 #   runner "AnotherModel.prune_old_records"
 # end
-
-# Learn more: http://github.com/javan/whenever
