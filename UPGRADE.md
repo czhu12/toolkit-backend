@@ -12,6 +12,10 @@ We've made a few gems optional, but still integrated in Jumpstart Pro:
 
 If you wish to continue using the gems, enable them in the Jumpstart Pro config at `http://localhost:3000/jumpstart#dependencies`
 
+The `solargraph` configuration option was also removed. We now recommend [Ruby LSP](https://github.com/Shopify/ruby-lsp) which is zero-dependency in VS Code.
+
+Rack-attack configuration has been added. It's recommended to enable throttling to stop malicious users and bots from overwhelming your application.
+
 ### July 6, 2023
 
 `Gemfile.jumpstart` now replaces `config/jumpstart/Gemfile`. We no longer rewrite `config/jumpstart/Gemfile` each time the Jumpstart Pro configuration changes to keep things simpler and easier to work with.
