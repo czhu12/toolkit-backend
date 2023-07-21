@@ -34,7 +34,7 @@ services:
   #   env: ruby
   #   plan: starter # no free option for bg workers
   #   region: oregon # the region must be consistent across all services for the internal keys to be read
-  #   buildCommand: "./bin/render-build-worker.sh"
+  #   buildCommand: "./bin/render-build-worker.sh --skip-migrate"
   #   startCommand: bundle exec sidekiq -e production
   #   envVars:
   #     - key: DATABASE_URL
