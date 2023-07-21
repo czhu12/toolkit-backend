@@ -25,6 +25,7 @@
 @import "components/trix";
 @import "components/typography";
 @import "components/util";
+@import "components/braintree";
 
 @import "tailwindcss/utilities";
 
