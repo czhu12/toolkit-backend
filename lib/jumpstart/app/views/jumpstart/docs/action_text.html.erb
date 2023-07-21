@@ -2,7 +2,7 @@
 
 <p class="text-xl">Action Text provides rich text fields for your applications where you can upload images, @mention users, and create other types of dynamic attachments.</p>
 
-<h2>Using Action Text</h2>
+<%= h2_with_anchor "Using Action Text" %>
 <p>Action Text is installed by default in Jumpstart Pro.</p>
 <p>Rich text fields are extremely easy to add. You can use the <code>rich_text</code> type when generating models and scaffolds and everything will be setup for you.</p>
 
@@ -15,7 +15,7 @@
 
 <p>Check out the <%= link_to "GoRails screencast episodes on Action Text", "https://gorails.com/episodes/tagged/ActionText", target: :_blank, class: "text-blue-500" %> and the <%= link_to "Action Text Rails Guide", "https://edgeguides.rubyonrails.org/action_text_overview.html", target: :_blank, class: "text-blue-500" %> for more information on how to use Action Text.</p>
 
-<h2>User Mentions (@mentions)</h2>
+<%= h2_with_anchor "User Mentions (@mentions)" %>
 <p>We have preinstalled Action Text for you in Jumpstart Pro and added User mentions so you can easily reference users. By default, it will only search users of the current account. You can modify this to search all users depending on your needs.</p>
 <p>Scaffolds have been modified to automatically enable this feature for <code>rich_text_area</code> fields.</p>
 <p>You can add it to your own rich_text_area by simply adding the following Stimulus data attributes:</p>

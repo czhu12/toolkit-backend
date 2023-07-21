@@ -3,18 +3,12 @@
 <p class="text-xl">Use this system as a starting point for your own template. We created a set of UI components commonly seen in the wild. Tailor them and/or your Tailwind configuration to meet your own needs</p>
 <p>To the left are sections of components and their relative code snippets. You're welcome to change anything to match your own branding.</p>
 
-<h3>Tailwind CSS</h3>
+<%= h2_with_anchor "TailwindCSS" %>
 <p>Jumpstart Pro utilizes <a class="link" href="https://tailwindcss.com" target="_blank">Tailwind CSS</a> as a utility-first approach towards designing an application. Refer to the documentation to understand how it works and to configure for your own needs.</p>
 <p>TailwindCSS is configured to automatically purge styles and watches your Rails helpers, views, and Javascript files for CSS classes.</p>
-<p>The official TailwindCSS plugins are included by default:</p>
-<ul>
-  <li><%= link_to "@tailwindcss/aspect-ratio", "https://github.com/tailwindlabs/tailwindcss-aspect-ratio", target: :_blank %></li>
-  <li><%= link_to "@tailwindcss/forms", "https://github.com/tailwindlabs/tailwindcss-forms", target: :_blank %></li>
-  <li><%= link_to "@tailwindcss/typography", "https://github.com/tailwindlabs/tailwindcss-typography", target: :_blank %></li>
-</ul>
-<p>Be sure to modify the <code>tailwind.config.js</code> file to include any additional colors, fonts, and other customizations.</p>
+<p>You can modify the <code>tailwind.config.js</code> file to include any additional colors, fonts, and other customizations.</p>
 
-<h3>How to Use Tailwind UI with Jumpstart Pro</h3>
+<%= h2_with_anchor "TailwindUI" %>
 <p><%= link_to "TailwindUI", "https://tailwindui.com", target: :_blank %> is a set of components you can purchase from the TailwindCSS team. It's a wonderful complement to Jumpstart Pro for adding beautifully designed cards, layouts, and other components to your application.</p>
 <p>Simply copy and paste TailwindUI components into your Jumpstart Pro application. There is no additional configuration needed to use TailwindUI components.</p>
 <p>Jumpstart Pro includes default styles for HTML elements to provide a nice experience with or without TailwindUI. Some of these styles may conflict with TailwindUI components, so you may need additional classes applied to override these default styles. You can also comment out the default styles in the CSS files if you would like to take that approach instead.</p>
@@ -25,7 +19,7 @@
   </div>
 </div>
 
-<h4>TailwindCSS Purging</h4>
+<%= h2_with_anchor "Purging Unused CSS" %>
 <p>When Tailwind compiles CSS, it will read each file in the <code>content: []</code> config entry. These files are searched for references to TailwindCSS classes and <em>only</em> the classes in these files will be in the final output.</p>
 <p>These files are not evaluated, so you must use the full class name. Dynamically generated classes <u>will not work</u>.</p>
 
@@ -38,7 +32,7 @@
 &lt;div class="&lt;%= color %&gt;"&gt;&lt;/div&gt;
 </code></pre>
 
-<h4>Having trouble with TailwindCSS picking up changes?</h4>
+<%= h2_with_anchor "Debugging" %>
 <p>Sometimes you may run into an issue where you add a TailwindCSS class and it seems to not be generated. Here are a few steps you can use for debugging:</p>
 
 <ul>

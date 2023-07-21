@@ -1,9 +1,8 @@
 <% content_for :section_title, "Forms" %>
 
-<h2>Forms</h2>
 <p>We've included the <%= link_to "TailwindCSS Forms", "https://github.com/tailwindlabs/tailwindcss-forms", target: :_blank %> plugin to provide default styling for form fields.</p>
 
-<h4>Block Layout</h4>
+<%= h3_with_anchor "Block Layout" %>
 <%= render "jumpstart/docs/snippet" do %>
   <form action="#">
 
@@ -112,7 +111,7 @@
   </form>
 <% end %>
 
-<h3>Inline Layout</h3>
+<%= h3_with_anchor "Inline Layout" %>
 <%= render "jumpstart/docs/snippet" do %>
   <form action="#">
     <div class="flex flex-wrap items-center justify-start form-group">
@@ -169,7 +168,7 @@
   </form>
 <% end %>
 
-<h2>Date & Time Fields with Flatpickr</h2>
+<%= h3_with_anchor "Date & Time Fields" %>
 <p class="mb-3">We're using <%= link_to "stimulus-flatpickr", "https://github.com/adrienpoly/stimulus-flatpickr", target: :_blank %> to enable this functionality. You can customize this to whatever you need as it supports everything Flatpickr does.</p>
 
 <div class="form-group">

@@ -1,28 +1,26 @@
-<h2>Modals</h2>
+<%= h2_with_anchor "Modals" %>
 <p>Modals are implemented using the Stimulus <code>modal_controller</code> or overriding the Turbo confirm method.</p>
 
-<h4>Confirm Dialog</h4>
+<%= h4_with_anchor "Confirm Modals" %>
 <%= render "jumpstart/docs/snippet" do %>
-  <%= button_to "Confirm Modal", request.path, method: :get, class: "btn btn-tertiary", data: { turbo_confirm: "Are you sure?" } %>
-<% end %>
+  <div class="flex gap-4">
+    <%= button_to "Confirm Modal", request.path, method: :get, class: "btn btn-tertiary", data: { turbo_confirm: "Are you sure?" } %>
 
-<%= render "jumpstart/docs/snippet" do %>
-  <%= button_to "Confirm Modal with Description", request.path, method: :get, class: "btn btn-tertiary", form: {
-    data: {
-      turbo_confirm: "Are you sure?",
-      turbo_confirm_description: "<p>This is a description for the confirmation modal.</p><p>It can contain any HTML you need.</p>"
-    }
-  } %>
-<% end %>
+    <%= button_to "Confirm with Description", request.path, method: :get, class: "btn btn-tertiary", form: {
+      data: {
+        turbo_confirm: "Are you sure?",
+        turbo_confirm_description: "<p>This is a description for the confirmation modal.</p><p>It can contain any HTML you need.</p>"
+      }
+    } %>
 
-<%= render "jumpstart/docs/snippet" do %>
-  <%= button_to "Confirm Modal with Required Text", request.path, method: :get, class: "btn btn-tertiary", form: {
-    data: {
-      turbo_confirm: "Are you sure?",
-      turbo_confirm_text: "permanently delete",
-      turbo_confirm_description: "<p>To confirm, please enter the text \"permanently delete\".</p>"
-    }
-  } %>
+    <%= button_to "Confirm with Text", request.path, method: :get, class: "btn btn-tertiary", form: {
+      data: {
+        turbo_confirm: "Are you sure?",
+        turbo_confirm_text: "permanently delete",
+        turbo_confirm_description: "<p>To confirm, please enter the text \"permanently delete\".</p>"
+      }
+    } %>
+  </div>
 <% end %>
 
 <h4>Small Modal</h4>

@@ -1,11 +1,11 @@
 <% content_for :section_title, "API Clients" %>
 
-<h2>API Clients</h2>
+<%= h2_with_anchor "API Clients" %>
 <p>Jumpstart Pro includes a built-in API client generator. You can use it to create your own API clients for integrations with any API you would like.</p>
 <p>As developers, it's easy to reach for Rubygems, but each dependency we add makes it harder to maintain your application. We've found that we need to fork most API Rubygems to fix bugs or implement API features that aren't supported yet in the library.</p>
 <p>Now, our default is to build an API client ourselves. It's easy to maintain, doesn't break from external changes, and only implements the features we need. We've made this available to Jumpstart Pro users to more easily take advantage of building their own API clients.</p>
 
-<h3>Creating an API Client</h3>
+<%= h2_with_anchor "Creating API Clients" %>
 <p>Run the API client Rails generator to create an API client.</p>
 <div class="not-prose">
   <pre><code>rails g api_client OpenAi</code></pre>
@@ -66,6 +66,6 @@
 end</code></pre>
 </div>
 
-<h2>ApplicationClient</h2>
+<%= h2_with_anchor "ApplicationClient" %>
 <p>ApplicationClient is the base class that API clients inherit from. It provides methods for <code>get</code>, <code>post</code>, <code>patch</code>, <code>put</code>, and <code>delete</code>. It also handles authorization using the Authorization header and parsing response bodies as JSON.</p>
 <p>You can override these methods in your API client to match your API. For example, if you need to parse XML instead of JSON, override the <code>parse_response</code> method and use Nokogiri instead.</p>

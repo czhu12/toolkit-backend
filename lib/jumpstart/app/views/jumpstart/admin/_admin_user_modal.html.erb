@@ -5,7 +5,7 @@
     <!-- Modal Inner Container -->
     <div class="fixed top-0 left-0 w-full h-full relative">
       <!-- Modal Card -->
-      <div class="w-screen h-screen bg-white">
+      <div class="w-screen h-screen bg-white dark:bg-gray-900">
         <div class="flex flex-wrap justify-center items-center h-screen">
           <div class="w-2/3 m-auto">
 
@@ -18,22 +18,22 @@
 
                 <div class="form-group">
                   <%= form.label :name %>
-                  <%= form.text_field :name, class: "form-control" %>
+                  <%= form.text_field :name, class: "form-control", required: true %>
                 </div>
 
                 <div class="form-group">
                   <%= form.label :email %>
-                  <%= form.email_field :email, class: "form-control" %>
+                  <%= form.email_field :email, class: "form-control", required: true %>
                 </div>
 
                 <div class="form-group">
                   <%= form.label :password %>
-                  <%= form.password_field :password, class: "form-control" %>
+                  <%= form.password_field :password, class: "form-control", required: true %>
                 </div>
 
                 <div class="form-group">
                   <%= form.label :time_zone %>
-                  <%= form.time_zone_select :time_zone, nil, { default: browser_time_zone.name }, { class: "form-control" } %>
+                  <%= form.time_zone_select :time_zone, nil, { default: browser_time_zone.name }, { class: "form-control", required: true } %>
                 </div>
 
                 <div class="flex justify-end items-center flex-wrap mt-6">

@@ -2,10 +2,10 @@
 
 <p class="mtext-xl text-gray-700 dark:text-gray-200 leading-normal">You can clone Jumpstart Pro from our Git repository and merge updates at any time.</p>
 
-<h2>Using Jumpstart Pro with Git</h2>
+<%= h2_with_anchor "Using Jumpstart Pro with Git" %>
 <p>Git provides an easy way to merge changes from Jumpstart Pro into your application. This is handy when new features or improvements are added to Jumpstart Pro and you'd like to merge them into your application.</p>
 
-<h4>Clone Jumpstart Pro</h4>
+<%= h4_with_anchor "Clone The Repository" %>
 <p>First, you'll need to clone Jumpstart Pro from GitHub when you create your application. We'll call our application <code>my-app</code>, but you should change it to your application name.</p>
 
 <div class="not-prose">
@@ -16,7 +16,7 @@ git remote rename origin jumpstart</code></pre>
 
 <p class="text-sm">This example shows the Rails repository, but you'll want to change this for iOS or Android.</p>
 
-<h4>Create a git repository</h4>
+<%= h4_with_anchor "Create Your Git Repository" %>
 <p>Now that we have a clone of Jumpstart Pro, we need to create a GitHub repository to host our application.</p>
 
 <p class="flex gap-2">
@@ -32,8 +32,10 @@ git remote rename origin jumpstart</code></pre>
 git push -u origin main</code></pre>
 </div>
 
-<h4>Merging updates from Jumpstart Pro</h4>
-<p>We'll use git to fetch and merge updates into your application.</p>
+<%= link_to "#jsp-git-merge", class: "no-underline" do %>
+  <h4 id="jsp-git-merge">Merging updates from Jumpstart Pro</h4>
+<% end %>
+<p>Then We can use git to fetch and merge updates into your application.</p>
 
 <div class="not-prose">
   <pre class="lang-bash"><code>git fetch jumpstart

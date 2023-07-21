@@ -1,4 +1,4 @@
-<h2>Tooltips</h2>
+<%= h2_with_anchor "Tooltips" %>
 <p>Our tooltips are powered by <%= link_to "Tippy.js", "https://atomiks.github.io/tippyjs/", class: "link" %>. We've wrapped them in a Stimulus controller so you can easily add them anywhere in your application.</p>
 <p>Add a <code>data-controller="tooltip" data-tippy-content="My tooltip"</code> to the element you want to add the tooltip to. You can set options using data attributes without writing any JS.</p>
 
@@ -6,7 +6,7 @@
 <button class="btn btn-primary" data-controller="tooltip" data-tippy-content="I'm a Tippy tooltip!" data-tippy-delay="0" data-tippy-arrow="true" data-tippy-size="regular" data-tippy-animation="fade">Hover over me</button>
 <% end %>
 
-<h4>Clipboard Buttons</h4>
+<%= h4_with_anchor "Clipboard Buttons" %>
 <p>You can use the clipboard controller to copy text to the clipboard (with tooltips on success).</p>
 <p>Add <code>data-controller="clipboard" data-clipboard-text="Text for clipboard"</code> to the element.</p>
 

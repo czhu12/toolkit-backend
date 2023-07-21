@@ -1,7 +1,6 @@
 <% content_for :section_title, "Buttons" %>
 
-<h3>Default</h3>
-
+<%= h2_with_anchor "Default" %>
 <%= render "jumpstart/docs/snippet" do %>
   <div class="space-y-4">
     <button class="btn btn-primary mr-2">Primary</button>
@@ -17,8 +16,7 @@
   </div>
 <% end %>
 
-<h3>Block</h3>
-
+<%= h2_with_anchor "Block" %>
 <%= render "jumpstart/docs/snippet" do %>
   <div class="space-y-4">
     <button class="btn btn-block btn-tertiary btn-outline mr-2">
@@ -27,7 +25,7 @@
   </div>
 <% end %>
 
-<h3>Outlined</h3>
+<%= h2_with_anchor "Outlined" %>
 <%= render "jumpstart/docs/snippet" do %>
   <div class="space-y-4">
     <a href="#" class="btn btn-primary btn-outline mr-2">Primary</a>
@@ -37,7 +35,7 @@
   </div>
 <% end %>
 
-<h3>Small</h3>
+<%= h2_with_anchor "Small" %>
 <%= render "jumpstart/docs/snippet" do %>
   <div class="space-y-4">
     <button class="btn btn-small btn-primary mr-2">Primary</button>
@@ -50,7 +48,7 @@
   </div>
 <% end %>
 
-<h3>Large</h3>
+<%= h2_with_anchor "Large" %>
 <%= render "jumpstart/docs/snippet" do %>
   <div class="space-y-4">
     <button class="btn btn-large btn-primary mr-2">Primary</button>
@@ -63,7 +61,7 @@
   </div>
 <% end %>
 
-<h3>Default with Icon</h3>
+<%= h2_with_anchor "Button with Icon" %>
 <p>See the <%= link_to "Icons documentation", icons_docs_path %> for rendering SVGs inline.</p>
 
 <div class="not-prose">
@@ -106,7 +104,7 @@
   </div>
 <% end %>
 
-<h3>Disabled</h3>
+<%= h2_with_anchor "Disabled" %>
 <%= render "jumpstart/docs/snippet" do %>
   <div class="space-y-4">
     <button class="btn btn-primary mr-2" disabled><%= button_text "Primary" %></button>

@@ -35,12 +35,10 @@
   <body class="h-full overflow-x-hidden font-sans font-normal leading-normal bg-offwhite dark:bg-gray-900 dark:text-gray-50" data-controller="theme" data-theme-preference-value="<%= current_user&.theme %>">
     <%= render partial: "shared/flash" %>
 
-    <div class="flex flex-wrap items-start main">
-      <div class="flex w-full px-4 py-4 md:w-1/5 md:max-w-[300px] lg:p-8">
-        <%= render partial: "jumpstart/docs/nav" %>
-      </div>
+    <div class="sm:flex">
+      <%= render partial: "jumpstart/docs/nav" %>
 
-      <div class="flex-grow flex flex-col w-full h-full bg-white dark:bg-gray-900 dark:text-gray-50 border-l border-gray-200 dark:border-gray-700 md:w-4/5 docs-main">
+      <div class="flex-grow flex flex-col h-full bg-white dark:bg-gray-900 dark:text-gray-50 border-l border-gray-200 dark:border-gray-700 docs-main">
         <% if content_for :section_title %>
           <div class="px-4 py-10 mb-6 text-white bg-primary-500 dark:bg-primary-900 md:px-20 lg:px-40">
             <h1 class="font-black"><%= yield :section_title %></h1>

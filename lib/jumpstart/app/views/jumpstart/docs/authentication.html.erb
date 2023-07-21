@@ -2,11 +2,11 @@
 
 <p class="text-xl">User registration, authentication, forgotten passwords, social logins with OAuth, and more.</p>
 
-<h2>Authentication with Devise</h2>
+<%= h2_with_anchor "Authentication with Devise" %>
 <p>Jumpstart Pro uses Devise for user registration and authentication. This library is well tested and receives regular security updates allowing you to focus on your business.</p>
 <p>If you would like to collect other information on registration, you can add the fields to the devise views in <code>app/views/devise</code> and permit the additional params in <code>application_controller.rb</code>.</p>
 
-<h2>Social Login / OAuth with Omniauth Providers</h2>
+<%= h2_with_anchor "Social Login / OAuth with Omniauth Providers" %>
 <p>Devise is preconfigured to connect with Omniauth providers so users can register or sign in with their social accounts.</p>
 <p>We automatically handle the various situations that can arise with social auth:</p>
 
@@ -30,9 +30,9 @@
 <p>This makes a POST request to our Rails app. OmniAuth handles the request and redirects to the OAuth provider for login. This POST request is required for security.</p>
 <p><code>data-turbo="false"</code> is important because we are redirecting to an external site after making a POST request to Rails. Disabling Turbo on the request tells it to allow the external redirect.</p>
 
-<p>By default, OmniAuth callbacks controller will create a <code>ConnectedAccount</code> record and associate it with <code>current_user</code>.
+<p>By default, OmniAuth callbacks controller will create a <code>ConnectedAccount</code> record and associate it with <code>current_user</code>.</p>
 
-<h4>Associate ConnectedAccount with other models</h4>
+<%= h2_with_anchor "Associate ConnectedAccount with other models" %>
 <p>If you would like to associate the <code>ConnectedAccount</code> with a different model, you can pass in the <code>record</code> param set to a Signed GlobalID. The callback controller will detect this and use this as the owner of the ConnectedAccount record.</p>
 <p>Here we will associate the Twitter <code>ConnectedAccount</code> with the <code>current_account</code>. Optionally, you can set the <code>redirect_to</code> to send the user to a different location afterwards.</p>
 <div class="not-prose">
@@ -42,7 +42,7 @@
 &lt;% end %&gt;</code></pre>
 </div>
 
-<h2>Working with Connected Account OAuth Data And Tokens</h2>
+<%= h2_with_anchor "Working with Connected Account Data" %>
 <p>The User model <code>has_many :connected_accounts</code> which you can use to access the data collected from the accounts such as credentials and user information.</p>
 <p>We automatically generate a scope for each provider, so you can filter out connected accounts easily: <code>@user.connected_accounts.twitter.first</code></p>
 <p>If you would like to do something after connecting an OAuth account, you can add a method to the OmniauthCallbacksController for the provider and it will be called after the account is connected.</p>
