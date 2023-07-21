@@ -3,7 +3,6 @@
 <% end %>
 
 <% if Jumpstart.config.braintree? || Jumpstart.config.paypal? %>
-  <%= stylesheet_link_tag "components/dropin", media: "all", "data-turbo-track": "reload" %>
   <%= javascript_include_tag 'https://js.braintreegateway.com/web/dropin/1.20.2/js/dropin.min.js' %>
 <% end %>
 
