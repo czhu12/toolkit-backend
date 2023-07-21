@@ -3,10 +3,10 @@
     <%= local_relative_time announcement.published_at, 'weekday-or-date' %>
   <% end %>
 
-  <h2 class="font-semibold text-gray-900 text-lg mb-2"><%= announcement.title %></h2>
+  <h2 class="font-semibold text-gray-900 text-lg mb-2 dark:text-gray-100"><%= announcement.title %></h2>
   <%= badge announcement.kind.humanize.titleize, class: "mb-2", color: announcement_color(announcement) %>
 
-  <div class="text-gray-700 text-sm">
+  <div class="text-gray-700 text-sm dark:text-gray-300">
     <%= announcement.description %>
   </div>
 </div>
