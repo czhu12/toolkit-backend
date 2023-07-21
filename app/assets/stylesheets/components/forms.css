@@ -98,7 +98,8 @@ form.inline {
 }
 
 .form-checkbox {
-  @apply rounded border-gray-300 text-primary-600 focus:ring-primary-600 dark:border-white/10 dark:bg-white/5 dark:focus:ring-offset-gray-900;
+  @apply rounded border-gray-300 text-primary-600 focus:ring-primary-600;
+  @apply dark:border-white/10 dark:checked:bg-current dark:bg-white/5 dark:focus:ring-offset-gray-900;
 
   &[disabled] {
     @apply bg-gray-200 dark:bg-gray-600;
