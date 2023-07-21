@@ -1,15 +1,15 @@
-<div class="lg:w-1/3 w-full p-8 border border-gray-200 m-4 rounded-lg bg-white">
+<div class="lg:w-1/3 w-full p-8 bg-white border border-gray-200 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-50 m-4 rounded-lg">
   <h4 class="mb-4"><%= plan.name %></h4>
 
   <div class="mb-4">
     <span class="text-5xl font-bold"><%= plan.amount_with_currency(strip_insignificant_zeros: true) %></span>
-    <span class="text-lg text-gray-500 font-medium">
+    <span class="text-lg text-gray-500 dark:text-gray-300 font-medium">
       <% if plan.unit_label? %>/ <%= plan.unit_label %><% end %>
       / <%= plan.interval %>
     </span>
   </div>
 
-  <p class="mb-4 text-gray-500"><%= plan.description %></p>
+  <p class="mb-4 text-gray-500 dark:text-gray-300"><%= plan.description %></p>
 
   <div class="mb-8">
     <% plan.features.each do |plan_feature| %>

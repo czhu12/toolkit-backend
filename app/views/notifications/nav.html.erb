@@ -2,11 +2,11 @@
   <%= render partial: "notifications/notification", collection: @notifications.limit(10), cached: true %>
 
   <% if @notifications.any? %>
-    <%= link_to "See more notifications", notifications_path, class: "block px-4 py-3 text-gray-700 font-medium hover:bg-gray-100" %>
+    <%= link_to "See more notifications", notifications_path, class: "block px-4 py-3 text-gray-700 dark:text-gray-300 font-medium hover:bg-gray-100" %>
   <% end %>
 
   <div class="hidden p-4 text-center only:block">
     <div class="mb-2"><%= t("notifications.empty") %></div>
-    <div class="text-gray-600"><%= t("notifications.empty_description") %></div>
+    <div class="text-gray-600 dark:text-gray-300/75"><%= t("notifications.empty_description") %></div>
   </div>
 <% end %>

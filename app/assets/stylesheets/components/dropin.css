@@ -1,0 +1,195 @@
+/* =========================================================================
+   General
+   ========================================================================= */
+
+/* =========================================================================
+   Loaders
+   ========================================================================= */
+
+/* =========================================================================
+   Headings
+   ========================================================================= */
+:is(.dark .braintree-placeholder,
+.braintree-heading) {
+  color: #d4d4d4;
+}
+:is(.dark .braintree-icon--bordered) {
+  background: #FFFFFF;
+  border: 1px solid #BBBBBB;
+}
+/* =========================================================================
+   Upper Container
+   ========================================================================= */
+:is(.dark .braintree-upper-container:before) {
+  background-color: #FAFAFA;
+  border: 1px solid #B5B5B5;
+}
+/* =========================================================================
+   Payment Options
+   ========================================================================= */
+:is(.dark .braintree-option) {
+  background-color: #171717;
+  border-color: #B5B5B5;
+}
+:is(.dark .braintree-option:hover) {
+  background: #404040;
+}
+:is(.dark .braintree-option.braintree-disabled) {
+  background: #EAEAEA;
+}
+:is(.dark .braintree-option.braintree-disabled .braintree-option__label) {
+  color: #787878;
+}
+:is(.dark .braintree-option.braintree-disabled .braintree-option__disabled-message span) {
+  border-bottom: 1px solid #B5B5B5;
+}
+:is(.dark .braintree-option .braintree-option__label) {
+  color: #d4d4d4;
+}
+/* =========================================================================
+   Apple Pay buttons
+   ========================================================================= */
+@supports not (-webkit-appearance: -apple-pay-button) {
+  :is(.dark .apple-pay-button-black) {
+    background-image: -webkit-named-image(apple-pay-logo-white);
+    background-color: black;
+  }
+  :is(.dark .apple-pay-button-white) {
+    background-image: -webkit-named-image(apple-pay-logo-black);
+    background-color: white;
+  }
+  :is(.dark .apple-pay-button-white-with-line) {
+    background-image: -webkit-named-image(apple-pay-logo-black);
+    background-color: white;
+    border: 0.5px solid black;
+  }
+}
+/* =========================================================================
+   Sheets
+   ========================================================================= */
+:is(.dark .braintree-sheet) {
+  background-color: #171717;
+  border: 1px solid #B5B5B5;
+}
+:is(.dark .braintree-sheet--has-error .braintree-sheet) {
+  border: 2px solid #CA2A2A;
+}
+:is(.dark .braintree-sheet--has-error .braintree-methods--edit .braintree-method) {
+  border-left: 2px solid #CA2A2A;
+  border-right: 2px solid #CA2A2A;
+}
+:is(.dark .braintree-sheet--has-error .braintree-methods--edit .braintree-method:first-child) {
+  border-top: 2px solid #CA2A2A;
+}
+:is(.dark .braintree-sheet--has-error .braintree-methods--edit .braintree-method:last-child) {
+  border-bottom: 2px solid #CA2A2A;
+}
+:is(.dark .braintree-sheet--has-error .braintree-sheet__error) {
+  color: #CA2A2A;
+}
+:is(.dark .braintree-sheet--has-error .braintree-sheet__error .braintree-sheet__error-icon use) {
+  fill: #CA2A2A;
+}
+:is(.dark .braintree-sheet--has-error .braintree-sheet__error .braintree-sheet__error-text) {
+  color: #CA2A2A;
+}
+:is(.dark .braintree-show-methods .braintree-sheet--active.braintree-sheet--has-error .braintree-sheet) {
+  border-color: #CA2A2A;
+}
+:is(.dark .braintree-show-methods .braintree-sheet--active .braintree-sheet) {
+  border-color: #219653;
+}
+:is(.dark .braintree-sheet__header) {
+  border-bottom: 1px solid #B5B5B5;
+}
+:is(.dark .braintree-sheet__header .braintree-sheet__text) {
+  color: #FFFFFF;
+}
+/* =========================================================================
+   Input Forms
+   ========================================================================= */
+:is(.dark .braintree-form__hosted-field iframe) {
+  background-color: #171717;
+}
+:is(.dark .braintree-sheet__content--form .braintree-form__field-group .braintree-form__label) {
+  color: #FFFFFF;
+}
+:is(.dark .braintree-sheet__content--form .braintree-form__field-group .braintree-form__descriptor) {
+  color: #FFFFFF;
+}
+/* =========================================================================
+   Payment Methods
+   ========================================================================= */
+:is(.dark .braintree-method) {
+  background-color: white;
+  border-color: #B5B5B5;
+}
+:is(.dark .braintree-method .braintree-method__label) {
+  color: #000000;
+}
+:is(.dark .braintree-method .braintree-method__icon) {
+  background-color: #FAFAFA;
+  fill: #FAFAFA;
+}
+:is(.dark .braintree-methods--active:not(.braintree-methods--edit) .braintree-method--active) {
+  border-color: #219653;
+}
+:is(.dark .braintree-methods--active:not(.braintree-methods--edit) .braintree-method--active .braintree-method__check) {
+  background-color: #219653;
+}
+:is(.dark .braintree-methods--active:not(.braintree-methods--edit) .braintree-method--active .braintree-method__icon) {
+  fill: white;
+}
+:is(.dark .braintree-method__delete-container .braintree-method__delete) {
+  background-color: #EC493A;
+}
+:is(.dark .braintree-method__delete-container .braintree-method__delete:hover) {
+  background-color: #c62213;
+}
+:is(.dark .braintree-delete-confirmation) {
+  background: #FAFAFA !important;
+  color: #606060;
+}
+:is(.dark .braintree-delete-confirmation .braintree-delete-confirmation__button-container .braintree-delete-confirmation__button) {
+  border-top: 1px solid #B5B5B5;
+  background: #FAFAFA;
+  color: #C4C4C4;
+}
+:is(.dark .braintree-delete-confirmation .braintree-delete-confirmation__button-container [data-braintree-id="delete-confirmation__yes"]) {
+  color: white;
+  background: #EC493A;
+  border-left: solid 1px #b5b5b5;
+}
+:is(.dark .braintree-delete-confirmation .braintree-delete-confirmation__button-container [data-braintree-id="delete-confirmation__yes"]:hover) {
+  background: #c62213;
+}
+:is(.dark .braintree-delete-confirmation .braintree-delete-confirmation__button-container [data-braintree-id="delete-confirmation__no"]) {
+  color: #666666;
+}
+:is(.dark .braintree-delete-confirmation .braintree-delete-confirmation__button-container [data-braintree-id="delete-confirmation__no"]:hover) {
+  background: #efefef;
+}
+:is(.dark .braintree-large-button) {
+  background: #404040;
+  color: #e5e5e5;
+}
+:is(.dark .braintree-large-button:hover) {
+  background: #262626;
+}
+:is(.dark .braintree-large-button:hover span) {
+  border-color: black;
+}
+:is(.dark .braintree-large-button span) {
+  border-bottom: 1px solid #B5B5B5;
+}
+/* =========================================================================
+   Dropin Visibility States
+   ========================================================================= */
+
+/* =========================================================================
+   Javascript hooks
+   ========================================================================= */
+
+/* =========================================================================
+   Flexbox-free styling
+   ========================================================================= */

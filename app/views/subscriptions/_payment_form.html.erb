@@ -1,18 +1,18 @@
 <% if Jumpstart.config.collect_billing_address? %>
-  <h5 class="text-gray-700 font-semibold my-4 border-b border-gray-200 pb-2"><%= t("subscriptions.new.billing_address") %></h5>
+  <h5 class="text-gray-700 dark:text-gray-300 font-semibold my-4 border-b border-gray-200 pb-2"><%= t("subscriptions.new.billing_address") %></h5>
   <div class="flex justify-between text-sm">
     <div>
-    <% if current_account.billing_address %>
-      <%= render current_account.billing_address %>
-    <% else %>
-      <%= t("subscriptions.billing_address.no_billing_address") %>
-    <% end %>
+      <% if current_account.billing_address %>
+        <%= render current_account.billing_address %>
+      <% else %>
+        <%= t("subscriptions.billing_address.no_billing_address") %>
+      <% end %>
     </div>
     <%= link_to t("subscriptions.billing_address.edit"), subscriptions_billing_address_path(plan: @plan) %>
   </div>
 <% end %>
 
-<h5 class="text-gray-700 font-semibold my-4 border-b border-gray-200 pb-2"><%= t("subscriptions.new.payment_method") %></h5>
+<h5 class="text-gray-700 dark:text-gray-300 font-semibold my-4 border-b border-gray-200 pb-2"><%= t("subscriptions.new.payment_method") %></h5>
 
 <div data-controller="toggle">
   <% if (default_payment_method = current_account.payment_processor&.default_payment_method) %>
@@ -20,7 +20,7 @@
       <div class="flex items-center mb-8">
         <div class="flex-1">
           <label><%= t("subscriptions.new.payment_method") %></label>
-          <i class="fab fa-cc-<%= default_payment_method.brand.downcase %> text-gray-700"></i> <%= payment_method_details(default_payment_method) %>
+          <i class="fab fa-cc-<%= default_payment_method.brand.downcase %> text-gray-700 dark:text-gray-300"></i> <%= payment_method_details(default_payment_method) %>
         </div>
         <%= link_to t("subscriptions.new.change"), "#", class: "btn btn-light-gray", data: { action: "click->toggle#toggle" } %>
       </div>
@@ -40,8 +40,8 @@
   <% end %>
 
   <% if @plan.has_trial? %>
-    <p class="mt-4 text-center text-sm text-gray-500">After your trial ends, you will be charged <%= @plan.amount_with_currency %> per <%= @plan.interval %> starting <%= l @plan.trial_period_days.days.from_now.to_date, format: :long %>. You can always cancel before then.</p>
+    <p class="mt-4 text-center text-sm text-gray-500 dark:text-gray-300">After your trial ends, you will be charged <%= @plan.amount_with_currency %> per <%= @plan.interval %> starting <%= l @plan.trial_period_days.days.from_now.to_date, format: :long %>. You can always cancel before then.</p>
   <% elsif !show_payment_processor?(:stripe) %>
-    <p class="mt-4 text-center text-sm text-gray-500">By confirming your subscription, you allow <%= Jumpstart.config.application_name %> to charge your payment method for this payment and future payments in accorandce with our terms.</p>
+    <p class="mt-4 text-center text-sm text-gray-500 dark:text-gray-300">By confirming your subscription, you allow <%= Jumpstart.config.application_name %> to charge your payment method for this payment and future payments in accorandce with our terms.</p>
   <% end %>
 </div>

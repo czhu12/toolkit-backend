@@ -4,7 +4,7 @@
   </div>
 
   <div class="w-full lg:w-3/4 lg:p-4">
-    <div class="p-4 bg-white border border-gray-200 rounded-lg lg:p-10">
+    <div class="p-4 bg-white border border-gray-200 dark:bg-gray-900 dark:border-gray-700 rounded-lg lg:p-10">
 
       <div class="sm:flex items-center justify-between mb-3">
         <h1 class="flex-1 h3"><%= t(".title") %></h1>
@@ -23,8 +23,8 @@
               <td class="p-3">
                 <%= link_to account, class: "flex items-center" do %>
                   <%= account_avatar account, class: "rounded-full h-8 w-8 mr-3" %>
-                  <%= tag.span account.name, class: "text-gray-900 font-semibold text-sm no-underline hover:text-primary" %>
-                  <%= badge "Personal", class: "ml-3" if account.personal_account_for?(current_user) %>
+                  <%= tag.span account.name, class: "text-gray-900 dark:text-gray-100 font-semibold text-sm no-underline hover:text-primary" %>
+                  <%= badge "Personal", class: "ml-3  dark:bg-gray-700 dark:text-gray-200" if account.personal_account_for?(current_user) %>
                 <% end %>
 
               </td>
@@ -33,7 +33,7 @@
                 <% if current_account != account %>
                   <%= switch_account_button account, label: t(".switch"), class: "btn btn-light-gray" %>
                 <% else %>
-                  <span class="font-medium text-gray-600"><%= t(".current") %></span>
+                  <span class="font-medium text-gray-600 dark:text-gray-300"><%= t(".current") %></span>
                 <% end %>
               </td>
 

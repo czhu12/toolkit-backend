@@ -2,8 +2,8 @@
 
 <h3>Default</h3>
 
-<div class="space-y-4">
-  <%= render "jumpstart/docs/snippet" do %>
+<%= render "jumpstart/docs/snippet" do %>
+  <div class="space-y-4">
     <button class="btn btn-primary mr-2">Primary</button>
     <button class="btn btn-secondary mr-2">Secondary</button>
     <button class="btn btn-tertiary mr-2">Tertiary</button>
@@ -14,32 +14,32 @@
     <button class="btn btn-light-blue mr-2">Light Blue</button>
     <button class="btn btn-light-green mr-2">Light Green</button>
     <button class="btn btn-light-red mr-2">Light Red</button>
-  <% end %>
-</div>
+  </div>
+<% end %>
 
 <h3>Block</h3>
 
-<div class="space-y-4">
-  <%= render "jumpstart/docs/snippet" do %>
-    <button class="btn btn-block btn-white mr-2">
+<%= render "jumpstart/docs/snippet" do %>
+  <div class="space-y-4">
+    <button class="btn btn-block btn-tertiary btn-outline mr-2">
       <%= render_svg "icons/download", styles: "fill-current icon-sm mr-2" %> Primary
     </button>
-  <% end %>
-</div>
+  </div>
+<% end %>
 
 <h3>Outlined</h3>
-<div class="space-y-4">
-  <%= render "jumpstart/docs/snippet" do %>
+<%= render "jumpstart/docs/snippet" do %>
+  <div class="space-y-4">
     <a href="#" class="btn btn-primary btn-outline mr-2">Primary</a>
     <a href="#" class="btn btn-secondary btn-outline mr-2">Secondary</a>
     <a href="#" class="btn btn-tertiary btn-outline mr-2">Tertiary</a>
     <a href="#" class="btn btn-danger btn-outline mr-2">Danger</a>
-  <% end %>
-</div>
+  </div>
+<% end %>
 
 <h3>Small</h3>
-<div class="space-y-4">
-  <%= render "jumpstart/docs/snippet" do %>
+<%= render "jumpstart/docs/snippet" do %>
+  <div class="space-y-4">
     <button class="btn btn-small btn-primary mr-2">Primary</button>
     <button class="btn btn-small btn-secondary mr-2">Secondary</button>
     <button class="btn btn-small btn-tertiary mr-2">Tertiary</button>
@@ -47,12 +47,12 @@
     <button class="btn btn-small btn-gray mr-2">Gray</button>
     <button class="btn btn-small btn-white mr-2">White</button>
     <button class="btn btn-small btn-link mr-2">Link</button>
-  <% end %>
-</div>
+  </div>
+<% end %>
 
 <h3>Large</h3>
-<div class="space-y-4">
-  <%= render "jumpstart/docs/snippet" do %>
+<%= render "jumpstart/docs/snippet" do %>
+  <div class="space-y-4">
     <button class="btn btn-large btn-primary mr-2">Primary</button>
     <button class="btn btn-large btn-secondary mr-2">Secondary</button>
     <button class="btn btn-large btn-tertiary mr-2">Tertiary</button>
@@ -60,8 +60,8 @@
     <button class="btn btn-large btn-gray mr-2">Gray</button>
     <button class="btn btn-large btn-white mr-2">White</button>
     <button class="btn btn-large btn-link mr-2">Link</button>
-  <% end %>
-</div>
+  </div>
+<% end %>
 
 <h3>Default with Icon</h3>
 <p>See the <%= link_to "Icons documentation", icons_docs_path %> for rendering SVGs inline.</p>
@@ -74,8 +74,8 @@
 </code></pre>
 </div>
 
-<div class="space-y-4">
-  <%= render "jumpstart/docs/snippet" do %>
+<%= render "jumpstart/docs/snippet" do %>
+  <div class="space-y-4">
     <button class="btn btn-primary mr-2">
       <%= render_svg "icons/download", styles: "fill-current icon-sm mr-2" %> Primary
     </button>
@@ -103,17 +103,17 @@
     <button class="btn btn-link mr-2">
       Link <%= render_svg "icons/arrow-right", styles: "fill-current icon-xs ml-2" %>
     </button>
-  <% end %>
-</div>
+  </div>
+<% end %>
 
 <h3>Disabled</h3>
-<div class="space-y-4">
-  <%= render "jumpstart/docs/snippet" do %>
+<%= render "jumpstart/docs/snippet" do %>
+  <div class="space-y-4">
     <button class="btn btn-primary mr-2" disabled><%= button_text "Primary" %></button>
     <button class="btn btn-secondary mr-2" disabled><%= button_text "Secondary" %></button>
     <button class="btn btn-tertiary mr-2" disabled><%= button_text "Tertiary" %></button>
     <button class="btn btn-danger mr-2" disabled><%= button_text "Danger" %></button>
     <button class="btn btn-white mr-2" disabled><%= button_text "White" %></button>
     <button class="btn btn-link mr-2" disabled><%= button_text "Link" %></button>
-  <% end %>
-</div>
+  </div>
+<% end %>

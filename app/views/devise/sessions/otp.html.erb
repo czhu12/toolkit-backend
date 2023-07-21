@@ -1,7 +1,7 @@
 <div class="max-w-sm mx-auto mt-16">
   <h1 class="h3 text-center"><%= t("users.two_factor.header") %></h1>
 
-  <div class="bg-white rounded shadow p-8 mt-8">
+  <div class="bg-white rounded shadow p-8 mt-8 border border-gray-200 dark:bg-gray-900 dark:border-gray-700">
     <%= form_with url: new_user_session_path do |form| %>
       <div class="form-group">
         <%= form.label :otp_attempt, "Verification code" %>

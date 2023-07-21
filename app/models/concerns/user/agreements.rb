@@ -1,4 +1,4 @@
-module UserAgreements
+module User::Agreements
   extend ActiveSupport::Concern
 
   included do

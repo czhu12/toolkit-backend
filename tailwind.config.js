@@ -5,6 +5,8 @@ const defaultTheme = require('tailwindcss/defaultTheme')
 
 /** @type {import('tailwindcss').Config */
 module.exports = {
+  darkMode: 'class',
+
   plugins: [
     require('@tailwindcss/aspect-ratio'),
     require('@tailwindcss/forms'),
@@ -31,6 +33,7 @@ module.exports = {
         secondary: colors.emerald,
         tertiary: colors.gray,
         danger: colors.red,
+        gray: colors.neutral,
         "code-400": "#fefcf9",
         "code-600": "#3c455b",
       },

@@ -26,7 +26,10 @@
     <%= yield :head %>
   </head>
 
-  <body class="antialiased font-sans bg-gray-100">
-    <%= yield %>
+  <body class="antialiased font-sans bg-gray-100 dark:bg-gray-900 dark:text-gray-50">
+    <div class="main flex flex-col">
+      <%= yield %>
+    </div>
+    <%= render "shared/footer", dark_mode_toggle: true unless turbo_native_app? %>
   </body>
 </html>

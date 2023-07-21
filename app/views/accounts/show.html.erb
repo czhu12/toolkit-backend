@@ -4,7 +4,7 @@
   </div>
 
   <div class="w-full lg:w-3/4 lg:p-4">
-    <div class="p-4 bg-white border border-gray-200 rounded-lg lg:p-10">
+    <div class="p-4 bg-white border border-gray-200 dark:bg-gray-900 dark:border-gray-700 rounded-lg lg:p-10">
 
       <div class="sm:flex items-center justify-between mb-5">
         <div class="flex items-center">
@@ -29,8 +29,8 @@
         <table class="w-full">
           <thead>
             <tr>
-              <th class="p-3 text-xs text-left text-gray-600 uppercase"><%= AccountUser.human_attribute_name(:user) %></th>
-              <th class="p-3 text-xs text-left text-gray-600 uppercase"><%= AccountUser.human_attribute_name(:roles) %></th>
+              <th class="p-3 text-xs text-left text-gray-600 dark:text-gray-300 uppercase"><%= AccountUser.human_attribute_name(:user) %></th>
+              <th class="p-3 text-xs text-left text-gray-600 dark:text-gray-300 uppercase"><%= AccountUser.human_attribute_name(:roles) %></th>
               <th></th>
             </tr>
           </thead>
@@ -43,7 +43,7 @@
                   <%= image_tag avatar_url_for(user), class: "hidden lg:inline-block h-6 rounded-full mr-2" %>
                   <%= user.name || user.email %>
                 </td>
-                <td class="p-3 text-sm font-medium text-gray-700"><%= account_user_roles(@account, account_user).join(", ") %></td>
+                <td class="p-3 text-sm font-medium text-gray-700 dark:text-gray-300"><%= account_user_roles(@account, account_user).join(", ") %></td>
                 <td class="p-3 text-right"><%= link_to t(".edit"), edit_account_account_user_path(@account, account_user), class: "btn btn-link" if account_admin?(@account, current_user) %></td>
               </tr>
             <% end %>

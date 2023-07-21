@@ -5,13 +5,13 @@
     read_at: notification&.read_at,
     interacted_at: notification&.interacted_at,
   },
-  class: "flex items-center px-4 py-3 hover:bg-gray-100 border-b last:border-b-0" do %>
+  class: "flex items-center px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-800 border-b last:border-b-0" do %>
   <div class="flex-1">
-    <p class="mb-2 text-sm leading-5 font-medium text-gray-900">
+    <p class="mb-2 text-sm leading-5 font-medium text-gray-900 dark:text-gray-200">
       <%= instance.message %>
     </p>
 
-    <p class="text-sm text-gray-600"><%= local_time_ago notification&.created_at %></p>
+    <p class="text-sm text-gray-600 dark:text-gray-400"><%= local_time_ago notification&.created_at %></p>
   </div>
 
   <%# blue dot is toggled by CSS from the parent's data-interacted-at attribute presence %>

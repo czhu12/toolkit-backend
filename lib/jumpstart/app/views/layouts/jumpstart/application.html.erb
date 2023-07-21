@@ -1,36 +1,38 @@
 <!DOCTYPE html>
-<html lang="en" class="h-full antialiased">
+<html class="<%= class_names("h-full antialiased", "dark": current_user&.dark_theme?) %>" lang="<%= I18n.locale %>">
   <head>
     <title>Jumpstart Docs</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <%= viewport_meta_tag %>
 
+    <% if current_user&.system_theme? %><script>document.documentElement.classList.toggle("dark", window.matchMedia('(prefers-color-scheme: dark)').matches)</script><% end %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbo-track': 'reload' %>
+
+    <%# Be sure to add your own custom favicons %>
+    <%= render "shared/favicons" %>
+    <%= render "shared/payments_dependencies" %>
 
     <%# Replace this with your FontAwesome Pro Kit code %>
     <script src="https://kit.fontawesome.com/0e5ab6a736.js"></script>
 
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/dracula.min.css">
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
-
-    <%# Be sure to add your own custom favicons %>
     <script>
       document.addEventListener("turbo:load", function() {
         var snippets = document.querySelectorAll('pre code')
         snippets.forEach(function(snippet) {
           hljs.highlightBlock(snippet);
+          snippet.parentNode.classList.add('dark:border', 'dark:border-gray-400/50', 'dark:rounded');
         })
       });
     </script>
-    <%= render "shared/favicons" %>
 
     <%= yield :head %>
   </head>
-
-  <body class="h-full overflow-x-hidden font-sans font-normal leading-normal bg-offwhite">
+  <body class="h-full overflow-x-hidden font-sans font-normal leading-normal bg-offwhite dark:bg-gray-900 dark:text-gray-50" data-controller="theme" data-theme-preference-value="<%= current_user&.theme %>">
     <%= yield %>
   </body>
 </html>
-

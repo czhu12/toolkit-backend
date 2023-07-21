@@ -18,7 +18,7 @@
       <div class="font-weight-semibold"><%= details[:name] %></div>
 
       <% if gem_name == "facebook" %>
-        <p class="text-sm text-gray-700">Facebook requires HTTPS for OAuth so you will need to use a service like <%= link_to "ngrok", "https://ngrok.com/", target: :_blank %> for testing.
+        <p class="text-sm text-gray-700 dark:text-gray-300/75">Facebook requires HTTPS for OAuth so you will need to use a service like <%= link_to "ngrok", "https://ngrok.com/", target: :_blank %> for testing.</p>
       <% end %>
 
       <div class="custom-control custom-checkbox">

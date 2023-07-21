@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" class="h-full antialiased">
+<html class="<%= class_names("h-full antialiased", "dark": current_user&.dark_theme?) %>" lang="<%= I18n.locale %>">
   <head>
     <title>Jumpstart Docs | <%= yield :section_title %></title>
-
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= viewport_meta_tag %>
 
+    <% if current_user&.system_theme? %><script>document.documentElement.classList.toggle("dark", window.matchMedia('(prefers-color-scheme: dark)').matches)</script><% end %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbo-track': 'reload' %>
 
@@ -18,22 +18,21 @@
     <script defer src="https://kit.fontawesome.com/0e5ab6a736.js" crossorigin="anonymous"></script>
 
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-
-    <%= yield :head %>
-
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github-dark.min.css">
-    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
     <script>
       document.addEventListener("turbo:load", function() {
         var snippets = document.querySelectorAll('pre code')
         snippets.forEach(function(snippet) {
           hljs.highlightElement(snippet);
+          snippet.parentNode.classList.add('dark:border', 'dark:border-gray-400/50', 'dark:rounded');
         })
       });
     </script>
-  </head>
 
-  <body class="h-full overflow-x-hidden font-sans font-normal leading-normal bg-offwhite">
+    <%= yield :head %>
+  </head>
+  <body class="h-full overflow-x-hidden font-sans font-normal leading-normal bg-offwhite dark:bg-gray-900 dark:text-gray-50" data-controller="theme" data-theme-preference-value="<%= current_user&.theme %>">
     <%= render partial: "shared/flash" %>
 
     <div class="flex flex-wrap items-start main">
@@ -41,17 +40,18 @@
         <%= render partial: "jumpstart/docs/nav" %>
       </div>
 
-      <div class="flex-grow flex flex-col w-full h-full bg-white border-l border-gray-200 md:w-4/5 docs-main">
+      <div class="flex-grow flex flex-col w-full h-full bg-white dark:bg-gray-900 dark:text-gray-50 border-l border-gray-200 dark:border-gray-700 md:w-4/5 docs-main">
         <% if content_for :section_title %>
-          <div class="px-4 py-10 mb-6 text-white bg-primary-500 md:px-20 lg:px-40">
+          <div class="px-4 py-10 mb-6 text-white bg-primary-500 dark:bg-primary-900 md:px-20 lg:px-40">
             <h1 class="font-black"><%= yield :section_title %></h1>
           </div>
         <% end %>
 
-        <div class="prose max-w-7xl py-20 px-4 pt-4 md:px-20 lg:px-40">
+        <div class="prose dark:prose-invert max-w-7xl py-20 px-4 pt-4 md:px-20 lg:px-40">
           <%= yield %>
         </div>
       </div>
     </div>
+
   </body>
 </html>

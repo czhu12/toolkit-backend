@@ -1,14 +1,16 @@
-<% classes = "block py-0.5 px-2 -mx-2 rounded no-underline text-gray-800 hover:bg-gray-100 hover:text-gray-800" %>
-<% active_class = "bg-gray-200" %>
+<% classes = "block py-0.5 px-2 -mx-2 rounded no-underline text-gray-800 dark:text-gray-200 hover:bg-gray-100 hover:text-gray-800 dark:text-gray-100 dark:hover:text-gray-200 dark:hover:bg-gray-800" %>
+<% active_class = "bg-gray-200 dark:bg-gray-700" %>
 <% inactive_class = "" %>
 
 <div class="w-full text-sm font-medium">
-  <%= link_to image_tag("jumpstart-docs-logo.svg"), root_path, class: "block" %>
+  <%= link_to root_path, class: "block" do %>
+    <%= render_svg "jumpstart-docs-logo", styles: "text-gray-500 dark:text-gray-200" %>
+  <% end %>
 
-  <%= link_to "Back to the app", main_app.root_path, class: "block text-sm mt-4 py-1 text-gray-900" %>
-  <%= link_to "Configuration", root_path, class: "block text-sm py-1 text-gray-900", target: :_blank %>
+  <%= link_to "Back to the app", main_app.root_path, class: "block text-sm mt-4 py-1 text-gray-900 dark:text-gray-50" %>
+  <%= link_to "Configuration", root_path, class: "block text-sm py-1 text-gray-900 dark:text-gray-50", target: :_blank %>
 
-  <h4 class="mt-4 font-semibold mb-1 text-gray-800">Get Started</h4>
+  <h4 class="mt-4 font-semibold mb-1 text-gray-800 dark:text-gray-200">Get Started</h4>
   <ul class="list-none leading-loose">
     <li><%= nav_link_to "Installation", installation_docs_path, class: classes, active_class: active_class, inactive_class: inactive_class %></li>
     <li><%= nav_link_to "Configuration", configuration_docs_path, class: classes, active_class: active_class, inactive_class: inactive_class %></li>
@@ -17,7 +19,7 @@
     <li><%= nav_link_to "Screencasts", screencasts_docs_path, class: classes, active_class: active_class, inactive_class: inactive_class %></li>
   </ul>
 
-  <h4 class="mt-4 font-semibold mb-1 text-gray-800">Backend</h4>
+  <h4 class="mt-4 font-semibold mb-1 text-gray-800 dark:text-gray-200">Backend</h4>
   <ul class="list-none leading-loose">
     <li><%= nav_link_to "Accounts & Multitenancy", accounts_docs_path, class: classes, active_class: active_class, inactive_class: inactive_class %></li>
     <li><%= nav_link_to "Action Cable", action_cable_docs_path, class: classes, active_class: active_class, inactive_class: inactive_class %></li>
@@ -42,7 +44,7 @@
     <li><%= nav_link_to "Users", users_docs_path, class: classes, active_class: active_class, inactive_class: inactive_class %></li>
   </ul>
 
-  <h4 class="mt-4 font-semibold mb-1 text-gray-800">Frontend</h4>
+  <h4 class="mt-4 font-semibold mb-1 text-gray-800 dark:text-gray-200">Frontend</h4>
   <ul class="list-none leading-loose">
     <li><%= nav_link_to "Alerts & Notices", alerts_docs_path, class: classes, active_class: active_class, inactive_class: inactive_class %></li>
     <li><%= nav_link_to "Branding", branding_docs_path, class: classes, active_class: active_class, inactive_class: inactive_class %></li>
@@ -58,12 +60,12 @@
     <li><%= nav_link_to "Wells", wells_docs_path, class: classes, active_class: active_class, inactive_class: inactive_class %></li>
   </ul>
 
-  <h4 class="mt-4 font-semibold mb-1 text-gray-800">Extras</h4>
+  <h4 class="mt-4 font-semibold mb-1 text-gray-800 dark:text-gray-200">Extras</h4>
   <ul class="list-none leading-loose">
     <li><%= nav_link_to "Integrations", integrations_docs_path, class: classes, active_class: active_class, inactive_class: inactive_class %></li>
   </ul>
 
-  <h4 class="mt-4 font-semibold mb-1 text-gray-800">Turbo Native (iOS & Android)</h4>
+  <h4 class="mt-4 font-semibold mb-1 text-gray-800 dark:text-gray-200">Turbo Native (iOS & Android)</h4>
   <ul class="list-none leading-loose">
     <li><%= nav_link_to "Existing Apps", existing_apps_docs_path, class: classes, active_class: active_class, inactive_class: inactive_class %></li>
   </ul>

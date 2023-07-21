@@ -7,9 +7,9 @@
       <h1 class="h3"><%= plural_table_name.titleize %></h1>
 
       <div class="text-sm font-medium">
-        <span class="text-gray-500">Sort by:</span>
+        <span class="text-gray-500 dark:text-gray-300/75">Sort by:</span>
 <%- attributes.reject(&:password_digest?).each do |attribute| -%>
-        <%%= sortable @<%= plural_table_name %>, :<%= attribute.column_name %>, "<%= attribute.human_name %>", class: "text-gray-700 mr-1" %>
+        <%%= sortable @<%= plural_table_name %>, :<%= attribute.column_name %>, "<%= attribute.human_name %>", class: "text-gray-700 dark:text-gray-300 mr-1" %>
 <%- end -%>
       </div>
     </div>
@@ -17,7 +17,7 @@
     <%%= link_to t("shared.scaffold.new.title", model: "<%= singular_table_name.titleize %>"), new_<%= singular_route_name %>_path, class: "btn btn-white" %>
   </div>
 
-  <%%= tag.div id: ("<%= plural_table_name %>" if first_page?), class: "bg-white rounded-md shadow p-6 space-y-8" do %>
+  <%%= tag.div id: ("<%= plural_table_name %>" if first_page?), class: "bg-white dark:bg-gray-900 dark:border dark:border-gray-700 rounded-md shadow p-6 space-y-8" do %>
     <%%= render partial: "<%= controller_file_path %>/index", collection: @<%= plural_table_name %>, as: :<%= singular_name %>, cached: true %>
 
     <div class="hidden only:flex flex-col items-center justify-between lg:flex-row">

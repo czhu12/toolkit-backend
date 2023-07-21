@@ -80,7 +80,7 @@ button[disabled]        .when-enabled { display: none; }
     }
 
     &.btn-outline {
-      @apply bg-transparent border  border-gray-500 text-gray-700 shadow-none;
+      @apply bg-transparent border  border-gray-500 text-gray-700 dark:text-gray-100 shadow-none;
 
       &:hover,
       &:focus {
@@ -112,7 +112,7 @@ button[disabled]        .when-enabled { display: none; }
   }
 
   .btn-light-gray {
-    @apply bg-gray-100 text-gray-800 hover:bg-gray-200 hover:text-gray-800 focus:ring-gray-600;
+    @apply bg-gray-100 text-gray-800 hover:bg-gray-200 hover:text-gray-800 focus:ring-gray-600 dark:bg-gray-700 dark:text-gray-200;
   }
 
   .btn-white {

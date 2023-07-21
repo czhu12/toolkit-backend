@@ -1,23 +1,25 @@
 <%= form_with model: @config, url: config_path do |f| %>
   <div data-controller="tabs" class="flex flex-wrap items-start justify-between main">
     <div class="sticky top-0 w-full px-4 pt-4 md:w-1/5 lg:px-8">
-      <%= link_to image_tag("jumpstart.svg"), root_path, class: "block" %>
+      <%= link_to root_path, class: "block" do %>
+        <%= inline_svg_tag "jumpstart.svg", title: "Logo", aria: true, class: "fill-current text-gray-500 dark:text-gray-200" %>
+      <% end %>
 
-      <%= link_to "Back to the app", main_app.root_path, class: "block text-sm mt-4 py-1 text-gray-900" %>
-      <%= link_to "Documentation", docs_path, class: "block text-sm py-1 text-gray-900", target: :_blank %>
+      <%= link_to "Back to the app", main_app.root_path, class: "block text-sm mt-4 py-1 text-gray-900 dark:text-gray-50" %>
+      <%= link_to "Documentation", docs_path, class: "block text-sm py-1 text-gray-900 dark:text-gray-50", target: :_blank %>
 
-      <h4 class="mt-4 font-semibold mb-1 text-gray-800">Configuration</h4>
+      <h4 class="mt-4 font-semibold mb-1 text-gray-800 dark:text-gray-100">Configuration</h4>
       <div>
-        <a class="block py-1 text-gray-700 no-underline hover:text-primary focus:outline-none" data-tabs-target="tab" data-action="click->tabs#change" href="#" id="application">Application</a>
-        <a class="block py-1 text-gray-700 no-underline hover:text-primary" data-tabs-target="tab" data-action="click->tabs#change" href="#" id="development">Development</a>
-        <a class="block py-1 text-gray-700 no-underline hover:text-primary" data-tabs-target="tab" data-action="click->tabs#change" href="#" id="accounts">Accounts</a>
-        <a class="block py-1 text-gray-700 no-underline hover:text-primary" data-tabs-target="tab" data-action="click->tabs#change" href="#" id="workers">Background Workers</a>
-        <a class="block py-1 text-gray-700 no-underline hover:text-primary" data-tabs-target="tab" data-action="click->tabs#change" href="#" id="integrations">Integrations</a>
-        <a class="block py-1 text-gray-700 no-underline hover:text-primary" data-tabs-target="tab" data-action="click->tabs#change" href="#" id="oauth">Login & OAuth</a>
-        <a class="block py-1 text-gray-700 no-underline hover:text-primary" data-tabs-target="tab" data-action="click->tabs#change" href="#" id="payments">Payments</a>
-        <a class="block py-1 text-gray-700 no-underline hover:text-primary" data-tabs-target="tab" data-action="click->tabs#change" href="#" id="email">Transactional Email</a>
-        <a class="block py-1 text-gray-700 no-underline hover:text-primary" data-tabs-target="tab" data-action="click->tabs#change" href="#" id="turbo-native">Turbo Native</a>
-        <a class="block py-1 text-gray-700 no-underline hover:text-primary" data-tabs-target="tab" data-action="click->tabs#change" href="#" id="users">Admin Users</a>
+        <a class="block py-1 text-gray-700 dark:text-gray-200 no-underline hover:text-primary focus:outline-none" data-tabs-target="tab" data-action="click->tabs#change" href="#" id="application">Application</a>
+        <a class="block py-1 text-gray-700 dark:text-gray-200 no-underline hover:text-primary" data-tabs-target="tab" data-action="click->tabs#change" href="#" id="development">Development</a>
+        <a class="block py-1 text-gray-700 dark:text-gray-200 no-underline hover:text-primary" data-tabs-target="tab" data-action="click->tabs#change" href="#" id="accounts">Accounts</a>
+        <a class="block py-1 text-gray-700 dark:text-gray-200 no-underline hover:text-primary" data-tabs-target="tab" data-action="click->tabs#change" href="#" id="workers">Background Workers</a>
+        <a class="block py-1 text-gray-700 dark:text-gray-200 no-underline hover:text-primary" data-tabs-target="tab" data-action="click->tabs#change" href="#" id="integrations">Integrations</a>
+        <a class="block py-1 text-gray-700 dark:text-gray-200 no-underline hover:text-primary" data-tabs-target="tab" data-action="click->tabs#change" href="#" id="oauth">Login & OAuth</a>
+        <a class="block py-1 text-gray-700 dark:text-gray-200 no-underline hover:text-primary" data-tabs-target="tab" data-action="click->tabs#change" href="#" id="payments">Payments</a>
+        <a class="block py-1 text-gray-700 dark:text-gray-200 no-underline hover:text-primary" data-tabs-target="tab" data-action="click->tabs#change" href="#" id="email">Transactional Email</a>
+        <a class="block py-1 text-gray-700 dark:text-gray-200 no-underline hover:text-primary" data-tabs-target="tab" data-action="click->tabs#change" href="#" id="turbo-native">Turbo Native</a>
+        <a class="block py-1 text-gray-700 dark:text-gray-200 no-underline hover:text-primary" data-tabs-target="tab" data-action="click->tabs#change" href="#" id="users">Admin Users</a>
       </div>
 
       <div class="mt-4">
@@ -29,11 +31,11 @@
           <% end %>
         <% end %>
 
-        <p class="text-gray-600 text-xs mt-2">Jumpstart Pro will install any new dependencies after saving and automatically restart your app.</p>
+        <p class="text-gray-600 dark:text-gray-300 text-xs mt-2">Jumpstart Pro will install any new dependencies after saving and automatically restart your app.</p>
       </div>
     </div>
 
-    <div class="flex flex-col w-full h-full bg-white border-l border-gray-200 md:w-4/5 docs-main">
+    <div class="flex flex-col w-full h-full bg-white border-l border-gray-200 dark:bg-gray-900 dark:border-gray-700 md:w-4/5 docs-main">
       <div class="px-4 pt-4 md:px-20 lg:px-40 xl:px-56">
         <div class="mb-4">
           <%= render "shared/flash" %>

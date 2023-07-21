@@ -7,6 +7,11 @@ export default class extends Controller {
     braintree.dropin.create({
       authorization: this.data.get("clientToken"),
       container: this.dropinTarget,
+      card: {
+        overrides: {
+          styles: this.cardStyles
+        }
+      },
       //threeDSecure: true,
       paypal: {
         flow: "vault"
@@ -51,5 +56,19 @@ export default class extends Controller {
     hiddenInput.setAttribute("name", name)
     hiddenInput.setAttribute("value", value)
     this.formTarget.appendChild(hiddenInput)
+  }
+
+  get cardStyles() {
+    let darkMode = document.documentElement.classList.contains("dark");
+    if(darkMode) {
+      return {
+        '.number': {
+          color: 'white'
+        },
+        '.expirationDate': {
+          color: 'white'
+        }
+      }
+    }
   }
 }

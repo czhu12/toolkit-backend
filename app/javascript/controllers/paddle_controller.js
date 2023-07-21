@@ -4,6 +4,7 @@ export default class extends Controller {
   static targets = [ "form" ]
 
   connect() {
+    let displayModeTheme = document.documentElement.classList.contains("dark") ? "dark" : "light";
     let params = {
       method: 'inline',
       allowQuantity: false,
@@ -11,7 +12,8 @@ export default class extends Controller {
       frameTarget: "paddle-checkout",
       frameInitialHeight: 416,
       frameStyle: 'width:100%; background-color: transparent; border: none;',
-      successCallback: this.checkoutComplete.bind(this)
+      successCallback: this.checkoutComplete.bind(this),
+      displayModeTheme: displayModeTheme
     }
 
     if (this.data.get("action") == "create-subscription") {
