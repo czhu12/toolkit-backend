@@ -21,7 +21,7 @@
     <% end %>
     <div data-dropdown-target="menu" class="lg:absolute lg:right-0 mt-2 hidden z-20">
       <div class="bg-white border border-gray-200 dark:bg-gray-900 dark:border-gray-700 shadow rounded overflow-hidden sm:w-96">
-        <%= turbo_frame_tag "notifications", loading: :lazy, target: :_top, src: notifications_path, data: { notifications_target: "list" } do %>
+        <%= turbo_frame_tag "notifications", class: "divide-y divide-gray-200 dark:divide-gray-700", loading: :lazy, target: :_top, src: notifications_path, data: { notifications_target: "list" } do %>
           <p class="p-4"><i class="fas fa-circle-notch fa-spin text-gray-400 mr-1"></i> Loading...</p>
         <% end %>
       </div>
