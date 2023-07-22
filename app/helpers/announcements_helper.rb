@@ -1,28 +1,17 @@
 module AnnouncementsHelper
-  # Use the explicit class names so purgecss can find them
+  # Use the explicit names so they don't get purged
+  ANNOUNCEMENT_COLORS = {
+    "new" => "announcement-new",
+    "update" => "announcement-update",
+    "improvement" => "announcement-update",
+    "fix" => "announcement-fix"
+  }
+
   def announcement_color(announcement)
-    case announcement.kind
-    when "new"
-      "announcement-new"
-    when "update"
-      "announcement-update"
-    when "improvement"
-      "announcement-improvement"
-    when "fix"
-      "announcement-fix"
-    else
-      "announcement-update"
-    end
+    ANNOUNCEMENT_COLORS.fetch(announcement.kind, "announcement-update")
   end
 
   def unread_announcements_class(user)
-    announcement = Announcement.order(published_at: :desc).first
-    return if announcement.nil?
-
-    # Highlight announcements for anyone not logged in, cuz tempting
-    if user.nil? || user.announcements_read_at.nil? ||
-        user.announcements_read_at < announcement.published_at
-      "unread-announcements"
-    end
+    "unread-announcements" if Announcement.unread?(user)
   end
 end
