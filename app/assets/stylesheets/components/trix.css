@@ -476,3 +476,9 @@ trix-editor .attachment__metadata .attachment__size {
   flex-basis: 50%;
   max-width: 50%;
 }
+
+
+/* JSP customizations */
+html.dark .trix-content pre {
+  @apply bg-gray-800 text-white;
+}
