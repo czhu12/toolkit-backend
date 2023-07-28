@@ -7,45 +7,37 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   static targets = ["toggle", "frequency", "plans"]
   static values = { frequency: String }
-  static classes = ["activeFrequency", "inactiveFrequency", "activePlans", "inactivePlans"]
+  static classes = ["activeFrequency", "inactiveFrequency", "activePlans", "inactivePlans", "hiddenToggle"]
 
   connect() {
-    if (!this.hasFrequencyValue) {
-      this.frequencyValue = this.frequencyTargets[0].dataset.frequency
-    }
+    this.removeEmptyFrequencies()
+    this.defaultFrequency()
+  }
 
-    // Remove any targets without plans in them
+  // Switches visible plans
+  switch(event) {
+    this.frequencyValue = event.target.dataset.frequency
+  }
+
+  // Removes frequencies that have no plans in them
+  removeEmptyFrequencies() {
     this.frequencyTargets.forEach(target => {
       let frequency = target.dataset.frequency
       let index = this.plansTargets.findIndex((element) => element.dataset.frequency == frequency && element.childElementCount > 0)
       if (index == -1) target.remove()
     })
-
-    // Hide frequency toggle if we have less than 2 frequencies with plans
-    if (this.frequencyTargets.length < 2) this._hideFrequencyToggle()
-
-    this._toggle(this.frequencyValue)
+    this.hiddenToggleClasses.forEach(className => {
+      this.toggleTarget.classList.toggle(className, this.frequencyTargets.length < 2)
+    })
   }
 
-  // Switches visible plans
-  switch(event) {
-    event.preventDefault()
-    this._toggle(event.target.dataset.frequency)
+  defaultFrequency() {
+    if (!this.hasFrequencyValue) this.frequencyValue = this.frequencyTargets[0].dataset.frequency
   }
 
-  // Hides frequency toggle
-  _hideFrequencyToggle() {
-    this.toggleTarget.classList.add("hidden")
-  }
-
-  // Toggles visible plans and selected frequency
-  // Expects: "monthly", "yearly", etc
-  _toggle(frequency) {
-    // Keep track of active frequency on a data attribute
-    this.frequencyValue = frequency
-
+  frequencyValueChanged() {
     this.frequencyTargets.forEach(target => {
-      if (target.dataset.frequency == frequency) {
+      if (target.dataset.frequency == this.frequencyValue) {
         this.showFrequency(target)
       } else {
         this.hideFrequency(target)
@@ -53,7 +45,7 @@ export default class extends Controller {
     })
 
     this.plansTargets.forEach(target => {
-      if (target.dataset.frequency == frequency) {
+      if (target.dataset.frequency == this.frequencyValue) {
         this.showPlans(target)
       } else {
         this.hidePlans(target)
