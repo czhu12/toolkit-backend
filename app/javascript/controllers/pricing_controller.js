@@ -7,12 +7,11 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   static targets = ["toggle", "frequency", "plans"]
   static values = { frequency: String }
-  static classes = ["activeFrequency", "inactiveFrequency", "activePlans", "inactivePlans"]
+  static classes = ["activeFrequency", "inactiveFrequency", "activePlans", "inactivePlans", "hiddenToggle"]
 
   connect() {
     this.removeEmptyFrequencies()
     this.defaultFrequency()
-    if (this.frequencyTargets.length < 2) this.hideFrequencyToggle()
   }
 
   // Switches visible plans
@@ -27,14 +26,13 @@ export default class extends Controller {
       let index = this.plansTargets.findIndex((element) => element.dataset.frequency == frequency && element.childElementCount > 0)
       if (index == -1) target.remove()
     })
+    this.hiddenToggleClasses.forEach(className => {
+      this.toggleTarget.classList.toggle(className, this.frequencyTargets.length < 2)
+    })
   }
 
   defaultFrequency() {
     if (!this.hasFrequencyValue) this.frequencyValue = this.frequencyTargets[0].dataset.frequency
-  }
-
-  hideFrequencyToggle() {
-    this.toggleTarget.classList.add("hidden")
   }
 
   frequencyValueChanged() {
