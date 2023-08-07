@@ -4,17 +4,17 @@
 <%= render "jumpstart/docs/snippet" do %>
 <div data-controller="tabs" data-tabs-active-tab="-mb-px tab-active transition">
   <ul class="list-none list-reset flex border-b">
-    <li class="mr-1" data-tabs-target="tab" data-action="click->tabs#change">
-      <a class="inline-block py-2 px-4 text-primary hover:text-blue-800 font-semibold no-underline" href="#">Active</a>
+    <li class="mr-1" data-tabs-target="tab" data-action="click->tabs#change:prevent">
+      <a href="#" class="inline-block py-2 px-4 text-primary hover:text-blue-800 font-semibold no-underline">Active</a>
     </li>
-    <li class="mr-1" data-tabs-target="tab" data-action="click->tabs#change">
-      <a class="inline-block py-2 px-4 text-primary hover:text-blue-800 font-semibold no-underline" href="#">Tab</a>
+    <li class="mr-1" data-tabs-target="tab" data-action="click->tabs#change:prevent">
+      <a href="#" class="inline-block py-2 px-4 text-primary hover:text-blue-800 font-semibold no-underline">Tab</a>
     </li>
-    <li class="mr-1" data-tabs-target="tab" data-action="click->tabs#change">
-      <a class="inline-block py-2 px-4 text-primary hover:text-blue-800 font-semibold no-underline" href="#">Tab</a>
+    <li class="mr-1" data-tabs-target="tab" data-action="click->tabs#change:prevent">
+      <a href="#" class="inline-block py-2 px-4 text-primary hover:text-blue-800 font-semibold no-underline">Tab</a>
     </li>
     <li class="mr-1">
-      <a class="inline-block py-2 px-4 text-gray-400 font-semibold no-underline" href="#">Tab</a>
+      <a href="#" class="inline-block py-2 px-4 text-gray-400 font-semibold no-underline">Tab</a>
     </li>
   </ul>
 

@@ -5,7 +5,14 @@
     <button class="mb-0 text-gray-700 dark:text-gray-200 btn btn-link btn-small" data-action="click->toggle#toggle">
       <%= render_svg "icons/code", styles: "fill-current icon-sm mr-2" %> Toggle Source
     </button>
-    <div data-toggle-target="toggleable" class="hidden">
+    <div class="hidden"
+          data-toggle-target="toggleable"
+          data-transition-enter="transition-all ease-linear duration-300"
+          data-transition-enter-from="opacity-0 h-0"
+          data-transition-enter-to="opacity-100"
+          data-transition-leave="transition-all ease-linear duration-300"
+          data-transition-leave-from="opacity-100"
+          data-transition-leave-to="opacity-0">
       <pre class="example-code"><code><%= content.to_param.strip %></code></pre>
     </div>
   </div>

@@ -4,7 +4,15 @@
   <div class="flex-1">
     <div class="text-gray-700 dark:text-gray-200 mt-2"><%= t ".additional_information" %></div>
 
-    <%= form_with model: current_account, url: billing_settings_subscriptions_path, html: { class: "hidden mt-4 max-w-lg", data: { toggle_target: "toggleable" }} do |f| %>
+    <%= form_with model: current_account, url: billing_settings_subscriptions_path, html: { class: "hidden mt-4 max-w-lg", data: {
+                                                                                                                            toggle_target: 'toggleable',
+                                                                                                                            transition_enter: 'transition-all ease-linear duration-300',
+                                                                                                                            transition_enter_from: 'opacity-0 h-0',
+                                                                                                                            transition_enter_to: 'opacity-100',
+                                                                                                                            transition_leave: 'transition-all ease-linear duration-300',
+                                                                                                                            transition_leave_from: 'opacity-100',
+                                                                                                                            transition_leave_to: 'opacity-0'
+                                                                                                                          }} do |f| %>
       <div class="form-group">
         <%= f.label :extra_billing_info, class: "text-gray-700 dark:text-gray-200" %>
         <%= f.text_area :extra_billing_info, class: "form-control dark:bg-gray-900 dark:text-gray-200", placeholder: true %>
@@ -17,7 +25,7 @@
   </div>
 
   <div>
-    <%= link_to t(".add_info"), "#", class: "btn btn-light-gray", data: { action: "click->toggle#toggle" } %>
+    <%= link_to t(".add_info"), "#", class: "btn btn-light-gray", data: { action: "click->toggle#toggle:prevent touch->toggle#toggle:prevent" } %>
   </div>
 </div>
 
