@@ -22,6 +22,7 @@
 #  invited_by_type        :string
 #  last_name              :string
 #  last_otp_timestep      :integer
+#  name                   :string
 #  otp_backup_codes       :text
 #  otp_required_for_login :boolean
 #  otp_secret             :string
@@ -79,6 +80,12 @@ class User < ApplicationRecord
   # Validations
   validates :name, presence: true
   validates :avatar, resizable_image: true
+
+  # Replace with a search engine like Meilisearch, ElasticSearch, or pg_search to provide better results
+  # Using arel matches allows for database agnostic like queries
+  def self.search(query)
+    where(arel_table[:name].matches("%#{sanitize_sql_like(query)}%"))
+  end
 
   # When ActionText rendering mentions in plain text
   def attachable_plain_text_representation(caption = nil)
