@@ -6,36 +6,36 @@
 
   <h5 class="mb-3">Payment Processors</h5>
 
-  <div>
-    <label>
-      <%= check_box_tag "configuration[payment_processors][]", :stripe, @config.stripe?, class: "form-checkbox", id: :stripe %>
+  <div class="mb-4 flex items-center flex items-center toggle">
+    <%= check_box_tag "configuration[payment_processors][]", :stripe, @config.stripe?, class: "form-checkbox", id: :stripe %>
+    <label for="stripe" class="mb-0">
       Stripe
-      <small class="text-gray-600 dark:text-gray-300/75">SCA payments supported</small>
     </label>
+    <small class="ml-2 text-gray-600 dark:text-gray-300/75">SCA payments supported</small>
   </div>
 
-  <div>
-    <label>
-      <%= check_box_tag "configuration[payment_processors][]", :paypal, @config.paypal?, class: "form-checkbox", id: :paypal %>
+  <div class="mb-4 flex items-center toggle">
+    <%= check_box_tag "configuration[payment_processors][]", :paypal, @config.paypal?, class: "form-checkbox", id: :paypal %>
+    <label for="paypal" class="mb-0">
       Paypal
-      <small class="text-gray-600 dark:text-gray-300/75">Uses Braintree behind the scenes</small>
     </label>
+    <small class="ml-2 text-gray-600 dark:text-gray-300/75">Uses Braintree behind the scenes</small>
   </div>
 
-  <div>
-    <label>
-      <%= check_box_tag "configuration[payment_processors][]", :braintree, @config.braintree?, class: "form-checkbox", id: :braintree %>
+  <div class="mb-4 flex items-center toggle">
+    <%= check_box_tag "configuration[payment_processors][]", :braintree, @config.braintree?, class: "form-checkbox", id: :braintree %>
+    <label for="braintree" class="mb-0">
       Braintree
-      <small class="text-gray-600 dark:text-gray-300/75">Accepts both credit cards and PayPal</small>
     </label>
+    <small class="ml-2 text-gray-600 dark:text-gray-300/75">Accepts both credit cards and PayPal</small>
   </div>
 
-  <div>
-    <label>
-      <%= check_box_tag "configuration[payment_processors][]", :paddle, @config.paddle?, class: "form-checkbox", id: :paddle %>
+  <div class="mb-4 flex items-center toggle">
+    <%= check_box_tag "configuration[payment_processors][]", :paddle, @config.paddle?, class: "form-checkbox", id: :paddle %>
+    <label for="paddle" class="mb-0">
       Paddle
-      <small class="text-muted">SCA supported, Merchant of Record, accepts both credit cards and PayPal</small>
     </label>
+    <small class="ml-2 text-gray-600 dark:text-gray-300/75">SCA supported, Merchant of Record, accepts both credit cards and PayPal</small>
   </div>
 </div>
 
@@ -43,10 +43,12 @@
 <h5>Billing Address</h5>
 <p class="text-sm text-gray-700 dark:text-gray-200/75">Enable this to collect a billing address during checkout. You might need this for Stripe Tax or other features.</p>
 
-<label class="mt-2">
+<div class="toggle">
   <%= f.check_box :collect_billing_address, checked: @config.collect_billing_address? %>
-  Collect billing address during checkout
-</label>
+  <label for="configuration_collect_billing_address" class="mt-2">
+    Collect billing address during checkout
+  </label>
+</div>
 
 <hr class="my-4" />
 
@@ -67,4 +69,4 @@ rails credentials:edit --environment production</code></pre>
 <h5>Stripe CLI</h5>
 <p>To properly generate charges and subscription updates for SCA payments, you'll need to install and run the Stripe CLI in development to forward these webhooks to the local server.</p>
 
-<pre><code>stripe listen --forward-to localhost:3000/webhooks/stripe</code></pre>
+<pre class="mb-24"><code>stripe listen --forward-to localhost:3000/webhooks/stripe</code></pre>

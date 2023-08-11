@@ -15,16 +15,15 @@
   <h4>Providers</h4>
   <% Jumpstart::Omniauth.all_providers.each do |gem_name, details| %>
     <div class="mb-4">
-      <div class="font-weight-semibold"><%= details[:name] %></div>
 
-      <% if gem_name == "facebook" %>
-        <p class="text-sm text-gray-700 dark:text-gray-300/75">Facebook requires HTTPS for OAuth so you will need to use a service like <%= link_to "ngrok", "https://ngrok.com/", target: :_blank %> for testing.</p>
-      <% end %>
 
-      <div class="custom-control custom-checkbox">
+      <div class="custom-control custom-checkbox toggle">
           <%= check_box_tag "configuration[omniauth_providers][]", gem_name, Jumpstart::Omniauth.enabled?(gem_name), id: gem_name, class: "form-checkbox" %>
-          <%= label_tag gem_name, "Enable", class: "inline-block" %>
-        </div>
+          <%= label_tag gem_name, details[:name], class: "font-weight-semibold inline-block" %>
+          <% if gem_name == "facebook" %>
+            <p class="pl-1 ml-14 text-sm text-gray-700 dark:text-gray-300/75">Facebook requires HTTPS for OAuth so you will need to use a service like <%= link_to "ngrok", "https://ngrok.com/", target: :_blank %> for testing.</p>
+          <% end %>
+      </div>
     </div>
   <% end %>
 </div>
