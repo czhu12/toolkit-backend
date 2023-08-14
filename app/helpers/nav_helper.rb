@@ -12,7 +12,8 @@ module NavHelper
     active_class = html_options.delete(:active_class) || "active"
     inactive_class = html_options.delete(:inactive_class) || ""
 
-    active = if (paths = Array.wrap(starts_with)) && paths.present?
+    paths = Array.wrap(starts_with)
+    active = if paths.present?
       paths.any? { |path| request.path.start_with?(path) }
     else
       request.path == url
