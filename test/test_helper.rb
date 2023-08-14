@@ -17,10 +17,6 @@ class ActiveSupport::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
-  def switch_account(account)
-    patch "/accounts/#{account.id}/switch"
-  end
-
   def json_response
     JSON.parse(response.body)
   end
@@ -28,6 +24,10 @@ end
 
 class ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
+
+  def switch_account(account)
+    patch "/accounts/#{account.id}/switch"
+  end
 end
 
 WebMock.disable_net_connect!({
