@@ -72,19 +72,19 @@ button[disabled]        .when-enabled { display: none; }
   }
 
   .btn-tertiary {
-    @apply bg-gray-700 text-white focus:ring-gray-600;
+    @apply bg-neutral-800 text-white focus:ring-neutral-700;
 
     &:hover,
     &:focus {
-      @apply bg-gray-600 text-white;
+      @apply bg-neutral-700 text-white;
     }
 
     &.btn-outline {
-      @apply bg-transparent border  border-gray-500 text-gray-700 dark:text-gray-100 shadow-none;
+      @apply bg-transparent border border-neutral-500 text-neutral-800 dark:text-neutral-100 shadow-none;
 
       &:hover,
       &:focus {
-        @apply bg-gray-600 text-white;
+        @apply bg-neutral-700 text-white;
       }
     }
   }

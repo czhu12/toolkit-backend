@@ -1,0 +1,22 @@
+<% content_for :section_title, "Tabs" %>
+
+<%= h2_with_anchor "Tabs" %>
+<p>Tabs are implemented with the Stimulus.js <code>tabs_controller</code>. It works by having an list of tabs and panel targets that are hidden and shown based upon the active tab.</p>
+
+<%= render "jumpstart/docs/snippet" do %>
+<%= render TabsComponent.new do |component| %>
+  <% component.capture_for :tabs, "Tab 1" %>
+  <% component.capture_for :tabs, "Tab 2" %>
+  <% component.capture_for :tabs, "Tab 3" %>
+
+  <% component.capture_for :panels do %>
+    Tab panel 1
+  <% end %>
+  <% component.capture_for :panels do %>
+    Tab panel 2
+  <% end %>
+  <% component.capture_for :panels do %>
+    Tab panel 3
+  <% end %>
+<% end %>
+<% end %>

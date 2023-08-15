@@ -2,7 +2,7 @@
 <% active_class = "bg-gray-200 dark:bg-gray-700" %>
 <% inactive_class = "" %>
 
-<div class="p-8 sm:w-[300px] text-sm font-medium">
+<div class="p-8 sm:fixed sm:w-[300px] sm:h-screen sm:overflow-scroll shrink-0 text-sm font-medium">
   <%= link_to root_path, class: "block" do %>
     <%= render_svg "jumpstart-docs-logo", styles: "text-gray-500 dark:text-gray-200" %>
   <% end %>
@@ -39,20 +39,27 @@
       ["Internationalization (I18n)", i18n_docs_path],
       ["Notifications", notifications_docs_path],
       ["Scaffolds", scaffolds_docs_path],
-      ["users", users_docs_path],
+      ["Users", users_docs_path],
     ],
     "Frontend" => [
-      ["Alerts & Notices", alerts_docs_path],
       ["Branding", branding_docs_path],
-      ["Buttons", buttons_docs_path],
-      ["Cards", cards_docs_path],
-      ["Forms", forms_docs_path],
-      ["Icons", icons_docs_path],
       ["JavaScript", javascript_docs_path],
-      ["Pagination", pagination_docs_path],
-      ["Pills", pills_docs_path],
       ["TailwindCSS", tailwind_docs_path],
       ["Typography", typography_docs_path],
+    ],
+    "Components" => [
+      ["Alerts & Notices", alerts_docs_path],
+      ["Buttons", buttons_docs_path],
+      ["Cards", cards_docs_path],
+      ["Clipboard", clipboard_docs_path],
+      ["Forms", forms_docs_path],
+      ["Icons", icons_docs_path],
+      ["Modals", modals_docs_path],
+      ["Pagination", pagination_docs_path],
+      ["Pills", pills_docs_path],
+      ["Tabs", tabs_docs_path],
+      ["Tooltips", tooltips_docs_path],
+      ["Slideover", slideover_docs_path],
       ["Wells", wells_docs_path],
     ],
     "Extras" => [
@@ -68,7 +75,7 @@
   <div class="hidden sm:block">
     <% nav.each do |section, links| %>
       <h4 class="mt-4 font-semibold mb-1 text-gray-800 dark:text-gray-200"><%= section %></h4>
-      <ul class="list-none leading-loose">
+      <ul class="ml-4 list-none leading-loose">
         <% links.each do |title, url| %>
           <li><%= nav_link_to title, url, class: classes, active_class: active_class, inactive_class: inactive_class %></li>
         <% end %>

@@ -19,19 +19,20 @@ function insertConfirmModal(message, element, button) {
   if (confirmText) {
     confirmInput = `<input type="text" class="mt-4 form-control" data-behavior="confirm-text" />`
   }
+  let id = `confirm-modal-${new Date().getTime()}`
 
   let content = `
-    <div id="confirm-modal" class="z-50 bg-black/80 animated fadeIn fixed top-0 left-0 w-full h-full table backdrop-blur-sm">
+    <div id="${id}" class="z-50 bg-black/80 animated fadeIn fixed top-0 left-0 w-full h-full table backdrop-blur-sm">
       <div class="table-cell align-middle">
 
-        <div class="bg-white mx-auto rounded shadow p-8 max-w-sm dark:bg-gray-800">
-          <h4>${message}</h4>
-          ${description}
+        <div class="bg-white mx-auto rounded shadow p-8 max-w-md dark:bg-gray-800">
+          <h5>${message}</h5>
+          <p class="mt-4 text-sm text-gray-700">${description}</p>
 
           ${confirmInput}
 
-          <div class="flex justify-end items-center flex-wrap mt-6">
-            <button data-behavior="cancel" class="btn btn-light-gray mr-2">Cancel</button>
+          <div class="flex justify-end items-center flex-wrap gap-2 mt-6">
+            <button data-behavior="cancel" class="btn btn-white">Cancel</button>
             <button data-behavior="commit" class="btn btn-danger focus:outline-none">Confirm</button>
           </div>
         </div>
@@ -40,8 +41,7 @@ function insertConfirmModal(message, element, button) {
   `
 
   document.body.insertAdjacentHTML('beforeend', content)
-  document.activeElement.blur()
-  let modal = document.getElementById("confirm-modal")
+  let modal = document.getElementById(id)
 
   // Focus on the first button in the modal after rendering
   modal.querySelector("button").focus()

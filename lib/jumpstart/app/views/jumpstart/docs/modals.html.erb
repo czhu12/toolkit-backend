@@ -1,0 +1,85 @@
+<% content_for :section_title, "Modals" %>
+
+<%= h2_with_anchor "Modals" %>
+<p>Modals are implemented using the Stimulus <code>modal_controller</code> or overriding the Turbo confirm method.</p>
+
+<%= h4_with_anchor "Confirm Modals" %>
+<%= render "jumpstart/docs/snippet" do %>
+  <%= form_tag method: :get do |form| %>
+    <button
+      class="btn btn-white"
+      data-turbo-confirm="Are you sure?"
+      >Confirm</button>
+  <% end %>
+<% end %>
+
+<h4>Small Modal</h4>
+<%= render "jumpstart/docs/snippet" do %>
+<%= render ModalComponent.new(size: :sm) do |component| %>
+  <button class="btn btn-white" data-action="click->modal#open:prevent">Open Small Modal</button>
+
+  <% component.capture_for :body do %>
+    <h2 class="text-lg mb-2">Are you sure?</h2>
+    <p class="text-sm mb-2">Are you sure you want to do that. Seriously?</p>
+  <% end %>
+
+  <% component.capture_for :actions do %>
+    <button class="btn btn-white" data-action="click->modal#close:prevent">Cancel</button>
+    <button class="btn btn-primary" data-action="click->modal#close:prevent">Continue</button>
+  <% end %>
+<% end %>
+<% end %>
+
+<h4>Medium Modal</h4>
+<%= render "jumpstart/docs/snippet" do %>
+<%= render ModalComponent.new(size: :md) do |component| %>
+  <button class="btn btn-white" data-action="click->modal#open:prevent">Open Medium Modal</button>
+
+  <% component.capture_for :body do %>
+    <h2 class="text-lg mb-2">Are you sure?</h2>
+    <p class="text-sm mb-2">Are you sure you want to do that. Seriously?</p>
+  <% end %>
+
+  <% component.capture_for :actions do %>
+    <button class="btn btn-white" data-action="click->modal#close:prevent">Cancel</button>
+    <button class="btn btn-primary" data-action="click->modal#close:prevent">Continue</button>
+  <% end %>
+<% end %>
+<% end %>
+
+<h4>Large Modal</h4>
+<%= render "jumpstart/docs/snippet" do %>
+<%= render ModalComponent.new(size: :lg) do |component| %>
+  <button class="btn btn-white" data-action="click->modal#open:prevent">Open Large Modal</button>
+
+  <% component.capture_for :body do %>
+    <h2 class="text-lg mb-2">Are you sure?</h2>
+    <p class="text-sm mb-2">Are you sure you want to do that. Seriously?</p>
+  <% end %>
+
+  <% component.capture_for :actions do %>
+    <button class="btn btn-white" data-action="click->modal#close:prevent">Cancel</button>
+    <button class="btn btn-primary" data-action="click->modal#close:prevent">Continue</button>
+  <% end %>
+<% end %>
+<% end %>
+
+<h4>Fullscreen Modal</h4>
+<%= render "jumpstart/docs/snippet" do %>
+<%= render ModalComponent.new(size: :fullscreen) do |component| %>
+  <button class="btn btn-white" data-action="click->modal#open:prevent">Open Fullscreen Modal</button>
+
+  <% component.capture_for :body do %>
+    <div class="flex items-center h-full">
+      <div class="w-2/3 mx-auto">
+        <h2 class="text-lg mb-2">Are you sure?</h2>
+        <p class="text-sm mb-2">Are you sure you want to do that. Seriously?</p>
+        <div>
+          <button class="btn btn-white" data-action="click->modal#close:prevent">Cancel</button>
+          <button class="btn btn-primary" data-action="click->modal#close:prevent">Continue</button>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+<% end %>

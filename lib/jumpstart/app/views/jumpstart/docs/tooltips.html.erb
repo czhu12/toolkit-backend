@@ -1,0 +1,10 @@
+<% content_for :section_title, "tooltips" %>
+
+<%= h2_with_anchor "Tooltips" %>
+<p>Tooltips are powered by <%= link_to "Tippy.js", "https://atomiks.github.io/tippyjs/", class: "link" %>. We've wrapped them in a Stimulus controller so you can easily add them anywhere in your application.</p>
+<p>Add a <code>data-controller="tooltip" data-tippy-content="My tooltip"</code> to the element you want to add the tooltip to. You can set options using data attributes without writing any JS.</p>
+<p>See also <%= link_to "Clipboard", clipboard_docs_path %> which uses Tippy.js.</p>
+
+<%= render "jumpstart/docs/snippet" do %>
+<button class="btn btn-white" data-controller="tooltip" data-tippy-content="I'm a Tippy tooltip!" data-tippy-delay="0" data-tippy-arrow="true" data-tippy-size="regular" data-tippy-animation="fade">Hover over me</button>
+<% end %>

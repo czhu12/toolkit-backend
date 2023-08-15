@@ -1,0 +1,9 @@
+<% content_for :section_title, "Clipboard" %>
+
+<%= h2_with_anchor "Clipboard" %>
+<p>You can use the clipboard controller to copy text to the clipboard (with tooltips on success).</p>
+<p>Add <code>data-controller="clipboard" data-clipboard-text="Text for clipboard"</code> to the element.</p>
+
+<%= render "jumpstart/docs/snippet" do %>
+<button class="btn btn-white" data-controller="clipboard" data-clipboard-text="Hello from Jumpstart Pro!">Copy to Clipboard</button>
+<% end %>

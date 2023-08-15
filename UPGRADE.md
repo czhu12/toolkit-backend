@@ -2,6 +2,11 @@
 
 This file includes notes on major changes that might affect your application and require changes from you to update.
 
+### August 15, 2023
+
+TailwindCSS Stimulus Components has been updated to v4 which greatly improves animation support.
+We've also introduced UI components for modals, slideovers and tabs to make it easier to render them with the proper markup. We recommend switching modals and tabs over to the new components to automatically be updated to stay in sync with any future JavaScript changes.
+
 ### July 21, 2023
 
 We've made a few gems optional, but still integrated in Jumpstart Pro:
