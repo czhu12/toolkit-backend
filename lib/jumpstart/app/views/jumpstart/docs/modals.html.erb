@@ -5,12 +5,12 @@
 
 <%= h4_with_anchor "Confirm Modals" %>
 <%= render "jumpstart/docs/snippet" do %>
-  <%= form_tag method: :get do |form| %>
+  <form>
     <button
       class="btn btn-white"
       data-turbo-confirm="Are you sure?"
       >Confirm</button>
-  <% end %>
+  </form>
 <% end %>
 
 <h4>Small Modal</h4>
