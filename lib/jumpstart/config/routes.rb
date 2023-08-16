@@ -55,6 +55,7 @@ Jumpstart::Engine.routes.draw do
     get :slideover
     get :wells
 
+    get :business
     get :existing_apps
     get :integrations
   end

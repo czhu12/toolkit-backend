@@ -1,0 +1,78 @@
+<% content_for :section_title, "Your Business" %>
+
+<p class="text-xl">Jumpstart Pro has many successful business owners who have built (and sold!) their companies.</p>
+
+<%= h2_with_anchor "Starting Your Business" %>
+<p>It's daunting to start your own company. There are so many things to do and a million decisions to make.</p>
+<p>Let's start with a few things that you're going to need:</p>
+<ul>
+  <li>
+    <strong>A legal entity</strong>
+    <p class="text-sm">This is your LLC or Corporation that you'll be doing business as. It protects you from being personally liable in case of a lawsuit, for example.</p>
+  </li>
+  <li>
+    <strong>A Tax ID (EIN in the US)</strong>
+    <p class="text-sm">This is required to pay federal taxes, hire employees, open a bank account, and apply for business licenses and permits.</p>
+  </li>
+  <li>
+    <strong>Issue stock to founders</strong>
+    <p class="text-sm">You'll need to issue stock to the founders that is equivalent to the ownership each person has.</p>
+  </li>
+  <li>
+    <strong>File 83(b) election in US</strong>
+    <p class="text-sm">This is a letter you send to the Internal Revenue Service letting them know you'd like to be taxed on your equity, such as shares of restricted stock, on the date the equity was granted to you rather than on the date the equity vests. Without this election, you can land yourself in some serious tax trouble later on.</p>
+  </li>
+  <li>
+    <strong>A business bank account</strong>
+    <p class="text-sm">You'll need to keep finances for the business separate from your personal finances.</p>
+  </li>
+</ul>
+
+<p>We recommend using <%= link_to "Stripe Atlas", "https://stripe.com/atlas", target: :_blank %> to incorporate your company. They will help you do all of the above and connect you with accountants to help file taxes and everything.</p>
+
+<p>There are also many other considerations:</p>
+<ul>
+  <li>
+    <strong>What type of company do I want to create?</strong>
+    <p>There are pros and cons to LLCs, C Corporations, and S Corporations. An accountant can help you determine what makes the most sense for you.</p>
+    <p>Qualified Small Business Stock (QSBS) is a massive tax benefit if you sell your company that applies to C Corporations, for example. If you plan to sell your company in the future, it might be wise to follow the QSBS guidelines. However, if you don't plan to sell your company, you may be better off with another form of incorporation.</p>
+  </li>
+
+  <li>
+    <strong>Do I need to collect sales tax?</strong>
+    <p>Depending on the state(s) you operate in, you may need to collect sales tax.</p>
+    <p>A handy reference is Stripe's Sales Tax Categories list. Determine which category best fits your product and you can plug this into Stripe with your tax locations to determine if and when you'll have to collect sales tax. If you aren't sure, consult a tax lawyer for help.
+
+    <p>Paddle is another option for handling payments that acts as a Merchant of Record. Instead of customers paying your business, they pay Paddle. This means Paddle is on the hook for handling Sales Tax so you don't have to. They handle refunds and pay you out after everything is done. This can be extremely convenient to get started.
+  </li>
+</ul>
+
+
+<%= h2_with_anchor "Running Your Business" %>
+<p>Now that you're established, you're going to need a lot of things.</p>
+
+<ul>
+  <li>
+    <strong>Bookkeeping</strong>
+    <p>Keeping your accounts in order can be a lot of work. Your accounting firm might offer bookkeeping which can be nice to have everything handled in one place.</p>
+    <p>Bench is a service we use for bookkeeping ourselves. They can work with your accountant and can be considerably cheaper than paying for a bookkeeper since they use software to automate most of the work.</p>
+  </li>
+
+
+  <li>
+    <strong>Payroll / Health Insurance / Benefits</strong>
+    <p>Gusto or Rippling are good options for adding payroll and other benefits. You may not need this at the beginning, but they can help you out if you need to run payroll for your corporation and offer health insurance, retirement and other benefits.</p>
+  </li>
+
+  <li>
+    <strong>Email Marketing</strong>
+    <p>Email is the best way to stay in touch with your customers and get to know them. Social media is great, but it doesn't lead to relationships like email does.</p>
+    <p>Podia or ConvertKit are our recommended tools for email marketing. You can send one-off broadcasts, but you can also setup automations and drip campaigns to educate new users to your product.</p>
+  </li>
+
+  <li>
+    <strong>Customer Support</strong>
+    <p>Talking to customers and potential users is one of the most valuable ways of spending your time. Spend time to get to know them and form relationships with them. Don't just treat it as a support ticket. Instead, treat it as a way to get to know your users and their businesses and help them succeed.</p>
+    <p>We recommend RelationKit and HelpScout for customer support.</p>
+  </li>
+</ul>
