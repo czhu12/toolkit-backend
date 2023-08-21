@@ -64,7 +64,7 @@ gem "sneakers" if Jumpstart.config.background_job_processor == "sneakers"
 gem "sucker_punch" if Jumpstart.config.background_job_processor == "sucker_punch"
 
 # Payment processors
-gem "stripe" if Jumpstart.config.stripe?
+gem "stripe", "~> 8.7" if Jumpstart.config.stripe?
 gem "braintree" if Jumpstart.config.braintree? || Jumpstart.config.paypal?
 gem "paddle_pay" if Jumpstart.config.paddle?
 
