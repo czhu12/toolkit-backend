@@ -1,10 +1,6 @@
 require "test_helper"
 
 class NavHelperTest < ActionView::TestCase
-  include NavHelper
-
-  attr_reader :request
-
   test "accepts block" do
     block_link = nav_link_to("/block") { "Block Link" }
     assert_equal %(<a href="/block">Block Link</a>), block_link
