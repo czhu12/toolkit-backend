@@ -13,7 +13,8 @@ module StripeSystemTestHelper
 
       find_field("expiry").send_keys expiry
       find_field("cvc").send_keys cvc
-      find_field("postalCode").send_keys postal if has_field?("postalCode")
+      find_field("country").select("United States")
+      find_field("postalCode").send_keys postal
     end
   end
 
