@@ -37,7 +37,7 @@ module AccountsHelper
   end
 
   def account_admin?(account, account_user)
-    AccountUser.find_by(account: account, user: account_user).admin?
+    AccountUser.find_by(account: account, user: account_user)&.admin?
   end
 
   # A link to switch the account
