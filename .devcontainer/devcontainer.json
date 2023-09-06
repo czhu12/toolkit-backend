@@ -1,12 +1,8 @@
 {
-	"name": "Jumpstart Pro Rails",
-	"dockerComposeFile": "../docker-compose.yml",
+  "name": "Jumpstart Pro Rails",
+  "dockerComposeFile": "../docker-compose.yml",
   "service": "web",
   "workspaceFolder": "/app",
-	"forwardPorts": [
-    3000,
-    5432,
-    6379
-  ],
-	"postCreateCommand": "../bin/setup"
+  "forwardPorts": [3000],
+  "postCreateCommand": "../bin/setup"
 }
