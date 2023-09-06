@@ -60,9 +60,9 @@ module TwoFactorAuthentication
     codes
   end
 
-  def two_factor_otp_qr_code(**kwargs)
+  def two_factor_otp_qr_code(**)
     qrcode = RQRCode::QRCode.new(otp.provisioning_uri(email))
-    qrcode.as_svg(**kwargs)
+    qrcode.as_svg(**)
   end
 
   private

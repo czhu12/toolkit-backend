@@ -27,8 +27,8 @@ module Jumpstart
     end
 
     # Search through credentials scoped, then unscoped
-    def get_credential(*path)
-      credentials.dig(Rails.env.to_sym, *path) || credentials.dig(*path)
+    def get_credential(*)
+      credentials.dig(Rails.env.to_sym, *) || credentials.dig(*)
     end
 
     def shared_settings
