@@ -39,7 +39,7 @@ RUN curl -fsSLO --compressed "https://yarnpkg.com/downloads/$YARN_VERSION/yarn-v
   && rm yarn-v$YARN_VERSION.tar.gz
 
 WORKDIR /app
-COPY ./Gemfile* /app/
+COPY ./Gemfile* ./.ruby-version /app/
 COPY ./lib/jumpstart/ /app/lib/jumpstart/
 COPY ./config/jumpstart.yml* /app/config/jumpstart.yml
 RUN bundle config --local without "development test omit" && bundle install --jobs $(nproc) --retry 5

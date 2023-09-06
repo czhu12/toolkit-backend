@@ -71,7 +71,7 @@ RUN apt-get update -qq && \
 
 # App
 WORKDIR /app
-COPY ./Gemfile* /app/
+COPY ./Gemfile* ./.ruby-version /app/
 COPY ./lib/jumpstart/ /app/lib/jumpstart/
 COPY ./config/jumpstart.yml* /app/config/jumpstart.yml
 RUN bundle config --local without "staging production omit" && bundle install --jobs $(nproc) --retry 5
