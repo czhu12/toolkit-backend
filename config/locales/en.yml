@@ -483,12 +483,12 @@ en:
         next: "Next"
       verify:
         header: "Scan this barcode with your app."
-        subheader: "Scan the image above with the two-factor authentication app on your phone."
+        subheader: "Scan the QR code below with the two-factor authentication app on your phone."
         instructions_1_html: "Install Authy: %{ios} or %{android}"
         instructions_2: "In the app, select \"Add account\""
         instructions_3: "Choose \"Scan QR Code\""
         verify_header: "Enter the six-digit code from the application"
-        verify_description: "After scanning the barcode image, the app will display a code that you can enter below."
+        verify_description: "After scanning the QR code, the app will display a code that you can enter below."
         cancel: "Cancel"
         verify: "Verify"
 
