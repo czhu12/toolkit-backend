@@ -155,7 +155,7 @@ form.inline {
     &:checked {
       + label {
         &:before {
-          @apply bg-blue-600;
+          @apply bg-blue-600 dark:bg-blue-400;
         }
 
         &:after {
@@ -169,11 +169,11 @@ form.inline {
     @apply relative pl-16 pt-0.5 hover:cursor-pointer;
 
     &:before {
-      @apply absolute bg-gray-200 top-0 left-0 rounded-3xl h-6 w-[50px] content-[""] transition-colors duration-200 ease-in;
+      @apply absolute bg-gray-200 dark:bg-gray-700 top-0 left-0 rounded-3xl h-6 w-[50px] content-[""] transition-colors duration-200 ease-in;
     }
 
     &:after {
-      @apply absolute top-0.5 left-0.5 rounded-full w-5 h-5 bg-white content-[""] transition-transform duration-200 ease-in;
+      @apply absolute top-0.5 left-0.5 rounded-full w-5 h-5 bg-white dark:bg-gray-400 content-[""] transition-transform duration-200 ease-in;
     }
   }
 }
