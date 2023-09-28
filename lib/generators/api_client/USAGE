@@ -1,8 +1,9 @@
 Description:
-    Explain the generator
+    Generates API clients for quickly integrating with standard third party APIs.
 
 Example:
-    bin/rails generate api_client Thing
+    bin/rails generate api_client Thing --url https://api.example.org things:index thing:show thing:destroy
 
     This will create:
-        what/will/it/create
+        app/clients/thing_client.rb
+        test/clients/thing_client_test.rb

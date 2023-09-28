@@ -7,12 +7,39 @@ class <%= class_name %>Client < ApplicationClient
   #
   # See app/clients/application_client.rb for more details
 
-  BASE_URI = "https://example.org"
+  BASE_URI = "<%= url %>"
+
+  def self.client
+    new(token: Rails.application.credentials.<%= class_name.underscore %>[:key])
+  end
 
   def me
     get "/me"
   end
-
+<% attributes.sort_by(&:name).each do |attr| -%>
+  <%- if attr.index? %>
+  def <%= attr.method_name %>
+    <%= attr.verb %> "/<%= attr.name %>"
+  end
+  <%- elsif attr.show? %>
+  def <%= attr.method_name %>(id)
+    <%= attr.verb %> "/<%= attr.name %>/#{id}"
+  end
+  <%- elsif attr.create? %>
+  def <%= attr.method_name %>(a:, b:)
+    <%= attr.verb %> "/<%= attr.name %>", body: {a: a, b: b}
+  end
+  <%- elsif attr.update? %>
+  def <%= attr.method_name %>(id, a:, b:)
+    <%= attr.verb %> "/<%= attr.name %>/#{id}", body: {a: a, b: b}
+  end
+  <%- elsif attr.destroy? %>
+  def <%= attr.method_name %>(id)
+    <%= attr.verb %> "/<%= attr.name %>/#{id}"
+  end
+  <%- end -%>
+<% end -%>
+<% if attributes.empty? %>
   def posts(**kwargs)
     get "/posts", query: kwargs
   end
@@ -32,4 +59,5 @@ class <%= class_name %>Client < ApplicationClient
   def delete_post(id)
     delete "/posts/#{id}"
   end
+<%- end -%>
 end
