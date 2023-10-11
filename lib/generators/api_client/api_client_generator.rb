@@ -3,7 +3,7 @@ class ApiClientGenerator < Rails::Generators::NamedBase
 
   argument :attributes, type: :array, default: [], banner: "method[:type] method[:type]"
 
-  class_option :url, type: :string, default: "http://example.com", desc: "API Base URL"
+  class_option :url, type: :string, default: "https://api.example.com", desc: "API Base URL"
 
   class ApiMethod
     METHOD_TYPES = [
