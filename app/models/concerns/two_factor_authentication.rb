@@ -11,7 +11,7 @@ module TwoFactorAuthentication
   included do
     # Per discussion, serialize with text column
     # when rails 7 comes out encryption should be trivial
-    serialize :otp_backup_codes, Array
+    serialize :otp_backup_codes, coder: YAML, type: Array
   end
 
   def set_otp_secret!

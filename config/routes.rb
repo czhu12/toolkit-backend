@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   draw :turbo
 
   # Jumpstart views
-  if Rails.env.development? || Rails.env.test?
+  if Rails.env.local?
     mount Jumpstart::Engine, at: "/jumpstart"
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
   end
@@ -148,6 +148,10 @@ Rails.application.routes.draw do
     # Alternate route to use if logged in users should still see public root
     # get "/dashboard", to: "dashboard#show", as: :user_root
   end
+
+  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
+  # Can be used by load balancers and uptime monitors to verify that the app is live.
+  get "up" => "rails/health#show", as: :rails_health_check
 
   # Public marketing homepage
   root to: "static#index"

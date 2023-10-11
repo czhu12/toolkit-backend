@@ -5,7 +5,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby File.read(".ruby-version").strip
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem "rails", "~> 7.0.0"
+gem "rails", github: "rails/rails", branch: "7-1-stable" # "~> 7.1.0"
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails", ">= 3.4.1"
@@ -26,13 +26,13 @@ gem "stimulus-rails", "~> 1.0", ">= 1.0.2"
 gem "jbuilder", github: "excid3/jbuilder", branch: "partial-paths" # "~> 2.11"
 
 # Use Redis adapter to run Action Cable in production
-gem "redis", "~> 4.8"
+gem "redis", "~> 5.0"
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem "tzinfo-data"
+gem "tzinfo-data", platforms: %i[windows jruby]
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", ">= 1.4.2", require: false
@@ -44,6 +44,9 @@ gem "image_processing", "~> 1.12"
 gem "nokogiri", ">= 1.12.5"
 
 group :development, :test do
+  # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
+  gem "debug", platforms: %i[mri windows]
+
   # Optional debugging tools
   # gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
   # gem "pry-rails"
@@ -70,6 +73,8 @@ group :development do
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
+
+  gem "error_highlight", ">= 0.4.0", platforms: [:ruby]
 end
 
 group :test do

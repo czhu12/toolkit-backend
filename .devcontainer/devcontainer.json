@@ -4,5 +4,5 @@
   "service": "web",
   "workspaceFolder": "/app",
   "forwardPorts": [3000],
-  "postCreateCommand": "../bin/setup"
+  "postCreateCommand": "bin/setup"
 }

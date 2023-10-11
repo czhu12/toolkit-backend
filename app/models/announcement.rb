@@ -17,14 +17,10 @@ class Announcement < ApplicationRecord
 
   validates :kind, :title, :description, :published_at, presence: true
 
-  after_initialize :set_defaults
+  attribute :published_at, default: -> { Time.current }
 
   def self.unread?(user)
     most_recent_announcement = maximum(:published_at)
     most_recent_announcement && (user.nil? || user.announcements_read_at&.before?(most_recent_announcement))
-  end
-
-  def set_defaults
-    self.published_at ||= Time.current
   end
 end

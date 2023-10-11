@@ -11,13 +11,22 @@ require "jumpstart"
 module JumpstartApp
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 7.0
+    config.load_defaults 7.1
 
-    # Settings in config/environments/* take precedence over those specified here.
-    # Application configuration can go into files in config/initializers
-    # -- all .rb files in that directory are automatically loaded after loading
-    # the framework and any gems in your application.
+    # Please, add to the `ignore` list any other `lib` subdirectories that do
+    # not contain `.rb` files, or that should not be reloaded or eager loaded.
+    # Common ones are `templates`, `generators`, or `middleware`, for example.
+    config.autoload_lib(ignore: %w[assets generators jumpstart rails tasks templates])
 
+    # Configuration for the application, engines, and railties goes here.
+    #
+    # These settings can be overridden in specific environments using the files
+    # in config/environments, which are processed later.
+    #
+    # config.time_zone = "Central Time (US & Canada)"
+    # config.eager_load_paths << Rails.root.join("extras")
+
+    # Use ErrorsController for handling 404s and 500s.
     config.exceptions_app = routes
 
     # Where the I18n library should search for translation files
@@ -41,5 +50,13 @@ module JumpstartApp
     # libvips is up to 10x faster and consumes 1/10th the memory of imagemagick
     # If you need to use imagemagick, uncomment this to switch
     # config.active_storage.variant_processor = :mini_magick
+
+    # Support older SHA1 digests for ActiveStorage so ActionText attachments don't break
+    config.after_initialize do |app|
+      app.message_verifier("ActiveStorage").rotate(digest: "SHA1")
+    end
+
+    # Support older SHA1 digests for ActiveRecord::Encryption
+    config.active_record.encryption.support_sha1_for_non_deterministic_encryption = true
   end
 end

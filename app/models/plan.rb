@@ -25,6 +25,8 @@ class Plan < ApplicationRecord
 
   store_accessor :details, :features, :stripe_id, :braintree_id, :paddle_id, :jumpstart_id, :fake_processor_id, :stripe_tax
   attribute :features, :string, array: true
+  attribute :currency, default: "usd"
+  normalizes :currency, with: ->(currency) { currency.downcase }
 
   validates :name, :amount, :interval, presence: true
   validates :currency, presence: true, format: {with: /\A[a-zA-Z]{3}\z/, message: "must be a 3-letter ISO currency code"}
@@ -39,12 +41,6 @@ class Plan < ApplicationRecord
   scope :with_hidden, -> { unscope(where: :hidden) }
   scope :without_free, -> { where.not("details @> ?", {fake_processor_id: :free}.to_json) }
   scope :yearly, -> { without_free.where(interval: :year) }
-
-  # Downcase
-  before_save { currency.downcase! }
-
-  # Default currency
-  after_initialize { self.currency ||= "usd" }
 
   def self.free
     plan = where(name: "Free").first_or_initialize

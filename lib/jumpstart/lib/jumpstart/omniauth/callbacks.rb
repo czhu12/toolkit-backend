@@ -7,7 +7,8 @@ module Jumpstart
 
           if (signed_id = omniauth_params["record"])
             # Handle authentication to another model
-            record = GlobalID::Locator.locate_signed(signed_id, for: :oauth)
+            record = GlobalID::Locator.locate_signed(signed_id, for: "oauth")
+
             ConnectedAccount.where(owner: record).first_or_initialize.update(connected_account_params)
             run_connected_callback(connected_account)
             redirect_to(omniauth_params.fetch("redirect_to", record) || root_path)

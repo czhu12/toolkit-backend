@@ -21,7 +21,7 @@
 #
 
 class ConnectedAccount < ApplicationRecord
-  serialize :auth, JSON
+  serialize :auth, coder: JSON
 
   encrypts :access_token
   encrypts :access_token_secret
