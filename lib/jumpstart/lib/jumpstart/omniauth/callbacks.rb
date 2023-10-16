@@ -95,7 +95,9 @@ module Jumpstart
       end
 
       def expires_at
-        Time.at(auth.credentials.expires_at) if auth.credentials.expires_at.present?
+        creds = auth.credentials
+        return Time.at(creds.expires_at).utc if creds.expires_at.present?
+        Time.now.utc + creds.expires_in if creds.expires_in.present?
       end
 
       def success_message!(kind:)
