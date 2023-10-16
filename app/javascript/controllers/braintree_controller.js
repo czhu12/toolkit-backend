@@ -34,7 +34,6 @@ export default class extends Controller {
 
   submit(event) {
     event.preventDefault()
-
     this.instance.requestPaymentMethod(this.paymentMethod.bind(this))
   }
 
@@ -46,8 +45,7 @@ export default class extends Controller {
 
     this.addHiddenField("processor", "braintree")
     this.addHiddenField("payment_method_token", payload.nonce)
-
-    Rails.fire(this.formTarget, "submit")
+    this.formTarget.submit()
   }
 
   addHiddenField(name, value) {

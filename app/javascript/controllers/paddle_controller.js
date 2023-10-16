@@ -31,10 +31,10 @@ export default class extends Controller {
     }
   }
 
+  // Webhooks will set the customer ID and subscription using the `passthrough` parameter
   checkoutComplete(data) {
     this.addHiddenField("processor", "paddle")
-    // Webhooks will set the customer ID and subscription using the `passthrough` parameter
-    Rails.fire(this.formTarget, "submit")
+    this.formTarget.submit()
   }
 
   addHiddenField(name, value) {
