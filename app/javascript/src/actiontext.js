@@ -1,6 +1,6 @@
 import Trix from "trix"
 import "@rails/actiontext"
-import { get } from "@rails/request.js"
+import { get, post } from "@rails/request.js"
 
 Trix.config.textAttributes.inlineCode = {
   tagName: "code",
@@ -74,13 +74,13 @@ class EmbedController {
     return this.patterns.some(regex => regex.test(value))
   }
 
-  fetch(value) {
-    Rails.ajax({
-      url: `/action_text/embeds?id=${encodeURIComponent(value)}`,
-      type: 'post',
-      error: this.reset.bind(this),
-      success: this.showEmbed.bind(this)
-    })
+  async fetch(value) {
+    const response = await post(`/action_text/embeds?id=${encodeURIComponent(value)}`, { responseKind: "json" })
+    if (response.ok) {
+      this.showEmbed(await response.json)
+    } else {
+      this.reset()
+    }
   }
 
   embed(event) {
