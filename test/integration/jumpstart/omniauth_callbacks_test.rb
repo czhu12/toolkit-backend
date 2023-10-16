@@ -4,7 +4,7 @@ if defined? OmniAuth
   class Jumpstart::OmniauthCallbacksTest < ActionDispatch::IntegrationTest
     setup do
       OmniAuth.config.test_mode = true
-      OmniAuth.config.add_mock(:developer, uid: "12345", info: {email: "twitter@example.com"}, credentials: {token: 1})
+      OmniAuth.config.add_mock(:developer, uid: "12345", info: {email: "twitter@example.com"}, credentials: {token: 1, expires_in: 100})
     end
 
     test "can register and login with a social account" do
@@ -15,6 +15,7 @@ if defined? OmniAuth
       assert_equal "developer", user.connected_accounts.last.provider
       assert_equal "12345", user.connected_accounts.last.uid
       assert_equal user, controller.current_user
+      assert_in_delta Time.now.utc + 100, user.connected_accounts.last.expires_at.utc, 1
 
       sign_out user
       get "/"
