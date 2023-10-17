@@ -4,6 +4,9 @@ import Trix from "trix"
 
 export default class extends Controller {
   static targets = [ "field" ]
+  static values = {
+    url: { type: String, default: '/users/mentions.json'}
+  }
 
   connect() {
     this.initializeTribute()
@@ -13,7 +16,12 @@ export default class extends Controller {
     this.tribute = new Tribute({
       allowSpaces: true,
       lookup: 'name',
-      values: this.fetchUsers,
+      values: (text, callback) => {
+        fetch(`${this.urlValue}?query=${text}`)
+          .then(response => response.json())
+          .then(users => callback(users))
+          .catch(error => callback([]))
+      },
       menuShowMinLength: 1,
     })
     this.tribute.attach(this.fieldTarget)
@@ -23,13 +31,6 @@ export default class extends Controller {
 
   disconnect() {
     this.tribute.detach(this.fieldTarget)
-  }
-
-  fetchUsers(text, callback) {
-    fetch(`/users/mentions.json?query=${text}`)
-      .then(response => response.json())
-      .then(users => callback(users))
-      .catch(error => callback([]))
   }
 
   // Inserts ActionText Attachment when a Tribute entry is selected
