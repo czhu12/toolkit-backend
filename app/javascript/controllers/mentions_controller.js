@@ -20,7 +20,7 @@ export default class extends Controller {
         fetch(`${this.urlValue}?query=${text}`)
           .then(response => response.json())
           .then(users => callback(users))
-
+          .catch(error => callback([]))
       },
       menuShowMinLength: 1,
     })
