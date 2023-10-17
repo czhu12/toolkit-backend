@@ -36,7 +36,6 @@ export default class extends Controller {
   // Inserts ActionText Attachment when a Tribute entry is selected
   replaced(e) {
     let mention = e.detail.item.original
-
     let attachment = new Trix.Attachment({
       content: mention.content,
       sgid: mention.sgid,
