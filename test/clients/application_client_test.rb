@@ -168,7 +168,7 @@ class ApplicationClientTest < ActiveSupport::TestCase
   test "handles missing link header" do
     stub_request(:get, "https://example.org/pages")
     response = @client.send(:get, "/pages")
-    assert_equal({}, response.link_header)
+    assert_empty(response.link_header)
   end
 
   class CustomClientTest < ActiveSupport::TestCase

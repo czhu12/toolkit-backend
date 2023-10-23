@@ -25,7 +25,7 @@ class Jumpstart::PlansTest < ActionDispatch::IntegrationTest
     get "/pricing"
 
     Plan.visible.find_each do |plan|
-      assert response.body.include?(plan.name)
+      assert_includes response.body, plan.name
     end
   end
 
@@ -45,9 +45,9 @@ class Jumpstart::PlansTest < ActionDispatch::IntegrationTest
       plan = plans(:personal)
 
       get new_subscription_path(plan: plan)
-      assert response.body.include?(plan.name)
+      assert_includes response.body, plan.name
       plan.features.each do |feature|
-        assert response.body.include?(feature)
+        assert_includes response.body, feature
       end
     end
 
@@ -59,10 +59,10 @@ class Jumpstart::PlansTest < ActionDispatch::IntegrationTest
       switch_account(account)
       get new_subscription_path(plan: plan)
 
-      assert response.body.include?(account.name)
-      assert response.body.include?(plan.name)
+      assert_includes response.body, account.name
+      assert_includes response.body, plan.name
       plan.features.each do |feature|
-        assert response.body.include?(feature)
+        assert_includes response.body, feature
       end
     end
   end

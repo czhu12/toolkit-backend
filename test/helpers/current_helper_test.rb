@@ -71,7 +71,7 @@ class CurrentHelperTest < ActionView::TestCase
     end
 
     test "current_roles" do
-      assert_equal [], current_roles
+      assert_empty current_roles
     end
   end
 end
