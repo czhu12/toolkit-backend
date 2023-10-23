@@ -4,31 +4,31 @@ class <%= class_name %>ClientTest < ActiveSupport::TestCase
   setup do
     @client = <%= class_name %>Client.new(token: "test")
   end
-<% attributes.sort_by(&:name).each do |attr| -%>
+<% attributes.each do |attr| -%>
   <%- if attr.index? %>
-  test "<%= attr.name %> <%= attr.type %>" do
-    stub_request(:<%= attr.verb %>, "<%= url %>/<%= attr.name %>")
-    @client.<%= attr.method_name %>
+  test "<%= attr.name %> <%= attr.verb %>" do
+    stub_request(:<%= attr.verb %>, "<%= url %>/<%= plural_file_name %>")
+    @client.<%= attr.name %>
   end
   <%- elsif attr.show? %>
-  test "<%= attr.name %> <%= attr.type %>" do
-    stub_request(:<%= attr.verb %>, "<%= url %>/<%= attr.name %>/123")
-    @client.<%= attr.method_name %>(123)
+  test "<%= attr.name %> <%= attr.verb %>" do
+    stub_request(:<%= attr.verb %>, "<%= url %>/<%= plural_file_name %>/123")
+    @client.<%= attr.name %>(123)
   end
   <%- elsif attr.create? %>
-  test "<%= attr.name %> <%= attr.type %>" do
-    stub_request(:<%= attr.verb %>, "<%= url %>/<%= attr.name %>").with(body: {"a" => "a", "b" => "b"})
-    @client.<%= attr.method_name %>(a: "a", b: "b")
+  test "<%= attr.name %> <%= attr.verb %>" do
+    stub_request(:<%= attr.verb %>, "<%= url %>/<%= plural_file_name %>").with(body: {"a" => "a", "b" => "b"})
+    @client.<%= attr.name%>(a: "a", b: "b")
   end
   <%- elsif attr.update? %>
-  test "<%= attr.name %> <%= attr.type %>" do
-    stub_request(:<%= attr.verb %>, "<%= url %>/<%= attr.name %>/123").with(body: {"a" => "a", "b" => "b"})
-    @client.<%= attr.method_name %>(123, a: "a", b: "b")
+  test "<%= attr.name %> <%= attr.verb %>" do
+    stub_request(:<%= attr.verb %>, "<%= url %>/<%= plural_file_name %>/123").with(body: {"a" => "a", "b" => "b"})
+    @client.<%= attr.name %>(123, a: "a", b: "b")
   end
   <%- elsif attr.destroy? %>
-  test "<%= attr.name %> <%= attr.type %>" do
-    stub_request(:<%= attr.verb %>, "<%= url %>/<%= attr.name %>/123")
-    @client.<%= attr.method_name %>(123)
+  test "<%= attr.name %> <%= attr.verb %>" do
+    stub_request(:<%= attr.verb %>, "<%= url %>/<%= plural_file_name %>/123")
+    @client.<%= attr.name %>(123)
   end
   <%- end -%>
 <% end -%>

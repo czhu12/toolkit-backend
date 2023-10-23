@@ -1,77 +1,38 @@
 class ApiClientGenerator < Rails::Generators::NamedBase
+  Endpoint = Data.define(:name, :verb) do
+    def self.parse(attribute)
+      return attribute if attribute.is_a? Endpoint
+
+      name, verb, _ = attribute.split(":")
+      new(name, verb || "get")
+    end
+
+    def index?
+      name.start_with? "list"
+    end
+
+    def show?
+      verb == "get"
+    end
+
+    def create?
+      verb == "post"
+    end
+
+    def update?
+      ["patch", "put"].include? verb
+    end
+
+    def destroy?
+      verb == "delete"
+    end
+  end
+
   source_root File.expand_path("templates", __dir__)
 
   argument :attributes, type: :array, default: [], banner: "method[:type] method[:type]"
 
   class_option :url, type: :string, default: "https://api.example.com", desc: "API Base URL"
-
-  class ApiMethod
-    METHOD_TYPES = [
-      :index,
-      :show,
-      :create,
-      :update,
-      :destroy
-      # :resources TODO! (gen all 5 the resources)
-    ]
-    METHOD_TO_VERB = {
-      index: :get,
-      show: :get,
-      create: :post,
-      update: :put,
-      destroy: :delete
-    }
-
-    def self.parse(attr)
-      return attr if attr.is_a?(ApiMethod)
-
-      name, type = attr.split(":")
-      if type.nil?
-        type = :index
-      end
-
-      type = type&.to_sym
-
-      if !valid_type?(type)
-        raise "Invalid API method type: #{type}"
-      end
-
-      new(name, type)
-    end
-
-    def self.valid_type?(type)
-      METHOD_TYPES.include?(type)
-    end
-
-    attr_accessor :name, :type
-
-    def initialize(name, type)
-      @name = name
-      @type = type
-    end
-
-    def method_name
-      prefix = {
-        index: "list",
-        show: "get",
-        create: "create",
-        update: "update",
-        destroy: "delete"
-      }[type]
-
-      "#{prefix}_#{name.underscore}".to_sym
-    end
-
-    def verb
-      METHOD_TO_VERB[type]
-    end
-
-    METHOD_TYPES.each do |method_type|
-      define_method("#{method_type}?") do
-        type == method_type
-      end
-    end
-  end
 
   def copy_templates
     template "client.rb", "app/clients/#{file_path}_client.rb"
@@ -82,8 +43,8 @@ class ApiClientGenerator < Rails::Generators::NamedBase
   # Instead of retruning instances of GeneratedAttributes (which makes sense for models)
   # we want to return instances of ApiMethod.
   def parse_attributes!
-    self.attributes = (attributes || []).map do |attr|
-      ApiMethod.parse(attr)
+    self.attributes = Array.wrap(attributes).map do |attr|
+      Endpoint.parse(attr)
     end
   end
 

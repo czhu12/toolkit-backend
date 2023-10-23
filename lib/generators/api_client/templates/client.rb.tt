@@ -16,26 +16,29 @@ class <%= class_name %>Client < ApplicationClient
   def me
     get "/me"
   end
-<% attributes.sort_by(&:name).each do |attr| -%>
+<% attributes.each do |attr| -%>
   <%- if attr.index? %>
-  def <%= attr.method_name %>
-    <%= attr.verb %> "/<%= attr.name %>"
+  def <%= attr.name %>(**kwargs)
+    with_pagination "/<%= plural_file_name %>", query: kwargs do |response|
+      # Return a hash of query params or URL to get the next page or nil to stop paginating
+      response.link_header[:next]
+    end
   end
   <%- elsif attr.show? %>
-  def <%= attr.method_name %>(id)
-    <%= attr.verb %> "/<%= attr.name %>/#{id}"
+  def <%= attr.name %>(id)
+    <%= attr.verb %> "/<%= plural_file_name %>/#{id}"
   end
   <%- elsif attr.create? %>
-  def <%= attr.method_name %>(a:, b:)
-    <%= attr.verb %> "/<%= attr.name %>", body: {a: a, b: b}
+  def <%= attr.name %>(a:, b:)
+    <%= attr.verb %> "/<%= plural_file_name %>", body: {a: a, b: b}
   end
   <%- elsif attr.update? %>
-  def <%= attr.method_name %>(id, a:, b:)
-    <%= attr.verb %> "/<%= attr.name %>/#{id}", body: {a: a, b: b}
+  def <%= attr.name %>(id, a:, b:)
+    <%= attr.verb %> "/<%= plural_file_name %>/#{id}", body: {a: a, b: b}
   end
   <%- elsif attr.destroy? %>
-  def <%= attr.method_name %>(id)
-    <%= attr.verb %> "/<%= attr.name %>/#{id}"
+  def <%= attr.name %>(id)
+    <%= attr.verb %> "/<%= plural_file_name %>/#{id}"
   end
   <%- end -%>
 <% end -%>
