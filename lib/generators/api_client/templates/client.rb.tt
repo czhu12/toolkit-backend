@@ -7,12 +7,47 @@ class <%= class_name %>Client < ApplicationClient
   #
   # See app/clients/application_client.rb for more details
 
-  BASE_URI = "https://example.org"
+  BASE_URI = "<%= url %>"
 
+  def self.client
+    new(token: Rails.application.credentials.dig(:<%= file_path.split("/").first %>, :api_key))
+  end
+
+  def self.client_for(connected_account)
+    new(auth: connected_account)
+  end
+
+  # Example endpoint
   def me
     get "/me"
   end
-
+<% attributes.each do |attr| -%>
+  <%- if attr.index? %>
+  def <%= attr.name %>(**kwargs)
+    with_pagination "/<%= plural_file_name %>", query: kwargs do |response|
+      # Return a hash of query params or URL to get the next page or nil to stop paginating
+      response.link_header[:next]
+    end
+  end
+  <%- elsif attr.show? %>
+  def <%= attr.name %>(id)
+    <%= attr.verb %> "/<%= plural_file_name %>/#{id}"
+  end
+  <%- elsif attr.create? %>
+  def <%= attr.name %>(**kwargs)
+    <%= attr.verb %> "/<%= plural_file_name %>", body: kwargs
+  end
+  <%- elsif attr.update? %>
+  def <%= attr.name %>(id, **kwargs)
+    <%= attr.verb %> "/<%= plural_file_name %>/#{id}", body: kwargs
+  end
+  <%- elsif attr.destroy? %>
+  def <%= attr.name %>(id)
+    <%= attr.verb %> "/<%= plural_file_name %>/#{id}"
+  end
+  <%- end -%>
+<% end -%>
+<% if attributes.empty? %>
   def posts(**kwargs)
     get "/posts", query: kwargs
   end
@@ -21,15 +56,16 @@ class <%= class_name %>Client < ApplicationClient
     get "/posts/#{id}"
   end
 
-  def create_post(title:, body:)
-    post "/posts", body: { title: title, body: body }
+  def create_post(**kwargs)
+    post "/posts", body: kwargs
   end
 
-  def update_post(id, title:, body:)
-    patch "/posts/#{id}", body: { title: title, body: body }
+  def update_post(id, **kwargs)
+    patch "/posts/#{id}", body: kwargs
   end
 
   def delete_post(id)
     delete "/posts/#{id}"
   end
+<%- end -%>
 end
