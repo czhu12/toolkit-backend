@@ -7,7 +7,8 @@ module Users::AgreementUpdates
   end
 
   def require_accepted_latest_agreements!
-    Rails.application.config.agreements.each do |agreement|
+    agreements = Rails.application.config.agreements.select(&:prompt_when_updated)
+    agreements.each do |agreement|
       if agreement.not_accepted_by?(current_user)
         respond_to do |format|
           format.html {
