@@ -69,3 +69,10 @@ end</code></pre>
 <%= h2_with_anchor "ApplicationClient" %>
 <p>ApplicationClient is the base class that API clients inherit from. It provides methods for <code>get</code>, <code>post</code>, <code>patch</code>, <code>put</code>, and <code>delete</code>. It also handles authorization using the Authorization header and parsing response bodies as JSON.</p>
 <p>You can override these methods in your API client to match your API. For example, if you need to parse XML instead of JSON, override the <code>parse_response</code> method and use Nokogiri instead.</p>
+
+<%= h2_with_anchor "More features" %>
+<p>Optionally pass the <code>--url</code> option to set the base URL</p>
+<p>Optionally pass methods with <code>index</code>, <code>show</code>, <code>create</code>, <code>update</code>, <code>destroy</code> types</p>
+<div class="not-prose">
+  <pre><code>rails g api_client OpenAi completions:create --url https://api.openai.com</code></pre>
+</div>
