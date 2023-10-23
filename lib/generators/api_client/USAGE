@@ -12,9 +12,9 @@ Notes:
 
     You can generate a single API Client for a service:
 
-        bin/rails generate api_client Service list_users:get list_accounts:get create_account:post update_account:patch delete_account:delete --url https://api.example.org
+        bin/rails generate api_client Service list_accounts:get list_users:get create_account:post create_user --url https://api.example.org
 
     Or generate multiple API clients for each services resource using namespacing:
 
-        bin/rails generate api_client Service::User list:get retrieve:get update:patch destroy:delete --url https://api.example.org
-        bin/rails generate api_client Service::Account list:get retrieve:get update:patch destroy:delete --url https://api.example.org
+        bin/rails generate api_client Service::User list:get retrieve:get create:post update:patch destroy:delete --url https://api.example.org
+        bin/rails generate api_client Service::Account list:get retrieve:get create:post update:patch destroy:delete --url https://api.example.org

@@ -10,9 +10,14 @@ class <%= class_name %>Client < ApplicationClient
   BASE_URI = "<%= url %>"
 
   def self.client
-    new(token: Rails.application.credentials.<%= class_name.underscore %>[:key])
+    new(token: Rails.application.credentials.dig(:<%= file_path.split("/").first %>, :api_key))
   end
 
+  def self.client_for(connected_account)
+    new(auth: connected_account)
+  end
+
+  # Example endpoint
   def me
     get "/me"
   end
@@ -29,12 +34,12 @@ class <%= class_name %>Client < ApplicationClient
     <%= attr.verb %> "/<%= plural_file_name %>/#{id}"
   end
   <%- elsif attr.create? %>
-  def <%= attr.name %>(a:, b:)
-    <%= attr.verb %> "/<%= plural_file_name %>", body: {a: a, b: b}
+  def <%= attr.name %>(**kwargs)
+    <%= attr.verb %> "/<%= plural_file_name %>", body: kwargs
   end
   <%- elsif attr.update? %>
-  def <%= attr.name %>(id, a:, b:)
-    <%= attr.verb %> "/<%= plural_file_name %>/#{id}", body: {a: a, b: b}
+  def <%= attr.name %>(id, **kwargs)
+    <%= attr.verb %> "/<%= plural_file_name %>/#{id}", body: kwargs
   end
   <%- elsif attr.destroy? %>
   def <%= attr.name %>(id)
@@ -51,12 +56,12 @@ class <%= class_name %>Client < ApplicationClient
     get "/posts/#{id}"
   end
 
-  def create_post(title:, body:)
-    post "/posts", body: { title: title, body: body }
+  def create_post(**kwargs)
+    post "/posts", body: kwargs
   end
 
-  def update_post(id, title:, body:)
-    patch "/posts/#{id}", body: { title: title, body: body }
+  def update_post(id, **kwargs)
+    patch "/posts/#{id}", body: kwargs
   end
 
   def delete_post(id)
