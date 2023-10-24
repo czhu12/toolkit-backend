@@ -1,12 +1,16 @@
 ---
 nl:
-  hello: Hallo Wereld
-  something_went_wrong: Er is iets fout gegaan
-  create_an_account_first: Je hebt een account nodig. Maak dit eerst aan.
-  must_be_an_admin: U moet daarvoor een beheerder zijn.
   are_you_sure: Weet je het zeker?
-  delete: Verwijderen
   back: Terug
+  cancel: Annuleren
+  create_an_account_first: Je hebt een account nodig. Maak dit eerst aan.
+  delete: Verwijderen
+  edit: Wijzigen
+  must_be_an_admin: U moet daarvoor een beheerder zijn.
+  processing: "Verwerken..."
+  something_went_wrong: Er is iets fout gegaan
+  unauthorized: Je bent niet bevoegd om deze actie uit te voeren
+
   account_invitations_mailer:
     invite:
       subject: "%{inviter} heeft je uitgenodigd voor %{account}"
@@ -14,6 +18,7 @@ nl:
       description_html: U kunt deze uitnodiging %{link}.
       accept_or_decline: accepteren of weigeren
       view_invitation: Uitnodiging bekijken
+
   account_invitations:
     invite_user: Gebruiker uitnodigen
     authenticate: Log in of maak een account aan om deze uitnodiging te accepteren
@@ -24,11 +29,13 @@ nl:
         om lid te worden van <strong> %{account}</strong>"
       accept: Uitnodiging accepteren
       decline: Afwijzen
+
   account_users:
     updated: Account lid is bijgewerkt.
     destroyed: Account lid is verwijderd.
     edit:
       description: Accountrechten bewerken voor %{user}.
+
   accounts:
     index:
       title: Accounts
@@ -162,6 +169,14 @@ nl:
     right_nav:
       pricing: Prijzen
       announcements: Wat is er nieuw
+    scaffold:
+      edit:
+        title: "Wijzig %{model}"
+      new:
+        title: "%{model} aanmaken"
+      actions: "Acties"
+      view: "Bekijk"
+
   subscriptions:
     created: Bedankt voor het abonneren!
     resumed: Uw abonnement is hervat.
