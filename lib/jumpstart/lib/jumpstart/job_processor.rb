@@ -6,7 +6,8 @@ module Jumpstart
       "DelayedJob" => :delayed_job,
       "Sneakers" => :sneakers,
       "SuckerPunch" => :sucker_punch,
-      "Que" => :que
+      "Que" => :que,
+      "GoodJob" => :good_job
     }.freeze
 
     AVAILABLE_PROVIDERS.each do |_, name|
@@ -26,6 +27,8 @@ module Jumpstart
         "rake sneakers:run"
       when "que"
         "bundle exec que -q default -q mailers -q action_mailbox_incineration -q action_mailbox_routing -q active_storage_analysis -q active_storage_purge"
+      when "good_job"
+        "bundle exec good_job start"
       end
     end
 
