@@ -20,10 +20,10 @@ class Users::RegistrationsControllerTest < ActionDispatch::IntegrationTest
     test "successfully registration form render" do
       get new_user_registration_path
       assert_response :success
-      assert response.body.include?("user[name]")
-      assert response.body.include?("user[email]")
-      assert response.body.include?("user[password]")
-      assert response.body.include?(InvisibleCaptcha.sentence_for_humans)
+      assert_includes response.body, "user[name]"
+      assert_includes response.body, "user[email]"
+      assert_includes response.body, "user[password]"
+      assert_includes response.body, InvisibleCaptcha.sentence_for_humans
     end
 
     test "successful user registration" do

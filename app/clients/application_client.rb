@@ -36,11 +36,18 @@ class ApplicationClient
   BASE_URI = "https://example.org"
   NET_HTTP_ERRORS = [Timeout::Error, Errno::EINVAL, Errno::ECONNRESET, EOFError, Net::HTTPBadResponse, Net::HTTPHeaderSyntaxError, Net::ProtocolError]
 
-  attr_reader :token
+  attr_reader :auth, :token
 
-  # Override if API requires additional attributes
-  def initialize(token:)
-    @token = token
+  # Initializes an API client
+  #
+  # To provide authentication credentials, you can supply either `auth` or `token`.
+  #
+  #   `auth` should be an object that responds to the `token` method
+  #   `token` should be a String authentication token or API key
+  #
+  # Override this method if the API requires additional parameters
+  def initialize(auth: nil, token: nil)
+    @auth, @token = auth, token
   end
 
   # Override to customize default headers
@@ -67,7 +74,7 @@ class ApplicationClient
   #   { "X-API-Key" => token }
   #   { "AccessKey" => token }
   def authorization_header
-    {"Authorization" => "Bearer #{token}"}
+    {"Authorization" => "Bearer #{auth&.token || token}"}
   end
 
   # Override to customize default query params
