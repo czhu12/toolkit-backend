@@ -4,5 +4,9 @@
   "service": "web",
   "workspaceFolder": "/app",
   "forwardPorts": [3000],
-  "postCreateCommand": "bin/setup"
+  "features": {
+    "ghcr.io/devcontainers/features/github-cli:1": {
+      "version": "latest"
+    }
+  }
 }
