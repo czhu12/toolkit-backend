@@ -3,7 +3,6 @@
   "dockerComposeFile": "../docker-compose.yml",
   "service": "web",
   "workspaceFolder": "/app",
-  "forwardPorts": [3000],
   "features": {
     "ghcr.io/devcontainers/features/github-cli:1": {
       "version": "latest"
