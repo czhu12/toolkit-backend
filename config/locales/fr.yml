@@ -252,7 +252,7 @@ fr:
   subscriptions:
     created: "Merci de vous être abonné !"
     resumed: "Votre abonnement a repris."
-    info_updated: "Les informations de facturation ont été sauvegardées."
+    billing_settings_updated: "Les informations de facturation ont été sauvegardées."
 
     plan:
       change_plan: "Changer de forfait"
