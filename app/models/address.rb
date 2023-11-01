@@ -26,7 +26,7 @@ class Address < ApplicationRecord
 
   enum address_type: [:billing, :shipping]
 
-  after_commit :update_pay_customer_addresses
+  after_commit :update_pay_customer_addresses, if: :billing?
 
   def to_stripe
     {
@@ -42,8 +42,6 @@ class Address < ApplicationRecord
   private
 
   def update_pay_customer_addresses
-    if addressable.respond_to?(:pay_customers)
-      addressable.pay_customers.each { |payment_processor| payment_processor.update_customer! }
-    end
+    addressable.try(:pay_customers)&.each { |payment_processor| payment_processor.update_customer! }
   end
 end
