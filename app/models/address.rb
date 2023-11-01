@@ -42,6 +42,6 @@ class Address < ApplicationRecord
   private
 
   def update_pay_customer_addresses
-    addressable.try(:pay_customers)&.each { |payment_processor| payment_processor.update_customer! }
+    addressable.try(:pay_customers)&.each(&:update_customer!)
   end
 end
