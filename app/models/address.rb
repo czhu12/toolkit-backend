@@ -26,7 +26,7 @@ class Address < ApplicationRecord
 
   enum address_type: [:billing, :shipping]
 
-  after_commit :update_pay_customer_addresses, if: ->{ billing? && addressable.respond_to?(:pay_customers) }
+  after_commit :update_pay_customer_addresses, if: -> { billing? && addressable.respond_to?(:pay_customers) }
 
   def to_stripe
     {
