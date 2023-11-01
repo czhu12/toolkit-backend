@@ -22,7 +22,16 @@
 require "test_helper"
 
 class AddressTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  setup do
+    @user = users(:one)
+    @address = addresses(:one)
+    @address.addressable = @user
+  end
+
+  test "does not run update_pay_customer_addresses if no pay_customers" do
+    @user.personal_account.set_payment_processor :fake_processor, allow_fake: true
+    assert_no_changes -> { @user.personal_account.pay_customers } do
+      @address.save!
+    end
+  end
 end
