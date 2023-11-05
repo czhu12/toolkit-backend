@@ -1,6 +1,6 @@
-<div class="bg-white border border-gray-200 dark:bg-gray-900 dark:border-gray-800 rounded text-sm font-medium">
-  <% active_class = "bg-primary-600 text-white hover:text-white dark:bg-primary-800" %>
-  <% inactive_class = "text-gray-700 hover:text-gray-700 hover:bg-gray-100 dark:text-gray-50 dark:hover:text-gray-200 dark:hover:bg-gray-700" %>
+<div class="bg-white border border-gray-200 rounded text-sm font-medium">
+  <% active_class = "bg-primary-600 text-white hover:text-white" %>
+  <% inactive_class = "text-gray-700 hover:text-gray-700 hover:bg-gray-100" %>
   <%= nav_link_to t(".profile"), edit_user_registration_path, class: "block no-underline p-3 px-6 rounded-t", active_class: active_class, inactive_class: inactive_class %>
   <%= nav_link_to t(".password"), edit_account_password_path, class: "block no-underline p-3 px-6", active_class: active_class, inactive_class: inactive_class %>
   <%= nav_link_to t(".connected_accounts"), user_connected_accounts_path, class: "block no-underline p-3 px-6", active_class: active_class, inactive_class: inactive_class if Devise.omniauth_configs.any? %>

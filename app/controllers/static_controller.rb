@@ -1,5 +1,17 @@
 class StaticController < ApplicationController
   def index
+    result = Scripts::List.execute(filters: params)
+    @pagy, @scripts = pagy(result.scripts)
+    respond_to do |format|
+      format.html
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.replace(
+          "search_results",
+          partial: "static/search_results",
+          locals: { scripts: @scripts }
+        )
+      end
+    end
   end
 
   def about

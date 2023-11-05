@@ -89,3 +89,11 @@ eval_gemfile "Gemfile.jumpstart"
 
 # We recommend using strong migrations when your app is in production
 # gem "strong_migrations", "~> 0.7.6"
+
+gem "pg_search", "~> 2.3"
+
+gem "light-service", "~> 0.18.0"
+
+gem "friendly_id", "~> 5.5"
+
+gem "font-awesome-sass", "~> 6.4"

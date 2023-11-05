@@ -11,12 +11,18 @@ module.exports = {
     require('@tailwindcss/aspect-ratio'),
     require('@tailwindcss/forms'),
     require('@tailwindcss/typography'),
+    require("daisyui"),
   ],
+
+  daisyui: {
+    themes: ["cupcake", "dracula"],
+  },
 
   content: [
     './app/components/**/*.rb',
     './app/helpers/**/*.rb',
     './app/javascript/**/*.js',
+    './app/javascript/**/*.jsx',
     './app/views/**/*.erb',
     './app/views/**/*.haml',
     './app/views/**/*.slim',

@@ -1,0 +1,19 @@
+--- !ruby/object:Jumpstart::Configuration
+application_name: Toolkit
+business_name: Toolkit Inc
+business_address: ''
+domain: example.com
+support_email: trytoolkit@gmail.com
+default_from_email: Jumpstart <support@example.com>
+background_job_processor: async
+email_provider: ''
+personal_accounts: true
+register_with_account: false
+collect_billing_address: false
+apns: false
+fcm: false
+integrations:
+omniauth_providers:
+payment_processors:
+multitenancy:
+gems:

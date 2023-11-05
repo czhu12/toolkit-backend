@@ -1,16 +1,15 @@
-<div class="py-32 max-w-2xl m-auto text-center flex flex-col items-center justify-center">
-  <h1 class="mb-2">Welcome to Jumpstart</h1>
-  <p class="mb-6 text-gray-700 dark:text-gray-200 leading-normal text-xl">Jumpstart is the perfect starting point for your next Ruby on Rails app. Skip the boilerplate setup and build your app faster.</p>
-  <% if Rails.env.development? %>
-    <div class="flex flex-col items-center md:flex-row">
-      <div class="w-full md:w-auto">
-        <%= link_to "Configure Jumpstart", jumpstart_path, data: { turbo: false }, class: "btn btn-primary lg:mr-4 mr-0 lg:mb-0 mb-4" %>
-      </div>
-      <div>
-        <span class="hidden md:inline border border-gray-200 h-10 mr-4"></span>
-        <%= link_to "Create a User", new_user_registration_path, class: "btn btn-tertiary btn-outline lg:mr-4 mr-0 lg:mb-0 mb-4" %>
-        <%= link_to "Read the Docs", jumpstart.docs_path, target: :_blank, data: { turbo: false }, class: "btn btn-tertiary btn-outline lg:mr-4 mr-0 lg:mb-0 mb-4" %>
-      </div>
-    </div>
-  <% end %>
+<div class="py-32 max-w-2xl m-auto text-center flex flex-col items-center justify-center" data-controller="search">
+  <h1 class="mb-2">Welcome to Toolkit</h1>
+  <p class="mb-6 text-gray-700 dark:text-gray-200 leading-normal text-xl">Search thousands of applications or <a>build your own</a>.</p>
+
+  <input
+    autofocus
+    type="text"
+    placeholder="Ex: html to markdown"
+    class="input input-bordered w-full max-w-xxl"
+    data-action="search#search"
+  />
+  <div class="my-4 w-full text-left">
+    <%= render "static/search_results", scripts: @scripts %>
+  </div>
 </div>

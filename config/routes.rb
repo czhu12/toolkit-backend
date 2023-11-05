@@ -1,5 +1,12 @@
 # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 Rails.application.routes.draw do
+  get "/s/:id", to: "scripts#serve", as: :script_short
+
+  resources :scripts do
+    member do
+      get :fork
+    end
+  end
   draw :turbo
 
   # Jumpstart views
@@ -144,7 +151,7 @@ Rails.application.routes.draw do
   match "/500", via: :all, to: "errors#internal_server_error"
 
   authenticated :user do
-    root to: "dashboard#show", as: :user_root
+    get "/me", to: "dashboard#show", as: :user_root
     # Alternate route to use if logged in users should still see public root
     # get "/dashboard", to: "dashboard#show", as: :user_root
   end
@@ -154,5 +161,6 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   # Public marketing homepage
+  get :search, to: "static#index"
   root to: "static#index"
 end

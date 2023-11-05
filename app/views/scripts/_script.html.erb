@@ -1,0 +1,14 @@
+<div id="<%= dom_id script %>" class="my-4">
+  <div class="flex flex-row justify-between mb-1">
+    <p class="text-xl font-medium"><%= script.title %></p>
+    <% if script.public_visibility? %>
+      <div class="badge badge-primary">Public</div>
+    <% else %>
+      <div class="badge badge-secondary">secondary</div>
+    <% end %>
+  </div>
+  <p><%= script.description %></p>
+  <div class="font-bold mt-3">
+    <%= script.run_count %> run<%= script.run_count == 1 ? "" : "s" %>
+  </div>
+</div>

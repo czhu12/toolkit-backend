@@ -1,0 +1,37 @@
+# == Schema Information
+#
+# Table name: scripts
+#
+#  id          :bigint           not null, primary key
+#  code        :text             default("")
+#  description :string
+#  run_count   :bigint           default(0), not null
+#  slug        :string           not null
+#  title       :string           not null
+#  visibility  :integer          default("public")
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  user_id     :bigint
+#
+# Indexes
+#
+#  index_scripts_on_slug  (slug) UNIQUE
+#
+
+one:
+  code: MyText
+  description: MyString
+  run_count: 1
+  slug: MyString
+  title: MyString
+  visibility: 1
+  user_id: 
+
+two:
+  code: MyText
+  description: MyString
+  run_count: 1
+  slug: MyString
+  title: MyString
+  visibility: 1
+  user_id: 

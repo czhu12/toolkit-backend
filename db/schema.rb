@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_10_10_151212) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_02_035006) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -278,6 +278,19 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_10_151212) do
     t.string "description"
     t.string "unit_label"
     t.boolean "charge_per_unit"
+  end
+
+  create_table "scripts", force: :cascade do |t|
+    t.text "code", default: ""
+    t.string "description"
+    t.bigint "run_count", default: 0, null: false
+    t.string "slug", null: false
+    t.string "title", null: false
+    t.integer "visibility", default: 0
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["slug"], name: "index_scripts_on_slug", unique: true
   end
 
   create_table "users", force: :cascade do |t|

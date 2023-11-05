@@ -53,6 +53,7 @@ class User < ApplicationRecord
   include User::Accounts
   include User::Agreements
   include User::Theme
+  has_many :scripts
 
   # Include default devise modules. Others available are:
   # :lockable, :timeoutable, andle :trackable
