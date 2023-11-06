@@ -23,7 +23,7 @@ export default class Code extends Component {
     if (this.options.language) {
       code.classList.add(`language-${this.options.language}`);
     }
-    code.innerHTML = this.options.code
+    code.textContent = this.options.code
     return div;
   }
 

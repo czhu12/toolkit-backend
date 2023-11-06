@@ -1,4 +1,5 @@
 class StaticController < ApplicationController
+  INITIAL_CODE = Rails.root.join("resources", "initial_code.js").read.strip
   def index
     result = Scripts::List.execute(filters: params)
     @pagy, @scripts = pagy(result.scripts)
