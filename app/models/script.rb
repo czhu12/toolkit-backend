@@ -40,7 +40,7 @@ class Script < ApplicationRecord
     private: 1,
   }, _suffix: true
 
-  after_initialize :create_slug
+  before_create :create_slug
 
   def create_slug
     if slug.blank?

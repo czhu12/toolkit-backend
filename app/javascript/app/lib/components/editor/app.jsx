@@ -10,6 +10,14 @@ function App({initialScript, saveScript}) {
     saveScript(script);
     window.Toolkit.run(script.code || "");
   }
+  let onSave;
+  if (script.slug) {
+    onSave = async () => {
+      await saveScript(script);
+      const notfy = new Notyf();
+      notfy.success("Saved");
+    }
+  }
 
   return (
     <div className="h-full w-full">
@@ -23,12 +31,8 @@ function App({initialScript, saveScript}) {
           <div className="mx-3 flex-initial">
             <ActionBar
               onRun={run}
-              viewApp={`/s/${script.slug}`}
-              onSave={async () => {
-                await saveScript(script);
-                const notfy = new Notyf();
-                notfy.success("Saved");
-              }}
+              viewApp={script.slug && `/s/${script.slug}`}
+              onSave={onSave}
             />
           </div>
         </div>
@@ -40,7 +44,7 @@ function App({initialScript, saveScript}) {
   )
 }
 
-function EditScript(script) {
+function EditScript({script}) {
   const saveScript = async (script) => {
   }
 

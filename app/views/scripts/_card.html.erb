@@ -1,6 +1,11 @@
-<div class="card border mb-5">
-  <div class="card-body">
-    <%= link_to script.title, script_short_url(script), class: "text-lg", data: { turbolinks: false } %>
-    <%= script.description %>
-  </div>
+<div class="card mb-5">
+  <%= link_to(script_short_url(script), data: {turbolinks: false}) do %>
+    <div class="card-body hover:bg-secondary">
+      <div class="flex flex-row justify-between">
+        <div class="text-lg"><%= script.title %></div>
+        <%= script.run_count %>
+      </div>
+      <%= script.description %>
+    </div>
+  <% end %>
 </div>
