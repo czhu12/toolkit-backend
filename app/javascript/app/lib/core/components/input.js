@@ -12,6 +12,7 @@ export default class Input extends BaseInput {
       el.querySelector("input").value = this.options.defaultValue;
     }
     el.querySelector("input").classList.add("input");
+    el.querySelector("input").classList.add("input-bordered");
     return el;
   }
 

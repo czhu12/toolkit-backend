@@ -20,13 +20,13 @@
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <%= yield :head %>
   </head>
-  <body class="h-full font-sans antialiased font-normal leading-normal bg-gray-50">
+  <body class="min-h-full font-sans antialiased font-normal leading-normal bg-gray-50">
     <div class="main flex flex-col">
       <header>
         <%= render partial: "shared/flash" %>
         <%= render partial: "shared/navbar" %>
       </header>
-      <main class="h-full">
+      <main class="min-h-full">
         <%= yield %>
       </main>
     </div>

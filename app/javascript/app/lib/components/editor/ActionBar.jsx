@@ -2,7 +2,7 @@ import * as React from 'react'
 
 function ActionBar({onRun, onSave, viewApp, onEdit}) {
   return (
-    <div className="action-bar">
+    <div className="action-bar mt-2">
       <div className="flex flex-row justify-between">
         <div className="flex-initial">
           {onSave && (

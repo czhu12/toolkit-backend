@@ -1,6 +1,6 @@
-<div class="py-32 max-w-2xl m-auto text-center flex flex-col items-center justify-center" data-controller="search">
+<div class="py-32 max-w-2xl m-auto flex flex-col items-center justify-center" data-controller="search">
   <h1 class="mb-2">Welcome to Toolkit</h1>
-  <p class="mb-6 text-gray-700 dark:text-gray-200 leading-normal text-xl">Search thousands of applications or <a>build your own</a>.</p>
+  <p class="mb-6 text-gray-700 dark:text-gray-200 leading-normal text-xl">Search thousands of applications or <a href="#build">build your own</a>.</p>
 
   <input
     autofocus
@@ -12,4 +12,7 @@
   <div class="my-4 w-full text-left">
     <%= render "static/search_results", scripts: @scripts %>
   </div>
+
 </div>
+<%= render "static/build_your_own" %>
+<%= render "shared/footer" %>

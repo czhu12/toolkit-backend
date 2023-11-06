@@ -34,3 +34,4 @@
 @import "tom-select/dist/css/tom-select.css";
 
 @import "./globals.scss";
+@import "./core.scss";
