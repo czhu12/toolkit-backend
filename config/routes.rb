@@ -1,6 +1,6 @@
 # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 Rails.application.routes.draw do
-  get "/s/:id", to: "scripts#serve", as: :script_short
+  get "/s/:id", to: "runs#serve", as: :script_short
 
   resources :scripts do
     member do

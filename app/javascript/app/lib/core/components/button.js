@@ -8,7 +8,6 @@ export default class Button extends Component {
 
   createElement() {
     const button = this._createElement("button");
-    button.classList.add("button");
     button.addEventListener("click", this.options.onClick);
     button.innerHTML = this.options.text
     return button;

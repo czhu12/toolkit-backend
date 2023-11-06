@@ -11,8 +11,6 @@ class ScriptsController < ApplicationController
     @pagy, @scripts = pagy(current_user.scripts.sort_by_params(params[:sort], sort_direction))
   end
 
-  def serve
-  end
   # Show the source of the script
   def show
 

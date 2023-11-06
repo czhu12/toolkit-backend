@@ -7,7 +7,7 @@ function RunScript(script) {
   }, []);
 
   return (
-    <div className="container">
+    <div className="container max-w-[764px] mx-auto">
       <div id="main-view">
       </div>
     </div>

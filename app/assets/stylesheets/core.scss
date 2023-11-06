@@ -1,9 +1,49 @@
+@import 'highlight.js/styles/github.css';
+@import 'ag-grid-community/styles/ag-grid.css';
+@import 'ag-grid-community/styles/ag-theme-alpine.css';
+
 .browser-script-screen {
   overflow: auto;
   height: 100%;
   padding: 20px;
   > * {
     margin: 20px 0;
+  }
+
+  button {
+    @apply btn btn-primary;
+  }
+
+  input:not([type="file"]):not([type="radio"]):not([type="checkbox"]):not([type="color"]) {
+    @apply w-full input input-bordered;
+  }
+
+  input[type="checkbox"] {  
+    @apply checkbox;
+  }  
+
+  input[type="file"] {  
+    @apply w-full file-input file-input-bordered;
+  }  
+    
+
+
+  iframe {
+    @apply w-full h-auto;
+  }
+  label {
+    @apply block text-lg;
+  }
+  textarea {
+    @apply w-full textarea textarea-bordered;
+  }
+
+  .kit--input input {
+    @apply w-full;
+  }
+
+  .kit--button {
+    @apply btn btn-primary btn-outline;
   }
 
   .pointer {
@@ -14,8 +54,8 @@
     margin-bottom: 5px;
   }
 
-  pre {
-    background-color: transparent;
+  .hljs {
+    background-color: transparent !important;
     padding: 0 !important;
   }
 
@@ -24,9 +64,7 @@
   }
 
   .kit--code .copy-bar {
-    text-align: right;
-    font-size: 1.5em;
-    color: #34495e;
+    @apply text-right text-xl	text-info-content;
   }
 
   .kit--fileinput {
@@ -49,10 +87,6 @@
 
   .kit--radio input {
     margin-right: 5px;
-  }
-
-  .kit--input label {
-    display: block;
   }
 
   .kit--select label {

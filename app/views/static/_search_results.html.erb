@@ -8,4 +8,9 @@
       <%== pagy_nav(@pagy) %>
     </div>
   <% end %>
+  <% if scripts.empty? %>
+    <div class="mb-3">No results for <span class="italic">"<%= params[:q] %>"</span>.</div>
+    <div>Why not <a href="/scripts/new" class="btn btn-primary btn-xs">create one</a>?</div>
+
+  <% end %>
 <% end %>

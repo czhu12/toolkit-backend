@@ -22,7 +22,6 @@ export default class DownloadButton extends Component {
       <span>${this.options.text}</span>
     `;
     button.addEventListener("click", this.download.bind(this));
-    button.classList.add("button");
     return button;
   }
 }
