@@ -305,10 +305,10 @@ acorn@^8.11.2:
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-8.11.2.tgz#ca0d78b51895be5390a5903c5b3bdcdaf78ae40b"
   integrity sha512-nc0Axzp/0FILLEVsm4fNwLCwMttvhEI263QtVPQcbpfZZ3ts0hLsZGOpE6czNlid7CJ9MlyH8reXkpsf3YUY4w==
 
-ag-grid-community@^30.2.0:
-  version "30.2.0"
-  resolved "https://registry.yarnpkg.com/ag-grid-community/-/ag-grid-community-30.2.0.tgz#b831fc99df1bfee6f73669fd8b7d3e9bd4012e22"
-  integrity sha512-Gd6GXmtzEQSCDloBdRxxCDqnjTBRAOf/zzlaxxyyVBJgc+cePuNgGdplRUhT/rwIiDwvyuoynvxelVE/iYdXsA==
+ag-grid-community@^31.0.0:
+  version "31.0.0"
+  resolved "https://registry.yarnpkg.com/ag-grid-community/-/ag-grid-community-31.0.0.tgz#cd97210f47c79847bbe2fcc3e4053fc514b4d9f4"
+  integrity sha512-OUrXSAbLs0s5DTL9G/J626IKF2mzENHtLzLo5SV0RMO34ZzQANZd1mWlahT0uhZyUFnhyyEEecJBE5nSI88VEw==
 
 any-promise@^1.0.0:
   version "1.3.0"
