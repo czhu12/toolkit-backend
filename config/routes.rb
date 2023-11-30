@@ -2,7 +2,7 @@
 Rails.application.routes.draw do
   get "/s/:id", to: "runs#serve", as: :script_short
 
-  resources :scripts do
+  resources :scripts, only: [:index, :edit, :update, :create, :destroy] do
     member do
       get :fork
     end
@@ -151,7 +151,6 @@ Rails.application.routes.draw do
   match "/500", via: :all, to: "errors#internal_server_error"
 
   authenticated :user do
-    get "/me", to: "dashboard#show", as: :user_root
     # Alternate route to use if logged in users should still see public root
     # get "/dashboard", to: "dashboard#show", as: :user_root
   end

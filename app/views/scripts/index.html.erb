@@ -14,7 +14,7 @@
       </div>
     </div>
 
-    <%= link_to t("shared.scaffold.new.title", model: "Script"), scripts_path, method: :post, class: "btn btn-white" %>
+    <%= link_to t("shared.scaffold.new.title", model: "Script"), scripts_path, data: { turbo_method: :post }, class: "btn btn-white" %>
   </div>
 
   <%= tag.div id: ("scripts" if first_page?), class: "bg-white dark:bg-gray-900 dark:border dark:border-gray-700 rounded-md shadow p-6 space-y-8" do %>
@@ -24,7 +24,7 @@
       <%= image_tag "empty.svg", class: "mb-4 lg:w-1/2" %>
       <div class="flex-1 text-center">
         <p class="mb-4 h3">Create your first Script</p>
-        <%= link_to t("shared.scaffold.new.title", model: "Script"), scripts_path, method: :post, class: "btn btn-primary" %>
+        <%= link_to t("shared.scaffold.new.title", model: "Script"), scripts_path, data: { turbo_method: :post }, class: "btn btn-primary" %>
       </div>
     </div>
   <% end %>

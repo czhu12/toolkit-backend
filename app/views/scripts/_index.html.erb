@@ -2,7 +2,7 @@
   <%= turbo_stream_from script %>
   <%= render script %>
   <div class="flex flex-row">
-    <%= link_to "View", script, class: "btn btn-white mr-4" %>
+    <%= link_to "View", script_short_url(script), class: "btn btn-white mr-4" %>
     <%= link_to "Edit", edit_script_url(script), class: "btn btn-primary" %>
   </div>
 </div>

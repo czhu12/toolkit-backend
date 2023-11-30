@@ -1,6 +1,6 @@
 class ScriptsController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show, :source, :serve]
-  before_action :set_script, only: [:serve, :show, :edit, :update, :destroy]
+  before_action :authenticate_user!
+  before_action :set_script, only: [:show, :edit, :update, :destroy]
 
   # Uncomment to enforce Pundit authorization
   # after_action :verify_authorized
@@ -32,8 +32,8 @@ class ScriptsController < ApplicationController
 
   # POST /scripts or /scripts.json
   def create
-    script = current_user.scripts.create(title: "Untitled")
-    redirect_to script_url(script)
+    script = current_user.scripts.create!(title: "Untitled")
+    redirect_to edit_script_url(script)
   end
 
   # PATCH/PUT /scripts/1 or /scripts/1.json
@@ -41,7 +41,7 @@ class ScriptsController < ApplicationController
     respond_to do |format|
       if @script.update(script_params)
         format.html { redirect_to @script, notice: "Script was successfully updated." }
-        format.json { render :show, status: :ok, location: @script }
+        format.json { render :show, status: :ok }
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @script.errors, status: :unprocessable_entity }
@@ -62,8 +62,7 @@ class ScriptsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_script
-    @script = Script.friendly.find(params[:id])
-    authorize @script
+    @script = current_user.scripts.friendly.find(params[:id])
     # Uncomment to authorize with Pundit
     # authorize @script
   rescue ActiveRecord::RecordNotFound

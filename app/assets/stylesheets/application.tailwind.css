@@ -35,3 +35,4 @@
 
 @import "./globals.scss";
 @import "./core.scss";
+@import "notyf/notyf.min.css"
