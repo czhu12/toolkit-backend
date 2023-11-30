@@ -7,7 +7,7 @@ class RunsController < ApplicationController
 
   # Show the source of the script
   def serve
-
+    @script.increment!
   end
 
   private

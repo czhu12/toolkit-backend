@@ -1,9 +1,14 @@
 <div id="<%= dom_id(script, :index) %>">
   <%= turbo_stream_from script %>
   <%= render script %>
-  <div class="flex flex-row">
-    <%= link_to "View", script_short_url(script), class: "btn btn-white mr-4" %>
-    <%= link_to "Edit", edit_script_url(script), class: "btn btn-primary" %>
+  <div class="flex flex-row justify-between">
+    <div>
+      <%= link_to "View", script_short_url(script), class: "btn btn-white mr-4" %>
+      <%= link_to "Edit", edit_script_url(script), class: "btn btn-primary" %>
+    </div>
+    <div>
+      <%= link_to "Destroy", script_url(script), class: "btn btn-error btn-outline", data: { turbo_method: :delete, turbo_confirm: t("are_you_sure") } %>
+    </div>
   </div>
 </div>
 

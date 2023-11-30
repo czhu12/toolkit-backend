@@ -1,4 +1,5 @@
 class ScriptsController < ApplicationController
+  INITIAL_CODE = Rails.root.join("resources", "initial_script.js").read.strip
   before_action :authenticate_user!
   before_action :set_script, only: [:show, :edit, :update, :destroy]
 
@@ -32,7 +33,10 @@ class ScriptsController < ApplicationController
 
   # POST /scripts or /scripts.json
   def create
-    script = current_user.scripts.create!(title: "Untitled")
+    script = current_user.scripts.create!(
+      title: "Untitled",
+      code: INITIAL_CODE,
+    )
     redirect_to edit_script_url(script)
   end
 
@@ -53,7 +57,7 @@ class ScriptsController < ApplicationController
   def destroy
     @script.destroy!
     respond_to do |format|
-      format.html { redirect_to scripts_url, status: :see_other, notice: "Script was successfully destroyed." }
+      format.html { redirect_to scripts_url, status: :see_other, notice: "Script <b>#{@script.title}</b> was successfully destroyed." }
       format.json { head :no_content }
     end
   end
