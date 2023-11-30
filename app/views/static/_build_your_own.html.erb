@@ -8,6 +8,6 @@
     </div>
   </div>
   <div class="h-[500px] py-3">
-    <editor-component props-json='<%= {script: Script.new(code: StaticController::INITIAL_CODE)}.to_json %>'/>
+    <editor-component props-json='<%= {initialScript: Script.new(code: StaticController::INITIAL_CODE), heightSetting: "inherit"}.to_json %>'/>
   </div>
 </div>
