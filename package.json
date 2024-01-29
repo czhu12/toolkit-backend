@@ -15,7 +15,7 @@
     "@uidotdev/usehooks": "^2.4.1",
     "ace-builds": "^1.31.1",
     "acorn": "^8.11.2",
-    "ag-grid-community": "^30.2.0",
+    "ag-grid-community": "^31.0.3",
     "autoprefixer": "^10.4.0",
     "axios": "^1.6.0",
     "axios-cache-adapter": "^2.7.3",
